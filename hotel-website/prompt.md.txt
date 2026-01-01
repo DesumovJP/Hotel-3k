@@ -1,0 +1,59 @@
+Ти — топовий UX/UI дизайнер і архітектор дизайн-систем світового рівня (Awwwards, Behance, Dribbble). 
+Завдання: створити повністю новий сайт для Grand Hotel Opduin (Texel, NL). 
+Не використовуй структуру старого сайту — повна свобода. 
+Мета: сайт топ-0,01% рівня, який виглядає як робота найкращого дизайнера світу, а не типовий AI-сайт.
+
+## 1. Дизайн-система
+- Використовуй атомарний підхід (Atoms, Molecules, Organisms).
+- Кожен елемент сайту має бути компонентом:
+  - **Atoms**: кнопки, іконки, типографіка, кольори, spacing, motion tokens.
+  - **Molecules**: RoomCard, OfferBlock, TestimonialItem, BookingField.
+  - **Organisms**: HeroSection, GalleryGrid, BookingWidget, RestaurantSection, WellnessSection.
+- Централізоване керування стилями (Design Tokens: typography, color, spacing, motion).
+- Всі стилі мають бути легко редаговані через CMS (Strapi/Headless ready).
+
+## 2. Візуальний стиль
+- **Luxury minimalism**: великі фото, відео-бекграунди, плавні анімації (Framer Motion рівня).
+- Колірна палітра: теплі піски (#F5E9DA), морські відтінки (#004C70), акценти золота (#C9A646).
+- Типографіка: сучасна, елегантна (наприклад, pairing: serif для заголовків + sans для тексту).
+- Мікроанімації при наведенні, скролі, переходах.
+- Ефекти: паралакс, плавні page transitions, lazy‑loading для фото.
+
+## 3. UX
+- Інтуїтивна навігація, sticky booking widget.
+- Мультимовність (NL/EN/DE).
+- Mobile-first, але з преміум desktop experience.
+- Легкий процес бронювання (3 кроки: вибір дати → вибір кімнати → підтвердження).
+- Accessibility (WCAG 2.1 AA).
+- SEO-friendly структура.
+
+## 4. Контентні блоки (усі як компоненти)
+- **HeroSection**: full-screen відео/фото з tagline "Hamptons of the Wadden".
+- **RoomsSection**: картки з фото, ціною, CTA "Book now".
+- **RestaurantSection**: галерея + меню preview.
+- **WellnessSection**: інтерактивні блоки з іконками/фото.
+- **OffersSection**: динамічні промо-блоки.
+- **TexelGuideSection**: інтерактивна карта + рекомендації.
+- **TestimonialsSection**: slider з відгуками.
+- **Footer**: мінімалістичний, з контактами та соцмережами.
+
+## 5. Motion & Interaction
+- Використовуй Framer Motion рівня анімації.
+- Page transitions: плавні fade/slide.
+- Hover states: мікроанімації (scale, blur, color shift).
+- Scroll interactions: паралакс, reveal animations.
+- Booking widget: плавне відкриття/закриття, step-by-step flow.
+
+## 6. Технічні вимоги
+- Компонентність для легкого редагування (Strapi/Headless CMS ready).
+- Оптимізація для швидкого завантаження.
+- SEO-friendly структура.
+- Accessibility (WCAG 2.1 AA).
+- Мультимовність (NL/EN/DE).
+- Інтеграція з CRM/Booking API.
+
+## 7. Рівень виконання
+- Сайт має виглядати як переможець Awwwards.
+- Унікальні layout-и, не шаблонні.
+- Емоційний дизайн, який продає атмосферу готелю.
+- Використовуй storytelling: показати атмосферу Texel як "Hamptons of the Wadden".

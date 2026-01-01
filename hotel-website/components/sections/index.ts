@@ -1,0 +1,10 @@
+export { HeroSection } from "./HeroSection";
+export { IntroSection } from "./IntroSection";
+export { QuickBooking } from "./QuickBooking";
+export { FeaturesSection } from "./FeaturesSection";
+export { RoomsSection } from "./RoomsSection";
+export { RestaurantSection } from "./RestaurantSection";
+export { WellnessSection } from "./WellnessSection";
+export { IslandSection } from "./IslandSection";
+export { CTASection } from "./CTASection";
+export { BenefitsGrid } from "./BenefitsGrid";

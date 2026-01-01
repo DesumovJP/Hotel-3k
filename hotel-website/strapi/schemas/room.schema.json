@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Room",
+  "description": "Strapi v5 content type schema for hotel rooms",
+  "kind": "collectionType",
+  "collectionName": "rooms",
+  "info": {
+    "singularName": "room",
+    "pluralName": "rooms",
+    "displayName": "Room",
+    "description": "Hotel room types with pricing and amenities"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "description": "Room type name (e.g., 'Dune Suite')"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["standard", "deluxe", "suite", "penthouse"],
+      "default": "standard",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true,
+      "description": "Full room description with rich formatting"
+    },
+    "shortDescription": {
+      "type": "text",
+      "maxLength": 300,
+      "description": "Brief description for cards and listings"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "min": 0,
+      "description": "Base price per night in EUR"
+    },
+    "originalPrice": {
+      "type": "decimal",
+      "min": 0,
+      "description": "Original price for displaying discounts"
+    },
+    "size": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "description": "Room size in square meters"
+    },
+    "maxGuests": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 10,
+      "default": 2
+    },
+    "bedType": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Bed configuration (e.g., 'King bed + Sofa bed')"
+    },
+    "view": {
+      "type": "enumeration",
+      "enum": ["sea-view", "dune-view", "garden-view", "village-view"],
+      "default": "garden-view"
+    },
+    "floor": {
+      "type": "integer",
+      "min": 0,
+      "max": 10
+    },
+    "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "virtualTour": {
+      "type": "string",
+      "description": "URL to 360° virtual tour"
+    },
+    "amenities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::amenity.amenity"
+    },
+    "highlights": {
+      "type": "json",
+      "description": "Array of highlight strings"
+    },
+    "available": {
+      "type": "boolean",
+      "default": true
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

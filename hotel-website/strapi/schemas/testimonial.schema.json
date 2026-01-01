@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Testimonial",
+  "description": "Strapi v5 content type schema for guest testimonials",
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial",
+    "description": "Guest reviews and testimonials"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "quote": {
+      "type": "text",
+      "required": true,
+      "maxLength": 1000,
+      "description": "The testimonial text"
+    },
+    "guestName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "guestLocation": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "City/Country of guest"
+    },
+    "guestAvatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "rating": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 5,
+      "default": 5
+    },
+    "stayDate": {
+      "type": "date",
+      "description": "When the guest stayed"
+    },
+    "room": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::room.room"
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": ["direct", "booking-com", "tripadvisor", "google", "expedia"],
+      "default": "direct"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "json",
+      "description": "Array of tags like 'wellness', 'dining', 'beach'"
+    }
+  }
+}

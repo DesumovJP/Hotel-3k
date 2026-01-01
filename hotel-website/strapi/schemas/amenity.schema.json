@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Amenity",
+  "description": "Strapi v5 content type schema for room amenities",
+  "kind": "collectionType",
+  "collectionName": "amenities",
+  "info": {
+    "singularName": "amenity",
+    "pluralName": "amenities",
+    "displayName": "Amenity",
+    "description": "Room and hotel amenities"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 100
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Lucide icon name (e.g., 'wifi', 'waves')"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["comfort", "technology", "bathroom", "dining", "wellness", "service"],
+      "default": "comfort"
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "premium": {
+      "type": "boolean",
+      "default": false,
+      "description": "Premium amenities shown prominently"
+    },
+    "rooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::room.room",
+      "mappedBy": "amenities"
+    }
+  }
+}

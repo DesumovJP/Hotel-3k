@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SEO Component",
+  "description": "Strapi v5 shared component for SEO metadata",
+  "collectionName": "components_shared_seo",
+  "info": {
+    "displayName": "SEO",
+    "description": "SEO metadata component for pages and content",
+    "icon": "search"
+  },
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60,
+      "description": "SEO title (max 60 characters)"
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 160,
+      "description": "SEO description (max 160 characters)"
+    },
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"],
+      "description": "Open Graph image (1200x630px recommended)"
+    },
+    "keywords": {
+      "type": "text",
+      "description": "Comma-separated keywords"
+    },
+    "canonicalURL": {
+      "type": "string",
+      "description": "Canonical URL for duplicate content"
+    },
+    "noIndex": {
+      "type": "boolean",
+      "default": false,
+      "description": "Prevent search engine indexing"
+    },
+    "structuredData": {
+      "type": "json",
+      "description": "JSON-LD structured data"
+    }
+  }
+}

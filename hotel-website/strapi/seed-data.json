@@ -1,0 +1,332 @@
+{
+  "$schema": "./schemas/seed-schema.json",
+  "description": "Seed data for Grand Hotel Opduin - Strapi v5",
+  "version": "1.0.0",
+  "data": {
+    "amenities": [
+      {
+        "name": "Free WiFi",
+        "slug": "free-wifi",
+        "icon": "wifi",
+        "category": "technology",
+        "description": "High-speed fiber internet throughout the hotel",
+        "premium": false
+      },
+      {
+        "name": "Sea View",
+        "slug": "sea-view",
+        "icon": "waves",
+        "category": "comfort",
+        "description": "Panoramic views of the Wadden Sea",
+        "premium": true
+      },
+      {
+        "name": "Private Balcony",
+        "slug": "private-balcony",
+        "icon": "maximize-2",
+        "category": "comfort",
+        "description": "Private outdoor space with seating",
+        "premium": true
+      },
+      {
+        "name": "Nespresso Machine",
+        "slug": "nespresso-machine",
+        "icon": "coffee",
+        "category": "dining",
+        "description": "Complimentary Nespresso coffee maker with capsules",
+        "premium": false
+      },
+      {
+        "name": "Rain Shower",
+        "slug": "rain-shower",
+        "icon": "droplets",
+        "category": "bathroom",
+        "description": "Luxurious rainfall shower head",
+        "premium": false
+      },
+      {
+        "name": "Bathtub",
+        "slug": "bathtub",
+        "icon": "bath",
+        "category": "bathroom",
+        "description": "Deep soaking tub with bath amenities",
+        "premium": true
+      },
+      {
+        "name": "Mini Bar",
+        "slug": "mini-bar",
+        "icon": "wine",
+        "category": "dining",
+        "description": "Fully stocked mini bar with local selections",
+        "premium": false
+      },
+      {
+        "name": "24/7 Room Service",
+        "slug": "room-service",
+        "icon": "concierge-bell",
+        "category": "service",
+        "description": "Round-the-clock in-room dining",
+        "premium": true
+      },
+      {
+        "name": "Air Conditioning",
+        "slug": "air-conditioning",
+        "icon": "thermometer",
+        "category": "comfort",
+        "description": "Individual climate control",
+        "premium": false
+      },
+      {
+        "name": "Smart TV",
+        "slug": "smart-tv",
+        "icon": "tv",
+        "category": "technology",
+        "description": "55-inch Smart TV with streaming apps",
+        "premium": false
+      },
+      {
+        "name": "Spa Access",
+        "slug": "spa-access",
+        "icon": "sparkles",
+        "category": "wellness",
+        "description": "Complimentary access to wellness facilities",
+        "premium": true
+      },
+      {
+        "name": "Underfloor Heating",
+        "slug": "underfloor-heating",
+        "icon": "flame",
+        "category": "comfort",
+        "description": "Heated bathroom floors",
+        "premium": false
+      }
+    ],
+    "rooms": [
+      {
+        "name": "Comfort Room",
+        "slug": "comfort-room",
+        "category": "standard",
+        "description": "<p>Our Comfort Rooms offer a peaceful retreat with modern amenities and thoughtful touches. Perfect for couples or solo travelers seeking a cozy base for their Texel adventure.</p><p>Each room features a plush king bed, ensuite bathroom with rain shower, and a work desk. Large windows bring in natural light and offer views of the hotel gardens.</p>",
+        "shortDescription": "Cozy retreat with modern amenities, perfect for couples exploring Texel.",
+        "price": 195,
+        "size": 25,
+        "maxGuests": 2,
+        "bedType": "King bed",
+        "view": "garden-view",
+        "floor": 1,
+        "highlights": ["Garden View", "King Bed", "Rain Shower", "Nespresso"],
+        "available": true,
+        "sortOrder": 1
+      },
+      {
+        "name": "Deluxe Sea View",
+        "slug": "deluxe-sea-view",
+        "category": "deluxe",
+        "description": "<p>Wake up to breathtaking views of the Wadden Sea in our Deluxe Sea View rooms. Spacious and elegantly appointed, these rooms feature a private balcony where you can enjoy the morning sun and sea breeze.</p><p>The generous bathroom includes both a rain shower and deep soaking tub. A seating area provides the perfect spot to unwind with a book from our curated library.</p>",
+        "shortDescription": "Spacious room with private balcony overlooking the UNESCO-listed Wadden Sea.",
+        "price": 295,
+        "originalPrice": 350,
+        "size": 35,
+        "maxGuests": 2,
+        "bedType": "King bed",
+        "view": "sea-view",
+        "floor": 2,
+        "highlights": ["Sea View", "Private Balcony", "Bathtub", "Spa Access"],
+        "available": true,
+        "sortOrder": 2
+      },
+      {
+        "name": "Dune Suite",
+        "slug": "dune-suite",
+        "category": "suite",
+        "description": "<p>Our signature Dune Suite offers an unparalleled luxury experience with panoramic views of both the sea and the iconic Texel dunes. This expansive suite features a separate living area, master bedroom, and spa-inspired bathroom.</p><p>Enjoy exclusive amenities including complimentary champagne on arrival, daily breakfast in-room or at our restaurant, and priority spa bookings. The private terrace is perfect for watching spectacular Texel sunsets.</p>",
+        "shortDescription": "Signature suite with panoramic views, separate living area, and exclusive amenities.",
+        "price": 495,
+        "originalPrice": 595,
+        "size": 55,
+        "maxGuests": 3,
+        "bedType": "King bed + Sofa bed",
+        "view": "sea-view",
+        "floor": 3,
+        "highlights": ["Panoramic View", "Private Terrace", "Champagne Welcome", "Priority Spa"],
+        "available": true,
+        "sortOrder": 3
+      },
+      {
+        "name": "Wadden Penthouse",
+        "slug": "wadden-penthouse",
+        "category": "penthouse",
+        "description": "<p>The crown jewel of Grand Hotel Opduin, the Wadden Penthouse offers an unmatched luxury experience. Occupying the entire top floor, this 120m² haven features 360-degree views, two bedrooms, a full kitchen, and a wraparound terrace.</p><p>Personalized butler service, private dining experiences, and exclusive access to our rooftop lounge make this the ultimate Texel retreat. Perfect for special celebrations or discerning travelers seeking absolute privacy and luxury.</p>",
+        "shortDescription": "Ultimate luxury with 360° views, butler service, and wraparound terrace.",
+        "price": 895,
+        "size": 120,
+        "maxGuests": 4,
+        "bedType": "2 King beds",
+        "view": "sea-view",
+        "floor": 4,
+        "highlights": ["360° Views", "Butler Service", "Private Dining", "Rooftop Access"],
+        "available": true,
+        "sortOrder": 4
+      },
+      {
+        "name": "Family Dune Room",
+        "slug": "family-dune-room",
+        "category": "deluxe",
+        "description": "<p>Designed with families in mind, our Family Dune Room offers ample space for parents and children to relax together. The interconnected layout provides privacy while keeping everyone close.</p><p>Child-friendly amenities include a welcome gift for young guests, kid-sized robes and slippers, and access to our family activity program. The room's dune-view location is perfect for spotting the local wildlife.</p>",
+        "shortDescription": "Spacious family accommodation with child-friendly amenities and dune views.",
+        "price": 345,
+        "size": 45,
+        "maxGuests": 4,
+        "bedType": "King bed + 2 Single beds",
+        "view": "dune-view",
+        "floor": 1,
+        "highlights": ["Family-Friendly", "Dune Views", "Kids Welcome Pack", "Activity Program"],
+        "available": true,
+        "sortOrder": 5
+      }
+    ],
+    "offers": [
+      {
+        "title": "Winter Escape",
+        "slug": "winter-escape",
+        "subtitle": "Embrace the Quiet Season",
+        "type": "seasonal",
+        "shortDescription": "20% off stays in January & February. Experience Texel's dramatic winter landscapes and cozy fireside moments.",
+        "discountType": "percentage",
+        "discountValue": 20,
+        "minimumNights": 2,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-02-28",
+        "inclusions": [
+          "20% off room rates",
+          "Complimentary breakfast daily",
+          "Welcome hot chocolate",
+          "Late checkout (subject to availability)"
+        ],
+        "featured": true,
+        "promoCode": "WINTER24"
+      },
+      {
+        "title": "Romantic Getaway",
+        "slug": "romantic-getaway",
+        "subtitle": "Love on the Wadden",
+        "type": "romance",
+        "shortDescription": "Celebrate romance with champagne, rose petals, and a couples spa treatment.",
+        "discountType": "value-add",
+        "discountValue": 150,
+        "minimumNights": 2,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-12-31",
+        "inclusions": [
+          "Champagne & strawberries on arrival",
+          "Rose petal turndown",
+          "60-minute couples massage",
+          "Romantic dinner for two",
+          "Late checkout guaranteed"
+        ],
+        "featured": true,
+        "promoCode": "ROMANCE"
+      },
+      {
+        "title": "Wellness Retreat",
+        "slug": "wellness-retreat",
+        "subtitle": "Restore Your Balance",
+        "type": "wellness",
+        "shortDescription": "Three nights of holistic wellness with daily spa treatments and healthy cuisine.",
+        "discountType": "value-add",
+        "discountValue": 350,
+        "minimumNights": 3,
+        "validFrom": "2026-01-01",
+        "validUntil": "2026-12-31",
+        "inclusions": [
+          "3 nights accommodation",
+          "Daily spa treatment (choose from menu)",
+          "Wellness breakfast daily",
+          "Yoga session with our instructor",
+          "Wellness welcome amenity",
+          "Spa robe to take home"
+        ],
+        "featured": false,
+        "promoCode": "WELLNESS"
+      },
+      {
+        "title": "Early Bird Summer",
+        "slug": "early-bird-summer",
+        "subtitle": "Plan Ahead & Save",
+        "type": "early-bird",
+        "shortDescription": "Book your summer stay before March 31st and save 15%.",
+        "discountType": "percentage",
+        "discountValue": 15,
+        "minimumNights": 3,
+        "validFrom": "2026-06-01",
+        "validUntil": "2026-08-31",
+        "bookingDeadline": "2026-03-31",
+        "inclusions": [
+          "15% off room rates",
+          "Complimentary upgrade (subject to availability)",
+          "Welcome drink on arrival",
+          "Beach bag amenity"
+        ],
+        "featured": true,
+        "promoCode": "EARLYBIRD"
+      }
+    ],
+    "testimonials": [
+      {
+        "quote": "An absolute gem on Texel. The staff remembered our preferences from our last visit two years ago. The Dune Suite views at sunset are something you'll never forget. We've already booked our next stay.",
+        "guestName": "Sophie van der Berg",
+        "guestLocation": "Amsterdam, Netherlands",
+        "rating": 5,
+        "stayDate": "2024-08-15",
+        "source": "direct",
+        "verified": true,
+        "featured": true,
+        "tags": ["service", "views", "repeat-guest"]
+      },
+      {
+        "quote": "The restaurant exceeded our expectations. Michelin-quality cuisine with ingredients sourced from the island. The lamb was incredible, and the sommelier's local wine pairings were perfect.",
+        "guestName": "Marcus Schmidt",
+        "guestLocation": "Hamburg, Germany",
+        "rating": 5,
+        "stayDate": "2024-09-20",
+        "source": "tripadvisor",
+        "verified": true,
+        "featured": true,
+        "tags": ["dining", "restaurant"]
+      },
+      {
+        "quote": "We came for the spa and stayed for everything else. The thalassotherapy treatment using local seaweed was unlike anything we've experienced. Truly restorative.",
+        "guestName": "Emma & James Wilson",
+        "guestLocation": "London, UK",
+        "rating": 5,
+        "stayDate": "2024-10-05",
+        "source": "booking-com",
+        "verified": true,
+        "featured": false,
+        "tags": ["wellness", "spa"]
+      },
+      {
+        "quote": "Traveling with three kids isn't easy, but the hotel made it seamless. The family room was spacious, the kids' activity program kept them engaged, and we parents finally got to relax.",
+        "guestName": "Familie de Vries",
+        "guestLocation": "Utrecht, Netherlands",
+        "rating": 5,
+        "stayDate": "2024-07-22",
+        "source": "google",
+        "verified": true,
+        "featured": false,
+        "tags": ["family", "kids"]
+      },
+      {
+        "quote": "The location is unbeatable. Waking up to the sound of waves and having direct beach access made this our best holiday in years. The hotel strikes the perfect balance between luxury and casual comfort.",
+        "guestName": "Pierre Dubois",
+        "guestLocation": "Paris, France",
+        "rating": 5,
+        "stayDate": "2024-06-10",
+        "source": "direct",
+        "verified": true,
+        "featured": true,
+        "tags": ["location", "beach"]
+      }
+    ]
+  }
+}
