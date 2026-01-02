@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "policies",
+  "info": {
+    "singularName": "policy",
+    "pluralName": "policies",
+    "displayName": "Policy",
+    "description": "Hotel policies and terms"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "booking",
+        "stay",
+        "wellness",
+        "restaurant",
+        "pets",
+        "cancellation",
+        "payment",
+        "privacy",
+        "accessibility"
+      ],
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "clock",
+        "calendar",
+        "creditCard",
+        "dog",
+        "utensils",
+        "sparkles",
+        "alertCircle",
+        "shield",
+        "accessibility"
+      ]
+    },
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "policy.section"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "lastUpdated": {
+      "type": "date"
+    }
+  }
+}

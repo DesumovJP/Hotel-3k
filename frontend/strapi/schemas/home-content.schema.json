@@ -1,0 +1,133 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_contents",
+  "info": {
+    "singularName": "home-content",
+    "pluralName": "home-contents",
+    "displayName": "Home Content",
+    "description": "Homepage content and featured items"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "heroMedia": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.media-set"
+    },
+    "heroHeadline": {
+      "type": "string",
+      "maxLength": 150,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "heroSubheadline": {
+      "type": "string",
+      "maxLength": 250,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "heroTagline": {
+      "type": "string",
+      "maxLength": 100,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "benefitsSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.benefits-section"
+    },
+    "featuredRooms": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::room.room"
+    },
+    "roomsSectionTitle": {
+      "type": "string",
+      "maxLength": 100,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "roomsSectionSubtitle": {
+      "type": "text",
+      "maxLength": 300,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "featuredOffers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offer.offer"
+    },
+    "offersSectionTitle": {
+      "type": "string",
+      "maxLength": 100,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "wellnessPreview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.preview-section"
+    },
+    "restaurantPreview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.preview-section"
+    },
+    "texelNowSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.texel-now"
+    },
+    "testimonialsTitle": {
+      "type": "string",
+      "maxLength": 100,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "featuredTestimonials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::testimonial.testimonial"
+    },
+    "ctaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.cta-section"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

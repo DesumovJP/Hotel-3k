@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_policy_rules",
+  "info": {
+    "displayName": "Policy Rule",
+    "description": "Individual policy rule or condition"
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "value": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "allowed": {
+      "type": "boolean",
+      "description": "null = no indicator, true = allowed, false = not allowed"
+    },
+    "note": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    }
+  }
+}

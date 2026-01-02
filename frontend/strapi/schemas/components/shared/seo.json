@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_shared_seo",
+  "info": {
+    "displayName": "SEO",
+    "description": "SEO metadata for pages and content",
+    "icon": "search"
+  },
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "maxLength": 70,
+      "description": "Title for search engines (max 70 chars)"
+    },
+    "metaDescription": {
+      "type": "text",
+      "maxLength": 160,
+      "description": "Description for search engines (max 160 chars)"
+    },
+    "ogImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"],
+      "description": "Image for social sharing (1200x630 recommended)"
+    },
+    "canonicalURL": {
+      "type": "string",
+      "description": "Canonical URL if different from page URL"
+    },
+    "noIndex": {
+      "type": "boolean",
+      "default": false,
+      "description": "Prevent search engine indexing"
+    },
+    "structuredData": {
+      "type": "json",
+      "description": "Custom JSON-LD structured data"
+    }
+  }
+}

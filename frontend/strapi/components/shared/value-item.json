@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_value_items",
+  "info": {
+    "displayName": "Value Item",
+    "description": "Item in a value stack (included or optional add-on)"
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "included": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this item is included or an optional add-on"
+    }
+  }
+}

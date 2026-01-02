@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_policy_sections",
+  "info": {
+    "displayName": "Policy Section",
+    "description": "A section within a policy document"
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "rules": {
+      "type": "component",
+      "repeatable": true,
+      "component": "policy.rule"
+    }
+  }
+}

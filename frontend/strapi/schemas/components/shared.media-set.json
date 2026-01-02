@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_shared_media_sets",
+  "info": {
+    "displayName": "Media Set",
+    "description": "Collection of media with video, image, and fallback options",
+    "icon": "image"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["image", "video", "youtube"],
+      "default": "image",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["videos"]
+    },
+    "youtubeId": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "fallbackImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "alt": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "caption": {
+      "type": "string",
+      "maxLength": 300
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_offer_value_item",
+  "info": {
+    "displayName": "Value Item",
+    "description": "Offer value stack item showing inclusions",
+    "icon": "check-circle"
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 150
+    },
+    "included": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this item is included or an optional add-on"
+    },
+    "value": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Additional value info (e.g., price for add-ons)"
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Icon name from Lucide icons"
+    }
+  }
+}

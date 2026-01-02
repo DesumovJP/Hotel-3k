@@ -1,0 +1,758 @@
+@import "tailwindcss";
+
+/* ============================================
+   GRAND HOTEL OPDUIN - PREMIUM DESIGN SYSTEM
+   Brand Colors: Shell #a79f88, Navy #212943
+   "Hamptons of the Wadden" - Luxury Coastal
+   ============================================ */
+
+:root {
+  /* ========== BRAND COLORS ========== */
+
+  /* Shell/Taupe - Brand Primary (warm accent, logo color) */
+  --color-shell-50: #FAFAF8;
+  --color-shell-100: #F5F4F1;
+  --color-shell-200: #E8E6E0;
+  --color-shell-300: #D4D0C6;
+  --color-shell-400: #BFB9AB;
+  --color-shell-500: #a79f88;
+  --color-shell-600: #918A74;
+  --color-shell-700: #7A7461;
+  --color-shell-800: #635E4F;
+  --color-shell-900: #4D493D;
+  --color-shell: #a79f88;
+
+  /* Navy - Brand Secondary (CTAs, text, buttons) */
+  --color-navy-50: #F0F1F4;
+  --color-navy-100: #D8DBE4;
+  --color-navy-200: #B1B7C9;
+  --color-navy-300: #8A93AE;
+  --color-navy-400: #636F93;
+  --color-navy-500: #3D4B78;
+  --color-navy-600: #313D61;
+  --color-navy-700: #212943;
+  --color-navy-800: #1A2136;
+  --color-navy-900: #131829;
+  --color-navy: #212943;
+
+  /* Sand - Warm Backgrounds */
+  --color-sand-50: #FDFCFB;
+  --color-sand-100: #FAF9F6;
+  --color-sand-200: #F5F3EE;
+  --color-sand-300: #EFEAE2;
+  --color-sand-400: #E5DED2;
+  --color-sand-500: #D8CFC0;
+  --color-sand: #FAF9F6;
+
+  /* Cream - Cards & Surfaces */
+  --color-cream: #FEFEFE;
+  --color-cream-warm: #FAFAF8;
+
+  /* Ink - Text (based on navy) */
+  --color-ink: #212943;
+  --color-ink-light: #4D525F;
+  --color-ink-muted: #7A7E89;
+
+  /* Gold - Special Accents */
+  --color-gold: #C1A050;
+  --color-gold-light: #D4BC82;
+  --color-gold-dark: #A68838;
+
+  /* Semantic */
+  --color-success: #4CAF50;
+  --color-warning: #FFC107;
+  --color-error: #F44336;
+
+  /* ========== TYPOGRAPHY ========== */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  /* ========== SPACING (Modular: 48/64/96) ========== */
+  /* Section spacing: Desktop 96px max, Mobile 64px */
+  --space-section-xs: clamp(1.5rem, 3vw, 2rem);   /* 24-32px internal */
+  --space-section-sm: clamp(3rem, 5vw, 4rem);     /* 48-64px */
+  --space-section-md: clamp(4rem, 6vw, 6rem);     /* 64-96px */
+  --space-section-lg: clamp(4rem, 8vw, 6rem);     /* 64-96px (was 144px) */
+  --space-section-hero: clamp(6rem, 10vw, 8rem);  /* Hero stays spacious */
+  --space-gutter: clamp(1.5rem, 4vw, 4rem);
+  /* Internal block spacing */
+  --space-block-sm: 1.5rem;  /* 24px */
+  --space-block-md: 2rem;    /* 32px */
+  --space-block-lg: 3rem;    /* 48px */
+
+  /* ========== MOTION ========== */
+  --duration-instant: 120ms;
+  --duration-fast: 180ms;
+  --duration-normal: 240ms;
+  --duration-slow: 300ms;
+  --duration-slower: 450ms;
+  --duration-slowest: 600ms;
+
+  --ease-premium-in: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-premium-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ========== ELEVATION ========== */
+  --shadow-1: 0 1px 2px rgba(33, 41, 67, 0.04), 0 1px 3px rgba(33, 41, 67, 0.08);
+  --shadow-2: 0 2px 4px rgba(33, 41, 67, 0.04), 0 4px 8px rgba(33, 41, 67, 0.08);
+  --shadow-3: 0 4px 8px rgba(33, 41, 67, 0.04), 0 8px 24px rgba(33, 41, 67, 0.08);
+  --shadow-4: 0 8px 16px rgba(33, 41, 67, 0.06), 0 16px 48px rgba(33, 41, 67, 0.12);
+  --shadow-glow: 0 0 20px rgba(167, 159, 136, 0.3), 0 0 40px rgba(167, 159, 136, 0.15);
+
+  /* ========== OVERLAY ========== */
+  --overlay-light: rgba(33, 41, 67, 0.08);
+  --overlay-medium: rgba(33, 41, 67, 0.18);
+  --overlay-dark: rgba(33, 41, 67, 0.45);
+  --overlay-hero: rgba(33, 41, 67, 0.35);
+
+  /* ========== ACCESSIBILITY ========== */
+  --focus-ring: 0 0 0 2px var(--color-shell), 0 0 0 4px rgba(167, 159, 136, 0.2);
+  --tap-target: 44px;
+}
+
+/* Tailwind v4 Theme */
+@theme inline {
+  --color-shell: var(--color-shell);
+  --color-navy: var(--color-navy);
+  --color-sand: var(--color-sand);
+  --color-ink: var(--color-ink);
+  --color-gold: var(--color-gold);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-sand);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+::selection {
+  background: var(--color-shell);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Display Typography */
+.text-display-2xl {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 400;
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.text-display-sm {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+/* Overline (Labels) */
+.text-overline {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-premium-out);
+  min-height: var(--tap-target);
+}
+
+.btn:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Button - Navy */
+.btn-primary {
+  background: var(--color-navy);
+  color: white;
+  padding: 0.875rem 2rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-navy-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-2);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Secondary Button - Shell Accent */
+.btn-secondary {
+  background: var(--color-shell);
+  color: var(--color-ink);
+  padding: 0.875rem 2rem;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-shell-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-2);
+}
+
+/* Outline Button */
+.btn-outline {
+  background: transparent;
+  color: var(--color-navy);
+  padding: 0.8125rem 1.9375rem;
+  border: 2px solid var(--color-navy);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--color-navy);
+  color: white;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-navy);
+  padding: 0.875rem 1rem;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--color-sand-200);
+}
+
+/* Light Button (for dark backgrounds) */
+.btn-light {
+  background: white;
+  color: var(--color-navy);
+  padding: 0.875rem 2rem;
+}
+
+.btn-light:hover:not(:disabled) {
+  background: var(--color-sand-100);
+  transform: translateY(-1px);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 36px;
+}
+
+.btn-lg {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+}
+
+.btn-xl {
+  padding: 1.25rem 3rem;
+  font-size: 1.125rem;
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-ink);
+  background: white;
+  border: 1px solid var(--color-sand-500);
+  transition: all var(--duration-fast) var(--ease-premium-out);
+  min-height: var(--tap-target);
+}
+
+.input:hover {
+  border-color: var(--color-shell);
+}
+
+.input:focus {
+  border-color: var(--color-shell);
+  box-shadow: 0 0 0 3px rgba(167, 159, 136, 0.15);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-ink-muted);
+}
+
+.input:disabled {
+  background: var(--color-sand-200);
+  cursor: not-allowed;
+}
+
+.input-error {
+  border-color: var(--color-error);
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.15);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-premium-out);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-2);
+}
+
+.card-elevated:hover {
+  box-shadow: var(--shadow-3);
+  transform: translateY(-4px);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Section Spacing - Compact per redesign (Desktop: 96px, Mobile: 64px) */
+.section-spacing-xs {
+  padding-top: var(--space-section-xs);
+  padding-bottom: var(--space-section-xs);
+}
+
+.section-spacing-sm {
+  padding-top: var(--space-section-sm);
+  padding-bottom: var(--space-section-sm);
+}
+
+.section-spacing {
+  padding-top: var(--space-section-md);
+  padding-bottom: var(--space-section-md);
+}
+
+.section-spacing-lg {
+  padding-top: var(--space-section-lg);
+  padding-bottom: var(--space-section-lg);
+}
+
+.section-spacing-hero {
+  padding-top: var(--space-section-hero);
+  padding-bottom: var(--space-section-hero);
+}
+
+/* Internal block spacing */
+.block-spacing-sm {
+  padding: var(--space-block-sm);
+}
+
+.block-spacing-md {
+  padding: var(--space-block-md);
+}
+
+.block-spacing-lg {
+  padding: var(--space-block-lg);
+}
+
+/* Container */
+.container-premium {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: var(--space-gutter);
+  padding-right: var(--space-gutter);
+}
+
+/* Gradient Overlays */
+.overlay-gradient-up {
+  background: linear-gradient(to top, var(--overlay-dark), transparent);
+}
+
+.overlay-gradient-down {
+  background: linear-gradient(to bottom, var(--overlay-dark), transparent);
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   PREMIUM HOVER EFFECTS
+   ============================================ */
+
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-premium-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-scale {
+  transition: transform var(--duration-normal) var(--ease-premium-out);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-premium-out);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-sand-300) 0%,
+    var(--color-sand-200) 50%,
+    var(--color-sand-300) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================
+   SCROLL PROGRESS
+   ============================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-shell);
+  transform-origin: left;
+  z-index: 100;
+}
+
+/* ============================================
+   BACKDROP
+   ============================================ */
+
+.backdrop-blur-premium {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+.backdrop-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* ============================================
+   GLASSMORPHISM SYSTEM - "Calm Premium Glass"
+   ============================================ */
+
+/* Glass-white: Primary overlay for hero/sections */
+.glass-white {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Glass-100: Lightest glass layer */
+.glass-100 {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Glass-200: Medium glass layer */
+.glass-200 {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+/* Glass-300: Heavy glass layer */
+.glass-300 {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Glass layers for dark backgrounds */
+.glass-100-dark {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(20, 20, 20, 0.12);
+}
+
+.glass-200-dark {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 20, 20, 0.12);
+}
+
+.glass-300-dark {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(20, 20, 20, 0.12);
+}
+
+/* Glass card variant with subtle shadow */
+.glass-card {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  box-shadow: 0 4px 24px rgba(14, 42, 58, 0.06);
+}
+
+/* Glass panel for content sections */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 1rem;
+}
+
+/* Subtle divider between sections */
+.glass-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5) 20%,
+    rgba(255, 255, 255, 0.5) 80%,
+    transparent
+  );
+}
+
+/* ============================================
+   SUBTLE TEXTURES & BACKGROUNDS
+   ============================================ */
+
+/* Grain texture overlay */
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Gradient: white to sand */
+.bg-gradient-sand {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5E9DA 100%);
+}
+
+/* Gradient: neutral to sand */
+.bg-gradient-neutral-sand {
+  background: linear-gradient(180deg, #FAFAF7 0%, #F5E9DA 100%);
+}
+
+/* Gradient: white to warm sand (more visible) */
+.bg-gradient-white-sand {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5E9DA 100%);
+}
+
+/* Gradient: light to warm (visible on homepage) */
+.bg-gradient-warm {
+  background: linear-gradient(180deg, #FEFEFE 0%, #F8F0E6 50%, #F5E9DA 100%);
+}
+
+/* Gradient: sand soft (subtle but visible) */
+.bg-gradient-sand-soft {
+  background: linear-gradient(180deg, #FBF7F2 0%, #F5E9DA 100%);
+}
+
+/* Subtle wave shape background */
+.bg-wave-shape {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-wave-shape::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='rgba(255,255,255,0.5)' d='M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom center;
+  background-size: cover;
+  pointer-events: none;
+}
+
+/* Arc shape decoration */
+.bg-arc-shape {
+  position: relative;
+}
+
+.bg-arc-shape::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  height: 120px;
+  background: radial-gradient(ellipse at center top, rgba(255,255,255,0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Section fade transition */
+.section-fade-in {
+  animation: sectionFadeIn 0.2s ease-out;
+}
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0.95;
+  }
+  to {
+    opacity: 1;
+  }
+}

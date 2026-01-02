@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_sections_benefits",
+  "info": {
+    "displayName": "Benefits Section",
+    "description": "Homepage benefits/USP grid section",
+    "icon": "layout"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "subtitle": {
+      "type": "text",
+      "maxLength": 300
+    },
+    "benefits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.usp-item",
+      "min": 3,
+      "max": 8
+    }
+  }
+}

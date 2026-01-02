@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_legal_links",
+  "info": {
+    "displayName": "Legal Link",
+    "description": "Legal page link (privacy, terms, cookies)",
+    "icon": "file-text"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "slug": {
+      "type": "enumeration",
+      "enum": [
+        "privacy",
+        "terms",
+        "cookies"
+      ],
+      "required": true
+    }
+  }
+}

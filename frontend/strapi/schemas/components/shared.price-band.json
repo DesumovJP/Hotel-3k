@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_price_bands",
+  "info": {
+    "displayName": "Price Band",
+    "description": "Seasonal or date-based pricing",
+    "icon": "dollar-sign"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "minNights": {
+      "type": "integer",
+      "min": 1,
+      "default": 1
+    }
+  }
+}

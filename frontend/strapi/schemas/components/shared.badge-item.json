@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_badge_items",
+  "info": {
+    "displayName": "Badge Item",
+    "description": "Badge or tag with icon",
+    "icon": "award"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": ["default", "highlight", "premium", "new"],
+      "default": "default"
+    }
+  }
+}

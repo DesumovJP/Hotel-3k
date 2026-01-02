@@ -1,0 +1,75 @@
+{
+  "globalSettings": {
+    "siteName": "Grand Hotel Opduin",
+    "tagline": "A sanctuary of stillness on the shores of Texel. Where the North Sea whispers and time slows.",
+    "contact": {
+      "address": "Ruijslaan 22",
+      "addressLine2": null,
+      "city": "De Koog",
+      "postalCode": "1796 AD",
+      "country": "Texel, Netherlands",
+      "phone": "+31 222 317 445",
+      "email": "hello@opduin.nl"
+    },
+    "socialLinks": [
+      {
+        "id": 1,
+        "name": "Facebook",
+        "url": "https://facebook.com/grandhotelOpduin",
+        "icon": "facebook"
+      },
+      {
+        "id": 2,
+        "name": "Instagram",
+        "url": "https://instagram.com/grandhotelOpduin",
+        "icon": "instagram"
+      }
+    ],
+    "footerLinks": [
+      {
+        "id": 1,
+        "name": "Rooms",
+        "slug": "rooms"
+      },
+      {
+        "id": 2,
+        "name": "Dining",
+        "slug": "dining"
+      },
+      {
+        "id": 3,
+        "name": "Spa & Wellness",
+        "slug": "spa"
+      },
+      {
+        "id": 4,
+        "name": "Events",
+        "slug": "events"
+      },
+      {
+        "id": 5,
+        "name": "About Us",
+        "slug": "about"
+      }
+    ],
+    "legalLinks": [
+      {
+        "id": 1,
+        "name": "Privacy Policy",
+        "slug": "privacy"
+      },
+      {
+        "id": 2,
+        "name": "Terms & Conditions",
+        "slug": "terms"
+      },
+      {
+        "id": 3,
+        "name": "Cookie Policy",
+        "slug": "cookies"
+      }
+    ],
+    "seoDefaultTitle": "Grand Hotel Opduin | Luxury Coastal Retreat on Texel",
+    "seoDefaultDescription": "Experience timeless elegance at Grand Hotel Opduin. A luxury beachfront hotel on Texel island offering world-class dining, spa, and serene coastal views."
+  }
+}

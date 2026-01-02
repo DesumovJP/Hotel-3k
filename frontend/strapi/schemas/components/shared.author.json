@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_authors",
+  "info": {
+    "displayName": "Author",
+    "description": "Blog post author information",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "role": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "bio": {
+      "type": "text",
+      "maxLength": 500
+    }
+  }
+}

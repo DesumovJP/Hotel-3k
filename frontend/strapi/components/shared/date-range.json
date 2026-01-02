@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_date_ranges",
+  "info": {
+    "displayName": "Date Range",
+    "description": "Start and end date range"
+  },
+  "attributes": {
+    "start": {
+      "type": "date",
+      "required": true
+    },
+    "end": {
+      "type": "date",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "description": "Optional label for this date range"
+    }
+  }
+}

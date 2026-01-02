@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "benefits",
+  "info": {
+    "singularName": "benefit",
+    "pluralName": "benefits",
+    "displayName": "Benefit",
+    "description": "Direct booking benefits and USPs"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "location",
+        "award",
+        "sustainable",
+        "dining",
+        "wellness",
+        "service",
+        "guarantee",
+        "flexibility",
+        "family",
+        "beach",
+        "parking",
+        "wifi"
+      ],
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "highlight": {
+      "type": "boolean",
+      "default": false
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "proof": {
+      "type": "component",
+      "component": "shared.proof-data"
+    },
+    "availabilityFlags": {
+      "type": "json"
+    },
+    "showOnHomepage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showOnBooking": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_shared_proof_data",
+  "info": {
+    "displayName": "Proof Data",
+    "description": "Proof or evidence data for benefits and claims"
+  },
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["award", "certification", "statistic", "review"],
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "source": {
+      "type": "string",
+      "description": "Source of the proof (e.g., TripAdvisor, UNESCO)"
+    },
+    "sourceUrl": {
+      "type": "string"
+    },
+    "year": {
+      "type": "string",
+      "maxLength": 4
+    },
+    "value": {
+      "type": "string",
+      "description": "Displayed value (e.g., 96%, 4.8/5)"
+    }
+  }
+}

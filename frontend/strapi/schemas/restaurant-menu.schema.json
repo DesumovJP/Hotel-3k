@@ -1,0 +1,123 @@
+{
+  "kind": "collectionType",
+  "collectionName": "restaurant_menus",
+  "info": {
+    "singularName": "restaurant-menu",
+    "pluralName": "restaurant-menus",
+    "displayName": "Restaurant Menu",
+    "description": "Restaurant menu items and categories"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "starters",
+        "soups",
+        "salads",
+        "mains",
+        "seafood",
+        "meat",
+        "vegetarian",
+        "desserts",
+        "cheese",
+        "drinks",
+        "wines",
+        "cocktails",
+        "kids"
+      ],
+      "required": true
+    },
+    "tags": {
+      "type": "json",
+      "customField": "plugin::multi-select.multi-select",
+      "options": [
+        "vegetarian",
+        "vegan",
+        "glutenFree",
+        "dairyFree",
+        "local",
+        "chefChoice",
+        "spicy",
+        "seafood",
+        "organic",
+        "seasonal"
+      ]
+    },
+    "pairing": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "season": {
+      "type": "enumeration",
+      "enum": ["spring", "summer", "autumn", "winter", "year-round"],
+      "default": "year-round"
+    },
+    "ingredients": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text-item"
+    },
+    "allergens": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text-item"
+    },
+    "calories": {
+      "type": "integer"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "new": {
+      "type": "boolean",
+      "default": false
+    },
+    "available": {
+      "type": "boolean",
+      "default": true
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

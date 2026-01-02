@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_offer_value_items",
+  "info": {
+    "displayName": "Value Item",
+    "description": "Offer value stack item (included/optional)",
+    "icon": "check-circle"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 150
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "isIncluded": {
+      "type": "boolean",
+      "default": true
+    },
+    "isHighlight": {
+      "type": "boolean",
+      "default": false
+    },
+    "value": {
+      "type": "string",
+      "maxLength": 50
+    }
+  }
+}

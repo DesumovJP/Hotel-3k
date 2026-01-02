@@ -1,0 +1,549 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Comfort Room",
+      "slug": "comfort-room",
+      "category": "standard",
+      "description": "A cozy retreat with modern amenities and garden views. Perfect for solo travelers or couples seeking comfort without compromise.",
+      "shortDescription": "Cozy garden-view room with modern comfort",
+      "price": 195.00,
+      "size": 25,
+      "maxGuests": 2,
+      "bedType": "Queen bed",
+      "view": "garden-view",
+      "floor": 1,
+      "highlights": ["Rain shower", "Nespresso machine", "Organic toiletries"],
+      "available": true,
+      "sortOrder": 1
+    },
+    {
+      "id": 2,
+      "name": "Deluxe Dune Room",
+      "slug": "deluxe-dune-room",
+      "category": "deluxe",
+      "description": "Spacious room with panoramic dune views. Wake up to the sounds of nature and enjoy your morning coffee on the private balcony.",
+      "shortDescription": "Spacious room with stunning dune views and balcony",
+      "price": 295.00,
+      "size": 35,
+      "maxGuests": 2,
+      "bedType": "King bed",
+      "view": "dune-view",
+      "floor": 2,
+      "highlights": ["Private balcony", "Dune views", "Premium bedding", "Smart TV"],
+      "available": true,
+      "sortOrder": 2
+    },
+    {
+      "id": 3,
+      "name": "Sea View Suite",
+      "slug": "sea-view-suite",
+      "category": "suite",
+      "description": "Luxurious suite with breathtaking North Sea views. Featuring a separate living area, spa bath, and exclusive amenities for the discerning guest.",
+      "shortDescription": "Luxury suite with North Sea panorama",
+      "price": 445.00,
+      "originalPrice": 495.00,
+      "size": 55,
+      "maxGuests": 3,
+      "bedType": "King bed + Sofa bed",
+      "view": "sea-view",
+      "floor": 3,
+      "highlights": ["Panoramic sea views", "Separate living room", "Spa bath", "Complimentary minibar", "Butler service"],
+      "available": true,
+      "sortOrder": 3
+    },
+    {
+      "id": 4,
+      "name": "Penthouse Suite",
+      "slug": "penthouse-suite",
+      "category": "penthouse",
+      "description": "The crown jewel of Grand Hotel Opduin. An expansive penthouse with 360° views, private terrace, and the finest amenities. Includes personal concierge service.",
+      "shortDescription": "Ultimate luxury with panoramic views and private terrace",
+      "price": 795.00,
+      "size": 95,
+      "maxGuests": 4,
+      "bedType": "King bed + Twin beds",
+      "view": "sea-view",
+      "floor": 4,
+      "highlights": ["360° panoramic views", "Private terrace", "Jacuzzi", "Personal concierge", "Champagne upon arrival", "In-suite dining"],
+      "available": true,
+      "sortOrder": 4
+    },
+    {
+      "id": 5,
+      "name": "Family Suite",
+      "slug": "family-suite",
+      "category": "suite",
+      "description": "Designed for families, this spacious suite offers separate sleeping areas for parents and children, plus a play corner and kid-friendly amenities.",
+      "shortDescription": "Perfect for families with kids",
+      "price": 395.00,
+      "size": 65,
+      "maxGuests": 5,
+      "bedType": "King bed + Bunk beds",
+      "view": "garden-view",
+      "floor": 1,
+      "highlights": ["Kids play corner", "Connected rooms option", "Family bathroom", "Welcome gift for kids"],
+      "available": true,
+      "sortOrder": 5
+    }
+  ],
+
+  "offers": [
+    {
+      "id": 1,
+      "title": "Romantic Escape",
+      "slug": "romantic-escape",
+      "subtitle": "Two nights of pure romance",
+      "category": "romance",
+      "description": "Celebrate love with a romantic getaway. Includes champagne, couples spa treatment, and a candlelit dinner for two.",
+      "shortDescription": "The perfect romantic getaway for couples",
+      "price": 699.00,
+      "originalPrice": 850.00,
+      "priceLabel": "per couple",
+      "discountType": "percentage",
+      "discountValue": 18,
+      "valueStack": [
+        { "title": "2 nights in Sea View Suite", "isIncluded": true, "isHighlight": true },
+        { "title": "Champagne & chocolates on arrival", "isIncluded": true },
+        { "title": "Couples massage (90 min)", "isIncluded": true, "isHighlight": true },
+        { "title": "4-course candlelit dinner", "isIncluded": true },
+        { "title": "Late checkout (2pm)", "isIncluded": true },
+        { "title": "Rose petal turndown", "isIncluded": true }
+      ],
+      "dateRanges": [
+        { "startDate": "2026-02-01", "endDate": "2026-12-20", "label": "Year-round" }
+      ],
+      "minimumNights": 2,
+      "urgencyFlag": "popular",
+      "featured": true,
+      "sortOrder": 1
+    },
+    {
+      "id": 2,
+      "title": "Wellness Weekend",
+      "slug": "wellness-weekend",
+      "subtitle": "Restore your balance",
+      "category": "wellness",
+      "description": "Rejuvenate mind, body and soul with our comprehensive wellness package. Daily spa access, treatments, and healthy cuisine.",
+      "shortDescription": "Complete wellness experience for mind and body",
+      "price": 549.00,
+      "originalPrice": 650.00,
+      "priceLabel": "per person",
+      "discountType": "percentage",
+      "discountValue": 15,
+      "valueStack": [
+        { "title": "2 nights accommodation", "isIncluded": true },
+        { "title": "Unlimited spa access", "isIncluded": true, "isHighlight": true },
+        { "title": "Daily wellness treatment", "isIncluded": true, "isHighlight": true },
+        { "title": "Healthy breakfast buffet", "isIncluded": true },
+        { "title": "Yoga session", "isIncluded": true },
+        { "title": "Wellness robe & slippers", "isIncluded": true }
+      ],
+      "dateRanges": [
+        { "startDate": "2026-01-15", "endDate": "2026-06-30" },
+        { "startDate": "2026-09-01", "endDate": "2026-12-15" }
+      ],
+      "minimumNights": 2,
+      "featured": true,
+      "sortOrder": 2
+    },
+    {
+      "id": 3,
+      "title": "Family Fun Package",
+      "slug": "family-fun-package",
+      "subtitle": "Adventures for the whole family",
+      "category": "family",
+      "description": "Create lasting memories with activities for all ages. Includes family suite, kids activities, and island adventures.",
+      "shortDescription": "Perfect family vacation on Texel",
+      "price": 899.00,
+      "originalPrice": 1100.00,
+      "priceLabel": "for 4",
+      "discountType": "percentage",
+      "discountValue": 18,
+      "valueStack": [
+        { "title": "3 nights in Family Suite", "isIncluded": true },
+        { "title": "Full breakfast for family", "isIncluded": true },
+        { "title": "Ecomare tickets (family)", "isIncluded": true, "isHighlight": true },
+        { "title": "Bike rental (2 days)", "isIncluded": true },
+        { "title": "Kids welcome pack", "isIncluded": true },
+        { "title": "Family dinner voucher (€100)", "isIncluded": true }
+      ],
+      "dateRanges": [
+        { "startDate": "2026-04-01", "endDate": "2026-10-31", "label": "Spring-Autumn" }
+      ],
+      "minimumNights": 3,
+      "featured": false,
+      "sortOrder": 3
+    },
+    {
+      "id": 4,
+      "title": "Last Minute Deal",
+      "slug": "last-minute-deal",
+      "subtitle": "Book within 48 hours",
+      "category": "seasonal",
+      "description": "Spontaneous getaway? Get 25% off when you book within 48 hours of arrival.",
+      "shortDescription": "25% off for last-minute bookings",
+      "price": 148.00,
+      "originalPrice": 195.00,
+      "priceLabel": "per night",
+      "discountType": "percentage",
+      "discountValue": 25,
+      "valueStack": [
+        { "title": "25% discount on room rate", "isIncluded": true, "isHighlight": true },
+        { "title": "Welcome drink", "isIncluded": true },
+        { "title": "Late checkout (subject to availability)", "isIncluded": true }
+      ],
+      "urgencyFlag": "lastMinute",
+      "minimumNights": 1,
+      "featured": false,
+      "sortOrder": 4
+    },
+    {
+      "id": 5,
+      "title": "Early Bird Summer",
+      "slug": "early-bird-summer",
+      "subtitle": "Book now for summer 2026",
+      "category": "seasonal",
+      "description": "Plan ahead and save. Book your summer 2026 stay now and enjoy special rates plus complimentary upgrades.",
+      "shortDescription": "Save 20% on summer bookings",
+      "price": 236.00,
+      "originalPrice": 295.00,
+      "priceLabel": "per night",
+      "discountType": "percentage",
+      "discountValue": 20,
+      "valueStack": [
+        { "title": "20% off room rates", "isIncluded": true, "isHighlight": true },
+        { "title": "Free room upgrade (subject to availability)", "isIncluded": true },
+        { "title": "Beach chairs & umbrella", "isIncluded": true },
+        { "title": "Welcome cocktail", "isIncluded": true }
+      ],
+      "dateRanges": [
+        { "startDate": "2026-06-15", "endDate": "2026-09-15", "label": "Summer 2026" }
+      ],
+      "bookingDeadline": "2026-03-31",
+      "minimumNights": 3,
+      "urgencyFlag": "endingSoon",
+      "featured": true,
+      "sortOrder": 5
+    }
+  ],
+
+  "restaurantMenu": [
+    {
+      "id": 1,
+      "name": "Texel Lamb Rack",
+      "description": "Herb-crusted local lamb with rosemary jus, seasonal vegetables, and potato gratin",
+      "price": 38.50,
+      "category": "mains",
+      "tags": ["local", "chefChoice"],
+      "pairing": "Château Margaux 2018",
+      "season": "year-round",
+      "featured": true,
+      "sortOrder": 1
+    },
+    {
+      "id": 2,
+      "name": "North Sea Catch",
+      "description": "Daily fresh fish with citrus butter, samphire, and crushed new potatoes",
+      "price": 32.00,
+      "category": "seafood",
+      "tags": ["seafood", "local", "seasonal"],
+      "pairing": "Chablis Premier Cru",
+      "season": "year-round",
+      "featured": true,
+      "sortOrder": 2
+    },
+    {
+      "id": 3,
+      "name": "Wadden Oysters",
+      "description": "Six freshly shucked Wadden Sea oysters with mignonette, lemon, and Tabasco",
+      "price": 24.00,
+      "category": "starters",
+      "tags": ["seafood", "local", "chefChoice"],
+      "pairing": "Champagne Brut",
+      "season": "autumn",
+      "featured": true,
+      "sortOrder": 3
+    },
+    {
+      "id": 4,
+      "name": "Texel Cheese Board",
+      "description": "Selection of local Texel cheeses with fig compote, nuts, and artisan crackers",
+      "price": 18.50,
+      "category": "cheese",
+      "tags": ["vegetarian", "local"],
+      "pairing": "Port wine",
+      "season": "year-round",
+      "featured": false,
+      "sortOrder": 4
+    },
+    {
+      "id": 5,
+      "name": "Garden Risotto",
+      "description": "Creamy arborio rice with seasonal vegetables, truffle oil, and aged parmesan",
+      "price": 26.50,
+      "category": "vegetarian",
+      "tags": ["vegetarian", "glutenFree"],
+      "season": "year-round",
+      "featured": false,
+      "sortOrder": 5
+    },
+    {
+      "id": 6,
+      "name": "Lobster Bisque",
+      "description": "Rich, creamy soup with lobster meat, brandy, and fresh herbs",
+      "price": 16.00,
+      "category": "soups",
+      "tags": ["seafood"],
+      "season": "autumn",
+      "featured": false,
+      "sortOrder": 6
+    },
+    {
+      "id": 7,
+      "name": "Beef Tenderloin",
+      "description": "Grass-fed beef with truffle mash, roasted vegetables, and red wine reduction",
+      "price": 42.00,
+      "category": "meat",
+      "tags": ["chefChoice"],
+      "pairing": "Barolo 2016",
+      "season": "year-round",
+      "featured": true,
+      "sortOrder": 7
+    },
+    {
+      "id": 8,
+      "name": "Chocolate Fondant",
+      "description": "Warm chocolate cake with molten center, vanilla ice cream, and berry coulis",
+      "price": 14.00,
+      "category": "desserts",
+      "tags": ["vegetarian"],
+      "season": "year-round",
+      "featured": false,
+      "sortOrder": 8
+    },
+    {
+      "id": 9,
+      "name": "Texel Lamb Carpaccio",
+      "description": "Thinly sliced cured lamb with rocket, parmesan shavings, and truffle dressing",
+      "price": 19.00,
+      "category": "starters",
+      "tags": ["local", "chefChoice"],
+      "season": "year-round",
+      "featured": false,
+      "sortOrder": 9
+    },
+    {
+      "id": 10,
+      "name": "Seafood Platter",
+      "description": "Selection of fresh oysters, langoustines, crab, shrimp, and lobster tail",
+      "price": 85.00,
+      "category": "seafood",
+      "tags": ["seafood", "local"],
+      "pairing": "Sancerre",
+      "season": "summer",
+      "featured": true,
+      "sortOrder": 10
+    }
+  ],
+
+  "testimonials": [
+    {
+      "id": 1,
+      "quote": "An absolute sanctuary. The moment we arrived, the stress of city life melted away. The staff anticipated our every need, and the sea view from our suite was breathtaking. We're already planning our return.",
+      "guestName": "Sophie & Thomas",
+      "guestLocation": "Amsterdam, Netherlands",
+      "rating": 5,
+      "stayDate": "2025-09-15",
+      "source": "direct",
+      "verified": true,
+      "featured": true,
+      "tags": ["rooms", "service", "location"]
+    },
+    {
+      "id": 2,
+      "quote": "The wellness spa exceeded all expectations. The treatments were world-class, and the heated outdoor pool with dune views was magical. True rejuvenation.",
+      "guestName": "Emma van Berg",
+      "guestLocation": "Rotterdam, Netherlands",
+      "rating": 5,
+      "stayDate": "2025-10-20",
+      "source": "booking-com",
+      "verified": true,
+      "featured": true,
+      "tags": ["wellness", "spa"]
+    },
+    {
+      "id": 3,
+      "quote": "The restaurant is worth the trip alone. Chef's tasting menu featuring local Texel lamb and fresh North Sea catch was extraordinary. Impeccable wine pairings.",
+      "guestName": "Michael Schneider",
+      "guestLocation": "Munich, Germany",
+      "rating": 5,
+      "stayDate": "2025-08-05",
+      "source": "tripadvisor",
+      "verified": true,
+      "featured": true,
+      "tags": ["dining", "culinary"]
+    },
+    {
+      "id": 4,
+      "quote": "Perfect family holiday. The kids loved the beach, and the family suite was spacious and well-equipped. Staff organized wonderful island activities for us.",
+      "guestName": "The Johnson Family",
+      "guestLocation": "London, UK",
+      "rating": 5,
+      "stayDate": "2025-07-22",
+      "source": "google",
+      "verified": true,
+      "featured": false,
+      "tags": ["family", "activities"]
+    },
+    {
+      "id": 5,
+      "quote": "Romantic getaway perfection. The champagne was chilled, rose petals scattered, and the sunset dinner was unforgettable. Thank you for making our anniversary so special.",
+      "guestName": "David & Lisa",
+      "guestLocation": "Brussels, Belgium",
+      "rating": 5,
+      "stayDate": "2025-06-14",
+      "source": "direct",
+      "verified": true,
+      "featured": true,
+      "tags": ["romance", "anniversary"]
+    }
+  ],
+
+  "blogPosts": [
+    {
+      "id": 1,
+      "title": "Discover the Hidden Beaches of Texel",
+      "slug": "hidden-beaches-texel",
+      "excerpt": "Beyond the popular shores lie secret coves and pristine stretches of sand. Our guide reveals the island's best-kept beach secrets.",
+      "category": "destination",
+      "tags": ["beach", "nature", "insider-tips"],
+      "author": {
+        "name": "Anna de Vries",
+        "role": "Guest Experience Manager"
+      },
+      "readTime": 6,
+      "isFeatured": true,
+      "publishedAt": "2025-11-15T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Farm to Table: Our Culinary Philosophy",
+      "slug": "farm-to-table-philosophy",
+      "excerpt": "Meet the local farmers and fishermen who supply our kitchen. Discover how we create dishes that tell the story of Texel.",
+      "category": "culinary",
+      "tags": ["food", "local", "sustainability"],
+      "author": {
+        "name": "Chef Willem Brouwer",
+        "role": "Executive Chef"
+      },
+      "readTime": 8,
+      "isFeatured": true,
+      "publishedAt": "2025-10-28T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "The Art of Doing Nothing: A Wellness Guide",
+      "slug": "art-of-doing-nothing",
+      "excerpt": "In our always-on world, true rest is revolutionary. Learn how to embrace the Dutch concept of 'niksen' during your stay.",
+      "category": "wellness",
+      "tags": ["wellness", "relaxation", "mindfulness"],
+      "author": {
+        "name": "Dr. Marlene Jansen",
+        "role": "Wellness Director"
+      },
+      "readTime": 5,
+      "isFeatured": false,
+      "publishedAt": "2025-09-20T10:00:00Z"
+    }
+  ],
+
+  "homeContent": {
+    "heroHeadline": "Where the North Sea Whispers",
+    "heroSubheadline": "Discover timeless luxury on the shores of Texel, where dunes meet the sea and every moment becomes a cherished memory.",
+    "heroTagline": "The Hamptons of the Wadden",
+    "roomsSectionTitle": "Curated Accommodations",
+    "roomsSectionSubtitle": "From intimate retreats to expansive suites, each room is a sanctuary designed for discerning travelers.",
+    "offersSectionTitle": "Exclusive Experiences",
+    "testimonialsTitle": "Guest Stories",
+    "benefitsSection": {
+      "title": "The Opduin Difference",
+      "subtitle": "What sets us apart in the world of luxury hospitality",
+      "benefits": [
+        {
+          "title": "Beachfront Location",
+          "description": "Steps from pristine North Sea beaches",
+          "icon": "waves"
+        },
+        {
+          "title": "Award-Winning Dining",
+          "description": "Michelin-quality cuisine from local ingredients",
+          "icon": "utensils"
+        },
+        {
+          "title": "World-Class Spa",
+          "description": "Holistic wellness in serene surroundings",
+          "icon": "spa"
+        },
+        {
+          "title": "Island Adventures",
+          "description": "Curated experiences across Texel",
+          "icon": "compass"
+        }
+      ]
+    },
+    "wellnessPreview": {
+      "title": "Spa & Wellness",
+      "subtitle": "Sanctuary for the Senses",
+      "description": "Immerse yourself in tranquility at our award-winning spa. From healing treatments to the heated infinity pool overlooking the dunes.",
+      "ctaLabel": "Explore Wellness",
+      "ctaUrl": "/wellness"
+    },
+    "restaurantPreview": {
+      "title": "The Restaurant",
+      "subtitle": "A Culinary Journey",
+      "description": "Experience the flavors of Texel with our seasonal menus featuring the finest local produce, fresh seafood, and the island's famous lamb.",
+      "ctaLabel": "View Menu",
+      "ctaUrl": "/restaurant"
+    },
+    "ctaSection": {
+      "headline": "Begin Your Journey",
+      "subheadline": "Reserve your stay at Grand Hotel Opduin and discover why discerning travelers return year after year.",
+      "primaryCta": "Check Availability",
+      "primaryCtaUrl": "/booking",
+      "secondaryCta": "Contact Us",
+      "secondaryCtaUrl": "/contact"
+    }
+  },
+
+  "globalSettings": {
+    "siteName": "Grand Hotel Opduin",
+    "tagline": "A sanctuary of stillness on the shores of Texel. Where the North Sea whispers and time slows.",
+    "contact": {
+      "address": "Ruijslaan 22",
+      "city": "De Koog",
+      "postalCode": "1796 AD",
+      "country": "Texel, Netherlands",
+      "phone": "+31 222 317 445",
+      "email": "hello@opduin.nl"
+    },
+    "socialLinks": [
+      { "id": 1, "name": "Facebook", "url": "https://facebook.com/grandhotelOpduin", "icon": "facebook" },
+      { "id": 2, "name": "Instagram", "url": "https://instagram.com/grandhotelOpduin", "icon": "instagram" }
+    ],
+    "footerLinks": [
+      { "id": 1, "name": "Rooms", "slug": "rooms" },
+      { "id": 2, "name": "Dining", "slug": "dining" },
+      { "id": 3, "name": "Spa & Wellness", "slug": "spa" },
+      { "id": 4, "name": "Events", "slug": "events" },
+      { "id": 5, "name": "About Us", "slug": "about" }
+    ],
+    "legalLinks": [
+      { "id": 1, "name": "Privacy Policy", "slug": "privacy" },
+      { "id": 2, "name": "Terms & Conditions", "slug": "terms" },
+      { "id": 3, "name": "Cookie Policy", "slug": "cookies" }
+    ],
+    "seoDefaultTitle": "Grand Hotel Opduin | Luxury Coastal Retreat on Texel",
+    "seoDefaultDescription": "Experience timeless elegance at Grand Hotel Opduin. A luxury beachfront hotel on Texel island offering world-class dining, spa, and serene coastal views."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_date_range",
+  "info": {
+    "displayName": "Date Range",
+    "description": "Start and end date range for offers and events",
+    "icon": "calendar"
+  },
+  "attributes": {
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Display label for this date range"
+    },
+    "allDay": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

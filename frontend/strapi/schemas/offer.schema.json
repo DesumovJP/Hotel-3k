@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Offer",
+  "description": "Strapi v5 content type schema for special offers and packages",
+  "kind": "collectionType",
+  "collectionName": "offers",
+  "info": {
+    "singularName": "offer",
+    "pluralName": "offers",
+    "displayName": "Offer",
+    "description": "Special offers, packages, and seasonal deals"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string",
+      "maxLength": 255,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "description": {
+      "type": "richtext",
+      "required": true,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "shortDescription": {
+      "type": "text",
+      "maxLength": 300,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      }
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["romance", "wellness", "adventure", "family", "seasonal", "business", "loyalty"],
+      "required": true,
+      "default": "seasonal"
+    },
+    "discountType": {
+      "type": "enumeration",
+      "enum": ["percentage", "fixed", "nights-free", "upgrade", "value-add"],
+      "default": "percentage"
+    },
+    "discountValue": {
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "description": "Discount amount (percentage or fixed EUR)"
+    },
+    "originalPrice": {
+      "type": "decimal",
+      "description": "Original price before discount"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true,
+      "description": "Final price after discount"
+    },
+    "priceLabel": {
+      "type": "string",
+      "maxLength": 50,
+      "pluginOptions": {
+        "i18n": { "localized": true }
+      },
+      "description": "e.g., 'per night', 'per couple'"
+    },
+    "valueStack": {
+      "type": "component",
+      "repeatable": true,
+      "component": "offer.value-item",
+      "description": "List of included items with included/optional flags"
+    },
+    "terms": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text-item",
+      "description": "Terms and conditions as list items"
+    },
+    "dateRanges": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.date-range",
+      "description": "Valid date ranges for this offer"
+    },
+    "urgencyFlag": {
+      "type": "enumeration",
+      "enum": ["limited", "lastMinute", "popular", "new", "endingSoon"],
+      "description": "Urgency badge to display"
+    },
+    "minimumNights": {
+      "type": "integer",
+      "min": 1,
+      "default": 1
+    },
+    "maximumGuests": {
+      "type": "integer",
+      "min": 1
+    },
+    "bookingDeadline": {
+      "type": "date",
+      "description": "Last date to book this offer"
+    },
+    "rooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::room.room",
+      "description": "Applicable room types"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "promoCode": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_text_item",
+  "info": {
+    "displayName": "Text Item",
+    "description": "Simple text item with optional icon",
+    "icon": "align-left"
+  },
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxLength": 300
+    },
+    "icon": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Icon name from Lucide icons"
+    },
+    "highlighted": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

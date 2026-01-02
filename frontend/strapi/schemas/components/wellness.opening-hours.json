@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "collectionName": "components_wellness_opening_hours",
+  "info": {
+    "displayName": "Opening Hours",
+    "icon": "clock",
+    "description": "Opening hours for wellness facilities"
+  },
+  "options": {},
+  "attributes": {
+    "mondayToFriday": {
+      "type": "string",
+      "default": "07:00 - 21:00"
+    },
+    "saturday": {
+      "type": "string",
+      "default": "08:00 - 21:00"
+    },
+    "sunday": {
+      "type": "string",
+      "default": "08:00 - 20:00"
+    },
+    "holidays": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

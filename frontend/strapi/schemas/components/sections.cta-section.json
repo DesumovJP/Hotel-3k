@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_sections_cta",
+  "info": {
+    "displayName": "CTA Section",
+    "description": "Call to action section",
+    "icon": "arrow-right"
+  },
+  "options": {},
+  "attributes": {
+    "headline": {
+      "type": "string",
+      "required": true,
+      "maxLength": 150
+    },
+    "subheadline": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "primaryCta": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "primaryCtaUrl": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "secondaryCta": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "secondaryCtaUrl": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}
