@@ -1,17 +1,17 @@
 "use client";
 
-import { useState, useRef, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SplitText } from "@/components/animations";
 import { rooms } from "@/lib/data";
 import {
   Calendar, Users, Minus, Plus, Check, ArrowRight, ArrowLeft,
-  Phone, Mail, MapPin, Shield, Clock, CreditCard, Sparkles,
+  Phone, Mail, MapPin, Shield, Clock, CreditCard,
   Eye, Maximize2, Gift, BadgeCheck
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -659,28 +659,14 @@ function BookingForm() {
 }
 
 export default function BookPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.4, 0.6]);
-
   return (
     <>
       <Header />
 
       <main>
-        {/* Hero */}
-        <section ref={heroRef} className="relative h-[50vh] min-h-[350px] overflow-hidden bg-navy">
-          <motion.div
-            style={{ y: bgY, scale: bgScale }}
-            className="absolute inset-0"
-          >
+        {/* Hero - Simplified */}
+        <section className="relative h-[40vh] min-h-[280px] overflow-hidden bg-navy">
+          <div className="absolute inset-0">
             <Image
               src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070"
               alt="Book your stay at Grand Hotel Opduin"
@@ -688,13 +674,9 @@ export default function BookPage() {
               priority
               className="object-cover"
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="absolute inset-0 bg-navy"
-            style={{ opacity: overlayOpacity }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
+          <div className="absolute inset-0 bg-navy/50" />
 
           <div className="absolute inset-0 flex items-end pb-12 md:pb-16 px-6 md:px-12 lg:px-24">
             <div className="max-w-2xl">
@@ -722,23 +704,11 @@ export default function BookPage() {
                 </motion.div>
               </div>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
-                className="text-lg text-white/80 max-w-lg"
-              >
+              <p className="text-lg text-white/80 max-w-lg">
                 Reserve directly with us for the best rates and exclusive benefits.
-              </motion.p>
+              </p>
             </div>
           </div>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, delay: 0.8, ease: easeOutExpo }}
-            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
-          />
         </section>
 
         {/* Trust Indicators */}
@@ -786,26 +756,6 @@ export default function BookPage() {
             >
               <BookingForm />
             </Suspense>
-          </div>
-        </section>
-
-        {/* Direct Booking Benefits */}
-        <section className="py-6 bg-shell text-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm">
-              <span className="font-medium flex items-center gap-2">
-                <Sparkles size={16} />
-                Book Direct Benefits:
-              </span>
-              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-                {directBenefits.map((benefit) => (
-                  <span key={benefit} className="flex items-center gap-2">
-                    <Check size={14} />
-                    {benefit}
-                  </span>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 

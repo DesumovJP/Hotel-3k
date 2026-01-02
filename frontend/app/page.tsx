@@ -8,7 +8,6 @@ import {
   IntroSection,
   RoomsSection,
   ExperiencesSection,
-  HomeTestimonials,
   OffersPreview,
   IslandSection,
   CTASection,
@@ -41,10 +40,6 @@ export default function Home() {
 
         <section id="experiences">
           <ExperiencesSection />
-        </section>
-
-        <section id="testimonials">
-          <HomeTestimonials />
         </section>
 
         <section id="offers">
