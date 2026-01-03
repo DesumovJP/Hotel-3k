@@ -1,12 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SplitText } from "@/components/animations";
 import { ArrowUpRight, Building2, MapPin, Heart, Users } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -82,87 +80,32 @@ const collectionValues = [
 ];
 
 export default function SisterHotelsPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.5, 0.7]);
-
   return (
     <>
       <Header />
 
       <main>
-        {/* Hero */}
-        <section ref={heroRef} className="relative h-[60vh] min-h-[400px] overflow-hidden bg-navy">
-          <motion.div
-            style={{ y: bgY, scale: bgScale }}
-            className="absolute inset-0"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=2070"
-              alt="Hoscom Hotel Collection"
-              fill
-              priority
-              className="object-cover"
-            />
-          </motion.div>
-
-          <motion.div
-            className="absolute inset-0 bg-navy"
-            style={{ opacity: overlayOpacity }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
-
-          <div className="absolute inset-0 flex items-end pb-16 md:pb-20 px-6 md:px-12 lg:px-24">
-            <div className="max-w-3xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-overline text-shell tracking-widest mb-4 block">
-                  Hoscom Collection
-                </span>
-              </motion.div>
-
-              <div className="overflow-hidden mb-4">
-                <motion.div
-                  initial={{ y: 60 }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
-                >
-                  <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1]">
-                    <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      Our Sister Hotels
-                    </SplitText>
-                  </h1>
-                </motion.div>
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
-                className="text-lg text-white/80 max-w-xl"
-              >
+        {/* Compact Header - No Image */}
+        <section className="bg-navy pt-24 pb-10 md:pt-28 md:pb-12">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
+              className="text-center"
+            >
+              <span className="text-overline text-shell tracking-widest mb-3 block">
+                Hoscom Collection
+              </span>
+              <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+                Our Sister Hotels
+              </h1>
+              <p className="text-white/70 max-w-xl mx-auto">
                 Five distinctive hotels across the Netherlands, each with its own character.
-                United by a commitment to genuine hospitality and memorable experiences.
-              </motion.p>
-            </div>
+                United by a commitment to genuine hospitality.
+              </p>
+            </motion.div>
           </div>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, delay: 0.8, ease: easeOutExpo }}
-            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
-          />
         </section>
 
         {/* Quick Info Strip */}
@@ -171,33 +114,35 @@ export default function SisterHotelsPage() {
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Building2 size={16} className="text-shell" />
-                <span>6 Unique Hotels</span>
+                <span>{sisterHotels.length} Hotels</span>
               </div>
               <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-shell" />
-                <span>Across the Netherlands</span>
+                <span>Across Netherlands</span>
               </div>
               <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Heart size={16} className="text-shell" />
-                <span>Family-Owned & Managed</span>
+                <span>Family Values</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Breadcrumbs & Intro */}
+        {/* Breadcrumbs */}
+        <section className="py-6 bg-white border-b border-neutral-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <BreadcrumbsInline items={[
+              { label: "About", href: "/about" },
+              { label: "Sister Hotels" }
+            ]} />
+          </div>
+        </section>
+
+        {/* Collection Values */}
         <section className="py-12 md:py-16 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline
-              items={[
-                { label: "About", href: "/about" },
-                { label: "Sister Hotels" }
-              ]}
-              className="mb-8"
-            />
-
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {collectionValues.map((value, index) => {
                 const Icon = value.icon;

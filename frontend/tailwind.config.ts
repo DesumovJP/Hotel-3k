@@ -24,34 +24,34 @@ const config: Config = {
       // COLOR SYSTEM - Hamptons of the Wadden
       // ============================================
       colors: {
-        // Sand - Warm backgrounds (primary brand)
+        // Sand - Warm honey-golden backgrounds (primary brand)
         sand: {
-          50: "#FDFCFA",
-          100: "#FBF7F2",
-          200: "#F8F0E6",
-          300: "#F5E9DA", // Brand primary
-          400: "#E8D9C4",
-          500: "#D4C4A8",
-          600: "#BBA984",
-          700: "#9A8A68",
-          800: "#7A6E52",
-          900: "#5A5240",
-          DEFAULT: "#F5E9DA",
+          50: "#FEFDFB",
+          100: "#FCF9F4",
+          200: "#F9F3E8",
+          300: "#F5EBDA", // Warm honey sand
+          400: "#EDDCBF",
+          500: "#DECA9F",
+          600: "#C9B17A",
+          700: "#A8915C",
+          800: "#857346",
+          900: "#625535",
+          DEFAULT: "#F5EBDA",
         },
-        // Deep Sea - Dark sections (footer, headers)
+        // Driftwood - Warm dark for sections (replacing cold deepsea)
         deepsea: {
-          50: "#E8F0F3",
-          100: "#C5D8E0",
-          200: "#9EBFCC",
-          300: "#6FA2B3",
-          400: "#4A8A9E",
-          500: "#2A6F85",
-          600: "#1D5468",
-          700: "#143D4D",
-          800: "#0E2A3A", // Brand primary
-          900: "#081A24",
-          950: "#040E14",
-          DEFAULT: "#0E2A3A",
+          50: "#F5F3F1",
+          100: "#E8E4E0",
+          200: "#D1CAC2",
+          300: "#B5AAA0",
+          400: "#958878",
+          500: "#756758",
+          600: "#5A4E42",
+          700: "#453D33",
+          800: "#352F28", // Warm driftwood dark
+          900: "#252119",
+          950: "#15120E",
+          DEFAULT: "#352F28",
         },
         // Accent Gold - CTAs, highlights
         gold: {
@@ -110,19 +110,19 @@ const config: Config = {
           900: "#4D493D",
           DEFAULT: "#a79f88",
         },
-        // Navy - Legacy dark color (for backward compatibility)
+        // Navy - Warm brown (replacing cold blue)
         navy: {
-          50: "#F0F1F4",
-          100: "#D8DBE4",
-          200: "#B1B7C9",
-          300: "#8A93AE",
-          400: "#636F93",
-          500: "#3D4B78",
-          600: "#313D61",
-          700: "#212943",
-          800: "#1A2136",
-          900: "#131829",
-          DEFAULT: "#212943",
+          50: "#F7F5F3",
+          100: "#EBE6E1",
+          200: "#D6CCC2",
+          300: "#BDAE9E",
+          400: "#9C8A76",
+          500: "#7A6B5A",
+          600: "#5F5347",
+          700: "#4A4139",
+          800: "#38322C",
+          900: "#282420",
+          DEFAULT: "#4A4139",
         },
         // Cream - Card backgrounds (legacy)
         cream: {
@@ -313,6 +313,13 @@ const config: Config = {
         "glow-sand": "0 0 20px rgba(245, 233, 218, 0.5), 0 0 40px rgba(245, 233, 218, 0.25)",
         "focus-ring": "0 0 0 2px #C9A646, 0 0 0 4px rgba(201, 166, 70, 0.25)",
         "focus-ring-deepsea": "0 0 0 2px #0E2A3A, 0 0 0 4px rgba(14, 42, 58, 0.25)",
+        // Neomorphism shadows
+        "neo-sm": "4px 4px 10px rgba(0, 0, 0, 0.05), -4px -4px 10px rgba(255, 255, 255, 0.8)",
+        "neo-md": "6px 6px 16px rgba(0, 0, 0, 0.06), -6px -6px 16px rgba(255, 255, 255, 0.9)",
+        "neo-lg": "10px 10px 24px rgba(0, 0, 0, 0.07), -10px -10px 24px rgba(255, 255, 255, 0.95)",
+        "neo-xl": "14px 14px 32px rgba(0, 0, 0, 0.08), -14px -14px 32px rgba(255, 255, 255, 1)",
+        "neo-inset": "inset 2px 2px 6px rgba(0, 0, 0, 0.04), inset -2px -2px 6px rgba(255, 255, 255, 0.7)",
+        "neo-btn": "4px 4px 12px rgba(0, 0, 0, 0.1)",
       },
 
       // ============================================

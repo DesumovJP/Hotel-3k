@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
+import { SectionCTA } from "@/components/sections";
 import { SplitText } from "@/components/animations";
-import { Clock, Phone, Waves, Flame, Droplets, Sparkles, Heart, Baby, Scissors, Hand, Footprints, ArrowRight, FileText, Check } from "lucide-react";
+import { Clock, Phone, Waves, Flame, Droplets, Sparkles, Heart, Baby, Scissors, Hand, Footprints, ArrowRight, FileText, Check, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -99,8 +100,27 @@ export default function WellnessPage() {
   const [youtubeLoaded, setYoutubeLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const { scrollYProgress } = useScroll();
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+  }, []);
+
+  const nextImage = useCallback(() => {
+    setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
+  }, []);
+
+  const prevImage = useCallback(() => {
+    setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -171,8 +191,7 @@ export default function WellnessPage() {
             />
           </div>
 
-          <div className="absolute inset-0 bg-navy/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
 
           <div className="absolute inset-0 flex items-end pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
             <div className="max-w-2xl">
@@ -336,26 +355,32 @@ export default function WellnessPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group"
+                  className="group relative aspect-[4/3] overflow-hidden"
                 >
-                  <div className="aspect-[4/3] relative overflow-hidden mb-4">
-                    <Image
-                      src={facility.image}
-                      alt={facility.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-                    <facility.icon className="absolute bottom-4 left-4 w-8 h-8 text-white" />
+                  <Image
+                    src={facility.image}
+                    alt={facility.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+
+                  {/* Icon badge - neomorphic style */}
+                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                    <facility.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-display text-xl text-ink mb-1">{facility.name}</h3>
-                  <p className="text-neutral-500 text-sm mb-2">{facility.description}</p>
-                  {facility.highlight && (
-                    <p className="text-shell text-sm font-medium flex items-center gap-1">
-                      <Check size={14} />
-                      {facility.highlight}
-                    </p>
-                  )}
+
+                  {/* Content overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <h3 className="font-display text-2xl text-white mb-2">{facility.name}</h3>
+                    <p className="text-white/70 text-sm leading-relaxed mb-3">{facility.description}</p>
+                    {facility.highlight && (
+                      <span className="inline-flex items-center gap-1.5 text-shell text-sm font-medium">
+                        <Check size={14} />
+                        {facility.highlight}
+                      </span>
+                    )}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -383,7 +408,7 @@ export default function WellnessPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {treatmentCategories.map((category, index) => {
                 const Icon = category.icon;
                 return (
@@ -394,24 +419,17 @@ export default function WellnessPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
                     className={cn(
-                      "p-6 border transition-colors",
-                      category.featured
-                        ? "border-shell bg-shell/5"
-                        : "border-sand-200 hover:border-sand-300 bg-sand-50"
+                      "neo-card neo-card-hover p-6 text-center",
+                      category.featured && "ring-2 ring-shell/30"
                     )}
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={cn(
-                        "w-10 h-10 rounded-full flex items-center justify-center",
-                        category.featured ? "bg-shell/20" : "bg-sand-200"
-                      )}>
-                        <Icon size={20} className={category.featured ? "text-shell" : "text-navy"} />
-                      </div>
-                      <h3 className="font-display text-lg text-ink">{category.name}</h3>
+                    <div className="neo-icon neo-icon-lg mx-auto mb-5">
+                      <Icon size={22} className="text-shell" />
                     </div>
-                    <ul className="space-y-1.5">
+                    <h3 className="font-display text-lg text-ink mb-4">{category.name}</h3>
+                    <ul className="space-y-2">
                       {category.treatments.map((treatment) => (
-                        <li key={treatment} className="text-sm text-neutral-600">
+                        <li key={treatment} className="text-sm text-neutral-500">
                           {treatment}
                         </li>
                       ))}
@@ -453,14 +471,16 @@ export default function WellnessPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="relative aspect-square overflow-hidden"
+                  className="relative aspect-square overflow-hidden cursor-pointer group"
+                  onClick={() => openLightbox(index)}
                 >
                   <Image
                     src={src}
                     alt={`Wellness gallery ${index + 1}`}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                 </motion.div>
               ))}
             </div>
@@ -468,42 +488,75 @@ export default function WellnessPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 bg-navy text-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl mb-4">
-                Book Your Treatment
-              </h2>
-              <p className="text-white/70 mb-8 max-w-xl mx-auto">
-                Our salon is open to everyone, not just hotel guests.
-                Call to reserve your personal wellness experience.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="tel:+31222317445"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-shell text-navy font-medium hover:bg-white transition-colors text-sm tracking-wide"
-                >
-                  <Phone size={16} />
-                  +31 222 317 445
-                </a>
-                <a
-                  href="mailto:info@opduin.nl"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-colors text-sm tracking-wide"
-                >
-                  Email Us
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <SectionCTA
+          icon={Sparkles}
+          title="Book Your Treatment"
+          description="Our salon is open to everyone, not just hotel guests. Call to reserve your personal wellness experience."
+          background="sand"
+          actions={[
+            { label: "+31 222 317 445", href: "tel:+31222317445", icon: Phone },
+            { label: "Email Us", href: "mailto:spa@opduin.nl", variant: "secondary" },
+          ]}
+        />
       </main>
 
       <Footer />
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-navy/95 flex items-center justify-center"
+            onClick={closeLightbox}
+          >
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+              className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+              className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="relative max-w-[90vw] max-h-[85vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={galleryImages[lightboxIndex]}
+                alt={`Wellness gallery ${lightboxIndex + 1}`}
+                width={1920}
+                height={1080}
+                className="object-contain max-h-[85vh] w-auto"
+              />
+            </motion.div>
+
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
+              <p className="text-sm text-white/60">
+                {lightboxIndex + 1} / {galleryImages.length}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

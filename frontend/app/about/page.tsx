@@ -1,16 +1,14 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight, MapPin, Phone, Mail, Award, Leaf, Heart, Star,
   Clock, Users, Ship, TreePine, Waves, ChefHat
 } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SplitText } from "@/components/animations";
 import { MiniGallery } from "@/components/sections";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -101,86 +99,31 @@ const awards = [
 ];
 
 export default function AboutPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.4, 0.6]);
-
   return (
     <>
       <Header />
 
       <main>
-        {/* Hero */}
-        <section ref={heroRef} className="relative h-[70vh] min-h-[500px] overflow-hidden bg-navy">
-          <motion.div
-            style={{ y: bgY, scale: bgScale }}
-            className="absolute inset-0"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070"
-              alt="Grand Hotel Opduin"
-              fill
-              priority
-              className="object-cover"
-            />
-          </motion.div>
-
-          <motion.div
-            className="absolute inset-0 bg-navy"
-            style={{ opacity: overlayOpacity }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
-
-          <div className="absolute inset-0 flex items-end pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
-            <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-overline text-shell tracking-widest mb-4 block">
-                  Our Story
-                </span>
-              </motion.div>
-
-              <div className="overflow-hidden mb-4">
-                <motion.div
-                  initial={{ y: 60 }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
-                >
-                  <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
-                    <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      The Hamptons of the Wadden
-                    </SplitText>
-                  </h1>
-                </motion.div>
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
-                className="text-lg text-white/80 max-w-lg"
-              >
+        {/* Compact Header - No Image */}
+        <section className="bg-navy pt-24 pb-10 md:pt-28 md:pb-12">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
+              className="text-center"
+            >
+              <span className="text-overline text-shell tracking-widest mb-3 block">
+                Our Story
+              </span>
+              <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+                The Hamptons of the Wadden
+              </h1>
+              <p className="text-white/70 max-w-lg mx-auto">
                 Where luxury meets the rhythm of the tides. Family-run since 1932.
-              </motion.p>
-            </div>
+              </p>
+            </motion.div>
           </div>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.5, delay: 0.8, ease: easeOutExpo }}
-            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
-          />
         </section>
 
         {/* Quick Info Strip */}
@@ -620,7 +563,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 md:py-28 bg-navy text-white">
+        <section className="py-20 md:py-28 bg-sand-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -628,24 +571,24 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: easeOutExpo }}
             >
-              <h2 className="font-display text-3xl md:text-4xl mb-6">
+              <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
                 Experience Opduin for yourself
               </h2>
-              <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+              <p className="text-neutral-600 mb-8 max-w-2xl mx-auto">
                 The best way to understand what makes us special is to visit.
                 We look forward to welcoming you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/book"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-shell text-navy hover:bg-white transition-colors text-sm tracking-wide uppercase"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
                 >
                   Book Your Stay
                   <ArrowRight size={16} />
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white hover:bg-white hover:text-navy transition-colors text-sm tracking-wide uppercase"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
                 >
                   Contact Us
                 </Link>

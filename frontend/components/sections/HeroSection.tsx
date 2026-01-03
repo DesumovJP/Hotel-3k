@@ -149,10 +149,9 @@ export function HeroSection({
           />
         </div>
 
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-deepsea/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-deepsea/80 via-deepsea/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-deepsea/70 via-transparent to-deepsea/20" />
+        {/* Overlay - minimal to show video */}
+        <div className="absolute inset-0 bg-gradient-to-t from-deepsea/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-deepsea/50 via-transparent to-transparent" />
 
         {/* Main Content - Left aligned for premium feel */}
         <div className="relative z-10 h-full flex items-center">
@@ -244,7 +243,7 @@ export function HeroSection({
           </div>
         </div>
 
-        {/* Scroll Indicator - Bottom center */}
+        {/* Scroll Indicator - Bottom center - Neomorphic */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -255,29 +254,12 @@ export function HeroSection({
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center pt-2"
+            className="w-8 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex justify-center pt-3 shadow-[4px_4px_12px_rgba(0,0,0,0.1),-2px_-2px_8px_rgba(255,255,255,0.1)]"
           >
-            <div className="w-1 h-2 bg-white/60 rounded-full" />
+            <div className="w-1.5 h-2.5 bg-white/70 rounded-full" />
           </motion.div>
         </motion.div>
 
-        {/* Right side info panel - Desktop only */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.8, ease: easeOutExpo }}
-          className="hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col gap-8 text-right"
-        >
-          <div>
-            <span className="text-white/50 text-xs tracking-widest uppercase block mb-1">Established</span>
-            <span className="text-white text-2xl font-display">1928</span>
-          </div>
-          <div className="w-px h-12 bg-white/20 self-end" />
-          <div>
-            <span className="text-white/50 text-xs tracking-widest uppercase block mb-1">Rooms</span>
-            <span className="text-white text-2xl font-display">22</span>
-          </div>
-        </motion.div>
       </section>
     </>
   );

@@ -7,7 +7,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SplitText } from "@/components/animations";
 import { rooms } from "@/lib/data";
 import {
   Calendar, Users, Minus, Plus, Check, ArrowRight, ArrowLeft,
@@ -664,50 +663,24 @@ export default function BookPage() {
       <Header />
 
       <main>
-        {/* Hero - Simplified */}
-        <section className="relative h-[40vh] min-h-[280px] overflow-hidden bg-navy">
-          <div className="absolute inset-0">
-            <Image
-              src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070"
-              alt="Book your stay at Grand Hotel Opduin"
-              fill
-              priority
-              className="object-cover"
-            />
-          </div>
-
-          <div className="absolute inset-0 bg-navy/50" />
-
-          <div className="absolute inset-0 flex items-end pb-12 md:pb-16 px-6 md:px-12 lg:px-24">
-            <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-overline text-shell tracking-widest mb-4 block">
-                  Reservations
-                </span>
-              </motion.div>
-
-              <div className="overflow-hidden mb-4">
-                <motion.div
-                  initial={{ y: 60 }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
-                >
-                  <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1]">
-                    <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      Book Your Stay
-                    </SplitText>
-                  </h1>
-                </motion.div>
-              </div>
-
-              <p className="text-lg text-white/80 max-w-lg">
-                Reserve directly with us for the best rates and exclusive benefits.
+        {/* Compact Header - No Image */}
+        <section className="bg-navy pt-24 pb-8 md:pt-28 md:pb-10">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
+            >
+              <span className="text-overline text-shell tracking-widest mb-3 block">
+                Reservations
+              </span>
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-3">
+                Book Your Stay
+              </h1>
+              <p className="text-white/70 max-w-md mx-auto">
+                Reserve directly for the best rates and exclusive benefits.
               </p>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -759,75 +732,40 @@ export default function BookPage() {
           </div>
         </section>
 
-        {/* Contact Info */}
-        <section className="py-16 md:py-20 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
+        {/* Contact Info - Compact Bar */}
+        <section className="py-10 md:py-12 bg-sand-100 border-t border-sand-200">
+          <div className="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-              className="text-center mb-12"
+              transition={{ duration: 0.5, ease: easeOutExpo }}
+              className="flex flex-col md:flex-row items-center justify-between gap-6"
             >
-              <h2 className="font-display text-2xl md:text-3xl text-ink mb-2">
-                Prefer to speak with us?
-              </h2>
-              <p className="text-neutral-500">Our reservations team is available to assist you.</p>
-            </motion.div>
+              <div className="text-center md:text-left">
+                <h2 className="font-display text-xl text-ink">
+                  Prefer to speak with us?
+                </h2>
+                <p className="text-neutral-500 text-sm">Our reservations team is available Mon-Sun 9:00-18:00</p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: Phone,
-                  title: "Phone",
-                  content: "+31 (0)222 317 445",
-                  href: "tel:+31222317445",
-                  subtext: "Mon-Sun 9:00-18:00"
-                },
-                {
-                  icon: Mail,
-                  title: "Email",
-                  content: "reservations@opduin.nl",
-                  href: "mailto:reservations@opduin.nl",
-                  subtext: "Response within 24h"
-                },
-                {
-                  icon: MapPin,
-                  title: "Address",
-                  content: "Ruijslaan 22, De Koog",
-                  href: null,
-                  subtext: "1796 AD Texel"
-                },
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5, ease: easeOutExpo }}
-                    className="text-center bg-white p-8"
-                  >
-                    <div className="w-12 h-12 mx-auto mb-4 bg-shell/10 flex items-center justify-center">
-                      <Icon size={24} className="text-shell" />
-                    </div>
-                    <h3 className="font-medium text-ink mb-2">{item.title}</h3>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        className="text-neutral-600 hover:text-shell transition-colors block mb-1"
-                      >
-                        {item.content}
-                      </a>
-                    ) : (
-                      <p className="text-neutral-600 mb-1">{item.content}</p>
-                    )}
-                    <p className="text-sm text-neutral-400">{item.subtext}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
+              <div className="flex flex-wrap items-center justify-center gap-6">
+                <a
+                  href="tel:+31222317445"
+                  className="flex items-center gap-2 text-neutral-600 hover:text-shell transition-colors"
+                >
+                  <Phone size={18} className="text-shell" />
+                  <span>+31 222 317 445</span>
+                </a>
+                <a
+                  href="mailto:reservations@opduin.nl"
+                  className="flex items-center gap-2 text-neutral-600 hover:text-shell transition-colors"
+                >
+                  <Mail size={18} className="text-shell" />
+                  <span>reservations@opduin.nl</span>
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>

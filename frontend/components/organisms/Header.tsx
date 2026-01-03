@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -65,9 +65,9 @@ function DropdownMenu({
     >
       <button
         className={cn(
-          "flex items-center gap-1 text-[13px] tracking-[0.12em] uppercase transition-all duration-150 hover:opacity-100 tap-target focus-visible-ring",
+          "flex items-center gap-1 text-[13px] tracking-[0.12em] uppercase transition-colors duration-150 hover:opacity-100 tap-target focus-visible-ring",
           isScrolled || useDarkText
-            ? "text-ink/70 hover:text-ink"
+            ? "text-ink/70 hover:text-shell"
             : "text-white/80 hover:text-white"
         )}
         aria-expanded={isOpen}
@@ -94,12 +94,12 @@ function DropdownMenu({
             className="absolute top-full left-1/2 -translate-x-1/2 pt-3"
             role="menu"
           >
-            <div className="bg-white shadow-lg py-2 min-w-[160px] rounded-lg">
+            <div className="bg-white/95 backdrop-blur-md py-2 min-w-[160px] rounded-xl shadow-neo-md">
               {item.children?.map((child) => (
                 <Link
                   key={child.href}
                   href={child.href}
-                  className="block px-5 py-2.5 text-[13px] tracking-[0.08em] text-ink/70 hover:text-ink hover:bg-white/50 transition-colors duration-150 focus-visible-ring"
+                  className="block px-5 py-2.5 text-[13px] tracking-[0.08em] text-neutral-600 hover:text-shell hover:bg-sand-50 transition-colors duration-150 focus-visible-ring"
                   role="menuitem"
                 >
                   {child.label}
@@ -116,32 +116,41 @@ function DropdownMenu({
 export function Header({ variant = "light" }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
   const useDarkText = variant === "dark" && !isScrolled;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
+  // Optimized scroll handler with RAF for smooth performance
+  const handleScroll = useCallback(() => {
+    if (rafRef.current) return;
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    rafRef.current = requestAnimationFrame(() => {
+      setIsScrolled(window.scrollY > 80);
+      rafRef.current = null;
+    });
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [handleScroll]);
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
+      <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50",
-          "transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "transition-all duration-300 ease-out",
+          // GPU acceleration for smooth scrolling over video
+          "transform-gpu will-change-transform",
           isScrolled
-            ? "bg-white py-3 shadow-sm border-b border-sand-200"
+            ? "py-3 bg-white/90 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-b border-sand-100"
             : useDarkText
-              ? "bg-white py-5 md:py-6 border-b border-sand-200"
-              : "bg-gradient-to-b from-black/30 to-transparent py-5 md:py-6"
+              ? "py-5 md:py-6 bg-white/80 backdrop-blur-sm border-b border-sand-100"
+              : "py-5 md:py-6 bg-gradient-to-b from-black/30 to-transparent"
         )}
       >
         <div className="px-6 md:px-12 lg:px-24">
@@ -149,15 +158,15 @@ export function Header({ variant = "light" }: HeaderProps) {
             {/* Logo */}
             <Link href="/" className="relative z-10">
               <div className={cn(
-                "relative transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                isScrolled ? "w-12 h-12 md:w-14 md:h-14" : "w-14 h-14 md:w-16 md:h-16"
+                "relative transition-all duration-300 ease-out",
+                isScrolled ? "w-14 h-14 md:w-16 md:h-16" : "w-16 h-16 md:w-20 md:h-20"
               )}>
                 <Image
                   src="/icon.png"
                   alt="Grand Hotel Opduin"
                   fill
                   className={cn(
-                    "object-contain transition-all duration-200",
+                    "object-contain transition-all duration-300",
                     isScrolled || useDarkText
                       ? "brightness-100"
                       : "brightness-0 invert"
@@ -182,9 +191,9 @@ export function Header({ variant = "light" }: HeaderProps) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "text-[13px] tracking-[0.12em] uppercase transition-colors duration-150 hover:opacity-100 tap-target focus-visible-ring",
+                      "text-[13px] tracking-[0.12em] uppercase transition-colors duration-150 tap-target focus-visible-ring",
                       isScrolled || useDarkText
-                        ? "text-ink/70 hover:text-ink"
+                        ? "text-ink/70 hover:text-shell"
                         : "text-white/80 hover:text-white"
                     )}
                   >
@@ -194,14 +203,14 @@ export function Header({ variant = "light" }: HeaderProps) {
               ))}
             </nav>
 
-            {/* Book Button */}
+            {/* Book Button - Neomorphic */}
             <Link
               href="/book"
               className={cn(
-                "hidden md:flex items-center gap-2 px-5 py-2.5 rounded-sm transition-all duration-200 ease-out tap-target focus-visible-ring",
+                "hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all duration-200 tap-target focus-visible-ring",
                 isScrolled || useDarkText
-                  ? "bg-deepsea text-white hover:bg-deepsea-600 hover:shadow-lg hover:shadow-deepsea/20 active:bg-deepsea-800"
-                  : "bg-white/10 text-white border border-white/20 hover:bg-white/20 hover:border-white/30 active:bg-white/30"
+                  ? "bg-navy text-white hover:bg-navy-600 shadow-neo-btn"
+                  : "bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25 shadow-neo-btn"
               )}
             >
               <span className="text-[13px] tracking-[0.1em] uppercase">Reserve</span>
@@ -211,21 +220,21 @@ export function Header({ variant = "light" }: HeaderProps) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={cn(
-                "md:hidden p-2 transition-colors duration-150 tap-target focus-visible-ring rounded-lg",
+                "md:hidden p-2.5 rounded-xl transition-all duration-150 tap-target focus-visible-ring",
                 isScrolled || useDarkText
-                  ? "text-ink hover:bg-sand-100"
-                  : "text-white hover:bg-white/10"
+                  ? "text-ink bg-sand-50 shadow-neo-sm"
+                  : "text-white bg-white/15 backdrop-blur-sm"
               )}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+              {isMobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Neomorphic */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -233,36 +242,36 @@ export function Header({ variant = "light" }: HeaderProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden bg-gradient-neutral-sand"
+            className="fixed inset-0 z-40 md:hidden bg-gradient-to-b from-sand-50 to-sand-100"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
           >
-            <div className="h-full flex flex-col justify-center px-6">
+            <div className="h-full flex flex-col justify-center px-8">
               {/* Logo in mobile menu */}
               <div className="absolute top-6 left-6">
                 <Image
                   src="/icon.png"
                   alt="Grand Hotel Opduin"
-                  width={48}
-                  height={48}
+                  width={44}
+                  height={44}
                   className="object-contain"
                 />
               </div>
 
-              <nav className="space-y-5" role="navigation">
+              <nav className="space-y-4" role="navigation">
                 {[...navItems, { href: "/book", label: "Reserve" }].map(
                   (item, index) => (
                     <motion.div
                       key={item.href}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.03, duration: 0.2 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.04, duration: 0.25 }}
                     >
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block font-display text-2xl text-ink hover:text-gold transition-colors duration-150 tap-target focus-visible-ring"
+                        className="block font-display text-2xl text-ink hover:text-shell transition-colors duration-150 tap-target focus-visible-ring py-1"
                       >
                         {item.label}
                       </Link>
@@ -273,7 +282,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                               key={child.href}
                               href={child.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="block text-lg text-ink/60 hover:text-gold transition-colors duration-150 tap-target focus-visible-ring"
+                              className="block text-base text-neutral-500 hover:text-shell transition-colors duration-150 tap-target focus-visible-ring"
                             >
                               {child.label}
                             </Link>
@@ -285,17 +294,17 @@ export function Header({ variant = "light" }: HeaderProps) {
                 )}
               </nav>
 
-              {/* Contact info in mobile menu */}
+              {/* Contact info - Neomorphic card */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.25, duration: 0.2 }}
-                className="absolute bottom-8 left-6 right-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.25 }}
+                className="absolute bottom-8 left-6 right-6 p-5 rounded-2xl bg-white/60 shadow-neo-md"
               >
-                <p className="text-sm text-ink/60">
+                <p className="text-sm text-neutral-600">
                   Ruijslaan 22, De Koog, Texel
                 </p>
-                <p className="text-sm text-ink/60">
+                <p className="text-sm text-shell font-medium mt-1">
                   +31 222 317 445
                 </p>
               </motion.div>

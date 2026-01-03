@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
+import { SectionCTA } from "@/components/sections";
 import { SplitText } from "@/components/animations";
-import { Users, Phone, Mail, ArrowRight, Briefcase, Heart, Check, Utensils, Wifi, Car, Sparkles, Monitor, Coffee, MapPin, Bed, Bike, TreePine } from "lucide-react";
+import { Users, Phone, Mail, ArrowRight, Briefcase, Heart, Check, Utensils, Wifi, Car, Sparkles, Monitor, Coffee, MapPin, Bed, Bike, TreePine, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -121,8 +122,27 @@ export default function MeetingsPage() {
   const [youtubeLoaded, setYoutubeLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const { scrollYProgress } = useScroll();
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+  }, []);
+
+  const nextImage = useCallback(() => {
+    setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
+  }, []);
+
+  const prevImage = useCallback(() => {
+    setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -203,8 +223,7 @@ export default function MeetingsPage() {
             </div>
           </div>
 
-          <div className="absolute inset-0 bg-navy/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
 
           <div className="absolute inset-0 flex items-end pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
             <div className="max-w-2xl">
@@ -355,106 +374,108 @@ export default function MeetingsPage() {
           </div>
         </section>
 
-        {/* Event Types */}
+        {/* Events & Venues - Combined 50/50 Layout */}
         <section className="py-16 md:py-24 bg-sand-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                What We Host
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
-                Your Event, Your Way
-              </h2>
-            </motion.div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+              {/* Left Column - Event Types */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: easeOutExpo }}
+              >
+                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
+                  What We Host
+                </span>
+                <h2 className="font-display text-3xl text-ink mb-8">
+                  Your Event, Your Way
+                </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {eventTypes.map((type, index) => {
-                const Icon = type.icon;
-                return (
-                  <motion.div
-                    key={type.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="p-8 bg-white border border-sand-200"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-shell/20 flex items-center justify-center mb-6">
-                      <Icon size={24} className="text-shell" />
-                    </div>
-                    <h3 className="font-display text-2xl text-ink mb-3">{type.title}</h3>
-                    <p className="text-neutral-600 mb-6">{type.description}</p>
-                    <ul className="space-y-2">
-                      {type.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm text-neutral-600">
-                          <Check size={14} className="text-shell" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {eventTypes.map((type, index) => {
+                    const Icon = type.icon;
+                    return (
+                      <motion.div
+                        key={type.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="neo-card neo-card-hover p-6 text-center"
+                      >
+                        <div className="neo-icon neo-icon-lg mx-auto mb-5">
+                          <Icon size={22} className="text-shell" />
+                        </div>
+                        <h3 className="font-display text-xl text-ink mb-2">{type.title}</h3>
+                        <p className="text-neutral-600 text-sm mb-5 leading-relaxed">{type.description}</p>
+                        <ul className="space-y-2">
+                          {type.features.slice(0, 4).map((feature) => (
+                            <li key={feature} className="text-sm text-neutral-500 flex items-center justify-center gap-1.5">
+                              <Check size={12} className="text-shell" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
 
-        {/* Venues */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                Our Spaces
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
-                Versatile Venues
-              </h2>
-            </motion.div>
+              {/* Right Column - Venues */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
+              >
+                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
+                  Our Spaces
+                </span>
+                <h2 className="font-display text-3xl text-ink mb-8">
+                  Versatile Venues
+                </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {venues.map((venue, index) => (
-                <motion.div
-                  key={venue.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group"
-                >
-                  <div className="aspect-[4/3] overflow-hidden relative mb-4">
-                    <Image
-                      src={venue.image}
-                      alt={venue.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/50 to-transparent" />
-                    <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white text-sm">
-                      <Users size={16} />
-                      {venue.capacity}
-                    </div>
-                  </div>
-                  <h3 className="font-display text-xl text-ink mb-1">{venue.name}</h3>
-                  <p className="text-neutral-500 text-sm mb-3">{venue.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {venue.features.map((feature) => (
-                      <span key={feature} className="text-xs px-2 py-1 bg-sand-100 text-neutral-600">
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+                <div className="space-y-5">
+                  {venues.map((venue, index) => (
+                    <motion.div
+                      key={venue.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="neo-card neo-card-hover overflow-hidden"
+                    >
+                      <div className="relative aspect-[16/9] overflow-hidden group">
+                        <Image
+                          src={venue.image}
+                          alt={venue.name}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="font-display text-lg text-ink">{venue.name}</h3>
+                          <span className="text-xs text-shell flex items-center gap-1 bg-shell/10 px-2 py-1 rounded-full">
+                            <Users size={12} />
+                            {venue.capacity}
+                          </span>
+                        </div>
+                        <p className="text-neutral-600 text-sm mb-3">{venue.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {venue.features.map((feature) => (
+                            <span key={feature} className="text-xs px-2 py-1 bg-sand-100 text-neutral-600 rounded-sm">
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -495,49 +516,42 @@ export default function MeetingsPage() {
         </section>
 
         {/* Process */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-20 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-10"
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
                 How It Works
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
+              <h2 className="font-display text-3xl text-ink">
                 From inquiry to event
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 mb-10">
               {processSteps.map((item, index) => (
                 <motion.div
                   key={item.step}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="w-10 h-10 rounded-full bg-shell text-navy font-display text-lg flex items-center justify-center mx-auto mb-4">
+                  <span className="w-10 h-10 rounded-full bg-shell text-navy font-display text-lg flex items-center justify-center mx-auto mb-3">
                     {item.step}
-                  </div>
-                  <h3 className="font-medium text-ink mb-2">{item.title}</h3>
-                  <p className="text-neutral-500 text-sm">{item.description}</p>
+                  </span>
+                  <p className="font-medium text-ink mb-1">{item.title}</p>
+                  <p className="text-neutral-500 text-sm leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
             </div>
 
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-center mt-12"
-            >
+            <div className="text-center">
               <a
                 href="mailto:events@opduin.nl"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
@@ -545,61 +559,88 @@ export default function MeetingsPage() {
                 Start Planning
                 <ArrowRight size={16} />
               </a>
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Wedding Section */}
-        <section className="py-16 md:py-24 bg-navy text-white relative overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070"
-              alt="Wedding at Opduin"
-              fill
-              className="object-cover opacity-20"
-            />
-          </div>
-          <div className="relative z-10 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-            >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                Weddings
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
-                Say yes with the sea as your witness
-              </h2>
-              <p className="text-white/70 mb-6 max-w-2xl mx-auto text-lg">
-                Exchange vows on the dunes. Dance until midnight in our ballroom.
-                Wake up to ocean views. Our wedding coordinator will craft
-                every detail of your perfect day.
-              </p>
-              <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-white/60 text-sm">
-                <li className="flex items-center gap-1"><Check size={14} className="text-shell" /> Ceremony on the dunes</li>
-                <li className="flex items-center gap-1"><Check size={14} className="text-shell" /> Reception for up to 150</li>
-                <li className="flex items-center gap-1"><Check size={14} className="text-shell" /> Custom menu tasting</li>
-                <li className="flex items-center gap-1"><Check size={14} className="text-shell" /> Room block for guests</li>
-              </ul>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="mailto:weddings@opduin.nl"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-shell text-navy font-medium hover:bg-white transition-colors text-sm tracking-wide"
-                >
-                  <Heart size={16} />
-                  Plan Your Wedding
-                </a>
-                <a
-                  href="tel:+31222317447"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-colors text-sm tracking-wide"
-                >
-                  <Phone size={16} />
-                  Wedding Coordinator
-                </a>
-              </div>
-            </motion.div>
+        <section className="py-16 md:py-24 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: easeOutExpo }}
+                className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden order-2 lg:order-1"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070"
+                  alt="Beach wedding on Texel"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
+              </motion.div>
+
+              {/* Content */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
+                className="order-1 lg:order-2"
+              >
+                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
+                  Weddings
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-6 leading-tight">
+                  Say yes with the sea as your witness
+                </h2>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  Exchange vows on the dunes. Dance until midnight in our ballroom.
+                  Wake up to ocean views. Our wedding coordinator will craft
+                  every detail of your perfect day.
+                </p>
+
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3 text-neutral-600">
+                    <Check size={16} className="text-shell flex-shrink-0" />
+                    <span>Ceremony on the dunes or in our gardens</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-neutral-600">
+                    <Check size={16} className="text-shell flex-shrink-0" />
+                    <span>Reception for up to 150 guests</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-neutral-600">
+                    <Check size={16} className="text-shell flex-shrink-0" />
+                    <span>Custom menu tasting with our chef</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-neutral-600">
+                    <Check size={16} className="text-shell flex-shrink-0" />
+                    <span>Room block for overnight guests</span>
+                  </li>
+                </ul>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="mailto:weddings@opduin.nl"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
+                  >
+                    <Heart size={14} />
+                    Plan Your Wedding
+                  </a>
+                  <a
+                    href="tel:+31222317447"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide"
+                  >
+                    <Phone size={14} />
+                    Wedding Coordinator
+                  </a>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -614,14 +655,16 @@ export default function MeetingsPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="relative aspect-square overflow-hidden"
+                  className="relative aspect-square overflow-hidden cursor-pointer group"
+                  onClick={() => openLightbox(index)}
                 >
                   <Image
                     src={src}
                     alt={`Events gallery ${index + 1}`}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                 </motion.div>
               ))}
             </div>
@@ -629,43 +672,74 @@ export default function MeetingsPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                Let&apos;s Plan Together
-              </h2>
-              <p className="text-neutral-600 mb-8 max-w-xl mx-auto">
-                Tell us about your event and we&apos;ll create a tailored proposal.
-                Our events team responds within 24 hours.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="mailto:events@opduin.nl"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
-                >
-                  <Mail size={16} />
-                  events@opduin.nl
-                </a>
-                <a
-                  href="tel:+31222317446"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide"
-                >
-                  <Phone size={16} />
-                  +31 222 317 446
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <SectionCTA
+          icon={Sparkles}
+          title="Let's Plan Together"
+          description="Tell us about your event and we'll create a tailored proposal. Our events team responds within 24 hours."
+          actions={[
+            { label: "events@opduin.nl", href: "mailto:events@opduin.nl", icon: Mail },
+            { label: "+31 222 317 446", href: "tel:+31222317446", icon: Phone, variant: "secondary" },
+          ]}
+        />
       </main>
 
       <Footer />
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-navy/95 flex items-center justify-center"
+            onClick={closeLightbox}
+          >
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+              className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+              className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="relative max-w-[90vw] max-h-[85vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={galleryImages[lightboxIndex]}
+                alt={`Events gallery ${lightboxIndex + 1}`}
+                width={1920}
+                height={1080}
+                className="object-contain max-h-[85vh] w-auto"
+              />
+            </motion.div>
+
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
+              <p className="text-sm text-white/60">
+                {lightboxIndex + 1} / {galleryImages.length}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

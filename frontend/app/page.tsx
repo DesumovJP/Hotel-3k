@@ -6,10 +6,7 @@ import {
   HeroSection,
   DirectBookingBenefits,
   IntroSection,
-  RoomsSection,
-  ExperiencesSection,
-  OffersPreview,
-  IslandSection,
+  DiscoverGrid,
   CTASection,
 } from "@/components/sections";
 
@@ -34,20 +31,8 @@ export default function Home() {
           <IntroSection />
         </section>
 
-        <section id="rooms">
-          <RoomsSection />
-        </section>
-
-        <section id="experiences">
-          <ExperiencesSection />
-        </section>
-
-        <section id="offers">
-          <OffersPreview />
-        </section>
-
-        <section id="island">
-          <IslandSection />
+        <section id="discover">
+          <DiscoverGrid />
         </section>
 
         <section id="cta">

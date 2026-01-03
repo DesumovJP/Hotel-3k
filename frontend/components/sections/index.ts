@@ -5,11 +5,13 @@ export { IntroSection } from "./IntroSection";
 export { QuickBooking } from "./QuickBooking";
 export { FeaturesSection } from "./FeaturesSection";
 export { CTASection } from "./CTASection";
+export { SectionCTA } from "./SectionCTA";
 export { BenefitsGrid } from "./BenefitsGrid";
 export { DirectBookingBenefits } from "./DirectBookingBenefits";
 
 // Rooms
 export { RoomsSection } from "./RoomsSection";
+export { DiscoverGrid } from "./DiscoverGrid";
 export { RoomDetailSection, defaultRoomDetail } from "./RoomDetailSection";
 export type { RoomDetailData } from "./RoomDetailSection";
 

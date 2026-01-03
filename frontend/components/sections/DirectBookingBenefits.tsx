@@ -2,19 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Check, ArrowRight } from "lucide-react";
+import { ArrowRight, BadgePercent, Sparkles, Gift } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
-
-const benefits = [
-  "€5 cheaper than Booking.com",
-  "Free sauna access",
-  "Texel gift on departure",
-  "Flexible cancellation",
-];
 
 export function DirectBookingBenefits() {
   return (
-    <section className="bg-navy text-white overflow-hidden">
+    <section className="neo-bar">
       <div className="px-4 md:px-12 lg:px-24">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -22,35 +15,31 @@ export function DirectBookingBenefits() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: easeOutExpo }}
-            className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 py-4 md:py-5"
+            className="flex flex-wrap items-center justify-between gap-4 py-4"
           >
-            {/* Benefits list */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <span className="text-shell font-medium text-sm tracking-wide whitespace-nowrap">
-                Book Direct & Save
-              </span>
-
-              <div className="hidden md:block w-px h-4 bg-white/20" />
-
-              <ul className="flex flex-wrap items-center gap-x-5 gap-y-1">
-                {benefits.map((benefit) => (
-                  <li
-                    key={benefit}
-                    className="flex items-center gap-1.5 text-white/80 text-sm whitespace-nowrap"
-                  >
-                    <Check size={14} className="text-shell flex-shrink-0" />
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
+              <div className="flex items-center gap-2">
+                <BadgePercent size={16} className="text-shell" />
+                <span className="text-neutral-500">Direct</span>
+                <span className="text-ink font-medium">Save €5</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Sparkles size={16} className="text-shell" />
+                <span className="text-neutral-500">Included</span>
+                <span className="text-ink font-medium">Free sauna</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Gift size={16} className="text-shell" />
+                <span className="text-neutral-500">Bonus</span>
+                <span className="text-ink font-medium">Texel gift</span>
+              </div>
             </div>
 
-            {/* CTA */}
             <Link
               href="/book"
-              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-shell text-navy text-sm font-medium hover:bg-white transition-colors whitespace-nowrap self-start lg:self-auto"
+              className="group inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
             >
-              Book Direct
+              Book direct
               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </motion.div>
