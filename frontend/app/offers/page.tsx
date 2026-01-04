@@ -6,130 +6,115 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SectionCTA } from "@/components/sections";
 import {
-  Check, ArrowRight, Gift, Star, Heart, Sparkles, Users,
-  Calendar, Sun, PartyPopper, Briefcase
+  Check, ArrowRight, Gift, Star, Snowflake, Leaf, Sparkles, Compass, UtensilsCrossed
 } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-// Offers data
+// Real package deals from opduin.nl
 const offers = [
   {
-    id: "romantic-escape",
-    title: "Romantic Escape",
-    subtitle: "Two nights of pure romance",
-    description: "Celebrate love with a curated experience including champagne, spa treatments, and a candlelit dinner overlooking the dunes.",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-    category: "Romance",
-    icon: Heart,
-    badge: "Most Popular",
+    id: "warm-winter",
+    slug: "warm-winter-offer",
+    title: "Warm Winter Offer",
+    subtitle: "Cozy escape with wellness included",
+    description: "Escape the winter cold with our warming package. Enjoy a cozy stay with breakfast, afternoon coffee and cake, and full access to our wellness facilities including sauna, steam room, and heated indoor pool.",
+    image: "/offers/warm-winteraanbieding-400x300_2.jpg",
+    category: "Seasonal",
+    icon: Snowflake,
+    badge: "Winter Special",
     includes: [
-      "2 nights in Sea View Suite",
-      "Champagne on arrival",
-      "Couples spa treatment (90 min)",
-      "4-course dinner at Restaurant Opduin",
-      "Late checkout until 2pm",
+      "Overnight stay with breakfast",
+      "Coffee and cake in the afternoon",
+      "Access to wellness facilities",
+      "Free parking",
+      "Free WiFi",
     ],
-    idealFor: "Anniversaries, honeymoons, proposals",
+    idealFor: "Weekend getaways, wellness seekers",
   },
   {
-    id: "winter-wellness",
-    title: "Winter Wellness Retreat",
-    subtitle: "Restore body and mind",
-    description: "Escape the cold with our warming wellness package. Daily spa access, signature treatments, and healthy gourmet dining.",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800",
+    id: "early-spring",
+    slug: "early-spring-week",
+    title: "Early Spring Week",
+    subtitle: "Up to 50% discount on accommodation",
+    description: "Book early and save big on your spring holiday. Enjoy the awakening nature of Texel with up to 50% discount on your overnight stay with breakfast. The perfect time to explore the island before the summer crowds arrive.",
+    image: "/offers/vroege-voorjaars-week-400x300.jpg",
+    category: "Seasonal",
+    icon: Leaf,
+    badge: "Up to 50% Off",
+    includes: [
+      "Up to 50% discount on accommodation",
+      "Breakfast included",
+      "Access to wellness facilities",
+      "Free parking",
+      "Free WiFi",
+    ],
+    idealFor: "Early bookers, budget-conscious travelers",
+  },
+  {
+    id: "opduin-relax",
+    slug: "opduin-relax-deal",
+    title: "Opduin Relax Deal",
+    subtitle: "3 nights of pure relaxation",
+    description: "Unwind completely with our 3-night relaxation package. Includes a delicious dinner at our restaurant, full access to wellness facilities, and everything you need for a peaceful retreat in the dunes of Texel.",
+    image: "/offers/opduin-verwenaanbieding-400x300_2.jpg",
     category: "Wellness",
     icon: Sparkles,
-    badge: "Seasonal",
+    badge: "3 Nights",
     includes: [
-      "Deluxe Room accommodation",
-      "Full spa access daily",
-      "One 60-min massage per stay",
-      "Wellness breakfast buffet",
-      "Yoga session",
+      "3 nights accommodation",
+      "Breakfast daily",
+      "1 dinner at Restaurant Opduin",
+      "Access to wellness facilities",
+      "Free parking",
     ],
-    idealFor: "Self-care retreats, wellness seekers",
+    idealFor: "Couples, wellness retreats, relaxation",
   },
   {
-    id: "early-bird-summer",
-    title: "Early Bird Summer 2026",
-    subtitle: "Plan ahead, save more",
-    description: "Plan ahead for the perfect Texel summer holiday. Enjoy beaches, biking, and endless sunsets at a special rate.",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-    category: "Seasonal",
-    icon: Sun,
-    badge: "Early Bird",
+    id: "explore-texel",
+    slug: "explore-texel-deal",
+    title: "Explore Texel Deal",
+    subtitle: "2 nights discovering the island",
+    description: "The perfect package for those who want to discover all that Texel has to offer. Includes entrance to Ecomare seal sanctuary, a picnic bag for your adventures, and dinner to end your day of exploration.",
+    image: "/offers/ontdek-texel-aanbieding-400x300_1.jpg",
+    category: "Adventure",
+    icon: Compass,
+    badge: "2 Nights",
     includes: [
-      "Dune View Room",
-      "Breakfast included",
-      "Free bike rental (2 bikes)",
-      "Beach basket reservation",
-      "Flexible rebooking",
+      "2 nights accommodation",
+      "Breakfast daily",
+      "1 dinner at Restaurant Opduin",
+      "Entrance to Ecomare",
+      "Picnic bag for your excursion",
     ],
-    idealFor: "Summer vacations, beach lovers",
+    idealFor: "Families, nature lovers, first-time visitors",
   },
   {
-    id: "family-adventure",
-    title: "Family Island Adventure",
-    subtitle: "Fun for the whole family",
-    description: "Create lasting memories with your family on Texel. Kids activities, seal spotting, and family-friendly dining included.",
-    image: "https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=800",
-    category: "Family",
-    icon: Users,
-    badge: "Family",
+    id: "taste-of-texel",
+    slug: "taste-of-texel-deal",
+    title: "Taste of Texel Deal",
+    subtitle: "2 nights of culinary delight",
+    description: "Experience the best flavors Texel has to offer. This culinary package includes two dinners at our restaurant featuring local Texel lamb, fresh seafood, and island produce. A feast for food lovers.",
+    image: "/offers/smaak-van-texel-aanbieding-400x300_1.jpg",
+    category: "Culinary",
+    icon: UtensilsCrossed,
+    badge: "2 Dinners",
     includes: [
-      "Family Suite (up to 4 guests)",
-      "Kids eat free (under 12)",
-      "Ecomare seal sanctuary tickets",
-      "Treasure hunt activity pack",
-      "Family bike rental",
+      "2 nights accommodation",
+      "Breakfast daily",
+      "2 dinners at Restaurant Opduin",
+      "Access to wellness facilities",
+      "Free parking",
     ],
-    idealFor: "Family vacations, school holidays",
-  },
-  {
-    id: "celebration-package",
-    title: "Celebration Package",
-    subtitle: "Mark life's special moments",
-    description: "Whether it's a milestone birthday, retirement, or graduation—celebrate in style with our curated celebration package.",
-    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800",
-    category: "Celebration",
-    icon: PartyPopper,
-    badge: "Special Occasion",
-    includes: [
-      "Superior Room accommodation",
-      "Welcome cake & sparkling wine",
-      "3-course celebration dinner",
-      "Personalized room decoration",
-      "Commemorative photo print",
-    ],
-    idealFor: "Birthdays, retirements, graduations",
-  },
-  {
-    id: "workation",
-    title: "Island Workation",
-    subtitle: "Work remotely, live fully",
-    description: "Combine productivity with island life. High-speed WiFi, ergonomic workspace, and all the inspiration of Texel at your doorstep.",
-    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800",
-    category: "Business",
-    icon: Briefcase,
-    badge: "Extended Stay",
-    includes: [
-      "7+ nights accommodation",
-      "Dedicated workspace in room",
-      "High-speed WiFi guaranteed",
-      "Daily breakfast",
-      "Access to meeting room (2h/day)",
-    ],
-    idealFor: "Remote workers, digital nomads",
+    idealFor: "Foodies, couples, culinary enthusiasts",
   },
 ];
 
 const packageBenefits = [
-  { icon: Gift, label: "All-Inclusive Value", description: "Everything bundled at a better rate than booking separately" },
-  { icon: Star, label: "Curated Experiences", description: "Thoughtfully designed by our team for the perfect stay" },
-  { icon: Calendar, label: "Easy Planning", description: "One booking covers everything—no stress, no surprises" },
+  { icon: Gift, label: "Book Direct & Save", description: "No 15% commission to Booking.com means better rates for you" },
+  { icon: Star, label: "Free Extras Included", description: "Each package includes perks you won't find elsewhere" },
+  { icon: Check, label: "Flexible Cancellation", description: "Easier cancellation when you book directly with us" },
 ];
 
 
@@ -183,14 +168,13 @@ export default function OffersPage() {
               className="text-center"
             >
               <span className="text-overline text-shell tracking-widest mb-3 block">
-                Exclusive Packages
+                Book Direct & Save
               </span>
               <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-                Special Offers
+                Package Deals
               </h1>
-              <p className="text-white/70 max-w-lg mx-auto">
-                Curated packages designed for unforgettable experiences on Texel.
-                Everything you need, thoughtfully bundled.
+              <p className="text-xl text-shell font-display italic mb-4">
+                Advantageous offers for direct bookers
               </p>
             </motion.div>
           </div>
@@ -202,17 +186,17 @@ export default function OffersPage() {
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Gift size={16} className="text-shell" />
-                <span>6 Curated Packages</span>
+                <span>5 Package Deals</span>
               </div>
               <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Star size={16} className="text-shell" />
-                <span>Best Value Guaranteed</span>
+                <span>Free Extras & Discounts</span>
               </div>
               <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Check size={16} className="text-shell" />
-                <span>Flexible Booking</span>
+                <span>2+ Nights Stay</span>
               </div>
             </div>
           </div>
@@ -247,7 +231,29 @@ export default function OffersPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Special Offers" }]} />
+            <BreadcrumbsInline items={[{ label: "Package Deals" }]} />
+          </div>
+        </section>
+
+        {/* Intro */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
+            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
+              Booking via Booking.com is very convenient, but also pricey. We pay 15% commission
+              on your booking through this or a similar booking site. That is why we have put together
+              these advantageous offers for direct bookers.
+            </p>
+            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
+              Affordable holidays with perks for stays of two nights or more. Our packages include
+              free extras and/or a discount on the accommodation price. Plus, easier cancellation
+              policies when you book directly with us.
+            </p>
+            <div className="bg-sand-100 p-6 rounded-lg">
+              <p className="text-neutral-700">
+                Questions about our packages? Give us a call: <a href="tel:+31222317445" className="text-navy font-medium hover:text-shell">+31 222 317 445</a>.
+                We would love to put together your perfect Texel holiday.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -269,7 +275,7 @@ export default function OffersPage() {
                 >
                   {/* Image - Clean style like rooms */}
                   <Link
-                    href={`/contact?package=${offer.id}`}
+                    href={`/offers/${offer.slug}`}
                     className={cn(
                       "relative aspect-[4/3] overflow-hidden bg-sand-100 group",
                       index % 2 === 1 && "lg:col-start-2"
@@ -334,7 +340,7 @@ export default function OffersPage() {
                     {/* CTAs - Like rooms */}
                     <div className="flex flex-wrap gap-4">
                       <Link
-                        href={`/contact?package=${offer.id}`}
+                        href={`/offers/${offer.slug}`}
                         className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
                       >
                         View Details
@@ -354,15 +360,39 @@ export default function OffersPage() {
           </div>
         </section>
 
-        {/* Custom Package CTA */}
-        <SectionCTA
-          icon={Sparkles}
-          title="Looking for Something Special?"
-          description="Can't find the perfect package? Our team creates bespoke experiences tailored to your wishes — from anniversaries to corporate retreats."
-          actions={[
-            { label: "Request Custom Package", href: "/contact" },
-          ]}
-        />
+        {/* Contact CTA */}
+        <section className="py-16 md:py-20 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-3xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
+            >
+              <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
+                Book Your Package
+              </h2>
+              <p className="text-neutral-600 mb-8">
+                Reserve via our website or just make a call. We are happy to answer your questions
+                and help you choose the right package for your Texel holiday.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/book"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
+                >
+                  Book Online
+                </Link>
+                <a
+                  href="tel:+31222317445"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
+                >
+                  Call +31 222 317 445
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </main>
 
       <Footer />

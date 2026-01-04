@@ -7,7 +7,7 @@ import { ArrowRight, MapPin, Clock, Waves, Award, Star } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
 const usps = [
-  { icon: Clock, text: "Since 1932" },
+  { icon: Clock, text: "90+ years of hospitality" },
   { icon: MapPin, text: "On the highest dune" },
   { icon: Waves, text: "5 min walk to beach" },
   { icon: Award, text: "Family-run" },
@@ -30,23 +30,25 @@ export function IntroSection() {
             </span>
 
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink mb-6 leading-tight">
-              Where the dunes meet the sea,
-              <span className="text-shell"> you find stillness</span>
+              The Hamptons on
+              <span className="text-shell"> the Wadden</span>
             </h2>
 
             <p className="text-neutral-600 text-lg leading-relaxed mb-6">
-              Perched on Texel&apos;s highest dune since 1932. Wake to salt air,
-              dine on today&apos;s catch, let the spa wash away the world.
+              More than 90 years of hospitality combined in a tasteful, comfortable
+              and contemporary hotel. The beach is within walking distance, the village
+              and cozy restaurants are next door.
             </p>
 
             <p className="text-neutral-500 leading-relaxed mb-8">
-              The beach is a five-minute walk. The rest of life feels much further.
-              Here, where the Wadden Sea meets the North Sea, you&apos;ll find a refuge
-              that has welcomed travelers for nearly a century.
+              Plenty of opportunities for relaxation, exercise and recreation.
+              Rooms ranging from suites to holiday homes, with options for single
+              occupancy through apartments. All rooms with air conditioning and
+              comfortable bedding, positioned atop a dune.
             </p>
 
-            {/* USP badges - neomorphic */}
-            <div className="flex flex-wrap gap-3 mb-8">
+            {/* USP badges - neomorphic grid */}
+            <div className="grid grid-cols-2 gap-3 mb-8">
               {usps.map((usp, index) => {
                 const Icon = usp.icon;
                 return (
@@ -56,10 +58,12 @@ export function IntroSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.2 + index * 0.05, ease: easeOutExpo }}
-                    className="neo-badge-lg text-neutral-600"
+                    className="flex items-center gap-3 px-4 py-3 bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)]"
                   >
-                    <Icon size={15} className="text-shell" />
-                    <span>{usp.text}</span>
+                    <div className="w-8 h-8 rounded-lg bg-sand-100 flex items-center justify-center flex-shrink-0">
+                      <Icon size={16} className="text-shell" />
+                    </div>
+                    <span className="text-sm text-ink/80">{usp.text}</span>
                   </motion.div>
                 );
               })}
@@ -86,7 +90,7 @@ export function IntroSection() {
             <div className="neo-frame">
               <div className="relative aspect-[4/5]">
                 <Image
-                  src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1200"
+                  src="/home/home-600x400_1.jpg"
                   alt="Grand Hotel Opduin exterior"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -101,7 +105,7 @@ export function IntroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
-              className="absolute -bottom-4 -left-4 md:-left-8 p-5 md:p-6 neo-card shadow-neo-lg"
+              className="absolute -bottom-4 -left-4 md:-left-8 p-5 md:p-6 bg-white rounded-2xl shadow-neo-lg"
             >
               <div className="flex items-center gap-1 mb-2">
                 {[...Array(5)].map((_, i) => (

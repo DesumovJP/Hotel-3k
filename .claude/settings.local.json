@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(git -C \"C:/Users/Alex/hotel/hotel-website\" status)",
+      "Bash(git -C \"C:/Users/Alex/hotel/hotel-website\" status --short)",
+      "Bash(^d \")",
+      "Bash(taskkill:*)",
+      "Bash(cmd //c \"taskkill /PID 19952 /F\")",
+      "Bash(tree:*)",
+      "Bash(npm run build:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(wmic process where \"ProcessId=1944\" get CommandLine,ExecutablePath)",
+      "Bash(tasklist /FI \"PID eq 1944\" /V)",
+      "Bash(wmic process where \"ProcessId=1944\" get CommandLine)",
+      "Bash(cat:*)",
+      "Bash(dir:*)",
+      "Bash(node -e:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git push:*)",
+      "WebFetch(domain:www.opduin.nl)",
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(curl:*)",
+      "Bash(npm run build:check:*)",
+      "Bash(git fetch:*)"
+    ]
+  }
+}

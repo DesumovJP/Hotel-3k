@@ -4,117 +4,98 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
-import { SectionCTA } from "@/components/sections";
 import { SplitText } from "@/components/animations";
-import { Users, Phone, Mail, ArrowRight, Briefcase, Heart, Check, Utensils, Wifi, Car, Sparkles, Monitor, Coffee, MapPin, Bed, Bike, TreePine, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, Phone, Mail, ArrowRight, Check, Utensils, Wifi, Car, Monitor, Coffee, MapPin, Bed, TreePine, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const YOUTUBE_ID = "APJyGnhfits";
 
-const eventTypes = [
+const activities = [
+  "Oyster mudflat hiking",
+  "Nature excursions",
+  "Flying above the island",
+  "Surfing",
+  "Cycling tours",
+  "Seal watching",
+];
+
+// Real meeting rooms with actual capacities and descriptions
+const meetingRooms = [
   {
-    id: "corporate",
-    icon: Briefcase,
-    title: "Corporate Events",
-    description: "Meetings, conferences, team retreats, and product launches in inspiring surroundings away from daily distractions.",
-    features: ["Boardroom for 12", "Conference room for 40", "Full AV equipment", "Breakout spaces", "High-speed WiFi"],
+    name: "Slufterzaal",
+    dimensions: "8 × 6m",
+    area: "48m²",
+    carre: 22,
+    theatre: 42,
+    ushape: 18,
+    description: "Suitable for 2 to 42 people. Can be linked with Muyzaal and Bollekamer to form 1 large room for up to 156 people, or with Muyzaal alone for up to 110 people.",
+    image: "/meetings/slufterzaal-600x450.jpg",
   },
   {
-    id: "celebrations",
-    icon: Heart,
-    title: "Celebrations",
-    description: "Weddings, anniversaries, birthdays, and private parties with ocean views and exceptional catering.",
-    features: ["Grand ballroom for 150", "Outdoor terrace", "Custom menus", "Accommodation packages", "Wedding coordinator"],
+    name: "Muyzaal",
+    dimensions: "7 × 7m",
+    area: "49m²",
+    carre: 26,
+    theatre: 57,
+    ushape: 20,
+    description: "Suitable for 2 to 57 people. Can be linked with Slufterzaal and Bollekamer to form 1 large room for up to 156 people, or with Slufterzaal alone for up to 110 people.",
+    image: "/meetings/muyzaal-600x450.jpg",
+  },
+  {
+    name: "Bollekamer",
+    dimensions: "9 × 6m",
+    area: "54m²",
+    carre: 20,
+    theatre: 48,
+    ushape: 18,
+    description: "Suitable for 2 to 48 people. Can be linked with Slufterzaal and Muyzaal to form 1 large room for up to 156 people.",
+    image: "/meetings/bollekamer-600x450.jpg",
+  },
+  {
+    name: "Slufter + Muyzaal",
+    dimensions: "13 × 6.5m",
+    area: "84m²",
+    carre: 42,
+    theatre: 110,
+    ushape: 36,
+    description: "Combined space suitable for 20 to 110 people.",
+    image: "/meetings/slufter-muyzaal-combinatie-600x450.jpg",
+  },
+  {
+    name: "All three rooms",
+    dimensions: "24 × 6.5m",
+    area: "156m²",
+    carre: 56,
+    theatre: 140,
+    ushape: 50,
+    description: "Maximum configuration for up to 156 people in various setups.",
+    image: "/meetings/vergaderzalen-600x450.jpg",
   },
 ];
 
-const venues = [
-  {
-    name: "The Boardroom",
-    capacity: "Up to 12",
-    description: "Intimate setting for focused discussions with natural light and garden views",
-    features: ["Projector & screen", "Video conferencing", "Whiteboard"],
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800",
-  },
-  {
-    name: "Dune View Room",
-    capacity: "Up to 40",
-    description: "Flexible space with floor-to-ceiling windows and direct terrace access",
-    features: ["Modular setup", "Natural daylight", "Private terrace"],
-    image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800",
-  },
-  {
-    name: "Grand Ballroom",
-    capacity: "Up to 150",
-    description: "Elegant space for conferences, gala dinners, and wedding receptions",
-    features: ["Stage & AV system", "Dance floor", "Catering kitchen"],
-    image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
-  },
-];
-
-const whyTexel = [
-  {
-    icon: MapPin,
-    title: "Away from distractions",
-    description: "20 minutes by ferry. A world away from office routine.",
-  },
-  {
-    icon: TreePine,
-    title: "Nature inspires",
-    description: "Fresh air, open skies, beach walks between sessions.",
-  },
-  {
-    icon: Bike,
-    title: "Team activities",
-    description: "Cycling tours, beach games, seal watching.",
-  },
-  {
-    icon: Bed,
-    title: "Stay overnight",
-    description: "22 rooms for your entire team, with spa access.",
-  },
-];
-
-const includedServices = [
-  { icon: Wifi, text: "High-speed WiFi" },
-  { icon: Monitor, text: "AV equipment" },
-  { icon: Coffee, text: "Coffee & tea" },
-  { icon: Utensils, text: "Catering options" },
+// Combined: why Texel + what's included
+const benefits = [
+  { icon: MapPin, text: "20 min ferry from mainland" },
+  { icon: TreePine, text: "Beach walks between sessions" },
+  { icon: Bed, text: "22 rooms for overnight stays" },
+  { icon: Monitor, text: "Beamer, screen & sound system" },
+  { icon: Coffee, text: "Coffee, tea & refreshments" },
+  { icon: Utensils, text: "Full catering available" },
   { icon: Car, text: "Free parking" },
-  { icon: Sparkles, text: "Spa access" },
-];
-
-const processSteps = [
-  {
-    step: "1",
-    title: "Tell us your vision",
-    description: "Share your event details, dates, and requirements via email or phone.",
-  },
-  {
-    step: "2",
-    title: "Receive a proposal",
-    description: "Within 24 hours, we'll send a tailored proposal with options and pricing.",
-  },
-  {
-    step: "3",
-    title: "Plan together",
-    description: "Your dedicated event manager handles every detail from menu to room setup.",
-  },
-  {
-    step: "4",
-    title: "Arrive and enjoy",
-    description: "We take care of everything. You focus on your guests and goals.",
-  },
+  { icon: Wifi, text: "High-speed WiFi" },
 ];
 
 const galleryImages = [
-  "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800",
-  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800",
-  "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
-  "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800",
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
-  "https://images.unsplash.com/photo-1559223607-b4d0555ae227?w=800",
+  "/meetings/vergaderzalen-600x450.jpg",
+  "/meetings/slufterzaal-600x450.jpg",
+  "/meetings/muyzaal-600x450.jpg",
+  "/meetings/bollekamer-600x450.jpg",
+  "/meetings/slufter-muyzaal-combinatie-600x450.jpg",
+  "/meetings/vergaderarrangementen-600x450.jpg",
+  "/meetings/teambuildingactiviteiten-600x450.jpg",
+  "/meetings/een-feestje-op-texel-600x450.jpg",
+  "/meetings/trouwen-op-texel-600x450.jpg",
 ];
 
 export default function MeetingsPage() {
@@ -160,7 +141,7 @@ export default function MeetingsPage() {
     return () => unsubscribe();
   }, [scrollYProgress]);
 
-  const youtubeEmbedUrl = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&start=0`;
+  const youtubeEmbedUrl = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0`;
 
   return (
     <>
@@ -174,7 +155,7 @@ export default function MeetingsPage() {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden"
       >
         <a
-          href="mailto:events@opduin.nl"
+          href="mailto:banqueting@opduin.nl"
           className="flex items-center gap-2 px-6 py-3 bg-navy text-white shadow-xl rounded-full text-sm font-medium"
         >
           <Mail size={16} />
@@ -195,7 +176,7 @@ export default function MeetingsPage() {
                   onLoad={() => setYoutubeLoaded(true)}
                   className={cn(
                     "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-                    "pointer-events-none transition-opacity duration-1000",
+                    "pointer-events-none transition-opacity duration-500",
                     youtubeLoaded ? "opacity-100" : "opacity-0"
                   )}
                   style={{
@@ -214,7 +195,7 @@ export default function MeetingsPage() {
               )}
             >
               <Image
-                src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2069"
+                src="/meetings/image-700x700_1.jpg"
                 alt="Meetings at Grand Hotel Opduin"
                 fill
                 priority
@@ -245,7 +226,7 @@ export default function MeetingsPage() {
                 >
                   <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
                     <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      Gather with Purpose
+                      Meetings
                     </SplitText>
                   </h1>
                 </motion.div>
@@ -255,33 +236,36 @@ export default function MeetingsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
-                className="text-lg text-white/80 max-w-lg mb-8"
+                className="text-xl md:text-2xl text-shell font-display italic mb-4"
               >
-                From boardroom meetings to grand celebrations.
-                Inspiring spaces where the dunes meet the sea.
+                Sincere attention for each other
               </motion.p>
 
-              <motion.div
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: easeOutExpo }}
-                className="hidden md:flex gap-4"
+                className="text-base text-white/80 max-w-lg mb-8"
               >
+                You will organize a meeting that no one will forget. And that&apos;s what matters.
+              </motion.p>
+
+              <div className="hidden md:flex gap-4">
                 <a
-                  href="mailto:events@opduin.nl"
+                  href="mailto:banqueting@opduin.nl"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-shell text-navy font-medium hover:bg-white transition-colors text-sm tracking-wide"
                 >
                   <Mail size={16} />
                   Request Proposal
                 </a>
                 <a
-                  href="tel:+31222317446"
+                  href="tel:+31222317455"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors text-sm tracking-wide"
                 >
                   <Phone size={16} />
-                  +31 222 317 446
+                  +31 222 317 455
                 </a>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
@@ -293,7 +277,7 @@ export default function MeetingsPage() {
               <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <Users size={16} className="text-shell" />
-                  <span>12 to 150 guests</span>
+                  <span>2 to 200 guests</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check size={16} className="text-shell" />
@@ -311,350 +295,287 @@ export default function MeetingsPage() {
           </div>
         </section>
 
-        {/* Why Texel */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Why Meet Here
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  Where focus meets fresh air
-                </h2>
-                <p className="text-neutral-600 mb-8 leading-relaxed text-lg">
-                  Twenty minutes by ferry and you&apos;re on an island. No traffic noise,
-                  no urban rush — just dunes, sea, and the space to think clearly.
-                  Teams leave their routines behind and return with fresh ideas.
-                </p>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {whyTexel.map((item, index) => {
-                    const Icon = item.icon;
-                    return (
-                      <motion.div
-                        key={item.title}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: index * 0.05 }}
-                        className="flex items-start gap-3"
-                      >
-                        <Icon className="w-5 h-5 text-shell mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-ink text-sm">{item.title}</p>
-                          <p className="text-neutral-500 text-xs">{item.description}</p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
-                className="relative aspect-[4/3] overflow-hidden"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070"
-                  alt="Texel island nature"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Events & Venues - Combined 50/50 Layout */}
-        <section className="py-16 md:py-24 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-              {/* Left Column - Event Types */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                  What We Host
-                </span>
-                <h2 className="font-display text-3xl text-ink mb-8">
-                  Your Event, Your Way
-                </h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {eventTypes.map((type, index) => {
-                    const Icon = type.icon;
-                    return (
-                      <motion.div
-                        key={type.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="neo-card neo-card-hover p-6 text-center"
-                      >
-                        <div className="neo-icon neo-icon-lg mx-auto mb-5">
-                          <Icon size={22} className="text-shell" />
-                        </div>
-                        <h3 className="font-display text-xl text-ink mb-2">{type.title}</h3>
-                        <p className="text-neutral-600 text-sm mb-5 leading-relaxed">{type.description}</p>
-                        <ul className="space-y-2">
-                          {type.features.slice(0, 4).map((feature) => (
-                            <li key={feature} className="text-sm text-neutral-500 flex items-center justify-center gap-1.5">
-                              <Check size={12} className="text-shell" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-
-              {/* Right Column - Venues */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
-              >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                  Our Spaces
-                </span>
-                <h2 className="font-display text-3xl text-ink mb-8">
-                  Versatile Venues
-                </h2>
-
-                <div className="space-y-5">
-                  {venues.map((venue, index) => (
-                    <motion.div
-                      key={venue.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="neo-card neo-card-hover overflow-hidden"
-                    >
-                      <div className="relative aspect-[16/9] overflow-hidden group">
-                        <Image
-                          src={venue.image}
-                          alt={venue.name}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-5">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-display text-lg text-ink">{venue.name}</h3>
-                          <span className="text-xs text-shell flex items-center gap-1 bg-shell/10 px-2 py-1 rounded-full">
-                            <Users size={12} />
-                            {venue.capacity}
-                          </span>
-                        </div>
-                        <p className="text-neutral-600 text-sm mb-3">{venue.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {venue.features.map((feature) => (
-                            <span key={feature} className="text-xs px-2 py-1 bg-sand-100 text-neutral-600 rounded-sm">
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* What's Included */}
-        <section className="py-12 md:py-16 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-8"
-            >
-              <h2 className="font-display text-2xl md:text-3xl text-ink">
-                Always Included
-              </h2>
-            </motion.div>
-
-            <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-              {includedServices.map((item, index) => {
+        {/* Introduction */}
+        <section className="py-16 md:py-20 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
+            <p className="text-lg md:text-xl text-neutral-700 leading-relaxed mb-6">
+              An original place where participants are completely isolated from their normal activities.
+              But still easily accessible. An endless variety of professionally organized activities
+              in and around the location. Intimate enough for a small gathering, but also well equipped
+              for a meeting of 200 participants.
+            </p>
+            <p className="text-lg md:text-xl text-neutral-700 leading-relaxed mb-8">
+              Meetings on Texel are always successful. With a well chosen destination and a good program
+              participants get involved and excited. The atmosphere and comfort in combination with
+              a flexible organization give everyone the chance to grow.
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 pt-6 border-t border-neutral-200">
+              {benefits.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <motion.div
-                    key={item.text}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    className="flex items-center gap-2 text-neutral-600"
-                  >
-                    <Icon size={18} className="text-shell" />
+                  <div key={item.text} className="flex items-center gap-2 text-neutral-600">
+                    <Icon size={16} className="text-shell" />
                     <span className="text-sm">{item.text}</span>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
           </div>
         </section>
 
-        {/* Process */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-10"
-            >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                How It Works
-              </span>
-              <h2 className="font-display text-3xl text-ink">
-                From inquiry to event
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 mb-10">
-              {processSteps.map((item, index) => (
-                <motion.div
-                  key={item.step}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="text-center"
+        {/* Teambuilding Activities */}
+        <section className="py-16 md:py-20 bg-sand-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image
+                  src="/meetings/teambuildingactiviteiten-600x450.jpg"
+                  alt="Teambuilding activities on Texel"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
+                  Teambuilding Activities
+                </h2>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  Oyster mudflat hiking, nature excursions, flying above the island, surfing...
+                  So many activities to let your guests experience something special between meetings.
+                </p>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  We are happy to help you find a suitable activity and arrange everything for you.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {activities.map((activity) => (
+                    <span key={activity} className="text-sm bg-white px-3 py-1.5 rounded-full text-neutral-700">
+                      {activity}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href="mailto:banqueting@opduin.nl"
+                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
                 >
-                  <span className="w-10 h-10 rounded-full bg-shell text-navy font-display text-lg flex items-center justify-center mx-auto mb-3">
-                    {item.step}
-                  </span>
-                  <p className="font-medium text-ink mb-1">{item.title}</p>
-                  <p className="text-neutral-500 text-sm leading-relaxed">{item.description}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <a
-                href="mailto:events@opduin.nl"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
-              >
-                Start Planning
-                <ArrowRight size={16} />
-              </a>
+                  Ask about activities
+                  <ArrowRight size={16} />
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Wedding Section */}
-        <section className="py-16 md:py-24 bg-white">
+        {/* A Texel Party */}
+        <section className="py-16 md:py-20 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Image */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-                className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden order-2 lg:order-1"
-              >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="order-2 lg:order-1">
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
+                  A Texel Party
+                </h2>
+                <p className="text-neutral-600 mb-4 leading-relaxed">
+                  A great party is well organized and at the same time gives your guests
+                  the opportunity to completely relax. When you invite guests to the island,
+                  the fun already begins — it&apos;s like going abroad, but even better.
+                </p>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  Texel offers a world of possibilities. Food and drinks grown by local neighbors,
+                  fierce nature, adventurous sports, high-standing art and culture, wellness,
+                  and unique skies on endless beaches.
+                </p>
+                <p className="text-neutral-500 text-sm mb-6">
+                  Weddings, anniversaries, family gatherings — your guests don&apos;t just stop by,
+                  they enjoy a real happening.
+                </p>
+                <a
+                  href="mailto:banqueting@opduin.nl"
+                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
+                >
+                  Plan your celebration
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg order-1 lg:order-2">
                 <Image
-                  src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070"
-                  alt="Beach wedding on Texel"
+                  src="/meetings/een-feestje-op-texel-600x450.jpg"
+                  alt="Celebrations on Texel"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
-              </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Content */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
-                className="order-1 lg:order-2"
-              >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                  Weddings
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl text-ink mb-6 leading-tight">
-                  Say yes with the sea as your witness
+        {/* Weddings */}
+        <section className="py-16 md:py-20 bg-sand-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image
+                  src="/meetings/trouwen-op-texel-600x450.jpg"
+                  alt="Wedding on Texel"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
+                  Getting Married on Texel
                 </h2>
-                <p className="text-neutral-600 mb-6 leading-relaxed">
-                  Exchange vows on the dunes. Dance until midnight in our ballroom.
-                  Wake up to ocean views. Our wedding coordinator will craft
-                  every detail of your perfect day.
+                <p className="text-neutral-600 mb-4 leading-relaxed">
+                  Opduin is an official wedding location. Ideal for small weddings. You can get married
+                  in one of our rooms or on the beach and afterwards a relaxed dinner with the whole group.
                 </p>
-
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center gap-3 text-neutral-600">
-                    <Check size={16} className="text-shell flex-shrink-0" />
-                    <span>Ceremony on the dunes or in our gardens</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-neutral-600">
-                    <Check size={16} className="text-shell flex-shrink-0" />
-                    <span>Reception for up to 150 guests</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-neutral-600">
-                    <Check size={16} className="text-shell flex-shrink-0" />
-                    <span>Custom menu tasting with our chef</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-neutral-600">
-                    <Check size={16} className="text-shell flex-shrink-0" />
-                    <span>Room block for overnight guests</span>
-                  </li>
-                </ul>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="mailto:weddings@opduin.nl"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
-                  >
-                    <Heart size={14} />
-                    Plan Your Wedding
-                  </a>
-                  <a
-                    href="tel:+31222317447"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide"
-                  >
-                    <Phone size={14} />
-                    Wedding Coordinator
-                  </a>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  To ensure that your wedding day is arranged according to your wishes, we work together
+                  with Sophie of Trouwen Texel. She will organize your wedding (or part of it) with heart
+                  and soul, so that you can enjoy this special day carefree.
+                </p>
+                <div className="bg-white p-4 rounded-lg mb-6">
+                  <p className="text-sm font-medium text-ink mb-2">Contact the Texel wedding planner Sophie:</p>
+                  <div className="text-sm text-neutral-600 space-y-1">
+                    <p><a href="https://www.trouwen-texel.nl" target="_blank" rel="noopener noreferrer" className="text-navy hover:text-shell">www.trouwen-texel.nl</a></p>
+                    <p><a href="mailto:info@trouwentexel.com" className="text-navy hover:text-shell">info@trouwentexel.com</a></p>
+                    <p><a href="tel:+31657186156" className="text-navy hover:text-shell">06-57186156</a></p>
+                  </div>
                 </div>
-              </motion.div>
+                <a
+                  href="mailto:banqueting@opduin.nl"
+                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
+                >
+                  Contact our banqueting team
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Meeting Packages */}
+        <section className="py-16 md:py-20 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image
+                  src="/meetings/vergaderarrangementen-600x450.jpg"
+                  alt="Meeting packages"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
+                  Meeting Packages
+                </h2>
+                <p className="text-neutral-600 mb-4 leading-relaxed">
+                  The complete package. You do not have to worry about anything, we make sure that you
+                  and your guests are taken care of in the right way.
+                </p>
+                <p className="text-neutral-600 mb-4 leading-relaxed">
+                  Including meeting room rental, lunches, dinner and treats. Prices depend on your wishes
+                  and the number of participants. We are happy to make an offer for you.
+                </p>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  Need extra ideas for an activity on Texel? Just give us a call and we will help you
+                  with some suggestions. We are also glad to take care of the organizational part.
+                </p>
+                <a
+                  href="mailto:banqueting@opduin.nl"
+                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
+                >
+                  Request a quote
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Meeting Rooms */}
+        <section className="py-16 md:py-24 bg-sand-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="font-display text-3xl md:text-4xl text-ink mb-3">
+                Meeting Rooms
+              </h2>
+              <p className="text-neutral-600">
+                All rooms on first floor with natural daylight. Beamer, screen, sound system & flipchart included.
+              </p>
+            </div>
+
+            {/* Room Cards - first 3 individual rooms */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              {meetingRooms.slice(0, 3).map((room) => (
+                <div key={room.name} className="bg-white rounded-lg overflow-hidden shadow-sm">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={room.image}
+                      alt={room.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-display text-xl text-ink mb-1">{room.name}</h3>
+                    <p className="text-sm text-shell mb-2">{room.dimensions} • {room.area}</p>
+                    <p className="text-sm text-neutral-600 mb-3">{room.description}</p>
+                    <div className="flex gap-4 text-xs text-neutral-500">
+                      <span>Carré: {room.carre}</span>
+                      <span>Theatre: {room.theatre}</span>
+                      <span>U: {room.ushape}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Capacity Table */}
+            <div className="bg-white rounded-lg p-6">
+              <h3 className="font-display text-xl text-ink mb-4 text-center">Room Combinations</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b-2 border-navy">
+                      <th className="py-3 pr-4 text-sm font-medium text-ink">Configuration</th>
+                      <th className="py-3 px-4 text-sm font-medium text-ink text-center hidden md:table-cell">Size</th>
+                      <th className="py-3 px-4 text-sm font-medium text-ink text-center">Carré</th>
+                      <th className="py-3 px-4 text-sm font-medium text-ink text-center">Theatre</th>
+                      <th className="py-3 pl-4 text-sm font-medium text-ink text-center">U-Shape</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {meetingRooms.map((room) => (
+                      <tr key={room.name} className="border-b border-neutral-200">
+                        <td className="py-3 pr-4">
+                          <span className="font-medium text-ink">{room.name}</span>
+                          <span className="block text-xs text-neutral-500 md:hidden">{room.area}</span>
+                        </td>
+                        <td className="py-3 px-4 text-center text-neutral-600 text-sm hidden md:table-cell">
+                          {room.area}
+                        </td>
+                        <td className="py-3 px-4 text-center text-neutral-700">{room.carre}</td>
+                        <td className="py-3 px-4 text-center text-neutral-700">{room.theatre}</td>
+                        <td className="py-3 pl-4 text-center text-neutral-700">{room.ushape}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-xs text-neutral-500 mt-4 text-center">
+                Additional equipment available through third-party hire.
+              </p>
             </div>
           </div>
         </section>
 
         {/* Gallery */}
-        <section className="py-16 md:py-24 bg-sand-100">
+        <section className="py-12 md:py-16 bg-sand-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {galleryImages.map((src, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
                   className="relative aspect-square overflow-hidden cursor-pointer group"
                   onClick={() => openLightbox(index)}
                 >
@@ -662,25 +583,46 @@ export default function MeetingsPage() {
                     src={src}
                     alt={`Events gallery ${index + 1}`}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Contact CTA */}
-        <SectionCTA
-          icon={Sparkles}
-          title="Let's Plan Together"
-          description="Tell us about your event and we'll create a tailored proposal. Our events team responds within 24 hours."
-          actions={[
-            { label: "events@opduin.nl", href: "mailto:events@opduin.nl", icon: Mail },
-            { label: "+31 222 317 446", href: "tel:+31222317446", icon: Phone, variant: "secondary" },
-          ]}
-        />
+        <section className="py-16 md:py-24 bg-navy text-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
+            <h2 className="font-display text-3xl md:text-4xl mb-4">
+              Contact Our Banqueting Team
+            </h2>
+            <p className="text-white/70 mb-8 max-w-xl mx-auto">
+              Luuk and Esmee will help you plan your event. We respond within 24 hours.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <a
+                href="mailto:banqueting@opduin.nl"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-shell text-navy font-medium hover:bg-white transition-colors"
+              >
+                <Mail size={18} />
+                banqueting@opduin.nl
+              </a>
+              <a
+                href="tel:+31222317455"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white hover:bg-white/20 transition-colors"
+              >
+                <Phone size={18} />
+                +31 222 317 455
+              </a>
+            </div>
+
+            <div className="text-white/50 text-sm">
+              <p>Ruijslaan 22, 1796 AD De Koog, Texel</p>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

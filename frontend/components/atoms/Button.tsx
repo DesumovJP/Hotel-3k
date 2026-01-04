@@ -30,49 +30,39 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  // Primary: Blue background, white text
-  // Hover: Lighter blue with subtle shadow
-  // Active: Darker blue, pressed feel
+  // Primary: Simple white text for dark backgrounds
   primary: [
-    "bg-deepsea text-white",
-    "hover:bg-deepsea-600 hover:shadow-lg hover:shadow-deepsea/20",
-    "active:bg-deepsea-800 active:shadow-none",
+    "bg-transparent text-white",
+    "hover:text-white/80",
+    "active:text-white/60",
   ].join(" "),
 
-  // Secondary: Transparent with blue border/text
-  // Hover: Fill with blue, text becomes white
-  // Active: Darker blue fill
+  // Secondary: Simple white text
   secondary: [
-    "bg-transparent border-2 border-deepsea text-deepsea",
-    "hover:bg-deepsea hover:text-white hover:border-deepsea",
-    "active:bg-deepsea-800 active:border-deepsea-800",
+    "bg-transparent text-white/80",
+    "hover:text-white",
+    "active:text-white/60",
   ].join(" "),
 
-  // Ghost: Minimal styling for tertiary actions
-  // Hover: Subtle background tint
-  // Active: Slightly darker
+  // Ghost: Minimal
   ghost: [
     "bg-transparent text-ink/70",
     "hover:text-ink hover:bg-ink/5",
     "active:bg-ink/10",
   ].join(" "),
 
-  // Light: White background for dark backgrounds
-  // Hover: Subtle cream tint with shadow
-  // Active: Slightly darker
+  // Light: For dark backgrounds
   light: [
-    "bg-white text-deepsea",
-    "hover:bg-sand-50 hover:shadow-lg hover:shadow-white/20",
-    "active:bg-sand-100 active:shadow-none",
+    "bg-sand-100 text-ink/80",
+    "hover:bg-sand-200",
+    "active:bg-sand-300",
   ].join(" "),
 
-  // Glass: Glassmorphism for overlays
-  // Hover: More opaque
-  // Active: Solid white
+  // Glass: Simple white text
   glass: [
-    "bg-white/10 backdrop-blur-sm border border-white/20 text-white",
-    "hover:bg-white/20 hover:border-white/30",
-    "active:bg-white/30",
+    "bg-transparent text-white/80",
+    "hover:text-white",
+    "active:text-white/60",
   ].join(" "),
 };
 
@@ -96,7 +86,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "font-medium tracking-[0.08em] uppercase",
           // Smooth transitions for all interactive states
           "transition-all duration-200 ease-out",
-          "rounded-sm",
+          "rounded-full",
           // Accessibility
           "tap-target focus-visible-ring",
           "disabled:opacity-40 disabled:pointer-events-none disabled:shadow-none",

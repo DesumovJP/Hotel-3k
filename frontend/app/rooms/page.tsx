@@ -15,11 +15,11 @@ import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const roomIncludes = [
-  { icon: Wifi, label: "Free High-Speed WiFi" },
-  { icon: Coffee, label: "Nespresso Machine" },
-  { icon: Wind, label: "Climate Control" },
-  { icon: ShieldCheck, label: "In-Room Safe" },
-  { icon: Sparkles, label: "Daily Housekeeping" },
+  { icon: Wifi, label: "Free WiFi" },
+  { icon: Coffee, label: "Coffee and tea in room" },
+  { icon: Wind, label: "Air-conditioning" },
+  { icon: Sparkles, label: "Swimming in heated indoor pool" },
+  { icon: ShieldCheck, label: "Free parking" },
 ];
 
 export default function RoomsPage() {
@@ -71,14 +71,13 @@ export default function RoomsPage() {
               className="text-center"
             >
               <span className="text-overline text-shell tracking-widest mb-3 block">
-                Accommodations
+                Sleeping in Opduin
               </span>
               <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-                Rooms & Suites
+                Rooms
               </h1>
-              <p className="text-white/70 max-w-lg mx-auto">
-                Each room is a sanctuary designed for rest—natural materials,
-                considered details, and views that ground you in Texel.
+              <p className="text-xl text-shell font-display italic mb-4">
+                Waking up in silence, fresh sheets and a clean sea breeze
               </p>
             </motion.div>
           </div>
@@ -109,7 +108,48 @@ export default function RoomsPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Rooms & Suites" }]} />
+            <BreadcrumbsInline items={[{ label: "Rooms" }]} />
+          </div>
+        </section>
+
+        {/* Intro */}
+        <section className="py-12 md:py-16 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
+            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
+              A holiday villa nestled in the dunes. Light and airy, without any unnecessary hotel furniture,
+              air-conditioned, beautiful fabrics, comfortable beds and a mini fridge.
+            </p>
+            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
+              Slide open the curtains for a view over the island and the dunes.
+              Make a Nespresso, open the windows and slowly wake up.
+            </p>
+            <p className="text-neutral-600 mb-8">
+              Opduin has 6 different possibilities to choose from. Double rooms with a king size bed,
+              large suites with an extra sleeping couch, apartments with separate bedrooms, a holiday house
+              for a big family, holiday homes for a small family and even six small single rooms.
+            </p>
+
+            {/* Book CTA */}
+            <div className="bg-sand-100 p-6 rounded-lg mb-8">
+              <p className="text-neutral-700 mb-4">
+                Reserve via our website or just make a call: <a href="tel:+31222317445" className="text-navy font-medium hover:text-shell">+31 222 317 445</a>.
+                We would love to put together your Texel-holiday with you.
+                Care for some ideas? Have a look at our <Link href="/offers" className="text-navy font-medium hover:text-shell underline">package deals</Link>.
+              </p>
+            </div>
+
+            {/* Always Includes */}
+            <div>
+              <h3 className="font-display text-xl text-ink mb-6">A stay in Opduin always includes:</h3>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {roomIncludes.map((item, index) => (
+                  <div key={index} className="neo-card p-4 flex flex-col items-center text-center gap-3">
+                    <item.icon size={24} className="text-shell" />
+                    <span className="text-sm text-neutral-700">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -209,38 +249,6 @@ export default function RoomsPage() {
           </div>
         </section>
 
-        {/* All Rooms Include */}
-        <section className="py-12 md:py-16 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-8"
-            >
-              <h2 className="font-display text-2xl md:text-3xl text-ink">
-                All Rooms Include
-              </h2>
-            </motion.div>
-
-            <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-              {roomIncludes.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex items-center gap-2 text-neutral-600"
-                >
-                  <item.icon size={18} className="text-shell" />
-                  <span className="text-sm">{item.label}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Need Help Section */}
         <section className="py-16 md:py-20 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-3xl mx-auto text-center">
@@ -251,25 +259,24 @@ export default function RoomsPage() {
               transition={{ duration: 0.6, ease: easeOutExpo }}
             >
               <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                Need Help Choosing?
+                Book Your Stay
               </h2>
               <p className="text-neutral-600 mb-8">
-                Our team is here to help you find the perfect room for your stay.
-                Whether you're celebrating a special occasion or planning a family getaway,
-                we'll match you with the ideal accommodation.
+                Reserve via our website or just make a call. We would love to put together
+                your Texel-holiday with you. Care for some ideas? Have a look at our package deals.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/contact"
+                  href="/book"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
                 >
-                  Contact Us
+                  Book Online
                 </Link>
                 <a
-                  href="tel:+31222123456"
+                  href="tel:+31222317445"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
                 >
-                  Call +31 222 123 456
+                  Call +31 222 317 445
                 </a>
               </div>
             </motion.div>

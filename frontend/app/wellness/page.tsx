@@ -7,38 +7,36 @@ import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { SectionCTA } from "@/components/sections";
 import { SplitText } from "@/components/animations";
-import { Clock, Phone, Waves, Flame, Droplets, Sparkles, Heart, Baby, Scissors, Hand, Footprints, ArrowRight, FileText, Check, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Clock, Phone, Waves, Flame, Droplets, Sparkles, Heart, Baby, Hand, Footprints, ArrowRight, Check, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const YOUTUBE_VIDEO_ID = "6JUXaDyk4Lo";
 
-// PDF link for full treatment menu
-const treatmentMenuPDF = "https://www.opduin.nl/upload/files/wellness-menu.pdf";
-
 const facilities = [
   {
     id: "pool",
     name: "Swimming Pool",
-    description: "Heated indoor pool with Jacuzzi and children's pool",
+    description: "Heated indoor pool with Jacuzzi and children's pool. Swimming lessons on Tuesdays.",
     icon: Waves,
-    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=600",
+    highlight: "Non-guests: €9 adults, €5 children",
+    image: "/wellness/zwembad-600x450_1.jpg",
   },
   {
     id: "sauna",
-    name: "Finnish Sauna",
-    description: "Traditional sauna at 80-90°C",
+    name: "Finnish Sauna & Steam Bath",
+    description: "Traditional Finnish sauna and Turkish steam bath. Customary use without swimwear during free hours.",
     icon: Flame,
-    highlight: "Free for hotel guests 16:30-19:00",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600",
+    highlight: "Free for guests 16:30-19:00",
+    image: "/wellness/finse-sauna-en-turks-stoombad-600x450_1.jpg",
   },
   {
-    id: "steam",
-    name: "Steam Bath",
-    description: "Turkish steam bath experience",
+    id: "solarium",
+    name: "Solarium",
+    description: "Quick tanning service available for guests and visitors.",
     icon: Droplets,
-    highlight: "Free for hotel guests 16:30-19:00",
-    image: "https://images.unsplash.com/photo-1515362655824-9a74989f318e?w=600",
+    highlight: "€11 per session",
+    image: "/wellness/solarium-600x450.jpg",
   },
 ];
 
@@ -47,52 +45,89 @@ const treatmentCategories = [
     id: "massage",
     name: "Massage",
     icon: Hand,
-    treatments: ["Relaxing Massage", "Hot Stone Massage", "Scalp Massage"],
+    image: "/wellness/massage-600x400_2.jpg",
+    treatments: [
+      { name: "Relaxing Massage", duration: "25 min", price: "€50" },
+      { name: "Relaxing Massage", duration: "55 min", price: "€85" },
+      { name: "Hot Stone Massage", duration: "40 min", price: "€70" },
+      { name: "Hot Stone Massage", duration: "75 min", price: "€110" },
+      { name: "Scalp Massage", duration: "15 min", price: "€25" },
+    ],
   },
   {
-    id: "facial",
-    name: "Facial",
+    id: "facial-women",
+    name: "Facial (Women)",
     icon: Sparkles,
-    treatments: ["Sea Treatment", "Anti-Aging", "Men's Facial", "Teen Cleansing"],
+    image: "/wellness/gezichtsbehandelingen-dames-600x400_1.jpg",
+    treatments: [
+      { name: "Sea Treatment", duration: "55 min", price: "€85" },
+      { name: "Organic Facial", duration: "40 min", price: "€65" },
+      { name: "Anti-Aging Treatment", duration: "90 min", price: "€135" },
+    ],
+  },
+  {
+    id: "facial-men",
+    name: "Facial (Men)",
+    icon: Sparkles,
+    image: "/wellness/gezichtsbehandelingen-heren-600x400_1.jpg",
+    treatments: [
+      { name: "Men's Facial", duration: "55 min", price: "€85" },
+      { name: "Men's Deluxe Facial", duration: "90 min", price: "€110" },
+    ],
   },
   {
     id: "body",
-    name: "Body",
+    name: "Body Treatments",
     icon: Heart,
-    treatments: ["Body Peeling", "Algae Wrap", "Pregnancy Treatment"],
+    image: "/wellness/lichaamsbehandelingen-600x400_2.jpg",
+    treatments: [
+      { name: "Body Peeling", duration: "30 min", price: "€60" },
+      { name: "Algae Packing", duration: "45 min", price: "€85" },
+      { name: "Pregnancy Treatment", duration: "60 min", price: "€110" },
+    ],
   },
   {
     id: "texel",
-    name: "Texel Specials",
+    name: "Texel Treatments",
     icon: Waves,
     featured: true,
-    treatments: ["Texel Feet", "Texel Feeling", "Opduin Feeling Deluxe"],
+    image: "/wellness/texelse-behandelingen-600x400_2.jpg",
+    treatments: [
+      { name: "Texel Feet (honey & sheepscream)", duration: "25 min", price: "€40" },
+      { name: "Texel Feeling", duration: "55 min", price: "€85" },
+      { name: "Opduin Feeling Deluxe", duration: "90 min", price: "€130" },
+    ],
   },
   {
     id: "hands-feet",
     name: "Hands & Feet",
     icon: Footprints,
-    treatments: ["Manicure", "Pedicure", "Foot Reflex Massage"],
-  },
-  {
-    id: "waxing",
-    name: "Waxing",
-    icon: Scissors,
-    treatments: ["Brazilian", "Legs", "Bikini Line", "Upper Lip"],
+    image: "/wellness/handen-en-voeten-600x400_1.jpg",
+    treatments: [
+      { name: "Manicure", duration: "35 min", price: "€50" },
+      { name: "Luxury Manicure", duration: "55 min", price: "€75" },
+      { name: "Pedicure", duration: "45 min", price: "€65" },
+      { name: "Foot Reflex Massage", duration: "55 min", price: "€85" },
+    ],
   },
   {
     id: "kids",
-    name: "Kids",
+    name: "Kids Wellness",
     icon: Baby,
-    treatments: ["Kids Massage", "Kids Manicure", "Kids Facial"],
+    image: "/wellness/kinder-wellness-600x400.jpg",
+    treatments: [
+      { name: "Kids Massage", duration: "25 min", price: "€29" },
+      { name: "Kids Manicure", duration: "25 min", price: "€29" },
+      { name: "Kids Facial", duration: "25 min", price: "€29" },
+    ],
   },
 ];
 
 const galleryImages = [
-  "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070",
-  "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070",
-  "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070",
-  "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070",
+  "/wellness/zwembad-600x450_1.jpg",
+  "/wellness/finse-sauna-en-turks-stoombad-600x450_1.jpg",
+  "/wellness/massage-600x400_2.jpg",
+  "/wellness/openingstijden-beautysalon-600x450.jpg",
 ];
 
 export default function WellnessPage() {
@@ -139,7 +174,7 @@ export default function WellnessPage() {
   }, [scrollYProgress]);
 
   const showYoutube = !isMobile;
-  const youtubeEmbedUrl = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0`;
+  const youtubeEmbedUrl = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&vq=hd1080&hd=1&quality=hd1080`;
 
   return (
     <>
@@ -187,7 +222,7 @@ export default function WellnessPage() {
                 "absolute inset-0 bg-cover bg-center transition-opacity duration-1000",
                 showYoutube && youtubeLoaded ? "opacity-0" : "opacity-100"
               )}
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070')" }}
+              style={{ backgroundImage: "url('/wellness/zwembad-600x450_1.jpg')" }}
             />
           </div>
 
@@ -200,7 +235,7 @@ export default function WellnessPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
-                <span className="text-overline text-shell tracking-widest mb-4 block">Wellness & Spa</span>
+                <span className="text-overline text-shell tracking-widest mb-4 block">Wellness in Opduin</span>
               </motion.div>
 
               <div className="overflow-hidden mb-4">
@@ -211,7 +246,7 @@ export default function WellnessPage() {
                 >
                   <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
                     <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      Space to Breathe
+                      Personal Attention
                     </SplitText>
                   </h1>
                 </motion.div>
@@ -223,8 +258,8 @@ export default function WellnessPage() {
                 transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
                 className="text-lg text-white/80 max-w-lg mb-8"
               >
-                Indoor pool, sauna, and treatments inspired by the healing sea.
-                Personal attention with Thalgo products.
+                There is nothing like personal attention. Our certified beauty specialists
+                work with Thalgo — light and fresh quality products with its origin from the sea.
               </motion.p>
 
               <motion.div
@@ -241,13 +276,10 @@ export default function WellnessPage() {
                   Book a Treatment
                 </a>
                 <a
-                  href={treatmentMenuPDF}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:info@opduin.nl"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors text-sm tracking-wide"
                 >
-                  <FileText size={16} />
-                  Treatment Menu
+                  info@opduin.nl
                 </a>
               </motion.div>
             </div>
@@ -295,20 +327,22 @@ export default function WellnessPage() {
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Our Approach
+                  Beauty Salon
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  The sea heals
+                  Thalgo Marine Cosmetics
                 </h2>
                 <p className="text-neutral-600 mb-6 leading-relaxed text-lg">
-                  We work exclusively with Thalgo — French marine cosmetics
-                  renowned for their purity and effectiveness. Each treatment
-                  draws on the restorative power of the sea.
+                  Our certified beauty specialists work with Thalgo — light and fresh
+                  quality products with its origin from the sea. French marine cosmetics
+                  renowned for their purity and effectiveness.
                 </p>
-                <p className="text-neutral-600 leading-relaxed">
-                  Our certified specialists take time to understand your needs.
-                  No rush, no routine — just personal attention in a space
-                  designed for stillness.
+                <p className="text-neutral-600 leading-relaxed mb-6">
+                  All treatments are by appointment only and accessible to non-guests as well.
+                  Book your treatment by phone or check availability in our online booking tool.
+                </p>
+                <p className="text-neutral-500 text-sm">
+                  For private sauna bookings: €12.50 per person per hour.
                 </p>
               </motion.div>
 
@@ -320,8 +354,8 @@ export default function WellnessPage() {
                 className="relative aspect-[4/3] overflow-hidden"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070"
-                  alt="Spa treatment"
+                  src="/wellness/openingstijden-beautysalon-600x450.jpg"
+                  alt="Beauty Salon Opduin"
                   fill
                   className="object-cover"
                 />
@@ -347,39 +381,32 @@ export default function WellnessPage() {
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {facilities.map((facility, index) => (
                 <motion.div
                   key={facility.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative aspect-[4/3] overflow-hidden"
+                  className="neo-card neo-card-hover p-3 group"
                 >
-                  <Image
-                    src={facility.image}
-                    alt={facility.name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
-
-                  {/* Icon badge - neomorphic style */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                    <facility.icon className="w-5 h-5 text-white" />
-                  </div>
-
-                  {/* Content overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6">
-                    <h3 className="font-display text-2xl text-white mb-2">{facility.name}</h3>
-                    <p className="text-white/70 text-sm leading-relaxed mb-3">{facility.description}</p>
-                    {facility.highlight && (
-                      <span className="inline-flex items-center gap-1.5 text-shell text-sm font-medium">
-                        <Check size={14} />
-                        {facility.highlight}
-                      </span>
-                    )}
+                  <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
+                    <Image
+                      src={facility.image}
+                      alt={facility.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-navy/60 group-hover:bg-navy/50 transition-colors" />
+                    <div className="absolute inset-0 p-6 flex flex-col justify-center text-center">
+                      <facility.icon className="w-12 h-12 text-shell mx-auto mb-6" />
+                      <h3 className="font-display text-2xl text-white mb-4">{facility.name}</h3>
+                      <p className="text-white/80 text-sm leading-relaxed mb-4">{facility.description}</p>
+                      {facility.highlight && (
+                        <p className="text-shell font-medium text-lg">{facility.highlight}</p>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -404,11 +431,11 @@ export default function WellnessPage() {
               </h2>
               <p className="text-neutral-600 max-w-xl mx-auto">
                 From soothing massages to revitalizing facials.
-                Signature Texel treatments and care for the whole family.
+                Signature Texel treatments with local honey and Noordkroon sheepscream.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {treatmentCategories.map((category, index) => {
                 const Icon = category.icon;
                 return (
@@ -419,44 +446,44 @@ export default function WellnessPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
                     className={cn(
-                      "neo-card neo-card-hover p-6 text-center",
-                      category.featured && "ring-2 ring-shell/30"
+                      "neo-card neo-card-hover p-3 group",
+                      category.featured && "ring-2 ring-shell"
                     )}
                   >
-                    <div className="neo-icon neo-icon-lg mx-auto mb-5">
-                      <Icon size={22} className="text-shell" />
+                    <div className="relative h-[300px] rounded-xl overflow-hidden">
+                      {/* Background Image */}
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-navy/75 group-hover:bg-navy/70 transition-colors" />
+
+                      {/* Content */}
+                      <div className="absolute inset-0 p-6 flex flex-col justify-center items-center text-center">
+                        {/* Header */}
+                        <div className="flex items-center gap-3 mb-5">
+                          <Icon size={22} className="text-shell" />
+                          <h3 className="font-display text-xl text-white">{category.name}</h3>
+                        </div>
+
+                        {/* Treatments list */}
+                        <div className="space-y-2 w-full text-left">
+                          {category.treatments.map((treatment, i) => (
+                            <div key={i} className="flex justify-between text-sm">
+                              <span className="text-white text-left">{treatment.name}</span>
+                              <span className="text-shell font-medium flex-shrink-0 ml-2">{treatment.price}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="font-display text-lg text-ink mb-4">{category.name}</h3>
-                    <ul className="space-y-2">
-                      {category.treatments.map((treatment) => (
-                        <li key={treatment} className="text-sm text-neutral-500">
-                          {treatment}
-                        </li>
-                      ))}
-                    </ul>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* PDF Link */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-center mt-12"
-            >
-              <a
-                href={treatmentMenuPDF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
-              >
-                <FileText size={16} />
-                View Full Menu with Prices
-              </a>
-            </motion.div>
           </div>
         </section>
 
@@ -491,11 +518,11 @@ export default function WellnessPage() {
         <SectionCTA
           icon={Sparkles}
           title="Book Your Treatment"
-          description="Our salon is open to everyone, not just hotel guests. Call to reserve your personal wellness experience."
+          description="Our salon is open to everyone, not just hotel guests. All treatments are by appointment only. Call or email to reserve your personal wellness experience."
           background="sand"
           actions={[
             { label: "+31 222 317 445", href: "tel:+31222317445", icon: Phone },
-            { label: "Email Us", href: "mailto:spa@opduin.nl", variant: "secondary" },
+            { label: "info@opduin.nl", href: "mailto:info@opduin.nl", variant: "secondary" },
           ]}
         />
       </main>

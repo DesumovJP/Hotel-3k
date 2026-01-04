@@ -73,7 +73,7 @@ export function WellnessHero({
 
   const showYoutube = youtubeId && !isMobile;
   const youtubeEmbedUrl = youtubeId
-    ? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&start=0`
+    ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&vq=hd1080&hd=1&quality=hd1080`
     : "";
 
   return (

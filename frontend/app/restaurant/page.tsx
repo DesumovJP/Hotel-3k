@@ -21,18 +21,18 @@ const menuPDFs = {
 const localIngredients = [
   {
     icon: UtensilsCrossed,
-    title: "Texel Lamb",
-    description: "Salt marsh lamb with distinctive flavour from grazing on sea herbs",
+    title: "Texel & Wadden Products",
+    description: "As many products as possible from Texel and other Wadden Sea regions",
   },
   {
     icon: Leaf,
-    title: "Island Vegetables",
-    description: "From local farms, harvested at peak freshness",
+    title: "Organic & Seasonal",
+    description: "Organic meat and seasonal vegetables from local farms",
   },
   {
     icon: Wine,
-    title: "Wadden Sea Catch",
-    description: "Daily fresh fish and shellfish from local fishermen",
+    title: "Day-fresh Fish",
+    description: "The sea provides us with day-fresh fish and shellfish",
   },
 ];
 
@@ -61,12 +61,10 @@ const diningOptions = [
 ];
 
 const galleryImages = [
-  "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070",
-  "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974",
-  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070",
-  "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1974",
-  "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069",
-  "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1974",
+  "/restaurant/restaurant-opduin-600x450.jpg",
+  "/restaurant/lunchen-in-opduin-600x450_2.jpg",
+  "/restaurant/tafel-reserveren-600x450_2.jpg",
+  "/restaurant/slow-food-chefs-alliantie-600x450_1.jpg",
 ];
 
 export default function RestaurantPage() {
@@ -113,7 +111,7 @@ export default function RestaurantPage() {
   }, [scrollYProgress]);
 
   const showYoutube = !isMobile;
-  const youtubeEmbedUrl = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0`;
+  const youtubeEmbedUrl = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&vq=hd1080&hd=1&quality=hd1080`;
 
   return (
     <>
@@ -162,7 +160,7 @@ export default function RestaurantPage() {
                 "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000",
                 showYoutube && youtubeLoaded ? "opacity-0" : "opacity-100"
               )}
-              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974')" }}
+              style={{ backgroundImage: "url('/restaurant/restaurant-opduin-600x450.jpg')" }}
             />
           </div>
 
@@ -176,7 +174,7 @@ export default function RestaurantPage() {
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
                 <span className="text-overline text-shell tracking-widest mb-4 block">
-                  Restaurant
+                  Restaurant of Opduin
                 </span>
               </motion.div>
 
@@ -188,7 +186,7 @@ export default function RestaurantPage() {
                 >
                   <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
                     <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      From Sea to Table
+                      Wadden Gastronomy
                     </SplitText>
                   </h1>
                 </motion.div>
@@ -200,8 +198,8 @@ export default function RestaurantPage() {
                 transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
                 className="text-lg text-white/80 max-w-lg mb-8"
               >
-                Fresh catches, island lamb, seasonal produce. Our kitchen celebrates
-                Texel&apos;s bounty with simplicity.
+                Good food with as many products as possible from Texel and other Wadden Sea regions.
+                If this is not possible, we look for a sustainable and organic alternative.
               </motion.p>
 
               <motion.div
@@ -270,29 +268,32 @@ export default function RestaurantPage() {
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Our Philosophy
+                  In the Dunes
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  The island on your plate
+                  Fresh and homemade
                 </h2>
                 <p className="text-neutral-600 mb-6 leading-relaxed text-lg">
-                  Every morning, the day&apos;s catch arrives from the harbour.
-                  Our lamb grazes on salt marshes just beyond the dunes.
-                  Vegetables travel minutes, not miles.
+                  In the middle of the dunes of De Koog we made the restaurant and terrace.
+                  Good food, extensive choice, as many local products as possible and always
+                  fresh and homemade.
                 </p>
                 <p className="text-neutral-600 leading-relaxed mb-8">
-                  We don&apos;t chase trends. We honour tradition, respect the seasons,
-                  and let exceptional ingredients speak for themselves. Our kitchen
-                  has earned recognition for its honest approach to island cuisine.
+                  Our chefs source the freshest and most sustainable ingredients from the region,
+                  from the Wadden Islands to the coastline from Den Oever to Delfzijl.
+                  The sea provides us with day-fresh fish and shellfish, while the land provides
+                  organic meat and seasonal vegetables. Each product is carefully selected to
+                  reflect the rich biodiversity and flavor of the Wadden region.
                 </p>
 
-                {/* Wine note */}
+                {/* Dog note */}
                 <div className="flex items-start gap-3 p-4 bg-sand-50 border-l-2 border-shell">
-                  <Wine className="w-5 h-5 text-shell mt-0.5" />
+                  <Heart className="w-5 h-5 text-shell mt-0.5" />
                   <div>
-                    <p className="font-medium text-ink mb-1">Curated Wine Selection</p>
+                    <p className="font-medium text-ink mb-1">Dog-free Restaurant</p>
                     <p className="text-sm text-neutral-600">
-                      Our sommelier pairs each course with wines from small European producers.
+                      The restaurant is completely dog-free. Would you like to have a bite to eat
+                      with your dog? Then you are welcome in our bar for a simple 2-course menu.
                     </p>
                   </div>
                 </div>
@@ -306,8 +307,8 @@ export default function RestaurantPage() {
                 className="relative aspect-[4/3] overflow-hidden"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1954"
-                  alt="Chef preparing fresh ingredients"
+                  src="/restaurant/slow-food-chefs-alliantie-600x450_1.jpg"
+                  alt="Slow Food Chefs Alliance - Restaurant Opduin"
                   fill
                   className="object-cover"
                 />
@@ -413,18 +414,18 @@ export default function RestaurantPage() {
               transition={{ duration: 0.6, ease: easeOutExpo }}
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                Dinner Experience
+                Reserve a Table
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                Served in courses
+                Dinner & Lunch
               </h2>
               <p className="text-neutral-600 text-lg leading-relaxed mb-4 max-w-2xl mx-auto">
-                We believe great meals unfold slowly. Choose from 3 to 6 courses
-                and let our kitchen guide you through the flavours of Texel —
-                from the first amuse to the final sweet note.
+                Reserve your table for dinner here. You simply choose the desired date and
+                preferred time. Also for non-hotel guests. We advise you to reserve in time,
+                there is availability for 70 guests.
               </p>
               <p className="text-neutral-500 mb-10">
-                Each course crafted, each moment savoured.
+                View our menus below to see the current seasonal offerings.
               </p>
 
               {/* Menu Links */}
@@ -480,13 +481,13 @@ export default function RestaurantPage() {
                 className="p-6 bg-sand-50"
               >
                 <Sun className="w-8 h-8 text-shell mb-4" />
-                <h3 className="font-display text-xl text-ink mb-3">Summer Terrace</h3>
+                <h3 className="font-display text-xl text-ink mb-3">Dune Terrace</h3>
                 <p className="text-neutral-600 text-sm mb-4">
-                  When the weather permits, dine on our terrace overlooking the dunes.
-                  Watch the sunset paint the sky as you enjoy your meal. Available for
-                  lunch and early dinner.
+                  When the weather is nice, a cup of coffee or an extensive lunch on our dune terrace,
+                  while the pheasants scurry among the marram grass. With various sun loungers and
+                  seats in the dune path, it is a wonderful place to relax.
                 </p>
-                <p className="text-xs text-neutral-500">May – September, weather permitting</p>
+                <p className="text-xs text-neutral-500">Non-hotel guests are also very welcome</p>
               </motion.div>
             </div>
           </div>

@@ -59,7 +59,7 @@ function DropdownMenu({
 
   return (
     <div
-      className="relative"
+      className="relative overflow-visible"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -68,8 +68,9 @@ function DropdownMenu({
           "flex items-center gap-1 text-[13px] tracking-[0.12em] uppercase transition-colors duration-150 hover:opacity-100 tap-target focus-visible-ring",
           isScrolled || useDarkText
             ? "text-ink/70 hover:text-shell"
-            : "text-white/80 hover:text-white"
+            : "text-white hover:text-white"
         )}
+        style={!isScrolled && !useDarkText ? { filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' } : undefined}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -153,8 +154,8 @@ export function Header({ variant = "light" }: HeaderProps) {
               : "py-5 md:py-6 bg-gradient-to-b from-black/30 to-transparent"
         )}
       >
-        <div className="px-6 md:px-12 lg:px-24">
-          <div className="flex items-center justify-between">
+        <div className="px-6 md:px-12 lg:px-24 overflow-visible">
+          <div className="flex items-center justify-between overflow-visible">
             {/* Logo */}
             <Link href="/" className="relative z-10">
               <div className={cn(
@@ -177,7 +178,7 @@ export function Header({ variant = "light" }: HeaderProps) {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+            <nav className="hidden md:flex items-center gap-8 lg:gap-10 overflow-visible">
               {navItems.map((item) => (
                 item.children ? (
                   <DropdownMenu
@@ -196,6 +197,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                         ? "text-ink/70 hover:text-shell"
                         : "text-white/80 hover:text-white"
                     )}
+                    style={!isScrolled && !useDarkText ? { filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' } : undefined}
                   >
                     {item.label}
                   </Link>
@@ -203,17 +205,19 @@ export function Header({ variant = "light" }: HeaderProps) {
               ))}
             </nav>
 
-            {/* Book Button - Neomorphic */}
+            {/* Book Button */}
             <Link
               href="/book"
               className={cn(
-                "hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all duration-200 tap-target focus-visible-ring",
+                "hidden md:flex items-center px-5 py-2 rounded-full transition-colors duration-200 tap-target focus-visible-ring",
                 isScrolled || useDarkText
-                  ? "bg-navy text-white hover:bg-navy-600 shadow-neo-btn"
-                  : "bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25 shadow-neo-btn"
+                  ? "bg-shell text-white hover:bg-shell-600"
+                  : "text-white hover:text-white/80"
               )}
             >
-              <span className="text-[13px] tracking-[0.1em] uppercase">Reserve</span>
+              <span className="text-[13px] tracking-[0.1em] uppercase">
+                Reserve
+              </span>
             </Link>
 
             {/* Mobile Menu Button */}

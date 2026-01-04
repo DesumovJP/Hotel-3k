@@ -27,14 +27,14 @@ const contactInfo = {
   postalCode: "1796 AD",
   country: "Texel, Netherlands",
   phone: "+31 222 317 445",
-  email: "hello@opduin.nl",
+  email: "info@opduin.nl",
   coordinates: { lat: 53.0928, lng: 4.7583 },
 };
 
 const openingHours = {
   reception: "24 hours",
-  restaurant: "07:30 - 22:00",
-  spa: "09:00 - 21:00",
+  restaurant: "12:00 - 22:00",
+  spa: "By appointment",
 };
 
 const directions = [
@@ -42,28 +42,26 @@ const directions = [
     mode: "car" as const,
     icon: Car,
     title: "By Car",
-    description: "A4 to Den Helder, then ferry to Texel. 15 min drive from ferry terminal.",
+    description: "From western/southern Netherlands via Amsterdam ringroad (A10), through Zaandam, Purmerend, Hoorn to Den Helder. From east via Afsluitdijk (A7).",
   },
   {
     mode: "ferry" as const,
     icon: Ship,
     title: "By Ferry",
-    description: "TESO ferry from Den Helder runs every hour. 20 minute crossing.",
+    description: "TESO ferry leaves from Den Helder every hour (on the half hour). 20 minute crossing, no reservation needed.",
   },
   {
-    mode: "plane" as const,
-    icon: Plane,
-    title: "By Plane",
-    description: "Nearest airports: Amsterdam Schiphol (1.5h) or Texel Airport (10min).",
+    mode: "bus" as const,
+    icon: Navigation,
+    title: "Public Transport",
+    description: "Bus 33 takes you to the ferry from Den Helder station. On Texel, bus 28 takes you from the ferry to Opduin.",
   },
 ];
 
-const departments = [
-  { name: "General Inquiries", email: "hello@opduin.nl", phone: "+31 222 317 445" },
-  { name: "Reservations", email: "reservations@opduin.nl", phone: "+31 222 317 446" },
-  { name: "Spa & Wellness", email: "spa@opduin.nl", phone: "+31 222 317 448" },
-  { name: "Meetings & Events", email: "events@opduin.nl", phone: "+31 222 317 447" },
-];
+const parkingInfo = {
+  title: "Free Parking",
+  description: "Parking on Opduin's own parking lot is free of charge. For island-wide parking you need to purchase a Texel vignet online.",
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -170,31 +168,34 @@ export default function ContactPage() {
                   </a>
                 </div>
 
-                {/* Departments */}
+                {/* Contact */}
                 <div className="mb-8">
                   <h3 className="font-display text-xl text-ink mb-4 flex items-center gap-2">
                     <Phone className="w-5 h-5 text-shell" />
                     Contact Us
                   </h3>
-                  <div className="space-y-4">
-                    {departments.map((dept) => (
-                      <div key={dept.name} className="pb-4 border-b border-sand-200 last:border-0">
-                        <p className="font-medium text-ink mb-1">{dept.name}</p>
-                        <a
-                          href={`mailto:${dept.email}`}
-                          className="text-neutral-600 text-sm hover:text-navy transition-colors block"
-                        >
-                          {dept.email}
-                        </a>
-                        <a
-                          href={`tel:${dept.phone.replace(/\s/g, "")}`}
-                          className="text-neutral-600 text-sm hover:text-navy transition-colors block"
-                        >
-                          {dept.phone}
-                        </a>
-                      </div>
-                    ))}
+                  <div className="space-y-3">
+                    <a
+                      href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+                      className="flex items-center gap-3 text-neutral-600 hover:text-navy transition-colors"
+                    >
+                      <Phone className="w-4 h-4 text-shell" />
+                      {contactInfo.phone}
+                    </a>
+                    <a
+                      href={`mailto:${contactInfo.email}`}
+                      className="flex items-center gap-3 text-neutral-600 hover:text-navy transition-colors"
+                    >
+                      <Mail className="w-4 h-4 text-shell" />
+                      {contactInfo.email}
+                    </a>
                   </div>
+                </div>
+
+                {/* Parking */}
+                <div className="mb-8 p-4 bg-sand-50 border-l-2 border-shell">
+                  <h4 className="font-medium text-ink mb-2">{parkingInfo.title}</h4>
+                  <p className="text-sm text-neutral-600">{parkingInfo.description}</p>
                 </div>
 
                 {/* Opening Hours */}
