@@ -1,7 +1,9 @@
 "use client";
 
 import { forwardRef, ButtonHTMLAttributes } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useRef, useState } from "react";
 
 /**
  * Button Component - Elegant Hotel Design System
@@ -26,6 +28,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
+  magnetic?: boolean;
+  magneticStrength?: number;
   children: React.ReactNode;
 }
 
@@ -74,10 +78,39 @@ const sizes: Record<ButtonSize, string> = {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variant = "primary", size = "md", fullWidth = false, className, children, ...props },
+    {
+      variant = "primary",
+      size = "md",
+      fullWidth = false,
+      magnetic = true,
+      magneticStrength = 0.15,
+      className,
+      children,
+      ...props
+    },
     ref
   ) => {
-    return (
+    const magneticRef = useRef<HTMLDivElement>(null);
+    const [magneticPosition, setMagneticPosition] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+      if (!magnetic || !magneticRef.current || props.disabled) return;
+
+      const rect = magneticRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      setMagneticPosition({
+        x: (e.clientX - centerX) * magneticStrength,
+        y: (e.clientY - centerY) * magneticStrength,
+      });
+    };
+
+    const handleMouseLeave = () => {
+      setMagneticPosition({ x: 0, y: 0 });
+    };
+
+    const buttonElement = (
       <button
         ref={ref}
         className={cn(
@@ -100,6 +133,26 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {children}
       </button>
+    );
+
+    if (!magnetic) return buttonElement;
+
+    return (
+      <motion.div
+        ref={magneticRef}
+        className="inline-block"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        animate={magneticPosition}
+        transition={{
+          type: "spring",
+          stiffness: 350,
+          damping: 15,
+          mass: 0.5,
+        }}
+      >
+        {buttonElement}
+      </motion.div>
     );
   }
 );

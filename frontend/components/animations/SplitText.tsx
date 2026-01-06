@@ -64,8 +64,23 @@ export function SplitText({
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
+    } else if (!once) {
+      controls.start("hidden");
     }
-  }, [isInView, controls]);
+  }, [isInView, controls, once]);
+
+  // Trigger animation immediately for above-the-fold content
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          controls.start("visible");
+        }
+      }
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [controls, elements]);
 
   const containerVariants: Variants = {
     hidden: {},

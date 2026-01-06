@@ -192,14 +192,19 @@ export function Header({ variant = "light" }: HeaderProps) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "text-[13px] tracking-[0.12em] uppercase transition-colors duration-150 tap-target focus-visible-ring",
+                      "relative text-[13px] tracking-[0.12em] uppercase transition-colors duration-300 tap-target focus-visible-ring group",
                       isScrolled || useDarkText
-                        ? "text-ink/70 hover:text-shell"
+                        ? "text-ink/70 hover:text-ink"
                         : "text-white/80 hover:text-white"
                     )}
                     style={!isScrolled && !useDarkText ? { filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' } : undefined}
                   >
                     {item.label}
+                    {/* Aman-style underline animation */}
+                    <span className={cn(
+                      "absolute -bottom-1 left-0 w-full h-px origin-left transition-transform duration-300 ease-out scale-x-0 group-hover:scale-x-100",
+                      isScrolled || useDarkText ? "bg-gold" : "bg-white/70"
+                    )} />
                   </Link>
                 )
               ))}

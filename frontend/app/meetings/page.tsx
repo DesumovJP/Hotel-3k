@@ -1,15 +1,13 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
-import { SplitText } from "@/components/animations";
+import { SectionHero, SectionCTA } from "@/components/sections";
 import { Users, Phone, Mail, ArrowRight, Check, Utensils, Wifi, Car, Monitor, Coffee, MapPin, Bed, TreePine, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-const YOUTUBE_ID = "APJyGnhfits";
 
 const activities = [
   "Oyster mudflat hiking",
@@ -99,9 +97,6 @@ const galleryImages = [
 ];
 
 export default function MeetingsPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [youtubeLoaded, setYoutubeLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -126,22 +121,11 @@ export default function MeetingsPage() {
   }, []);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
       setShowFloatingCTA(value > 0.15);
     });
     return () => unsubscribe();
   }, [scrollYProgress]);
-
-  const youtubeEmbedUrl = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0`;
 
   return (
     <>
@@ -165,110 +149,19 @@ export default function MeetingsPage() {
 
       <main>
         {/* Hero */}
-        <section ref={heroRef} className="relative h-[70vh] min-h-[500px] overflow-hidden bg-navy">
-          <div className="absolute inset-0">
-            {!isMobile && (
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <iframe
-                  src={youtubeEmbedUrl}
-                  title="Background video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  onLoad={() => setYoutubeLoaded(true)}
-                  className={cn(
-                    "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-                    "pointer-events-none transition-opacity duration-500",
-                    youtubeLoaded ? "opacity-100" : "opacity-0"
-                  )}
-                  style={{
-                    border: "none",
-                    width: "max(130vw, 230.77vh)",
-                    height: "max(130vh, 73.125vw)",
-                  }}
-                />
-              </div>
-            )}
-
-            <div
-              className={cn(
-                "absolute inset-0 transition-opacity duration-1000",
-                !isMobile && youtubeLoaded ? "opacity-0" : "opacity-100"
-              )}
-            >
-              <Image
-                src="/meetings/image-700x700_1.jpg"
-                alt="Meetings at Grand Hotel Opduin"
-                fill
-                priority
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
-
-          <div className="absolute inset-0 flex items-end pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
-            <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-overline text-shell tracking-widest mb-4 block">
-                  Meetings & Events
-                </span>
-              </motion.div>
-
-              <div className="overflow-hidden mb-4">
-                <motion.div
-                  initial={{ y: 60 }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
-                >
-                  <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
-                    <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
-                      Meetings
-                    </SplitText>
-                  </h1>
-                </motion.div>
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: easeOutExpo }}
-                className="text-xl md:text-2xl text-shell font-display italic mb-4"
-              >
-                Sincere attention for each other
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5, ease: easeOutExpo }}
-                className="text-base text-white/80 max-w-lg mb-8"
-              >
-                You will organize a meeting that no one will forget. And that&apos;s what matters.
-              </motion.p>
-
-              <div className="hidden md:flex gap-4">
-                <a
-                  href="mailto:banqueting@opduin.nl"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-shell text-navy font-medium hover:bg-white transition-colors text-sm tracking-wide"
-                >
-                  <Mail size={16} />
-                  Request Proposal
-                </a>
-                <a
-                  href="tel:+31222317455"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors text-sm tracking-wide"
-                >
-                  <Phone size={16} />
-                  +31 222 317 455
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <SectionHero
+          label="Meetings & Events"
+          title="Meetings"
+          tagline="Sincere attention for each other"
+          description="You will organize a meeting that no one will forget. And that's what matters."
+          backgroundImage="/meetings/image-700x700_1.jpg"
+          youtubeId="APJyGnhfits"
+          primaryAction={{
+            label: "Request Proposal",
+            href: "mailto:banqueting@opduin.nl",
+            icon: Mail,
+          }}
+        />
 
         {/* Quick Info Strip */}
         <section className="bg-navy text-white border-t border-white/10">
@@ -592,37 +485,14 @@ export default function MeetingsPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="py-16 md:py-24 bg-navy text-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl mb-4">
-              Contact Our Banqueting Team
-            </h2>
-            <p className="text-white/70 mb-8 max-w-xl mx-auto">
-              Luuk and Esmee will help you plan your event. We respond within 24 hours.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <a
-                href="mailto:banqueting@opduin.nl"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-shell text-navy font-medium hover:bg-white transition-colors"
-              >
-                <Mail size={18} />
-                banqueting@opduin.nl
-              </a>
-              <a
-                href="tel:+31222317455"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white hover:bg-white/20 transition-colors"
-              >
-                <Phone size={18} />
-                +31 222 317 455
-              </a>
-            </div>
-
-            <div className="text-white/50 text-sm">
-              <p>Ruijslaan 22, 1796 AD De Koog, Texel</p>
-            </div>
-          </div>
-        </section>
+        <SectionCTA
+          icon={Users}
+          title="Contact Our Banqueting Team"
+          description="Luuk and Esmee will help you plan your event. We respond within 24 hours."
+          actions={[
+            { label: "banqueting@opduin.nl", href: "mailto:banqueting@opduin.nl", icon: Mail },
+          ]}
+        />
       </main>
 
       <Footer />

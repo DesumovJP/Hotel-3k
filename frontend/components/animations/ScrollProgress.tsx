@@ -24,10 +24,11 @@ export function ScrollProgress({
   const { scrollYProgress } = useScroll();
   const [isVisible, setIsVisible] = useState(showAfter === 0);
 
+  // Use lighter spring settings to avoid conflicts with Lenis smooth scroll
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+    stiffness: 400,
+    damping: 40,
+    restDelta: 0.01,
   });
 
   // Use useEffect with scroll listener instead of useMotionValueEvent

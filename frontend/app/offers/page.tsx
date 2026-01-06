@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
+import { SectionCTA } from "@/components/sections";
 import {
   Check, ArrowRight, Gift, Star, Snowflake, Leaf, Sparkles, Compass, UtensilsCrossed
 } from "lucide-react";
@@ -361,38 +362,14 @@ export default function OffersPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                Book Your Package
-              </h2>
-              <p className="text-neutral-600 mb-8">
-                Reserve via our website or just make a call. We are happy to answer your questions
-                and help you choose the right package for your Texel holiday.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/book"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
-                >
-                  Book Online
-                </Link>
-                <a
-                  href="tel:+31222317445"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
-                >
-                  Call +31 222 317 445
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <SectionCTA
+          icon={Gift}
+          title="Book Your Package"
+          description="Reserve via our website or just make a call. We are happy to answer your questions and help you choose the right package for your Texel holiday."
+          actions={[
+            { label: "Book Online", href: "/book" },
+          ]}
+        />
       </main>
 
       <Footer />

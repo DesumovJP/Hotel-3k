@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { SplitText } from "@/components/animations";
 import { Button } from "@/components/atoms";
@@ -45,6 +45,17 @@ export function HeroSection({
   const [iframeKey, setIframeKey] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // Parallax scroll effect
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Different parallax speeds for depth effect
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.7]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   useEffect(() => {
     trackViewContent('page', 'home', { name: 'Homepage Hero' });
@@ -192,8 +203,11 @@ export function HeroSection({
         <div className="absolute inset-0 bg-gradient-to-t from-deepsea/60 via-transparent to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-deepsea/50 via-transparent to-transparent" />
 
-        {/* Main Content - Left aligned for premium feel */}
-        <div className="relative z-10 h-full flex items-center">
+        {/* Main Content - Left aligned for premium feel with parallax */}
+        <motion.div
+          className="relative z-10 h-full flex items-center"
+          style={prefersReducedMotion ? {} : { y: contentY }}
+        >
           <div className="w-full px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl">
               {/* Premium Badge */}
@@ -212,7 +226,7 @@ export function HeroSection({
                 </div>
                 <span className="h-4 w-px bg-white/30" />
                 <span
-                  className="text-white text-xs tracking-[0.2em] uppercase font-medium"
+                  className="text-white/80 text-xs tracking-[0.2em] uppercase font-medium"
                   style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.6))' }}
                 >
                   {location}
@@ -244,7 +258,9 @@ export function HeroSection({
                 <div className="w-16 h-px bg-gold drop-shadow-lg" />
                 <p
                   className="font-display text-xl md:text-2xl lg:text-3xl text-gold italic"
-                  style={{ filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.5))' }}
+                  style={{
+                    textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)',
+                  }}
                 >
                   {subheadline}
                 </p>
@@ -283,9 +299,9 @@ export function HeroSection({
               </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Scroll Indicator - Bottom center - Neomorphic */}
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -296,9 +312,9 @@ export function HeroSection({
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-8 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex justify-center pt-3 shadow-[4px_4px_12px_rgba(0,0,0,0.1),-2px_-2px_8px_rgba(255,255,255,0.1)]"
+            className="w-8 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex justify-center pt-3"
           >
-            <div className="w-1.5 h-2.5 bg-white/70 rounded-full" />
+            <div className="w-1.5 h-2.5 bg-white/60 rounded-full" />
           </motion.div>
         </motion.div>
 

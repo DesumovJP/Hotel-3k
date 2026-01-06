@@ -4,12 +4,12 @@ import type { Config } from "tailwindcss";
  * Grand Hotel Opduin - Premium Design System v2
  * "Hamptons of the Wadden" - Luxury coastal aesthetic
  *
- * Primary Colors:
+ * Brand Colors:
+ * - Sky Blue #A8C5D9 (hotel primary - coastal elegance)
+ * - Gold #C9A646 (accent, CTAs, highlights)
  * - Sand #F5E9DA (warm backgrounds)
- * - Deep Sea #0E2A3A (dark sections, footer)
- * - Gold #C9A646 (accent, CTAs)
+ * - White/Neutral #FAFAF7 (clean, fresh)
  * - Ink #141414 (primary text)
- * - Neutral #FAFAF7 (light backgrounds)
  */
 
 const config: Config = {
@@ -24,19 +24,34 @@ const config: Config = {
       // COLOR SYSTEM - Hamptons of the Wadden
       // ============================================
       colors: {
-        // Sand - Warm honey-golden backgrounds (primary brand)
+        // Sky - Whisper blue (ніжний біло-блакитний)
+        sky: {
+          50: "#FCFDFE",   // Almost white
+          100: "#F7FAFC",  // Barely blue
+          200: "#EEF4F8",  // Whisper of blue
+          300: "#E4ECF2",  // Light mist
+          400: "#D6E4ED",  // Soft sky
+          500: "#C4D8E6",  // Gentle blue
+          600: "#9FBFD5",  // Readable accent
+          700: "#7FA8C2",  // Text accent
+          800: "#6490A9",  // Darker accent
+          900: "#4C7489",
+          950: "#365361",
+          DEFAULT: "#D6E4ED",
+        },
+        // Sand - Warm beige backgrounds (primary brand)
         sand: {
-          50: "#FEFDFB",
-          100: "#FCF9F4",
-          200: "#F9F3E8",
-          300: "#F5EBDA", // Warm honey sand
-          400: "#EDDCBF",
-          500: "#DECA9F",
-          600: "#C9B17A",
-          700: "#A8915C",
-          800: "#857346",
-          900: "#625535",
-          DEFAULT: "#F5EBDA",
+          50: "#FDFCFA",
+          100: "#FAF8F5",
+          200: "#F5F0E8",
+          300: "#EBE4D8", // Warm beige sand
+          400: "#DDD3C2",
+          500: "#CBBFA8",
+          600: "#B5A68C",
+          700: "#998B70",
+          800: "#7A6F5A",
+          900: "#5C5344",
+          DEFAULT: "#EBE4D8",
         },
         // Driftwood - Warm dark for sections (replacing cold deepsea)
         deepsea: {
@@ -96,19 +111,19 @@ const config: Config = {
           900: "#525251",
           DEFAULT: "#FAFAF7",
         },
-        // Shell - Legacy warm accent (for backward compatibility)
+        // Shell - Sandy warm accent (coastal sand)
         shell: {
-          50: "#FAFAF8",
-          100: "#F5F4F1",
-          200: "#E8E6E0",
-          300: "#D4D0C6",
-          400: "#BFB9AB",
-          500: "#a79f88",
-          600: "#918A74",
-          700: "#7A7461",
-          800: "#635E4F",
-          900: "#4D493D",
-          DEFAULT: "#a79f88",
+          50: "#FDFCFA",
+          100: "#FAF7F2",
+          200: "#F5EFE5",
+          300: "#EBE2D3",
+          400: "#DED2BC",
+          500: "#CDBEA0", // Warm sand
+          600: "#B8A786",
+          700: "#9F8F6E",
+          800: "#7D7057",
+          900: "#5C5341",
+          DEFAULT: "#CDBEA0",
         },
         // Navy - Warm brown (replacing cold blue)
         navy: {

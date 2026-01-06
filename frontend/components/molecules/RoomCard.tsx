@@ -68,14 +68,19 @@ export function RoomCard({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [5, -5]), {
+  const tiltAmount = variant === "featured" ? 6 : 4;
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [tiltAmount, -tiltAmount]), {
     stiffness: 300,
     damping: 30,
   });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [-5, 5]), {
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [-tiltAmount, tiltAmount]), {
     stiffness: 300,
     damping: 30,
   });
+
+  // Glare effect position
+  const glareX = useTransform(x, [-0.5, 0.5], ["0%", "100%"]);
+  const glareY = useTransform(y, [-0.5, 0.5], ["0%", "100%"]);
 
   // Generate HotelRoom schema for SEO
   const roomSchema = generateHotelRoomSchema({
@@ -178,9 +183,10 @@ export function RoomCard({
       onMouseLeave={handleMouseLeave}
       onKeyDown={handleKeyDown}
       style={{
-        rotateX: variant === "featured" && !prefersReducedMotion ? rotateX : 0,
-        rotateY: variant === "featured" && !prefersReducedMotion ? rotateY : 0,
+        rotateX: !prefersReducedMotion ? rotateX : 0,
+        rotateY: !prefersReducedMotion ? rotateY : 0,
         transformStyle: "preserve-3d",
+        perspective: 1000,
       }}
       className={cn(
         "group relative glass-card rounded-2xl overflow-hidden",
@@ -396,6 +402,19 @@ export function RoomCard({
           </Link>
         </div>
       </div>
+
+      {/* Glare Effect */}
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden"
+          style={{
+            background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.15) 0%, transparent 60%)`,
+            opacity: isHovered ? 1 : 0,
+          }}
+          transition={{ opacity: { duration: 0.3 } }}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Hover Border Effect */}
       <motion.div

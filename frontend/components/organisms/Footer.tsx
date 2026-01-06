@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
 const exploreLinks = [
@@ -110,28 +110,20 @@ export function Footer() {
                 <h4 className="text-xs uppercase tracking-[0.2em] text-shell mb-6 font-medium">
                   Contact
                 </h4>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <MapPin size={16} className="text-shell mt-0.5 flex-shrink-0" />
-                    <div className="text-white/60 text-sm">
-                      <p>Ruijslaan 22</p>
-                      <p>1796 AD De Koog</p>
-                      <p>Texel, Netherlands</p>
-                    </div>
-                  </div>
+                <div className="space-y-3 text-sm text-white/60">
+                  <p>Ruijslaan 22, 1796 AD De Koog</p>
+                  <p>Texel, Netherlands</p>
                   <a
                     href="tel:+31222317445"
-                    className="flex items-center gap-3 text-white/60 hover:text-shell transition-colors text-sm"
+                    className="block hover:text-shell transition-colors"
                   >
-                    <Phone size={16} className="text-shell flex-shrink-0" />
-                    <span>+31 222 317 445</span>
+                    +31 222 317 445
                   </a>
                   <a
-                    href="mailto:hello@opduin.nl"
-                    className="flex items-center gap-3 text-white/60 hover:text-shell transition-colors text-sm"
+                    href="mailto:info@opduin.nl"
+                    className="block hover:text-shell transition-colors"
                   >
-                    <Mail size={16} className="text-shell flex-shrink-0" />
-                    <span>hello@opduin.nl</span>
+                    info@opduin.nl
                   </a>
                 </div>
               </div>

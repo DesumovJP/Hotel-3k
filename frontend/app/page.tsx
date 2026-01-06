@@ -1,7 +1,6 @@
 "use client";
 
 import { Header, Footer } from "@/components/organisms";
-import { ScrollProgress } from "@/components/animations";
 import {
   HeroSection,
   DirectBookingBenefits,
@@ -13,9 +12,6 @@ import {
 export default function Home() {
   return (
     <>
-      {/* Scroll Progress Bar - appears after hero */}
-      <ScrollProgress showAfter={0.1} />
-
       <Header />
 
       <main>

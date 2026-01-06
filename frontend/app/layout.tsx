@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import { CustomCursor } from "@/components/effects/CustomCursor";
+import { FilmGrain } from "@/components/effects/FilmGrain";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScroll";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -45,7 +48,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
-        {children}
+        <SmoothScrollProvider>
+          <CustomCursor />
+          <FilmGrain opacity={0.025} />
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );

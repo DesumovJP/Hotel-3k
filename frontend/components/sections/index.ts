@@ -6,6 +6,7 @@ export { QuickBooking } from "./QuickBooking";
 export { FeaturesSection } from "./FeaturesSection";
 export { CTASection } from "./CTASection";
 export { SectionCTA } from "./SectionCTA";
+export { SectionHero } from "./SectionHero";
 export { BenefitsGrid } from "./BenefitsGrid";
 export { DirectBookingBenefits } from "./DirectBookingBenefits";
 
