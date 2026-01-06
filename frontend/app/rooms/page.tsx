@@ -6,25 +6,45 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SectionCTA } from "@/components/sections";
+import { SectionCTA, SectionHeroCompact, SectionIntro } from "@/components/sections";
 import { rooms } from "@/lib/data";
 import {
-  ArrowRight, Wifi, Wind, Coffee, ShieldCheck,
-  Bed, Eye, ChevronRight, Sparkles, Check
+  ArrowRight, Bed, Eye, ChevronRight, Check, ChevronDown
 } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-const roomIncludes = [
-  { icon: Wifi, label: "Free WiFi" },
-  { icon: Coffee, label: "Coffee and tea in room" },
-  { icon: Wind, label: "Air-conditioning" },
-  { icon: Sparkles, label: "Swimming in heated indoor pool" },
-  { icon: ShieldCheck, label: "Free parking" },
+
+const faqs = [
+  {
+    question: "What are the check-in and check-out times?",
+    answer: "Standard check-in is after 3 PM with checkout before 11 AM. Early arrivals are accommodated if rooms are ready, or you can leave your contact info for a call when your room becomes available. Late checkout ('lazy Sunday') costs €42.50 until the last ferry at 9 PM, subject to room availability."
+  },
+  {
+    question: "What is the cancellation policy?",
+    answer: "Direct bookings allow free cancellation up to 24 hours before arrival (3 PM cutoff). Cancellations within 24 hours incur full charges for overnight stays and beauty treatments, though breakfast and taxes are refunded. Third-party bookings follow their respective policies."
+  },
+  {
+    question: "Are pets allowed?",
+    answer: "Dogs are permitted on request at €28.50 per night. We provide a dog pillow and water bowl. Dogs cannot enter the restaurant, and an entire floor remains pet-free for allergic guests."
+  },
+  {
+    question: "What costs should I expect?",
+    answer: "Municipal taxes of €3.85 per person per night apply at checkout. Breakfast is included for standard rooms (8-10:30 AM service). The West Hampton family home excludes breakfast but offers it separately at €24 (adults) or €12 (children)."
+  },
+  {
+    question: "Is parking available?",
+    answer: "Free on-site parking is available with limited spaces. We recommend arriving early to secure a spot."
+  },
+  {
+    question: "What wellness facilities are available?",
+    answer: "The heated pool operates from 7 AM to 11 PM. Sauna rentals cost €10/hour, while massage chairs and solarium carry separate fees. Direct bookers receive complimentary sauna tokens."
+  }
 ];
 
 export default function RoomsPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,27 +82,12 @@ export default function RoomsPage() {
       </AnimatePresence>
 
       <main className="pb-20 md:pb-0">
-        {/* Compact Header - No Image */}
-        <section className="bg-navy pt-24 pb-10 md:pt-28 md:pb-12">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-              className="text-center"
-            >
-              <span className="text-overline text-shell tracking-widest mb-3 block">
-                Sleeping in Opduin
-              </span>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-                Rooms
-              </h1>
-              <p className="text-xl text-shell font-display italic mb-4">
-                Waking up in silence, fresh sheets and a clean sea breeze
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        {/* Hero */}
+        <SectionHeroCompact
+          label="Sleeping in Opduin"
+          title="Rooms"
+          tagline="Waking up in silence, fresh sheets and a clean sea breeze"
+        />
 
         {/* Quick Info Strip */}
         <section className="bg-navy text-white py-4 border-t border-white/10">
@@ -114,45 +119,23 @@ export default function RoomsPage() {
         </section>
 
         {/* Intro */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-              A holiday villa nestled in the dunes. Light and airy, without any unnecessary hotel furniture,
-              air-conditioned, beautiful fabrics, comfortable beds and a mini fridge.
-            </p>
-            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-              Slide open the curtains for a view over the island and the dunes.
-              Make a Nespresso, open the windows and slowly wake up.
-            </p>
-            <p className="text-neutral-600 mb-8">
-              Opduin has 6 different possibilities to choose from. Double rooms with a king size bed,
-              large suites with an extra sleeping couch, apartments with separate bedrooms, a holiday house
-              for a big family, holiday homes for a small family and even six small single rooms.
-            </p>
-
-            {/* Book CTA */}
-            <div className="bg-sand-100 p-6 rounded-lg mb-8">
-              <p className="text-neutral-700 mb-4">
-                Reserve via our website or just make a call: <a href="tel:+31222317445" className="text-navy font-medium hover:text-shell">+31 222 317 445</a>.
-                We would love to put together your Texel-holiday with you.
-                Care for some ideas? Have a look at our <Link href="/offers" className="text-navy font-medium hover:text-shell underline">package deals</Link>.
-              </p>
-            </div>
-
-            {/* Always Includes */}
-            <div>
-              <h3 className="font-display text-xl text-ink mb-6">A stay in Opduin always includes:</h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {roomIncludes.map((item, index) => (
-                  <div key={index} className="neo-card p-4 flex flex-col items-center text-center gap-3">
-                    <item.icon size={24} className="text-shell" />
-                    <span className="text-sm text-neutral-700">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <SectionIntro
+          label="Accommodations"
+          title="A villa in the dunes"
+          lead="Light and airy, without any unnecessary hotel furniture, air-conditioned, beautiful fabrics, comfortable beds and a mini fridge."
+          paragraphs={[
+            "Slide open the curtains for a view over the island and the dunes. Make a Nespresso, open the windows and slowly wake up.",
+            "Opduin has 6 different possibilities to choose from. Double rooms with a king size bed, large suites with an extra sleeping couch, apartments with separate bedrooms, a holiday house for a big family, holiday homes for a small family and even six small single rooms.",
+          ]}
+          image="/rooms/suite-600x400_4.jpg"
+          imageAlt="Suite at Grand Hotel Opduin"
+          highlight={{
+            icon: Check,
+            title: "Book Direct Benefits",
+            description: "Free sauna access, €5 discount per night, and flexible cancellation when you book directly with us.",
+          }}
+          padding="lg"
+        />
 
         {/* Rooms Grid */}
         <section className="py-16 md:py-20 bg-white">
@@ -245,6 +228,70 @@ export default function RoomsPage() {
                     </div>
                   </div>
                 </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 md:py-20 bg-sand-50">
+          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
+              className="text-center mb-12"
+            >
+              <span className="text-overline text-shell tracking-widest mb-3 block">
+                Good to Know
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl text-ink">
+                Frequently Asked Questions
+              </h2>
+            </motion.div>
+
+            <div className="space-y-3">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05, ease: easeOutExpo }}
+                  className="bg-white border border-neutral-100"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    className="w-full flex items-center justify-between px-6 py-5 text-left group"
+                  >
+                    <span className="font-medium text-ink group-hover:text-navy transition-colors pr-4">
+                      {faq.question}
+                    </span>
+                    <ChevronDown
+                      size={20}
+                      className={cn(
+                        "text-neutral-400 transition-transform duration-300 flex-shrink-0",
+                        openFaq === index && "rotate-180"
+                      )}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {openFaq === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: easeOutExpo }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 pb-5 text-neutral-600 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               ))}
             </div>
           </div>

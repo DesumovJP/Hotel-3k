@@ -7,6 +7,9 @@ export { FeaturesSection } from "./FeaturesSection";
 export { CTASection } from "./CTASection";
 export { SectionCTA } from "./SectionCTA";
 export { SectionHero } from "./SectionHero";
+export { SectionHeroCompact } from "./SectionHeroCompact";
+export { SectionIntro } from "./SectionIntro";
+export { SectionTwoColumn } from "./SectionTwoColumn";
 export { BenefitsGrid } from "./BenefitsGrid";
 export { DirectBookingBenefits } from "./DirectBookingBenefits";
 

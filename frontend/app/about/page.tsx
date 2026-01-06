@@ -9,7 +9,7 @@ import {
 import { motion } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { MiniGallery } from "@/components/sections";
+import { MiniGallery, SectionHeroCompact, SectionCTA } from "@/components/sections";
 import { easeOutExpo } from "@/lib/motion";
 
 // Timeline data
@@ -104,27 +104,12 @@ export default function AboutPage() {
       <Header />
 
       <main>
-        {/* Compact Header - No Image */}
-        <section className="bg-navy pt-24 pb-10 md:pt-28 md:pb-12">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-              className="text-center"
-            >
-              <span className="text-overline text-shell tracking-widest mb-3 block">
-                Our Story
-              </span>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-                The Hamptons of the Wadden
-              </h1>
-              <p className="text-white/70 max-w-lg mx-auto">
-                Where luxury meets the rhythm of the tides. Family-run since 1932.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        {/* Hero */}
+        <SectionHeroCompact
+          label="Our Story"
+          title="The Hamptons of the Wadden"
+          description="Where luxury meets the rhythm of the tides. Family-run since 1932."
+        />
 
         {/* Quick Info Strip */}
         <section className="bg-navy text-white py-4 border-t border-white/10">
@@ -563,39 +548,16 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 md:py-28 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                Experience Opduin for yourself
-              </h2>
-              <p className="text-neutral-600 mb-8 max-w-2xl mx-auto">
-                The best way to understand what makes us special is to visit.
-                We look forward to welcoming you.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/book"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
-                >
-                  Book Your Stay
-                  <ArrowRight size={16} />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <SectionCTA
+          icon={Heart}
+          title="Experience Opduin"
+          description="The best way to understand what makes us special is to visit. We look forward to welcoming you."
+          actions={[
+            { label: "Book Your Stay", href: "/book" },
+            { label: "Contact Us", href: "/contact", variant: "secondary" },
+          ]}
+          background="sand"
+        />
       </main>
 
       <Footer />

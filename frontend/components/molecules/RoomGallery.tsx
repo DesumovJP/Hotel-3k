@@ -14,27 +14,31 @@ export function RoomGallery({ images, roomName }: RoomGalleryProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  // Ensure gallery displays a number of images divisible by 3 for clean grid
+  const displayCount = Math.floor(images.length / 3) * 3 || 3;
+  const displayImages = images.slice(0, Math.min(displayCount, images.length));
+
   const handleImageClick = (index: number) => {
     setSelectedIndex(index);
     setIsModalOpen(true);
   };
 
-  const galleryImages = images.map((src, index) => ({
+  const galleryImages = displayImages.map((src, index) => ({
     src,
     alt: `${roomName} - Image ${index + 1}`,
   }));
 
   return (
     <>
-      <section className="py-16 md:py-24 bg-[var(--color-mist)]">
+      <section className="py-16 md:py-24 bg-sand-100">
         <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
           <Heading as="h3" className="mb-10">Gallery</Heading>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {images.map((image, index) => (
+            {displayImages.map((image, index) => (
               <button
                 key={index}
                 onClick={() => handleImageClick(index)}
-                className="relative aspect-[4/3] overflow-hidden bg-[var(--color-cloud)] cursor-pointer group"
+                className="relative aspect-[4/3] overflow-hidden bg-sand-200 cursor-pointer group"
               >
                 <Image
                   src={image}

@@ -25,7 +25,19 @@
       "WebFetch(domain:www.youtube.com)",
       "Bash(curl:*)",
       "Bash(npm run build:check:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(yarn dev)",
+      "Bash(yarn cache clean:*)",
+      "Bash(yarn install:*)",
+      "WebSearch",
+      "Bash(grep:*)",
+      "Bash(xargs:*)",
+      "WebFetch(domain:www.aman.com)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:www.awwwards.com)",
+      "Bash(git checkout:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

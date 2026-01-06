@@ -10,6 +10,7 @@ interface SmoothScrollProps {
 
 export function SmoothScrollProvider({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
+  const rafIdRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -29,17 +30,44 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
       lerp: 0.1, // Linear interpolation for smoother edge behavior
     });
 
-    // GSAP ScrollTrigger integration
+    // RAF loop for smooth animation
     function raf(time: number) {
       lenisRef.current?.raf(time);
-      requestAnimationFrame(raf);
+      rafIdRef.current = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafIdRef.current = requestAnimationFrame(raf);
 
     // Expose lenis instance globally for GSAP ScrollTrigger
     (window as unknown as { lenis: Lenis }).lenis = lenisRef.current;
 
+    // Force resize after content loads to fix height calculation
+    const handleResize = () => {
+      lenisRef.current?.resize();
+    };
+
+    // Initial resize after DOM is ready
+    requestAnimationFrame(() => {
+      handleResize();
+      // Additional resize after images/fonts load
+      setTimeout(handleResize, 500);
+      setTimeout(handleResize, 1500);
+    });
+
+    // Listen for window resize
+    window.addEventListener("resize", handleResize);
+
+    // ResizeObserver for dynamic content changes
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    resizeObserver.observe(document.body);
+
     return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
       lenisRef.current?.destroy();
       lenisRef.current = null;
     };

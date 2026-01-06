@@ -135,7 +135,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by Lenis - do not use CSS scroll-behavior */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -965,4 +965,26 @@ body {
   border-top: 1px solid rgba(167, 159, 136, 0.1);
   border-bottom: 1px solid rgba(167, 159, 136, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03), 0 -4px 20px rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   RADIAL GRADIENTS
+   ============================================ */
+
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

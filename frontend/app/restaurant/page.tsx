@@ -1,18 +1,20 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, AnimatePresence } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
-import { SectionHero, SectionCTA } from "@/components/sections";
-import { Clock, Phone, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { BreadcrumbsInline, FeatureGrid } from "@/components/molecules";
+import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery } from "@/components/sections";
+import { Clock, Phone, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const menuPDFs = {
-  dinner: "https://www.opduin.nl/upload/files/opduin_menukaart%20EN%20vanaf%2012%20dec.pdf",
+  breakfast: "https://www.opduin.nl/upload/files/opduin_ontbijtkaart.pdf",
   lunch: "https://www.opduin.nl/upload/files/opduin_lunchkaart_A5%20(2).pdf",
+  dinner: "https://www.opduin.nl/upload/files/opduin_menukaart%20EN%20vanaf%2012%20dec.pdf",
 };
 
 const localIngredients = [
@@ -40,6 +42,7 @@ const diningOptions = [
     description: "Extensive buffet for hotel guests. Fresh breads, local cheeses, eggs to order, and island honey.",
     note: "Included for hotel guests",
     icon: Coffee,
+    menuUrl: menuPDFs.breakfast,
   },
   {
     title: "Lunch",
@@ -47,6 +50,7 @@ const diningOptions = [
     description: "Light dishes and sandwiches. Perfect after a morning beach walk or cycle tour.",
     note: "Open to all",
     icon: Sun,
+    menuUrl: menuPDFs.lunch,
   },
   {
     title: "Dinner",
@@ -54,39 +58,22 @@ const diningOptions = [
     description: "Multi-course dining experience. Choose 3 to 6 courses showcasing the island's finest.",
     note: "Reservations recommended",
     icon: UtensilsCrossed,
+    menuUrl: menuPDFs.dinner,
   },
 ];
 
 const galleryImages = [
   "/restaurant/restaurant-opduin-600x450.jpg",
   "/restaurant/lunchen-in-opduin-600x450_2.jpg",
-  "/restaurant/tafel-reserveren-600x450_2.jpg",
   "/restaurant/slow-food-chefs-alliantie-600x450_1.jpg",
+  "/restaurant/tafel-reserveren-600x450_2.jpg",
+  "/restaurant/restaurant-opduin-600x450.jpg",
+  "/restaurant/lunchen-in-opduin-600x450_2.jpg",
 ];
 
 export default function RestaurantPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   const { scrollYProgress } = useScroll();
-
-  const openLightbox = useCallback((index: number) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  }, []);
-
-  const closeLightbox = useCallback(() => {
-    setLightboxOpen(false);
-  }, []);
-
-  const nextImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
-  }, []);
-
-  const prevImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
-  }, []);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
@@ -127,27 +114,12 @@ export default function RestaurantPage() {
             label: "Reserve a Table",
             href: "/book?type=restaurant",
           }}
-        />
-
-        {/* Quick Info Strip */}
-        <section className="bg-navy text-white border-t border-white/10">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-between gap-4 py-4">
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <Clock size={16} className="text-shell" />
-                  <span className="text-white/60">Lunch</span>
-                  <span>12:00–14:30</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock size={16} className="text-shell" />
-                  <span className="text-white/60">Dinner</span>
-                  <span>18:00–22:00</span>
-                </div>
-                <div className="flex items-center gap-2 text-white/60">
-                  <span>Smart casual</span>
-                </div>
-              </div>
+          infoStrip={{
+            items: [
+              { icon: Clock, label: "Lunch", value: "12:00–14:30" },
+              { icon: Clock, label: "Dinner", value: "18:00–22:00" },
+            ],
+            trailingContent: (
               <Link
                 href="/book?type=restaurant"
                 className="hidden md:inline-flex items-center gap-2 text-shell hover:text-white transition-colors text-sm"
@@ -155,7 +127,14 @@ export default function RestaurantPage() {
                 Reserve now
                 <ArrowRight size={14} />
               </Link>
-            </div>
+            ),
+          }}
+        />
+
+        {/* Breadcrumbs */}
+        <section className="py-6 bg-white border-b border-neutral-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <BreadcrumbsInline items={[{ label: "Restaurant" }]} />
           </div>
         </section>
 
@@ -220,59 +199,25 @@ export default function RestaurantPage() {
         </section>
 
         {/* Local Ingredients */}
-        <section className="py-16 md:py-20 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
-                Local Sourcing
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
-                Ingredients with a story
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {localIngredients.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="neo-icon neo-icon-lg mx-auto mb-4">
-                      <Icon className="w-6 h-6 text-shell" />
-                    </div>
-                    <h3 className="font-display text-xl text-ink mb-2">{item.title}</h3>
-                    <p className="text-neutral-600 text-sm">{item.description}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <FeatureGrid
+          label="Local Sourcing"
+          title="Ingredients with a story"
+          items={localIngredients}
+        />
 
         {/* Dining Options */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-20 md:py-28 bg-sand-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
+              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
                 When to Dine
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink">
                 Three moments, one kitchen
               </h2>
             </motion.div>
@@ -281,146 +226,91 @@ export default function RestaurantPage() {
               {diningOptions.map((option, index) => {
                 const Icon = option.icon;
                 return (
-                  <motion.div
+                  <motion.article
                     key={option.title}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="neo-card neo-card-hover p-8 text-center"
+                    transition={{ duration: 0.5, delay: index * 0.1, ease: easeOutExpo }}
+                    className="group bg-white p-8"
                   >
-                    <div className="neo-icon neo-icon-lg mx-auto mb-5">
-                      <Icon size={22} className="text-shell" />
-                    </div>
-                    <h3 className="font-display text-xl text-ink mb-1">{option.title}</h3>
-                    <p className="text-shell text-sm font-medium mb-4">{option.time}</p>
-                    <p className="text-neutral-600 text-sm leading-relaxed mb-5">{option.description}</p>
-                    <p className="text-xs text-neutral-500 inline-flex items-center gap-1.5">
-                      <Check size={12} className="text-shell" />
+                    <Icon size={28} className="text-shell mb-6" />
+                    <p className="text-shell text-sm font-medium tracking-wide mb-2">{option.time}</p>
+                    <h3 className="font-display text-2xl text-ink mb-4">{option.title}</h3>
+                    <p className="text-neutral-600 leading-relaxed mb-6">{option.description}</p>
+                    <p className="text-sm text-neutral-500 flex items-center gap-2 mb-6">
+                      <Check size={14} className="text-shell" />
                       {option.note}
                     </p>
-                  </motion.div>
+                    {option.menuUrl && (
+                      <a
+                        href={option.menuUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm group/link"
+                      >
+                        <FileText size={14} />
+                        View Menu
+                        <ArrowRight size={14} className="opacity-0 -ml-2 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
+                      </a>
+                    )}
+                  </motion.article>
                 );
               })}
             </div>
-          </div>
-        </section>
 
-        {/* Course Menu Section */}
-        <section className="py-16 md:py-24 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
+            {/* Reserve CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-16 text-center"
             >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+              <p className="text-neutral-600 text-lg mb-6">
+                Reserve your table for lunch or dinner. Also for non-hotel guests.
+              </p>
+              <Link
+                href="/book?type=restaurant"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
+              >
                 Reserve a Table
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                Dinner & Lunch
-              </h2>
-              <p className="text-neutral-600 text-lg leading-relaxed mb-4 max-w-2xl mx-auto">
-                Reserve your table for dinner here. You simply choose the desired date and
-                preferred time. Also for non-hotel guests. We advise you to reserve in time,
-                there is availability for 70 guests.
-              </p>
-              <p className="text-neutral-500 mb-10">
-                View our menus below to see the current seasonal offerings.
-              </p>
-
-              {/* Menu Links */}
-              <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href={menuPDFs.dinner}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide"
-                >
-                  <FileText size={16} />
-                  View Dinner Menu
-                </a>
-                <a
-                  href={menuPDFs.lunch}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide"
-                >
-                  <FileText size={16} />
-                  View Lunch Menu
-                </a>
-              </div>
+                <ArrowRight size={16} />
+              </Link>
             </motion.div>
           </div>
         </section>
 
-        {/* Dietary & Terrace */}
-        <section className="py-16 md:py-20 bg-white">
+        {/* Quick Info Strip */}
+        <section className="py-6 bg-sand-50 border-y border-sand-200">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="p-6 bg-sand-50"
-              >
-                <Heart className="w-8 h-8 text-shell mb-4" />
-                <h3 className="font-display text-xl text-ink mb-3">Dietary Requirements</h3>
-                <p className="text-neutral-600 text-sm mb-4">
-                  Vegetarian, vegan, gluten-free, or other dietary needs — our kitchen
-                  adapts every course with the same care and creativity. Please inform
-                  us when booking.
-                </p>
-                <p className="text-xs text-neutral-500">All menus available in adjusted versions</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="p-6 bg-sand-50"
-              >
-                <Sun className="w-8 h-8 text-shell mb-4" />
-                <h3 className="font-display text-xl text-ink mb-3">Dune Terrace</h3>
-                <p className="text-neutral-600 text-sm mb-4">
-                  When the weather is nice, a cup of coffee or an extensive lunch on our dune terrace,
-                  while the pheasants scurry among the marram grass. With various sun loungers and
-                  seats in the dune path, it is a wonderful place to relax.
-                </p>
-                <p className="text-xs text-neutral-500">Non-hotel guests are also very welcome</p>
-              </motion.div>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm">
+              <div className="flex items-center gap-2">
+                <Heart size={16} className="text-shell" />
+                <span className="text-neutral-500">Dietary</span>
+                <span className="text-ink font-medium">Vegan, GF options</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Sun size={16} className="text-shell" />
+                <span className="text-neutral-500">Terrace</span>
+                <span className="text-ink font-medium">Open to all</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users size={16} className="text-shell" />
+                <span className="text-neutral-500">Capacity</span>
+                <span className="text-ink font-medium">70 guests</span>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Gallery */}
-        <section className="py-16 md:py-24 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {galleryImages.map((src, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05, ease: easeOutExpo }}
-                  className="relative aspect-square overflow-hidden cursor-pointer group"
-                  onClick={() => openLightbox(index)}
-                >
-                  <Image
-                    src={src}
-                    alt={`Restaurant gallery ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <MiniGallery
+          title="Restaurant Gallery"
+          images={galleryImages}
+          columns={3}
+          background="sand-100"
+        />
 
         {/* Private Dining CTA */}
         <SectionCTA
@@ -434,62 +324,6 @@ export default function RestaurantPage() {
       </main>
 
       <Footer />
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-navy/95 flex items-center justify-center"
-            onClick={closeLightbox}
-          >
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <button
-              onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <motion.div
-              key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-w-[90vw] max-h-[85vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={galleryImages[lightboxIndex]}
-                alt={`Restaurant gallery ${lightboxIndex + 1}`}
-                width={1920}
-                height={1080}
-                className="object-contain max-h-[85vh] w-auto"
-              />
-            </motion.div>
-
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
-              <p className="text-sm text-white/60">
-                {lightboxIndex + 1} / {galleryImages.length}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

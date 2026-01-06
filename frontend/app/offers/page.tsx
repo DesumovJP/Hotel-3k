@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SectionCTA } from "@/components/sections";
+import { SectionCTA, SectionHeroCompact } from "@/components/sections";
 import {
   Check, ArrowRight, Gift, Star, Snowflake, Leaf, Sparkles, Compass, UtensilsCrossed
 } from "lucide-react";
@@ -112,13 +112,6 @@ const offers = [
   },
 ];
 
-const packageBenefits = [
-  { icon: Gift, label: "Book Direct & Save", description: "No 15% commission to Booking.com means better rates for you" },
-  { icon: Star, label: "Free Extras Included", description: "Each package includes perks you won't find elsewhere" },
-  { icon: Check, label: "Flexible Cancellation", description: "Easier cancellation when you book directly with us" },
-];
-
-
 export default function OffersPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
 
@@ -131,7 +124,6 @@ export default function OffersPage() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
 
   return (
     <>
@@ -148,10 +140,10 @@ export default function OffersPage() {
             className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/95 backdrop-blur-sm border-t border-neutral-200 md:hidden"
           >
             <Link
-              href="/contact"
+              href="/book"
               className="flex items-center justify-center gap-2 w-full py-4 bg-navy text-white text-sm tracking-wide uppercase"
             >
-              Inquire About Packages
+              Book a Package
               <ArrowRight size={16} />
             </Link>
           </motion.div>
@@ -159,27 +151,12 @@ export default function OffersPage() {
       </AnimatePresence>
 
       <main className="pb-20 md:pb-0">
-        {/* Compact Header - No Image */}
-        <section className="bg-navy pt-24 pb-10 md:pt-28 md:pb-12">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-              className="text-center"
-            >
-              <span className="text-overline text-shell tracking-widest mb-3 block">
-                Book Direct & Save
-              </span>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-                Package Deals
-              </h1>
-              <p className="text-xl text-shell font-display italic mb-4">
-                Advantageous offers for direct bookers
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        {/* Hero */}
+        <SectionHeroCompact
+          label="Book Direct & Save"
+          title="Package Deals"
+          tagline="Advantageous offers for direct bookers"
+        />
 
         {/* Quick Info Strip */}
         <section className="bg-navy text-white py-4 border-t border-white/10">
@@ -187,44 +164,18 @@ export default function OffersPage() {
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Gift size={16} className="text-shell" />
-                <span>5 Package Deals</span>
+                <span>{offers.length} Package Deals</span>
               </div>
               <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Star size={16} className="text-shell" />
-                <span>Free Extras & Discounts</span>
+                <span>Free Extras Included</span>
               </div>
               <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Check size={16} className="text-shell" />
-                <span>2+ Nights Stay</span>
+                <span>Skip 15% Booking.com Fee</span>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Book a Package */}
-        <section className="py-12 md:py-16 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {packageBenefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1, ease: easeOutExpo }}
-                  className="flex items-start gap-4"
-                >
-                  <div className="neo-icon neo-icon-lg">
-                    <benefit.icon size={24} className="text-shell" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-ink mb-1">{benefit.label}</h3>
-                    <p className="text-sm text-neutral-600">{benefit.description}</p>
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </div>
         </section>
@@ -236,24 +187,58 @@ export default function OffersPage() {
           </div>
         </section>
 
-        {/* Intro */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-              Booking via Booking.com is very convenient, but also pricey. We pay 15% commission
-              on your booking through this or a similar booking site. That is why we have put together
-              these advantageous offers for direct bookers.
-            </p>
-            <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-              Affordable holidays with perks for stays of two nights or more. Our packages include
-              free extras and/or a discount on the accommodation price. Plus, easier cancellation
-              policies when you book directly with us.
-            </p>
-            <div className="bg-sand-100 p-6 rounded-lg">
-              <p className="text-neutral-700">
-                Questions about our packages? Give us a call: <a href="tel:+31222317445" className="text-navy font-medium hover:text-shell">+31 222 317 445</a>.
-                We would love to put together your perfect Texel holiday.
-              </p>
+        {/* Intro - Like rooms page */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: easeOutExpo }}
+              >
+                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+                  Why Book Direct?
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                  Better value, more perks
+                </h2>
+                <p className="text-neutral-600 mb-6 leading-relaxed text-lg">
+                  Booking via Booking.com is convenient, but pricey — we pay 15% commission
+                  on every third-party booking. That's money we'd rather spend on you.
+                </p>
+                <p className="text-neutral-600 leading-relaxed mb-8">
+                  Our packages are exclusively for direct bookers: free extras, discounts,
+                  and flexible cancellation. Choose your perfect Texel escape below.
+                </p>
+
+                {/* Benefits highlight */}
+                <div className="flex items-start gap-3 p-4 bg-sand-50 border-l-2 border-shell">
+                  <Gift className="w-5 h-5 text-shell mt-0.5" />
+                  <div>
+                    <p className="font-medium text-ink mb-1">Direct Booking Perks</p>
+                    <p className="text-sm text-neutral-600">
+                      Free sauna access, €5/night discount, and extras you won't find elsewhere.
+                    </p>
+                  </div>
+                </div>
+
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
+                className="relative aspect-[4/3] overflow-hidden"
+              >
+                <Image
+                  src="/offers/opduin-verwenaanbieding-600x400_2.jpg"
+                  alt="Relaxation package at Grand Hotel Opduin"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
             </div>
           </div>
         </section>

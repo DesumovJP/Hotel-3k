@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
+import { SectionHeroCompact } from "@/components/sections";
 import {
   MapPin,
   Phone,
@@ -84,27 +85,12 @@ export default function ContactPage() {
       <Header />
 
       <main>
-        {/* Compact Header - No Image */}
-        <section className="bg-navy pt-24 pb-10 md:pt-28 md:pb-12">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-              className="text-center"
-            >
-              <span className="text-overline text-shell tracking-widest mb-3 block">
-                Contact
-              </span>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-                Get in Touch
-              </h1>
-              <p className="text-white/70 max-w-lg mx-auto">
-                We're here to help you plan your perfect stay on Texel.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        {/* Hero */}
+        <SectionHeroCompact
+          label="Contact"
+          title="Get in Touch"
+          description="We're here to help you plan your perfect stay on Texel."
+        />
 
         {/* Quick Info Strip */}
         <section className="bg-navy text-white py-4 border-t border-white/10">

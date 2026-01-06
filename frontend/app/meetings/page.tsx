@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, AnimatePresence } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
-import { SectionHero, SectionCTA } from "@/components/sections";
-import { Users, Phone, Mail, ArrowRight, Check, Utensils, Wifi, Car, Monitor, Coffee, MapPin, Bed, TreePine, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { BreadcrumbsInline } from "@/components/molecules";
+import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionIntro } from "@/components/sections";
+import { Users, Mail, ArrowRight, Check } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
-import { cn } from "@/lib/utils";
 
 const activities = [
   "Oyster mudflat hiking",
@@ -72,17 +72,6 @@ const meetingRooms = [
   },
 ];
 
-// Combined: why Texel + what's included
-const benefits = [
-  { icon: MapPin, text: "20 min ferry from mainland" },
-  { icon: TreePine, text: "Beach walks between sessions" },
-  { icon: Bed, text: "22 rooms for overnight stays" },
-  { icon: Monitor, text: "Beamer, screen & sound system" },
-  { icon: Coffee, text: "Coffee, tea & refreshments" },
-  { icon: Utensils, text: "Full catering available" },
-  { icon: Car, text: "Free parking" },
-  { icon: Wifi, text: "High-speed WiFi" },
-];
 
 const galleryImages = [
   "/meetings/vergaderzalen-600x450.jpg",
@@ -98,27 +87,7 @@ const galleryImages = [
 
 export default function MeetingsPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   const { scrollYProgress } = useScroll();
-
-  const openLightbox = useCallback((index: number) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  }, []);
-
-  const closeLightbox = useCallback(() => {
-    setLightboxOpen(false);
-  }, []);
-
-  const nextImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
-  }, []);
-
-  const prevImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
-  }, []);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
@@ -161,144 +130,77 @@ export default function MeetingsPage() {
             href: "mailto:banqueting@opduin.nl",
             icon: Mail,
           }}
-        />
-
-        {/* Quick Info Strip */}
-        <section className="bg-navy text-white border-t border-white/10">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-between gap-4 py-4">
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <Users size={16} className="text-shell" />
-                  <span>2 to 200 guests</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check size={16} className="text-shell" />
-                  <span>Full-service catering</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check size={16} className="text-shell" />
-                  <span>Dedicated events team</span>
-                </div>
-              </div>
+          infoStrip={{
+            items: [
+              { icon: Users, value: "2 to 200 guests" },
+              { icon: Check, value: "Full-service catering" },
+              { icon: Check, value: "Dedicated events team" },
+            ],
+            trailingContent: (
               <span className="hidden md:block text-white/60 text-sm">
                 Response within 24 hours
               </span>
-            </div>
+            ),
+          }}
+        />
+
+        {/* Breadcrumbs */}
+        <section className="py-6 bg-white border-b border-neutral-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <BreadcrumbsInline items={[{ label: "Meetings & Events" }]} />
           </div>
         </section>
 
         {/* Introduction */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-            <p className="text-lg md:text-xl text-neutral-700 leading-relaxed mb-6">
-              An original place where participants are completely isolated from their normal activities.
-              But still easily accessible. An endless variety of professionally organized activities
-              in and around the location. Intimate enough for a small gathering, but also well equipped
-              for a meeting of 200 participants.
-            </p>
-            <p className="text-lg md:text-xl text-neutral-700 leading-relaxed mb-8">
-              Meetings on Texel are always successful. With a well chosen destination and a good program
-              participants get involved and excited. The atmosphere and comfort in combination with
-              a flexible organization give everyone the chance to grow.
-            </p>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 pt-6 border-t border-neutral-200">
-              {benefits.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.text} className="flex items-center gap-2 text-neutral-600">
-                    <Icon size={16} className="text-shell" />
-                    <span className="text-sm">{item.text}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <SectionIntro
+          label="Conference & Events"
+          title="Meetings that inspire"
+          lead="An original place where participants are completely isolated from their normal activities. But still easily accessible. An endless variety of professionally organized activities in and around the location."
+          paragraphs={[
+            "Intimate enough for a small gathering, but also well equipped for a meeting of 200 participants. Meetings on Texel are always successful.",
+            "With a well chosen destination and a good program participants get involved and excited. The atmosphere and comfort in combination with a flexible organization give everyone the chance to grow.",
+          ]}
+          image="/meetings/vergaderlocatie-voor-10-tot-200-personen-600x400_1.jpg"
+          imageAlt="Meeting room at Grand Hotel Opduin"
+          highlight={{
+            icon: Users,
+            title: "Flexible Capacity",
+            description: "From board meetings of 10 people to conferences of 200 participants - we adapt to your needs.",
+          }}
+          padding="lg"
+        />
 
         {/* Teambuilding Activities */}
-        <section className="py-16 md:py-20 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                <Image
-                  src="/meetings/teambuildingactiviteiten-600x450.jpg"
-                  alt="Teambuilding activities on Texel"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                  Teambuilding Activities
-                </h2>
-                <p className="text-neutral-600 mb-6 leading-relaxed">
-                  Oyster mudflat hiking, nature excursions, flying above the island, surfing...
-                  So many activities to let your guests experience something special between meetings.
-                </p>
-                <p className="text-neutral-600 mb-6 leading-relaxed">
-                  We are happy to help you find a suitable activity and arrange everything for you.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {activities.map((activity) => (
-                    <span key={activity} className="text-sm bg-white px-3 py-1.5 rounded-full text-neutral-700">
-                      {activity}
-                    </span>
-                  ))}
-                </div>
-                <a
-                  href="mailto:banqueting@opduin.nl"
-                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
-                >
-                  Ask about activities
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <SectionTwoColumn
+          title="Teambuilding Activities"
+          content={[
+            "Oyster mudflat hiking, nature excursions, flying above the island, surfing... So many activities to let your guests experience something special between meetings.",
+            "We are happy to help you find a suitable activity and arrange everything for you.",
+          ]}
+          image="/meetings/teambuildingactiviteiten-600x450.jpg"
+          imageAlt="Teambuilding activities on Texel"
+          imagePosition="left"
+          background="sand"
+          tags={activities}
+          ctaLink="mailto:banqueting@opduin.nl"
+          ctaText="Ask about activities"
+        />
 
         {/* A Texel Party */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div className="order-2 lg:order-1">
-                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                  A Texel Party
-                </h2>
-                <p className="text-neutral-600 mb-4 leading-relaxed">
-                  A great party is well organized and at the same time gives your guests
-                  the opportunity to completely relax. When you invite guests to the island,
-                  the fun already begins — it&apos;s like going abroad, but even better.
-                </p>
-                <p className="text-neutral-600 mb-6 leading-relaxed">
-                  Texel offers a world of possibilities. Food and drinks grown by local neighbors,
-                  fierce nature, adventurous sports, high-standing art and culture, wellness,
-                  and unique skies on endless beaches.
-                </p>
-                <p className="text-neutral-500 text-sm mb-6">
-                  Weddings, anniversaries, family gatherings — your guests don&apos;t just stop by,
-                  they enjoy a real happening.
-                </p>
-                <a
-                  href="mailto:banqueting@opduin.nl"
-                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
-                >
-                  Plan your celebration
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg order-1 lg:order-2">
-                <Image
-                  src="/meetings/een-feestje-op-texel-600x450.jpg"
-                  alt="Celebrations on Texel"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <SectionTwoColumn
+          title="A Texel Party"
+          content={[
+            "A great party is well organized and at the same time gives your guests the opportunity to completely relax. When you invite guests to the island, the fun already begins — it's like going abroad, but even better.",
+            "Texel offers a world of possibilities. Food and drinks grown by local neighbors, fierce nature, adventurous sports, high-standing art and culture, wellness, and unique skies on endless beaches.",
+            "Weddings, anniversaries, family gatherings — your guests don't just stop by, they enjoy a real happening.",
+          ]}
+          image="/meetings/een-feestje-op-texel-600x450.jpg"
+          imageAlt="Celebrations on Texel"
+          imagePosition="right"
+          background="white"
+          ctaLink="mailto:banqueting@opduin.nl"
+          ctaText="Plan your celebration"
+        />
 
         {/* Weddings */}
         <section className="py-16 md:py-20 bg-sand-100">
@@ -346,44 +248,20 @@ export default function MeetingsPage() {
         </section>
 
         {/* Meeting Packages */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                <Image
-                  src="/meetings/vergaderarrangementen-600x450.jpg"
-                  alt="Meeting packages"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                  Meeting Packages
-                </h2>
-                <p className="text-neutral-600 mb-4 leading-relaxed">
-                  The complete package. You do not have to worry about anything, we make sure that you
-                  and your guests are taken care of in the right way.
-                </p>
-                <p className="text-neutral-600 mb-4 leading-relaxed">
-                  Including meeting room rental, lunches, dinner and treats. Prices depend on your wishes
-                  and the number of participants. We are happy to make an offer for you.
-                </p>
-                <p className="text-neutral-600 mb-6 leading-relaxed">
-                  Need extra ideas for an activity on Texel? Just give us a call and we will help you
-                  with some suggestions. We are also glad to take care of the organizational part.
-                </p>
-                <a
-                  href="mailto:banqueting@opduin.nl"
-                  className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
-                >
-                  Request a quote
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <SectionTwoColumn
+          title="Meeting Packages"
+          content={[
+            "The complete package. You do not have to worry about anything, we make sure that you and your guests are taken care of in the right way.",
+            "Including meeting room rental, lunches, dinner and treats. Prices depend on your wishes and the number of participants. We are happy to make an offer for you.",
+            "Need extra ideas for an activity on Texel? Just give us a call and we will help you with some suggestions. We are also glad to take care of the organizational part.",
+          ]}
+          image="/meetings/vergaderarrangementen-600x450.jpg"
+          imageAlt="Meeting packages"
+          imagePosition="left"
+          background="white"
+          ctaLink="mailto:banqueting@opduin.nl"
+          ctaText="Request a quote"
+        />
 
         {/* Meeting Rooms */}
         <section className="py-16 md:py-24 bg-sand-100">
@@ -463,26 +341,12 @@ export default function MeetingsPage() {
         </section>
 
         {/* Gallery */}
-        <section className="py-12 md:py-16 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {galleryImages.map((src, index) => (
-                <div
-                  key={index}
-                  className="relative aspect-square overflow-hidden cursor-pointer group"
-                  onClick={() => openLightbox(index)}
-                >
-                  <Image
-                    src={src}
-                    alt={`Events gallery ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <MiniGallery
+          title="Events at Opduin"
+          images={galleryImages}
+          columns={3}
+          background="sand-100"
+        />
 
         {/* Contact CTA */}
         <SectionCTA
@@ -496,62 +360,6 @@ export default function MeetingsPage() {
       </main>
 
       <Footer />
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-navy/95 flex items-center justify-center"
-            onClick={closeLightbox}
-          >
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <button
-              onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <motion.div
-              key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-w-[90vw] max-h-[85vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={galleryImages[lightboxIndex]}
-                alt={`Events gallery ${lightboxIndex + 1}`}
-                width={1920}
-                height={1080}
-                className="object-contain max-h-[85vh] w-auto"
-              />
-            </motion.div>
-
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
-              <p className="text-sm text-white/60">
-                {lightboxIndex + 1} / {galleryImages.length}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

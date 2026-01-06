@@ -7,6 +7,22 @@ export {
   legalPages,
 } from "./data/static-content";
 
+// ============================================
+// CENTRALIZED DATA EXPORTS
+// ============================================
+
+// Hotel Info - Single source of truth for contact info
+export * from "./data/hotel-info";
+
+// Page-specific data
+export * from "./data/about";
+export * from "./data/wellness";
+export * from "./data/restaurant";
+export * from "./data/meetings";
+export * from "./data/gallery";
+export * from "./data/island";
+export * from "./data/sister-hotels";
+
 // Room data
 export interface Room {
   id: string;

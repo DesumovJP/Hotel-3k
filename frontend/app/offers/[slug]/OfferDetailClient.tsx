@@ -162,45 +162,23 @@ export function OfferDetailClient({ offer, otherOffers }: OfferDetailClientProps
                     </p>
                   </div>
 
-                  {/* What's Included */}
+                  {/* What's Included - Compact list */}
                   <div className="mb-10">
-                    <h2 className="font-display text-2xl text-ink mb-6">What&apos;s Included</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <h2 className="font-display text-2xl text-ink mb-4">What&apos;s Included</h2>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                       {offer.includes.map((item, index) => {
                         const Icon = getInclusionIcon(item);
                         return (
-                          <motion.div
+                          <li
                             key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                            className="group neo-card p-4 hover:shadow-lg transition-all duration-300 flex items-center"
+                            className="flex items-center gap-3 py-2 text-neutral-700"
                           >
-                            <div className="flex items-center gap-4">
-                              <Icon size={20} className="text-shell flex-shrink-0" />
-                              <span className="text-neutral-700">{item}</span>
-                            </div>
-                          </motion.div>
+                            <Icon size={16} className="text-shell flex-shrink-0" />
+                            <span>{item}</span>
+                          </li>
                         );
                       })}
-                    </div>
-                  </div>
-
-                  {/* Highlights */}
-                  <div className="mb-10">
-                    <h2 className="font-display text-2xl text-ink mb-6">Highlights</h2>
-                    <div className="flex flex-wrap gap-3">
-                      {offer.highlights.map((highlight, index) => (
-                        <span
-                          key={index}
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-shell/10 text-navy text-sm"
-                        >
-                          <Sparkles size={14} className="text-shell" />
-                          {highlight}
-                        </span>
-                      ))}
-                    </div>
+                    </ul>
                   </div>
 
                   {/* Conditions */}

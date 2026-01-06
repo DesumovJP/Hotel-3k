@@ -7,11 +7,11 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
+import { SectionHeroCompact, SectionCTA } from "@/components/sections";
 import { rooms } from "@/lib/data";
 import {
   Calendar, Users, Minus, Plus, Check, ArrowRight, ArrowLeft,
-  Phone, Mail, MapPin, Shield, Clock, CreditCard,
-  Eye, Maximize2, Gift, BadgeCheck
+  Shield, Clock, CreditCard, Eye, Maximize2, Gift, BadgeCheck, Phone
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { easeOutExpo } from "@/lib/motion";
@@ -663,26 +663,12 @@ export default function BookPage() {
       <Header />
 
       <main>
-        {/* Compact Header - No Image */}
-        <section className="bg-navy pt-24 pb-8 md:pt-28 md:pb-10">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-            >
-              <span className="text-overline text-shell tracking-widest mb-3 block">
-                Reservations
-              </span>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-3">
-                Book Your Stay
-              </h1>
-              <p className="text-white/70 max-w-md mx-auto">
-                Reserve directly for the best rates and exclusive benefits.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        {/* Hero */}
+        <SectionHeroCompact
+          label="Reservations"
+          title="Book Your Stay"
+          description="Reserve directly for the best rates and exclusive benefits."
+        />
 
         {/* Trust Indicators */}
         <section className="bg-navy text-white py-4 border-t border-white/10">
@@ -732,42 +718,16 @@ export default function BookPage() {
           </div>
         </section>
 
-        {/* Contact Info - Compact Bar */}
-        <section className="py-10 md:py-12 bg-sand-100 border-t border-sand-200">
-          <div className="px-6 md:px-12 lg:px-24 max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: easeOutExpo }}
-              className="flex flex-col md:flex-row items-center justify-between gap-6"
-            >
-              <div className="text-center md:text-left">
-                <h2 className="font-display text-xl text-ink">
-                  Prefer to speak with us?
-                </h2>
-                <p className="text-neutral-500 text-sm">Our reservations team is available Mon-Sun 9:00-18:00</p>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-6">
-                <a
-                  href="tel:+31222317445"
-                  className="flex items-center gap-2 text-neutral-600 hover:text-shell transition-colors"
-                >
-                  <Phone size={18} className="text-shell" />
-                  <span>+31 222 317 445</span>
-                </a>
-                <a
-                  href="mailto:reservations@opduin.nl"
-                  className="flex items-center gap-2 text-neutral-600 hover:text-shell transition-colors"
-                >
-                  <Mail size={18} className="text-shell" />
-                  <span>reservations@opduin.nl</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        {/* Contact CTA */}
+        <SectionCTA
+          icon={Phone}
+          title="Prefer to speak with us?"
+          description="Our reservations team is available Mon-Sun 9:00-18:00 to assist with your booking."
+          actions={[
+            { label: "Call +31 222 317 445", href: "tel:+31222317445" },
+          ]}
+          background="sand"
+        />
       </main>
 
       <Footer />

@@ -186,49 +186,40 @@ export function RoomDetailClient({ room, otherRooms }: RoomDetailClientProps) {
                     ))}
                   </div>
 
-                  {/* Features */}
+                  {/* Features & Amenities */}
                   <div className="mb-10">
-                    <h2 className="font-display text-2xl text-ink mb-6">Features</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <h2 className="font-display text-2xl text-ink mb-5">Room Features</h2>
+                    <div className="flex flex-wrap gap-x-6 gap-y-3">
                       {room.features.map((feature, index) => {
                         const Icon = getFeatureIcon(feature);
                         return (
                           <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                            className="group neo-card p-4 hover:shadow-lg transition-all duration-300 flex items-center"
+                            transition={{ duration: 0.3, delay: index * 0.03 }}
+                            className="flex items-center gap-2.5 text-ink/60"
                           >
-                            <div className="flex items-center gap-4">
-                              <Icon size={20} className="text-shell flex-shrink-0" />
-                              <span className="text-neutral-700">{feature}</span>
-                            </div>
+                            <Icon size={16} className="text-shell/70" />
+                            <span className="text-sm">{feature}</span>
                           </motion.div>
                         );
                       })}
-                    </div>
-                  </div>
-
-                  {/* Amenities */}
-                  <div className="mb-10">
-                    <h2 className="font-display text-2xl text-ink mb-6">Amenities</h2>
-                    <div className="flex flex-wrap gap-3">
                       {room.amenities.map((amenity, index) => {
                         const Icon = getFeatureIcon(amenity);
                         return (
-                          <motion.span
-                            key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                          <motion.div
+                            key={`amenity-${index}`}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: index * 0.03 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-shell/10 text-navy text-sm"
+                            transition={{ duration: 0.3, delay: (room.features.length + index) * 0.03 }}
+                            className="flex items-center gap-2.5 text-ink/60"
                           >
-                            <Icon size={16} className="text-shell" />
-                            {amenity}
-                          </motion.span>
+                            <Icon size={16} className="text-shell/70" />
+                            <span className="text-sm">{amenity}</span>
+                          </motion.div>
                         );
                       })}
                     </div>

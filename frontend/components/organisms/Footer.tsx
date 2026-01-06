@@ -1,157 +1,151 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Facebook, Instagram } from "lucide-react";
-import { easeOutExpo } from "@/lib/motion";
+import Image from "next/image";
+import { Facebook, Instagram, Phone, Mail } from "lucide-react";
 
-const exploreLinks = [
-  { href: "/rooms", label: "Rooms" },
-  { href: "/restaurant", label: "Restaurant" },
-  { href: "/wellness", label: "Wellness" },
-  { href: "/offers", label: "Special Offers" },
-  { href: "/meetings", label: "Meetings & Events" },
-];
-
-const aboutLinks = [
-  { href: "/about", label: "Our Story" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/island", label: "The Island" },
-  { href: "/contact", label: "Contact" },
-];
-
-const socialLinks = [
-  { href: "https://facebook.com/grandhotelop", label: "Facebook", icon: Facebook },
-  { href: "https://instagram.com/grandhotelop", label: "Instagram", icon: Instagram },
-];
-
+/**
+ * Footer Component
+ *
+ * Aman-inspired design: warm, minimal, elegant columns
+ * Uses site's sand/shell color palette
+ */
 export function Footer() {
   return (
-    <footer className="bg-navy text-white">
-      {/* Main Footer */}
-      <div className="py-16 md:py-20 px-6 md:px-12 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="max-w-6xl mx-auto"
-        >
-          <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-16">
-            {/* Left Block - Brand */}
-            <div className="lg:max-w-xs">
-              <Link href="/" className="inline-block mb-6">
-                <span className="font-display text-2xl text-white">
-                  Grand Hotel Opduin
-                </span>
+    <footer className="bg-shell">
+      <div className="px-6 md:px-12 lg:px-24 py-16 md:py-20">
+        <div className="max-w-6xl mx-auto">
+          {/* Main grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
+            {/* Brand */}
+            <div className="md:col-span-4">
+              <Link href="/" className="inline-block mb-4">
+                <Image
+                  src="/icon.png"
+                  alt="Grand Hotel Opduin"
+                  width={160}
+                  height={160}
+                  className="object-contain brightness-0 invert"
+                />
               </Link>
-              <p className="text-white/60 text-sm leading-relaxed mb-6">
-                A sanctuary of stillness on the shores of Texel.
-                Where the North Sea whispers and time slows.
-              </p>
-
-              {/* Social Links */}
-              <div className="flex gap-3">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-shell transition-colors"
-                    aria-label={social.label}
-                  >
-                    <social.icon size={18} aria-hidden="true" />
-                  </a>
-                ))}
+              <div className="text-sm text-white/70 space-y-1">
+                <p>Ruijslaan 22, 1796 AD De Koog</p>
+                <p>Texel, Netherlands</p>
               </div>
             </div>
 
-            {/* Right Block - Navigation columns */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
-              {/* Explore */}
-              <div>
-                <h4 className="text-xs uppercase tracking-[0.2em] text-shell mb-6 font-medium">
-                  Explore
-                </h4>
-                <nav className="space-y-3">
-                  {exploreLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="block text-white/60 hover:text-shell transition-colors text-sm"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
-              </div>
+            {/* Stay */}
+            <div className="md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Stay</h4>
+              <nav className="space-y-3">
+                <Link href="/rooms" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Rooms & Suites
+                </Link>
+                <Link href="/offers" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Special Offers
+                </Link>
+                <Link href="/book" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Reservations
+                </Link>
+              </nav>
+            </div>
 
-              {/* About */}
-              <div>
-                <h4 className="text-xs uppercase tracking-[0.2em] text-shell mb-6 font-medium">
-                  About
-                </h4>
-                <nav className="space-y-3">
-                  {aboutLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="block text-white/60 hover:text-shell transition-colors text-sm"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
-              </div>
+            {/* Experience */}
+            <div className="md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Experience</h4>
+              <nav className="space-y-3">
+                <Link href="/restaurant" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Restaurant
+                </Link>
+                <Link href="/wellness" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Wellness
+                </Link>
+                <Link href="/meetings" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Meetings
+                </Link>
+              </nav>
+            </div>
 
-              {/* Contact */}
-              <div className="col-span-2 md:col-span-1">
-                <h4 className="text-xs uppercase tracking-[0.2em] text-shell mb-6 font-medium">
-                  Contact
-                </h4>
-                <div className="space-y-3 text-sm text-white/60">
-                  <p>Ruijslaan 22, 1796 AD De Koog</p>
-                  <p>Texel, Netherlands</p>
-                  <a
-                    href="tel:+31222317445"
-                    className="block hover:text-shell transition-colors"
-                  >
-                    +31 222 317 445
-                  </a>
-                  <a
-                    href="mailto:info@opduin.nl"
-                    className="block hover:text-shell transition-colors"
-                  >
-                    info@opduin.nl
-                  </a>
-                </div>
+            {/* Discover */}
+            <div className="md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Discover</h4>
+              <nav className="space-y-3">
+                <Link href="/about" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Our Story
+                </Link>
+                <Link href="/island" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Texel Island
+                </Link>
+                <Link href="/gallery" className="block text-sm text-white/80 hover:text-white transition-colors">
+                  Gallery
+                </Link>
+              </nav>
+            </div>
+
+            {/* Contact */}
+            <div className="md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Contact</h4>
+              <div className="space-y-3">
+                <a
+                  href="tel:+31222317445"
+                  className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
+                >
+                  <Phone size={14} className="text-white/60" />
+                  +31 222 317 445
+                </a>
+                <a
+                  href="mailto:info@opduin.nl"
+                  className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
+                >
+                  <Mail size={14} className="text-white/60" />
+                  info@opduin.nl
+                </a>
               </div>
             </div>
           </div>
-        </motion.div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="py-6 px-6 md:px-12 lg:px-24">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <p className="text-xs text-white/40">
-              &copy; {new Date().getFullYear()} Grand Hotel Opduin. All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link
-                href="/privacy"
-                className="text-xs text-white/40 hover:text-shell transition-colors"
+          {/* Bottom */}
+          <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-6">
+              <a
+                href="https://facebook.com/grandhotelop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 hover:text-white transition-colors"
+                aria-label="Facebook"
               >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-xs text-white/40 hover:text-shell transition-colors"
+                <Facebook size={18} />
+              </a>
+              <a
+                href="https://instagram.com/grandhotelop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/50 hover:text-white transition-colors"
+                aria-label="Instagram"
               >
-                Terms & Conditions
+                <Instagram size={18} />
+              </a>
+            </div>
+            <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs text-white/50">
+              <span>© {new Date().getFullYear()} Grand Hotel Opduin</span>
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                Privacy
               </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                Terms
+              </Link>
+              <Link href="/about/sister-hotels" className="hover:text-white transition-colors">
+                Hoscom Collection
+              </Link>
+              <span className="text-white/30">·</span>
+              <a
+                href="https://webbie.team/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                made by webbie.team
+              </a>
             </div>
           </div>
         </div>

@@ -6,8 +6,9 @@ import {
   DirectBookingBenefits,
   IntroSection,
   DiscoverGrid,
-  CTASection,
+  SectionCTA,
 } from "@/components/sections";
+import { Waves } from "lucide-react";
 
 export default function Home() {
   return (
@@ -32,7 +33,12 @@ export default function Home() {
         </section>
 
         <section id="cta">
-          <CTASection />
+          <SectionCTA
+            icon={Waves}
+            title="Ready for stillness?"
+            description="Escape to where the horizon stretches endlessly and the only schedule is the rhythm of the tides."
+            actions={[{ label: "Check Availability", href: "/book" }]}
+          />
         </section>
       </main>
 

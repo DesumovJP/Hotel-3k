@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -15,6 +15,20 @@ interface HeroAction {
   icon?: LucideIcon;
 }
 
+interface InfoStripItem {
+  icon: LucideIcon;
+  label?: string;
+  value: string;
+  highlight?: boolean;
+}
+
+interface InfoStrip {
+  items: InfoStripItem[];
+  phoneNumber?: string;
+  phoneLabel?: string;
+  trailingContent?: ReactNode;
+}
+
 interface SectionHeroProps {
   label: string;
   title: string;
@@ -26,6 +40,7 @@ interface SectionHeroProps {
   };
   backgroundImage: string;
   youtubeId?: string;
+  infoStrip?: InfoStrip;
   className?: string;
 }
 
@@ -38,6 +53,7 @@ export function SectionHero({
   secondaryAction,
   backgroundImage,
   youtubeId,
+  infoStrip,
   className,
 }: SectionHeroProps) {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -62,6 +78,7 @@ export function SectionHero({
   const ActionIcon = primaryAction.icon;
 
   return (
+    <>
     <section
       ref={heroRef}
       className={cn(
@@ -105,8 +122,8 @@ export function SectionHero({
         </div>
       </div>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+      {/* Gradient Overlay - stronger for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-navy/20" />
 
       {/* Content */}
       <div className="absolute inset-0 flex items-end pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
@@ -117,7 +134,7 @@ export function SectionHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: easeOutExpo }}
           >
-            <span className="text-overline text-shell tracking-widest mb-4 block">
+            <span className="text-overline text-shell tracking-widest mb-4 block drop-shadow-md">
               {label}
             </span>
           </motion.div>
@@ -129,7 +146,7 @@ export function SectionHero({
               animate={{ y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
             >
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1]">
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] drop-shadow-lg">
                 <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
                   {title}
                 </SplitText>
@@ -143,9 +160,11 @@ export function SectionHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: easeOutExpo }}
-              className="text-xl md:text-2xl text-shell font-display italic mb-4"
+              className="text-xl md:text-2xl text-white font-display italic mb-4 drop-shadow-md"
             >
+              <span className="text-shell">"</span>
               {tagline}
+              <span className="text-shell">"</span>
             </motion.p>
           )}
 
@@ -154,7 +173,7 @@ export function SectionHero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: tagline ? 0.4 : 0.3, ease: easeOutExpo }}
-            className="text-lg text-white/80 max-w-lg mb-8"
+            className="text-lg text-white/90 max-w-lg mb-8 drop-shadow-sm"
           >
             {description}
           </motion.p>
@@ -199,5 +218,43 @@ export function SectionHero({
         </div>
       </div>
     </section>
+
+    {/* Info Strip */}
+    {infoStrip && (
+      <section className="bg-navy text-white border-t border-white/10">
+        <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+          <div className="flex flex-wrap items-center justify-between gap-4 py-4">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
+              {infoStrip.items.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={index}
+                    className={cn(
+                      "flex items-center gap-2",
+                      item.highlight && "text-shell"
+                    )}
+                  >
+                    <Icon size={16} className={item.highlight ? "" : "text-shell"} />
+                    {item.label && <span className="text-white/60">{item.label}</span>}
+                    <span>{item.value}</span>
+                  </div>
+                );
+              })}
+            </div>
+            {infoStrip.phoneNumber && (
+              <a
+                href={`tel:${infoStrip.phoneNumber.replace(/\s/g, "")}`}
+                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-white transition-colors text-sm"
+              >
+                {infoStrip.phoneLabel || infoStrip.phoneNumber}
+              </a>
+            )}
+            {infoStrip.trailingContent}
+          </div>
+        </div>
+      </section>
+    )}
+    </>
   );
 }

@@ -12,3 +12,15 @@ export { MenuItem, MenuSectionComponent, sampleMenuData } from "./MenuItem";
 export type { MenuItemType, MenuSection, DietaryTag } from "./MenuItem";
 export { Breadcrumbs, BreadcrumbsInline } from "./Breadcrumbs";
 export type { BreadcrumbItem } from "./Breadcrumbs";
+
+// New reusable components for redesign
+export { InfoStrip } from "./InfoStrip";
+export type { InfoStripItem, InfoStripProps } from "./InfoStrip";
+export { SectionHeader } from "./SectionHeader";
+export type { SectionHeaderProps } from "./SectionHeader";
+export { FeatureGrid } from "./FeatureGrid";
+export type { FeatureItem, FeatureGridProps } from "./FeatureGrid";
+export { FloatingCTA } from "./FloatingCTA";
+export type { FloatingCTAProps } from "./FloatingCTA";
+export { BreadcrumbsSection } from "./BreadcrumbsSection";
+export type { BreadcrumbsSectionProps } from "./BreadcrumbsSection";
