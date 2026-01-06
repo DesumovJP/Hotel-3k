@@ -169,28 +169,30 @@ const config: Config = {
       // TYPOGRAPHY - Luxury serif + Humanist sans
       // ============================================
       fontFamily: {
-        display: ["var(--font-playfair)", "Georgia", "Times New Roman", "serif"],
-        body: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
-        numeric: ["var(--font-inter)", "tabular-nums", "sans-serif"],
+        display: ["var(--font-display)", "Cormorant Garamond", "Georgia", "Times New Roman", "serif"],
+        body: ["var(--font-body)", "DM Sans", "system-ui", "-apple-system", "sans-serif"],
+        numeric: ["var(--font-body)", "tabular-nums", "sans-serif"],
       },
       fontSize: {
-        // Fluid Display Scale (clamp-based)
-        "display-hero": ["clamp(3.5rem, 8vw, 6rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
-        "display-2xl": ["clamp(3rem, 7vw, 5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "display-xl": ["clamp(2.5rem, 5vw, 4rem)", { lineHeight: "1.15", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(2rem, 4vw, 3rem)", { lineHeight: "1.2", letterSpacing: "-0.015em" }],
-        "display-md": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.25", letterSpacing: "-0.01em" }],
-        "display-sm": ["clamp(1.25rem, 2.5vw, 1.75rem)", { lineHeight: "1.3", letterSpacing: "-0.01em" }],
-        // Body Scale
-        "body-xl": ["1.25rem", { lineHeight: "1.6" }],
-        "body-lg": ["1.125rem", { lineHeight: "1.6" }],
-        "body-md": ["1rem", { lineHeight: "1.6" }],
-        "body-sm": ["0.875rem", { lineHeight: "1.5" }],
+        // Fluid Display Scale - Premium with lighter weights for large sizes
+        "display-hero": ["clamp(3.5rem, 8vw, 6rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "300" }],
+        "display-2xl": ["clamp(3rem, 7vw, 5rem)", { lineHeight: "1.08", letterSpacing: "-0.02em", fontWeight: "300" }],
+        "display-xl": ["clamp(2.5rem, 5vw, 4rem)", { lineHeight: "1.12", letterSpacing: "-0.02em", fontWeight: "300" }],
+        "display-lg": ["clamp(2rem, 4vw, 3rem)", { lineHeight: "1.15", letterSpacing: "-0.015em", fontWeight: "400" }],
+        "display-md": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "400" }],
+        "display-sm": ["clamp(1.25rem, 2.5vw, 1.75rem)", { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "500" }],
+        // Body Scale - Increased line-height for readability
+        "body-xl": ["1.25rem", { lineHeight: "1.75" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.7" }],
+        "body-md": ["1rem", { lineHeight: "1.7" }],
+        "body-sm": ["0.875rem", { lineHeight: "1.6" }],
         "body-xs": ["0.75rem", { lineHeight: "1.5" }],
         // Special
-        overline: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.12em" }],
+        overline: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.12em", fontWeight: "500" }],
         caption: ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.04em" }],
         price: ["1.5rem", { lineHeight: "1.2", fontVariantNumeric: "tabular-nums" }],
+        // Tagline - italic style
+        tagline: ["1.125rem", { lineHeight: "1.5", fontStyle: "italic" }],
       },
       letterSpacing: {
         tighter: "-0.03em",

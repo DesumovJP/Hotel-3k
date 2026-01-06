@@ -25,22 +25,22 @@ export function IntroSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: easeOutExpo }}
           >
-            <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+            <span className="text-overline text-shell mb-4 block">
               Welcome to Opduin
             </span>
 
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink mb-6 leading-tight">
+            <h2 className="text-display-xl text-ink mb-6">
               The Hamptons on
               <span className="text-shell"> the Wadden</span>
             </h2>
 
-            <p className="text-neutral-600 text-lg leading-relaxed mb-6">
+            <p className="text-body-lg text-neutral-600 mb-6">
               More than 90 years of hospitality combined in a tasteful, comfortable
               and contemporary hotel. The beach is within walking distance, the village
               and cozy restaurants are next door.
             </p>
 
-            <p className="text-neutral-500 leading-relaxed mb-8">
+            <p className="text-body-md text-neutral-500 mb-8">
               Plenty of opportunities for relaxation, exercise and recreation.
               Rooms ranging from suites to holiday homes, with options for single
               occupancy through apartments. All rooms with air conditioning and
@@ -112,7 +112,7 @@ export function IntroSection() {
                   <Star key={i} size={14} className="text-shell fill-shell" />
                 ))}
               </div>
-              <p className="text-3xl md:text-4xl font-display text-ink mb-1">9.2</p>
+              <p className="text-display-md text-ink mb-1">9.2</p>
               <p className="text-neutral-500 text-sm">Guest Rating</p>
               <p className="text-neutral-400 text-xs mt-1">1,200+ reviews</p>
             </motion.div>

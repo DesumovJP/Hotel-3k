@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, ReactNode } from "react";
+import { useEffect, useRef, ReactNode, useState } from "react";
 import Lenis from "lenis";
 import { useReducedMotion } from "@/lib/accessibility";
 
@@ -9,26 +9,41 @@ interface SmoothScrollProps {
 }
 
 export function SmoothScrollProvider({ children }: SmoothScrollProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const rafIdRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     // Skip smooth scroll if user prefers reduced motion
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      setIsReady(true);
+      return;
+    }
 
-    // Initialize Lenis with premium feel settings
+    if (!wrapperRef.current || !contentRef.current) return;
+
+    // Add lenis class to html for CSS
+    document.documentElement.classList.add("lenis", "lenis-smooth");
+
+    // Initialize Lenis with wrapper approach for reliable height calculation
     lenisRef.current = new Lenis({
-      duration: 1.0, // Slightly faster for better responsiveness
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential easing
+      wrapper: wrapperRef.current,
+      content: contentRef.current,
+      duration: 1.0,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1, // Normal scroll speed
+      wheelMultiplier: 1,
       touchMultiplier: 1.5,
       infinite: false,
-      lerp: 0.1, // Linear interpolation for smoother edge behavior
+      autoResize: true,
     });
+
+    setIsReady(true);
 
     // RAF loop for smooth animation
     function raf(time: number) {
@@ -37,43 +52,99 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
     }
     rafIdRef.current = requestAnimationFrame(raf);
 
-    // Expose lenis instance globally for GSAP ScrollTrigger
+    // Expose lenis instance globally
     (window as unknown as { lenis: Lenis }).lenis = lenisRef.current;
 
-    // Force resize after content loads to fix height calculation
+    // Force resize function
     const handleResize = () => {
-      lenisRef.current?.resize();
+      if (lenisRef.current) {
+        lenisRef.current.resize();
+      }
     };
 
-    // Initial resize after DOM is ready
-    requestAnimationFrame(() => {
-      handleResize();
-      // Additional resize after images/fonts load
-      setTimeout(handleResize, 500);
-      setTimeout(handleResize, 1500);
-    });
+    // Debounced resize for performance
+    let resizeTimeout: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(handleResize, 50);
+    };
+
+    // Initial resize sequence - be aggressive
+    handleResize();
+    setTimeout(handleResize, 100);
+    setTimeout(handleResize, 300);
+    setTimeout(handleResize, 600);
+    setTimeout(handleResize, 1000);
+    setTimeout(handleResize, 2000);
+    setTimeout(handleResize, 3000);
 
     // Listen for window resize
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", debouncedResize);
 
-    // ResizeObserver for dynamic content changes
-    const resizeObserver = new ResizeObserver(() => {
-      handleResize();
+    // Listen for load event
+    window.addEventListener("load", handleResize);
+
+    // Listen for all images loading
+    const images = document.querySelectorAll("img");
+    images.forEach((img) => {
+      if (!img.complete) {
+        img.addEventListener("load", debouncedResize);
+      }
     });
-    resizeObserver.observe(document.body);
+
+    // MutationObserver for dynamic content
+    const mutationObserver = new MutationObserver(() => {
+      debouncedResize();
+    });
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // ResizeObserver for element size changes
+    const resizeObserver = new ResizeObserver(() => {
+      debouncedResize();
+    });
+    if (contentRef.current) {
+      resizeObserver.observe(contentRef.current);
+    }
 
     return () => {
+      clearTimeout(resizeTimeout);
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
       }
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", debouncedResize);
+      window.removeEventListener("load", handleResize);
+      images.forEach((img) => {
+        img.removeEventListener("load", debouncedResize);
+      });
+      mutationObserver.disconnect();
       resizeObserver.disconnect();
       lenisRef.current?.destroy();
       lenisRef.current = null;
+      document.documentElement.classList.remove("lenis", "lenis-smooth");
     };
   }, [prefersReducedMotion]);
 
-  return <>{children}</>;
+  // If reduced motion is preferred, just render children without wrapper
+  if (prefersReducedMotion) {
+    return <>{children}</>;
+  }
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="lenis-wrapper fixed inset-0 overflow-auto"
+    >
+      <div
+        ref={contentRef}
+        className="lenis-content"
+      >
+        {children}
+      </div>
+    </div>
+  );
 }
 
 // Hook to access Lenis instance
@@ -96,5 +167,13 @@ export function useLenis() {
     }
   };
 
-  return { scrollTo, getLenis };
+  // Force resize - useful after dynamic content loads
+  const resize = () => {
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.resize();
+    }
+  };
+
+  return { scrollTo, getLenis, resize };
 }

@@ -57,23 +57,20 @@ export function SectionCTA({
           )}
 
           {label && (
-            <span className={cn(
-              "text-xs tracking-[0.2em] uppercase mb-4 block",
-              isDark ? "text-shell" : "text-shell"
-            )}>
+            <span className="text-overline text-shell mb-4 block">
               {label}
             </span>
           )}
 
           <h2 className={cn(
-            "font-display text-3xl md:text-4xl mb-4",
+            "text-display-lg mb-4",
             isDark ? "text-white" : "text-ink"
           )}>
             {title}
           </h2>
 
           <p className={cn(
-            "mb-8 max-w-xl mx-auto",
+            "text-body-md mb-8 max-w-xl mx-auto",
             isDark ? "text-white/70" : "text-neutral-600"
           )}>
             {description}

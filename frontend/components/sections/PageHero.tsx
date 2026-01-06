@@ -151,7 +151,7 @@ export function PageHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15, ease: easeOutExpo }}
           >
-            <span className="inline-flex items-center gap-3 text-gold/80 text-[11px] md:text-xs tracking-[0.25em] uppercase mb-4 block">
+            <span className="text-overline text-gold/80 mb-4 block">
               {label}
             </span>
           </motion.div>
@@ -162,7 +162,7 @@ export function PageHero({
               initial={{ y: 50 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
-              className="font-display text-[clamp(2rem,6vw,4.5rem)] text-white leading-[0.95] tracking-tight"
+              className="text-hero text-white"
             >
               <SplitText type="words" animation="fadeUp" staggerDelay={0.04} delay={0.25}>
                 {headline}
@@ -176,7 +176,7 @@ export function PageHero({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.4, ease: easeOutExpo }}
-              className="text-base md:text-lg text-white/70 font-light max-w-lg mx-auto leading-relaxed"
+              className="text-body-lg text-white/70 max-w-lg mx-auto"
             >
               {description}
             </motion.p>

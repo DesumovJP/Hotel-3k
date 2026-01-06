@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
 import { Header, Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionIntro } from "@/components/sections";
+import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionIntro, SectionBlend } from "@/components/sections";
 import { Users, Mail, ArrowRight, Check } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -170,6 +170,9 @@ export default function MeetingsPage() {
           padding="lg"
         />
 
+        {/* Blend: white -> sand */}
+        <SectionBlend from="white" to="sand" height="md" />
+
         {/* Teambuilding Activities */}
         <SectionTwoColumn
           title="Teambuilding Activities"
@@ -186,6 +189,9 @@ export default function MeetingsPage() {
           ctaText="Ask about activities"
         />
 
+        {/* Blend: sand -> white */}
+        <SectionBlend from="sand" to="white" height="md" />
+
         {/* A Texel Party */}
         <SectionTwoColumn
           title="A Texel Party"
@@ -201,6 +207,9 @@ export default function MeetingsPage() {
           ctaLink="mailto:banqueting@opduin.nl"
           ctaText="Plan your celebration"
         />
+
+        {/* Blend: white -> sand-100 */}
+        <SectionBlend from="white" to="sand-100" height="md" />
 
         {/* Weddings */}
         <section className="py-16 md:py-20 bg-sand-100">
@@ -247,6 +256,9 @@ export default function MeetingsPage() {
           </div>
         </section>
 
+        {/* Blend: sand-100 -> white */}
+        <SectionBlend from="sand-100" to="white" height="md" />
+
         {/* Meeting Packages */}
         <SectionTwoColumn
           title="Meeting Packages"
@@ -262,6 +274,9 @@ export default function MeetingsPage() {
           ctaLink="mailto:banqueting@opduin.nl"
           ctaText="Request a quote"
         />
+
+        {/* Blend: white -> sand-100 */}
+        <SectionBlend from="white" to="sand-100" height="md" />
 
         {/* Meeting Rooms */}
         <section className="py-16 md:py-24 bg-sand-100">
@@ -347,6 +362,9 @@ export default function MeetingsPage() {
           columns={3}
           background="sand-100"
         />
+
+        {/* Blend: sand-100 -> white */}
+        <SectionBlend from="sand-100" to="white" height="md" />
 
         {/* Contact CTA */}
         <SectionCTA

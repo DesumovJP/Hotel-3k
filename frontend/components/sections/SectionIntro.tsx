@@ -71,21 +71,21 @@ export function SectionIntro({
     >
       {/* Label */}
       {label && (
-        <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+        <span className="text-overline text-shell mb-4 block">
           {label}
         </span>
       )}
 
       {/* Title */}
       {title && (
-        <h2 className="font-display text-3xl md:text-4xl text-ink mb-6 leading-tight">
+        <h2 className="text-display-lg text-ink mb-6">
           {title}
         </h2>
       )}
 
       {/* Lead paragraph */}
       {lead && (
-        <p className="text-neutral-600 mb-6 leading-relaxed text-lg">
+        <p className="text-body-lg text-neutral-600 mb-6">
           {lead}
         </p>
       )}
@@ -94,7 +94,7 @@ export function SectionIntro({
       {paragraphs.length > 0 && (
         <div className="space-y-4 mb-8">
           {paragraphs.map((paragraph, index) => (
-            <p key={index} className="text-neutral-600 leading-relaxed">
+            <p key={index} className="text-body-md text-neutral-600">
               {paragraph}
             </p>
           ))}
@@ -107,7 +107,7 @@ export function SectionIntro({
           <highlight.icon className="w-5 h-5 text-shell mt-0.5 flex-shrink-0" />
           <div>
             <p className="font-medium text-ink mb-1">{highlight.title}</p>
-            <p className="text-sm text-neutral-600">{highlight.description}</p>
+            <p className="text-body-sm text-neutral-600">{highlight.description}</p>
           </div>
         </div>
       )}

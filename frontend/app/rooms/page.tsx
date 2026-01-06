@@ -181,15 +181,15 @@ export default function RoomsPage() {
                       {room.size} m² · Up to {room.maxGuests} guests
                     </span>
 
-                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-3">
+                    <h2 className="text-display-md text-ink mb-3">
                       {room.name}
                     </h2>
 
-                    <p className="text-sm text-neutral-500 italic mb-4">
+                    <p className="text-tagline-md text-neutral-500 mb-4">
                       {room.tagline}
                     </p>
 
-                    <p className="text-neutral-600 mb-6 leading-relaxed">
+                    <p className="text-body-md text-neutral-600 mb-6">
                       {room.description}
                     </p>
 
@@ -246,7 +246,7 @@ export default function RoomsPage() {
               <span className="text-overline text-shell tracking-widest mb-3 block">
                 Good to Know
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
+              <h2 className="text-display-lg text-ink">
                 Frequently Asked Questions
               </h2>
             </motion.div>
@@ -285,7 +285,7 @@ export default function RoomsPage() {
                         transition={{ duration: 0.3, ease: easeOutExpo }}
                         className="overflow-hidden"
                       >
-                        <p className="px-6 pb-5 text-neutral-600 leading-relaxed">
+                        <p className="px-6 pb-5 text-body-md text-neutral-600">
                           {faq.answer}
                         </p>
                       </motion.div>

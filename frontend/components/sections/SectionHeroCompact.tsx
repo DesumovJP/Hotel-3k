@@ -44,18 +44,18 @@ export function SectionHeroCompact({
           <span className="text-overline text-shell tracking-widest mb-3 block">
             {label}
           </span>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="text-hero-md text-white mb-4">
             {title}
           </h1>
           {tagline && (
-            <p className="text-xl text-shell font-display italic mb-4">
+            <p className="text-tagline-lg text-shell mb-4">
               {tagline}
             </p>
           )}
           {description && (
             <p
               className={cn(
-                "text-white/70",
+                "text-body-md text-white/70",
                 align === "center" && "max-w-lg mx-auto"
               )}
             >

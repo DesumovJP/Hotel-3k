@@ -13,12 +13,12 @@ interface HeadingProps extends Omit<HTMLMotionProps<"h1">, "ref"> {
 }
 
 const headingStyles: Record<HeadingLevel, string> = {
-  h1: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl",
-  h2: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl",
-  h3: "text-2xl sm:text-3xl md:text-4xl",
-  h4: "text-xl sm:text-2xl md:text-3xl",
-  h5: "text-lg sm:text-xl",
-  h6: "text-base sm:text-lg",
+  h1: "text-hero",
+  h2: "text-display-xl",
+  h3: "text-display-lg",
+  h4: "text-display-md",
+  h5: "text-display-sm",
+  h6: "text-body-lg",
 };
 
 const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
@@ -53,11 +53,11 @@ interface TextProps extends Omit<HTMLMotionProps<"p">, "ref"> {
 }
 
 const textSizes: Record<TextSize, string> = {
-  xs: "text-xs",
-  sm: "text-sm",
-  base: "text-base",
-  lg: "text-lg md:text-xl",
-  xl: "text-xl md:text-2xl",
+  xs: "text-caption",
+  sm: "text-body-sm",
+  base: "text-body-md",
+  lg: "text-body-lg",
+  xl: "text-body-xl",
 };
 
 const Text = forwardRef<HTMLParagraphElement, TextProps>(
@@ -92,7 +92,7 @@ const Label = forwardRef<HTMLSpanElement, LabelProps>(
       <motion.span
         ref={ref}
         className={cn(
-          "inline-block text-[11px] font-normal uppercase tracking-[0.25em]",
+          "inline-block text-overline",
           "text-[var(--color-slate)]",
           className
         )}

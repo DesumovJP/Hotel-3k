@@ -62,19 +62,14 @@ export function SectionHeader({
       )}
     >
       {label && (
-        <span
-          className={cn(
-            "text-xs tracking-[0.2em] uppercase mb-3 block",
-            theme === "dark" ? "text-shell" : "text-shell"
-          )}
-        >
+        <span className="text-overline text-shell mb-3 block">
           {label}
         </span>
       )}
 
       <h2
         className={cn(
-          "font-display text-3xl md:text-4xl",
+          "text-display-lg",
           theme === "dark" ? "text-white" : "text-ink",
           description && "mb-4"
         )}
@@ -85,7 +80,7 @@ export function SectionHeader({
       {description && (
         <p
           className={cn(
-            "max-w-2xl leading-relaxed",
+            "text-body-md max-w-2xl",
             theme === "dark" ? "text-white/70" : "text-neutral-600",
             align === "center" && "mx-auto"
           )}

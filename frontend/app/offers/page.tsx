@@ -197,17 +197,17 @@ export default function OffersPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+                <span className="text-overline text-shell mb-4 block">
                   Why Book Direct?
                 </span>
-                <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                <h2 className="text-display-lg text-ink mb-6">
                   Better value, more perks
                 </h2>
-                <p className="text-neutral-600 mb-6 leading-relaxed text-lg">
+                <p className="text-body-lg text-neutral-600 mb-6">
                   Booking via Booking.com is convenient, but pricey — we pay 15% commission
                   on every third-party booking. That's money we'd rather spend on you.
                 </p>
-                <p className="text-neutral-600 leading-relaxed mb-8">
+                <p className="text-body-md text-neutral-600 mb-8">
                   Our packages are exclusively for direct bookers: free extras, discounts,
                   and flexible cancellation. Choose your perfect Texel escape below.
                 </p>
@@ -288,15 +288,15 @@ export default function OffersPage() {
                       {offer.category}
                     </span>
 
-                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-3">
+                    <h2 className="text-display-md text-ink mb-3">
                       {offer.title}
                     </h2>
 
-                    <p className="text-sm text-neutral-500 italic mb-4">
+                    <p className="text-tagline-md text-neutral-500 mb-4">
                       {offer.subtitle}
                     </p>
 
-                    <p className="text-neutral-600 mb-6 leading-relaxed">
+                    <p className="text-body-md text-neutral-600 mb-6">
                       {offer.description}
                     </p>
 

@@ -10,6 +10,7 @@ export { SectionHero } from "./SectionHero";
 export { SectionHeroCompact } from "./SectionHeroCompact";
 export { SectionIntro } from "./SectionIntro";
 export { SectionTwoColumn } from "./SectionTwoColumn";
+export { SectionBlend, SectionWithBlend } from "./SectionBlend";
 export { BenefitsGrid } from "./BenefitsGrid";
 export { DirectBookingBenefits } from "./DirectBookingBenefits";
 

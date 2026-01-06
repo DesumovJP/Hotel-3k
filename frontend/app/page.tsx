@@ -8,6 +8,7 @@ import {
   DiscoverGrid,
   SectionCTA,
 } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { Waves } from "lucide-react";
 
 export default function Home() {
@@ -24,13 +25,19 @@ export default function Home() {
           <DirectBookingBenefits />
         </section>
 
+        <SectionDivider variant="wave" color="white" />
+
         <section id="intro">
           <IntroSection />
         </section>
 
+        <SectionDivider variant="line" />
+
         <section id="discover">
           <DiscoverGrid />
         </section>
+
+        <SectionDivider variant="fade" color="sand-dark" />
 
         <section id="cta">
           <SectionCTA

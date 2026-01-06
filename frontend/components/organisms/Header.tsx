@@ -65,7 +65,7 @@ function DropdownMenu({
     >
       <button
         className={cn(
-          "flex items-center gap-1 text-[13px] tracking-[0.12em] uppercase transition-colors duration-150 hover:opacity-100 tap-target focus-visible-ring",
+          "flex items-center gap-1 text-nav transition-colors duration-150 hover:opacity-100 tap-target focus-visible-ring",
           isScrolled || useDarkText
             ? "text-ink/70 hover:text-shell"
             : "text-white hover:text-white"
@@ -100,7 +100,7 @@ function DropdownMenu({
                 <Link
                   key={child.href}
                   href={child.href}
-                  className="block px-5 py-2.5 text-[13px] tracking-[0.08em] text-neutral-600 hover:text-shell hover:bg-sand-50 transition-colors duration-150 focus-visible-ring"
+                  className="block px-5 py-2.5 text-nav text-neutral-600 hover:text-shell hover:bg-sand-50 transition-colors duration-150 focus-visible-ring"
                   role="menuitem"
                 >
                   {child.label}
@@ -192,7 +192,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "relative text-[13px] tracking-[0.12em] uppercase transition-colors duration-300 tap-target focus-visible-ring group",
+                      "relative text-nav transition-colors duration-300 tap-target focus-visible-ring group",
                       isScrolled || useDarkText
                         ? "text-ink/70 hover:text-ink"
                         : "text-white/80 hover:text-white"
@@ -220,7 +220,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                   : "text-white hover:text-white/80"
               )}
             >
-              <span className="text-[13px] tracking-[0.1em] uppercase">
+              <span className="text-nav">
                 Reserve
               </span>
             </Link>
@@ -251,21 +251,28 @@ export function Header({ variant = "light" }: HeaderProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden bg-gradient-to-b from-sand-50 to-sand-100"
+            className="fixed inset-0 z-[60] md:hidden bg-[linear-gradient(to_bottom,#FEFDFB,#F9F3E8)]"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
           >
             <div className="h-full flex flex-col justify-center px-8">
-              {/* Logo in mobile menu */}
-              <div className="absolute top-6 left-6">
+              {/* Header with logo and close button */}
+              <div className="absolute top-6 left-6 right-6 flex items-center justify-between">
                 <Image
                   src="/icon.png"
                   alt="Grand Hotel Opduin"
-                  width={44}
-                  height={44}
+                  width={120}
+                  height={120}
                   className="object-contain"
                 />
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2.5 rounded-xl text-ink bg-white/80 shadow-neo-sm"
+                  aria-label="Close menu"
+                >
+                  <X size={24} aria-hidden="true" />
+                </button>
               </div>
 
               <nav className="space-y-4" role="navigation">
@@ -280,7 +287,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block font-display text-2xl text-ink hover:text-shell transition-colors duration-150 tap-target focus-visible-ring py-1"
+                        className="block text-nav-lg text-ink hover:text-shell transition-colors duration-150 tap-target focus-visible-ring py-1"
                       >
                         {item.label}
                       </Link>
@@ -291,7 +298,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                               key={child.href}
                               href={child.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className="block text-base text-neutral-500 hover:text-shell transition-colors duration-150 tap-target focus-visible-ring"
+                              className="block text-body-sm text-neutral-500 hover:text-shell transition-colors duration-150 tap-target focus-visible-ring"
                             >
                               {child.label}
                             </Link>

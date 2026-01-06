@@ -62,10 +62,10 @@ export function DiscoverGrid() {
           transition={{ duration: 0.6, ease: easeOutExpo }}
           className="text-center mb-16"
         >
-          <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+          <span className="text-overline text-shell mb-4 block">
             Discover
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink">
+          <h2 className="text-display-xl text-ink">
             Everything for the perfect stay
           </h2>
         </motion.div>
@@ -91,10 +91,10 @@ export function DiscoverGrid() {
                   />
                 </div>
                 <div className="p-6">
-                  <span className="text-shell text-xs tracking-[0.15em] uppercase mb-2 block">
+                  <span className="text-overline text-shell mb-2 block">
                     {category.label}
                   </span>
-                  <h3 className="font-display text-2xl text-ink mb-2 group-hover:text-shell transition-colors">
+                  <h3 className="text-display-sm text-ink mb-2 group-hover:text-shell transition-colors">
                     {category.title}
                   </h3>
                   <p className="text-neutral-600 text-sm mb-4">

@@ -376,10 +376,10 @@ export function RoomCard({
               </span>
             )}
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-medium text-navy">
+              <span className="text-price text-navy">
                 {formatPrice(room.price)}
               </span>
-              <span className="text-sm text-neutral-500">/night</span>
+              <span className="text-body-sm text-neutral-500">/night</span>
             </div>
           </div>
 

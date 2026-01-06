@@ -12,7 +12,7 @@ import { Facebook, Instagram, Phone, Mail } from "lucide-react";
  */
 export function Footer() {
   return (
-    <footer className="bg-shell">
+    <footer className="bg-navy">
       <div className="px-6 md:px-12 lg:px-24 py-16 md:py-20">
         <div className="max-w-6xl mx-auto">
           {/* Main grid */}
@@ -90,14 +90,14 @@ export function Footer() {
                   href="tel:+31222317445"
                   className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
                 >
-                  <Phone size={14} className="text-white/60" />
+                  <Phone size={14} className="text-shell" />
                   +31 222 317 445
                 </a>
                 <a
                   href="mailto:info@opduin.nl"
                   className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
                 >
-                  <Mail size={14} className="text-white/60" />
+                  <Mail size={14} className="text-shell" />
                   info@opduin.nl
                 </a>
               </div>

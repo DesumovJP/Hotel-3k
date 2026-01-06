@@ -146,7 +146,7 @@ export function SectionHero({
               animate={{ y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
             >
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] drop-shadow-lg">
+              <h1 className="text-hero text-white drop-shadow-lg">
                 <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
                   {title}
                 </SplitText>
@@ -160,7 +160,7 @@ export function SectionHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: easeOutExpo }}
-              className="text-xl md:text-2xl text-white font-display italic mb-4 drop-shadow-md"
+              className="text-tagline-xl text-white mb-4 drop-shadow-md"
             >
               <span className="text-shell">"</span>
               {tagline}
@@ -173,7 +173,7 @@ export function SectionHero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: tagline ? 0.4 : 0.3, ease: easeOutExpo }}
-            className="text-lg text-white/90 max-w-lg mb-8 drop-shadow-sm"
+            className="text-body-lg text-white/90 max-w-lg mb-8 drop-shadow-sm"
           >
             {description}
           </motion.p>
