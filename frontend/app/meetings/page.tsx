@@ -160,7 +160,7 @@ export default function MeetingsPage() {
             "Intimate enough for a small gathering, but also well equipped for a meeting of 200 participants. Meetings on Texel are always successful.",
             "With a well chosen destination and a good program participants get involved and excited. The atmosphere and comfort in combination with a flexible organization give everyone the chance to grow.",
           ]}
-          image="/meetings/vergaderlocatie-voor-10-tot-200-personen-600x400_1.jpg"
+          image="/meetings/vergaderzalen-600x450.jpg"
           imageAlt="Meeting room at Grand Hotel Opduin"
           highlight={{
             icon: Users,
