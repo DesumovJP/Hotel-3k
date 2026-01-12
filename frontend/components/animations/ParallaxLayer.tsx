@@ -37,12 +37,14 @@ export function ParallaxLayer({
   );
 
   return (
-    <div ref={ref} className={cn("relative overflow-hidden", className)}>
+    <div ref={ref} className={cn("relative overflow-hidden", className)} style={{ contain: "layout" }}>
       <motion.div
         style={{
           [direction === "vertical" ? "y" : "x"]: transform,
+          willChange: "transform",
+          backfaceVisibility: "hidden",
         }}
-        className="w-full h-full"
+        className="w-full h-full transform-gpu"
       >
         {children}
       </motion.div>
@@ -112,12 +114,17 @@ export function ParallaxImage({
   const y = useTransform(scrollYProgress, [0, 1], [`${-20 * speed}%`, `${20 * speed}%`]);
 
   return (
-    <div ref={ref} className={cn("relative overflow-hidden", className)}>
+    <div ref={ref} className={cn("relative overflow-hidden", className)} style={{ contain: "layout" }}>
       <motion.img
         src={src}
         alt={alt}
-        style={{ y, scale }}
-        className="w-full h-full object-cover"
+        style={{
+          y,
+          scale,
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+        }}
+        className="w-full h-full object-cover transform-gpu"
       />
     </div>
   );

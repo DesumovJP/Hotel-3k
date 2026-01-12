@@ -86,7 +86,7 @@ export function WellnessSection() {
               >
                 <span className="text-sm tracking-[0.1em] uppercase">Explore wellness</span>
                 <span className="w-10 h-10 rounded-full bg-sky-400/20 backdrop-blur-sm border border-sky-400/30 flex items-center justify-center group-hover:bg-sky-400/30 transition-all duration-300">
-                  <ArrowRight size={16} className="text-sky-300 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={16} className="text-sky-300 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             </motion.div>

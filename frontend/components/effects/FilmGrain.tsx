@@ -27,21 +27,25 @@ export function FilmGrain({
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-0 z-[9990]",
+        "pointer-events-none fixed inset-0 z-50 transform-gpu",
         className
       )}
       style={{
         mixBlendMode: blend,
         opacity,
+        willChange: "auto",
+        contain: "strict",
+        isolation: "isolate",
       }}
       aria-hidden="true"
     >
-      <svg className="w-full h-full">
+      {/* Static grain texture - no animation for better performance */}
+      <svg className="w-full h-full" style={{ transform: "translate3d(0,0,0)" }}>
         <filter id="film-grain">
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.8"
-            numOctaves="4"
+            baseFrequency="0.65"
+            numOctaves="3"
             stitchTiles="stitch"
           />
           <feColorMatrix type="saturate" values="0" />
@@ -50,7 +54,6 @@ export function FilmGrain({
           width="100%"
           height="100%"
           filter="url(#film-grain)"
-          className="animate-grain"
         />
       </svg>
     </div>
@@ -71,7 +74,7 @@ export function Vignette({
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-0 z-[9989]",
+        "pointer-events-none fixed inset-0 z-40",
         className
       )}
       style={{

@@ -94,7 +94,7 @@ function OfferCard({ offer, index, prefersReducedMotion }: OfferCardProps) {
             alt={offer.title}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
 
           {/* Gradient overlay */}
@@ -167,7 +167,7 @@ export function OffersPreview() {
           >
             <span className="text-sm tracking-[0.1em] uppercase">View all packages</span>
             <span className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center group-hover:bg-sky-200 transition-colors duration-300">
-              <ArrowRight size={14} className="text-sky-600 group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight size={14} className="text-sky-600 group-hover:translate-x-1 transition-transform" />
             </span>
           </Link>
         </motion.div>

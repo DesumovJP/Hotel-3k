@@ -70,7 +70,6 @@ function DropdownMenu({
             ? "text-ink/70 hover:text-shell"
             : "text-white hover:text-white"
         )}
-        style={!isScrolled && !useDarkText ? { filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' } : undefined}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -95,7 +94,7 @@ function DropdownMenu({
             className="absolute top-full left-1/2 -translate-x-1/2 pt-3"
             role="menu"
           >
-            <div className="bg-white/95 backdrop-blur-md py-2 min-w-[160px] rounded-xl shadow-neo-md">
+            <div className="bg-white py-2 min-w-[160px] rounded-xl shadow-lg">
               {item.children?.map((child) => (
                 <Link
                   key={child.href}
@@ -148,11 +147,12 @@ export function Header({ variant = "light" }: HeaderProps) {
           // GPU acceleration for smooth scrolling over video
           "transform-gpu will-change-transform",
           isScrolled
-            ? "py-3 bg-white/90 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-b border-sand-100"
+            ? "py-3 header-glass"
             : useDarkText
-              ? "py-5 md:py-6 bg-white/80 backdrop-blur-sm border-b border-sand-100"
+              ? "py-5 md:py-6 header-glass"
               : "py-5 md:py-6 bg-gradient-to-b from-black/30 to-transparent"
         )}
+        style={{ contain: "layout style", backfaceVisibility: "hidden" }}
       >
         <div className="px-6 md:px-12 lg:px-24 overflow-visible">
           <div className="flex items-center justify-between overflow-visible">
@@ -197,7 +197,6 @@ export function Header({ variant = "light" }: HeaderProps) {
                         ? "text-ink/70 hover:text-ink"
                         : "text-white/80 hover:text-white"
                     )}
-                    style={!isScrolled && !useDarkText ? { filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.6))' } : undefined}
                   >
                     {item.label}
                     {/* Aman-style underline animation */}
@@ -232,7 +231,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                 "md:hidden p-2.5 rounded-xl transition-all duration-150 tap-target focus-visible-ring",
                 isScrolled || useDarkText
                   ? "text-ink bg-sand-50 shadow-neo-sm"
-                  : "text-white bg-white/15 backdrop-blur-sm"
+                  : "text-white bg-white/20"
               )}
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}

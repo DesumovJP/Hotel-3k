@@ -4,9 +4,10 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { SplitText } from "@/components/animations";
+import { BrushStroke } from "@/components/effects";
 import { Button } from "@/components/atoms";
 import { cn } from "@/lib/utils";
-import { easeOutExpo, stagger } from "@/lib/motion";
+import { easeOutExpo } from "@/lib/motion";
 import { useReducedMotion } from "@/lib/accessibility";
 import { trackViewContent, trackStartBooking } from "@/lib/analytics";
 import { generateHotelSchema, toJsonLd } from "@/lib/seo";
@@ -209,13 +210,16 @@ export function HeroSection({
           style={prefersReducedMotion ? {} : { y: contentY }}
         >
           <div className="w-full px-6 md:px-12 lg:px-24">
-            <div className="max-w-3xl">
+            <div className="relative max-w-3xl">
+              {/* Brush stroke background for text readability */}
+              <BrushStroke />
+
               {/* Premium Badge */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
-                className="flex items-center gap-4 mb-8"
+                className="relative z-10 flex items-center gap-4 mb-8"
               >
                 <div className="flex gap-1 drop-shadow-lg">
                   {[...Array(4)].map((_, i) => (
@@ -226,40 +230,42 @@ export function HeroSection({
                 </div>
                 <span className="h-4 w-px bg-white/30" />
                 <span
-                  className="text-white/80 text-xs tracking-[0.2em] uppercase font-medium"
-                  style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.6))' }}
+                  className="text-white text-xs tracking-[0.2em] uppercase font-medium"
+                  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.5)' }}
                 >
                   {location}
                 </span>
               </motion.div>
 
               {/* Main Headline */}
-              <h1
-                className="font-display text-[clamp(3rem,10vw,7rem)] text-white leading-[0.95] tracking-[-0.03em] mb-6"
-                style={{ filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.5))' }}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: easeOutExpo }}
+                className="relative z-10 font-display text-[clamp(3rem,10vw,7rem)] text-white leading-[0.95] tracking-[-0.03em] mb-6 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
               >
                 <SplitText
                   type="words"
                   animation="fadeUp"
-                  staggerDelay={stagger.tight}
+                  staggerDelay={0.08}
                   delay={0.25}
                 >
                   {headline}
                 </SplitText>
-              </h1>
+              </motion.h1>
 
               {/* Subheadline with decorative line */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
-                className="flex items-center gap-6 mb-8"
+                className="relative z-10 flex items-center gap-6 mb-8"
               >
                 <div className="w-16 h-px bg-gold drop-shadow-lg" />
                 <p
                   className="font-display text-xl md:text-2xl lg:text-3xl text-gold italic"
                   style={{
-                    textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)',
+                    textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(0,0,0,0.3)',
                   }}
                 >
                   {subheadline}
@@ -271,8 +277,8 @@ export function HeroSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5, ease: easeOutExpo }}
-                className="text-lg md:text-xl text-white font-normal max-w-lg mb-12 leading-relaxed"
-                style={{ filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.6))' }}
+                className="relative z-10 text-lg md:text-xl text-white font-normal max-w-lg mb-12 leading-relaxed"
+                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4)' }}
               >
                 {tagline}
               </motion.p>
@@ -282,7 +288,7 @@ export function HeroSection({
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.6, ease: easeOutExpo }}
-                className="flex flex-wrap gap-4"
+                className="relative z-10 flex flex-wrap gap-4"
                 role="group"
                 aria-label="Booking actions"
               >

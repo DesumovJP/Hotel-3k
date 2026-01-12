@@ -1,13 +1,13 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { FloatingCTA, FloatingCTAProps } from "@/components/molecules";
 import { cn } from "@/lib/utils";
 
 /**
- * PageLayout - Standard page wrapper with Header, Footer, and optional floating CTA
+ * PageLayout - Standard page wrapper with Footer and optional floating CTA
+ * Note: Header is now in layout.tsx outside SmoothScrollProvider for backdrop-filter to work
  *
  * USAGE:
  * <PageLayout>
@@ -31,8 +31,6 @@ export interface PageLayoutProps {
   hasFloatingCTA?: boolean;
   /** Custom main element class */
   mainClassName?: string;
-  /** Disable header */
-  noHeader?: boolean;
   /** Disable footer */
   noFooter?: boolean;
 }
@@ -42,15 +40,12 @@ export function PageLayout({
   floatingCTA,
   hasFloatingCTA,
   mainClassName,
-  noHeader = false,
   noFooter = false,
 }: PageLayoutProps) {
   const showPadding = hasFloatingCTA || floatingCTA;
 
   return (
     <>
-      {!noHeader && <Header />}
-
       {/* Floating CTA */}
       {floatingCTA && <FloatingCTA {...floatingCTA} />}
 

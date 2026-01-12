@@ -4,8 +4,10 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { Breadcrumbs, ImageGallery } from "@/components/molecules";
+import { SectionDivider } from "@/components/ui";
+import { SectionBlend } from "@/components/sections";
 import { Heading, Text, Label, Button } from "@/components/atoms";
 import { SplitText, Counter } from "@/components/animations";
 import {
@@ -105,7 +107,6 @@ export default function IslandPage() {
 
   return (
     <>
-      <Header />
       <Breadcrumbs items={[{ label: "The Island" }]} />
 
       <main>
@@ -176,7 +177,7 @@ export default function IslandPage() {
         </section>
 
         {/* Quick Facts with Counter */}
-        <section className="py-12 bg-[#212B36]">
+        <section className="neo-bar py-6">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-8">
               {facts.map((fact, index) => (
@@ -188,7 +189,7 @@ export default function IslandPage() {
                   transition={{ duration: 0.5, delay: index * 0.1, ease: easeOutExpo }}
                   className="text-center"
                 >
-                  <p className="text-white text-2xl md:text-3xl font-light mb-1">
+                  <p className="text-ink text-2xl md:text-3xl font-light mb-1">
                     <Counter
                       value={fact.value}
                       prefix={fact.prefix || ""}
@@ -197,7 +198,7 @@ export default function IslandPage() {
                       delay={0.5 + index * 0.1}
                     />
                   </p>
-                  <p className="text-xs text-white/70 uppercase tracking-wider">
+                  <p className="text-xs text-neutral-500 uppercase tracking-wider">
                     {fact.label}
                   </p>
                 </motion.div>
@@ -205,6 +206,8 @@ export default function IslandPage() {
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Introduction */}
         <section className="py-16 md:py-24 bg-white">
@@ -244,6 +247,8 @@ export default function IslandPage() {
             </motion.div>
           </div>
         </section>
+
+        <SectionBlend from="white" to="mist" />
 
         {/* Attractions */}
         <section className="py-16 md:py-24 bg-[var(--color-mist)]">
@@ -293,6 +298,8 @@ export default function IslandPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="mist" to="white" />
 
         {/* De Slufter Feature */}
         <section className="py-16 md:py-24 bg-white">
@@ -351,6 +358,8 @@ export default function IslandPage() {
           </div>
         </section>
 
+        <SectionBlend from="white" to="mist" />
+
         {/* Villages */}
         <section className="py-16 md:py-24 bg-[var(--color-mist)]">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
@@ -401,6 +410,8 @@ export default function IslandPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="mist" to="white" />
 
         {/* Local Products */}
         <section className="py-16 md:py-24 bg-white">
@@ -472,6 +483,8 @@ export default function IslandPage() {
           </div>
         </section>
 
+        <SectionBlend from="white" to="dark" />
+
         {/* Getting Here */}
         <section className="py-16 md:py-24 bg-[#212B36]">
           <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
@@ -533,6 +546,8 @@ export default function IslandPage() {
           </div>
         </section>
 
+        <SectionBlend from="dark" to="white" />
+
         {/* Gallery */}
         <section className="py-16 md:py-24 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
@@ -571,6 +586,8 @@ export default function IslandPage() {
             </motion.div>
           </div>
         </section>
+
+        <SectionBlend from="white" to="mist" />
 
         {/* CTA */}
         <section className="py-16 md:py-24 bg-[var(--color-mist)]">

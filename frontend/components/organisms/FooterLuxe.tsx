@@ -105,7 +105,7 @@ export function FooterLuxe({
                       aria-label={`Follow us on ${social.name}`}
                       className="w-11 h-11 flex items-center justify-center rounded-full border border-sand-400/30 text-sand-300 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-300"
                       whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       <IconComponent className="w-5 h-5" />
                     </motion.a>

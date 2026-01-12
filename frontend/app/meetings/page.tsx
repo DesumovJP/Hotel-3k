@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionIntro, SectionBlend } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { Users, Mail, ArrowRight, Check } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -98,8 +99,6 @@ export default function MeetingsPage() {
 
   return (
     <>
-      <Header />
-
       {/* Floating CTA - Mobile */}
       <motion.div
         initial={{ y: 100, opacity: 0 }}
@@ -137,12 +136,14 @@ export default function MeetingsPage() {
               { icon: Check, value: "Dedicated events team" },
             ],
             trailingContent: (
-              <span className="hidden md:block text-white/60 text-sm">
+              <span className="hidden md:block text-neutral-500 text-sm">
                 Response within 24 hours
               </span>
             ),
           }}
         />
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">

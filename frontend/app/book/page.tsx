@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionHeroCompact, SectionCTA } from "@/components/sections";
 import { rooms } from "@/lib/data";
@@ -55,6 +55,19 @@ function BookingForm() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
+
+  // Scroll to form when step changes (skip initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [step]);
 
   const handleGuestChange = (type: "adults" | "children", increment: boolean) => {
     setFormData((prev) => ({
@@ -195,67 +208,72 @@ function BookingForm() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div ref={formRef} className="max-w-4xl mx-auto scroll-mt-8">
       <form onSubmit={handleSubmit}>
         {/* Progress Steps */}
-        <div className="flex items-center justify-center gap-2 md:gap-4 mb-12">
-          {steps.map((s, index) => (
-            <div key={s.number} className="flex items-center gap-2 md:gap-4">
-              <motion.button
-                type="button"
-                onClick={() => s.number < step && setStep(s.number)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5, ease: easeOutExpo }}
-                className="flex items-center gap-2 md:gap-3"
-                disabled={s.number > step}
-              >
-                <div
-                  className={cn(
-                    "w-10 h-10 flex items-center justify-center text-sm font-medium transition-colors",
-                    step >= s.number
-                      ? "bg-navy text-white"
-                      : "bg-sand-100 text-neutral-400"
-                  )}
-                >
-                  {step > s.number ? <Check size={16} /> : s.number}
-                </div>
-                <span
-                  className={cn(
-                    "hidden md:block text-sm",
-                    step >= s.number ? "text-ink" : "text-neutral-400"
-                  )}
-                >
-                  {s.label}
-                </span>
-              </motion.button>
-
-              {index < steps.length - 1 && (
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                  className={cn(
-                    "w-8 md:w-16 h-px origin-left",
-                    step > s.number ? "bg-navy" : "bg-sand-200"
-                  )}
-                />
-              )}
+        <div className="mb-12">
+          {/* Progress bar */}
+          <div className="max-w-md mx-auto mb-8">
+            <div className="h-1 bg-sand-200 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-navy"
+                initial={{ width: "0%" }}
+                animate={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }}
+                transition={{ duration: 0.5, ease: easeOutExpo }}
+              />
             </div>
-          ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-2 md:gap-4">
+            {steps.map((s, index) => (
+              <div key={s.number} className="flex items-center gap-2 md:gap-4">
+                <button
+                  type="button"
+                  onClick={() => s.number < step && setStep(s.number)}
+                  className="flex items-center gap-2 md:gap-3 group"
+                  disabled={s.number > step}
+                >
+                  <motion.div
+                    whileHover={s.number < step ? { scale: 1.05 } : {}}
+                    whileTap={s.number < step ? { scale: 0.95 } : {}}
+                    className={cn(
+                      "w-10 h-10 flex items-center justify-center text-sm font-medium transition-all duration-300",
+                      step >= s.number
+                        ? "bg-navy text-white"
+                        : "bg-sand-100 text-neutral-400",
+                      step === s.number && "ring-2 ring-shell ring-offset-2",
+                      s.number < step && "cursor-pointer hover:bg-navy-600"
+                    )}
+                  >
+                    {step > s.number ? <Check size={16} /> : s.number}
+                  </motion.div>
+                  <span
+                    className={cn(
+                      "hidden md:block text-sm transition-colors",
+                      step >= s.number ? "text-ink" : "text-neutral-400"
+                    )}
+                  >
+                    {s.label}
+                  </span>
+                </button>
+
+                {index < steps.length - 1 && (
+                  <div
+                    className={cn(
+                      "w-8 md:w-16 h-px transition-colors duration-500",
+                      step > s.number ? "bg-navy" : "bg-sand-200"
+                    )}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <AnimatePresence mode="wait">
+        <>
           {/* Step 1: Dates & Guests */}
           {step === 1 && (
-            <motion.div
-              key="step1"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: easeOutExpo }}
-              className="max-w-xl mx-auto space-y-8"
-            >
+            <div className="max-w-xl mx-auto space-y-8">
               <div className="text-center mb-8">
                 <h3 className="font-display text-2xl md:text-3xl text-ink mb-2">
                   When are you visiting?
@@ -264,62 +282,57 @@ function BookingForm() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.5 }}
-                >
+                <div className="group">
                   <label className="block text-sm font-medium text-ink mb-2">Check-in</label>
                   <div className="relative">
-                    <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400" />
+                    <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-navy transition-colors" />
                     <input
                       type="date"
                       required
                       value={formData.checkIn}
                       min={new Date().toISOString().split("T")[0]}
                       onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                      className="w-full pl-12 pr-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors bg-white"
+                      className="w-full pl-12 pr-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
                     />
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
+                <div className="group">
                   <label className="block text-sm font-medium text-ink mb-2">Check-out</label>
                   <div className="relative">
-                    <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400" />
+                    <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-navy transition-colors" />
                     <input
                       type="date"
                       required
                       value={formData.checkOut}
                       min={formData.checkIn || new Date().toISOString().split("T")[0]}
                       onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                      className="w-full pl-12 pr-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors bg-white"
+                      className="w-full pl-12 pr-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
                     />
                   </div>
-                </motion.div>
+                </div>
               </div>
 
-              {nights > 0 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-center text-shell font-medium"
-                >
-                  {nights} night{nights > 1 ? "s" : ""} selected
-                </motion.div>
-              )}
+              <AnimatePresence>
+                {nights > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="text-center overflow-hidden"
+                  >
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-shell/10 text-navy font-medium">
+                      <Check size={16} className="text-shell" />
+                      {nights} night{nights > 1 ? "s" : ""} selected
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div className="space-y-0">
-                {(["adults", "children"] as const).map((type, index) => (
-                  <motion.div
+                {(["adults", "children"] as const).map((type) => (
+                  <div
                     key={type}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                     className="flex items-center justify-between py-5 border-b border-sand-200"
                   >
                     <div>
@@ -328,51 +341,48 @@ function BookingForm() {
                         {type === "adults" ? "Ages 18+" : "Ages 0-17"}
                       </p>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <button
+                    <div className="flex items-center gap-3">
+                      <motion.button
                         type="button"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => handleGuestChange(type, false)}
-                        className="w-10 h-10 border border-sand-200 flex items-center justify-center hover:border-navy transition-colors"
+                        className="w-10 h-10 border border-sand-200 flex items-center justify-center hover:border-navy hover:bg-navy hover:text-white transition-all"
                       >
                         <Minus size={16} />
-                      </button>
-                      <span className="w-8 text-center font-medium text-ink">{formData[type]}</span>
-                      <button
+                      </motion.button>
+                      <span className="w-8 text-center font-display text-xl text-ink">{formData[type]}</span>
+                      <motion.button
                         type="button"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => handleGuestChange(type, true)}
-                        className="w-10 h-10 border border-sand-200 flex items-center justify-center hover:border-navy transition-colors"
+                        className="w-10 h-10 border border-sand-200 flex items-center justify-center hover:border-navy hover:bg-navy hover:text-white transition-all"
                       >
                         <Plus size={16} />
-                      </button>
+                      </motion.button>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
               <motion.button
                 type="button"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setStep(2)}
                 disabled={!formData.checkIn || !formData.checkOut || nights < 1}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group w-full flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-all text-sm tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
               >
                 Continue
-                <ArrowRight size={16} />
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </motion.button>
-            </motion.div>
+            </div>
           )}
 
           {/* Step 2: Room Selection */}
           {step === 2 && (
-            <motion.div
-              key="step2"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: easeOutExpo }}
-            >
+            <div>
               <div className="text-center mb-8">
                 <h3 className="font-display text-2xl md:text-3xl text-ink mb-2">
                   Choose your room
@@ -384,19 +394,19 @@ function BookingForm() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                {rooms.map((room, index) => (
+                {rooms.map((room) => (
                   <motion.button
                     key={room.id}
                     type="button"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.5, ease: easeOutExpo }}
+                    whileHover={{ y: -4 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => setFormData({ ...formData, selectedRoom: room.slug })}
                     className={cn(
-                      "text-left border transition-all group",
+                      "text-left transition-all group",
+                      "shadow-sm hover:shadow-lg",
                       formData.selectedRoom === room.slug
-                        ? "border-navy bg-sand-50"
-                        : "border-sand-200 hover:border-neutral-300 bg-white"
+                        ? "ring-2 ring-navy bg-sand-50"
+                        : "bg-white"
                     )}
                   >
                     <div className="relative aspect-[3/2] overflow-hidden bg-sand-100">
@@ -404,8 +414,10 @@ function BookingForm() {
                         src={room.image}
                         alt={room.name}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
+                      {/* Subtle overlay on hover */}
+                      <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/10 transition-colors duration-500" />
                       {/* Selection indicator */}
                       <AnimatePresence>
                         {formData.selectedRoom === room.slug && (
@@ -414,28 +426,28 @@ function BookingForm() {
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="absolute top-3 right-3 w-8 h-8 bg-navy flex items-center justify-center"
+                            className="absolute top-3 right-3 w-8 h-8 bg-navy flex items-center justify-center shadow-md"
                           >
                             <Check size={16} className="text-white" />
                           </motion.div>
                         )}
                       </AnimatePresence>
                       {/* View badge */}
-                      <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2 py-1 bg-white/90 backdrop-blur-sm text-xs text-navy">
+                      <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-xs text-navy font-medium">
                         <Eye size={10} />
                         {room.view}
                       </span>
                     </div>
                     <div className="p-4">
-                      <h4 className="font-display text-lg text-ink mb-1">{room.name}</h4>
-                      <p className="text-sm text-neutral-500 mb-3">{room.tagline}</p>
+                      <h4 className="font-display text-lg text-ink mb-1 group-hover:text-navy transition-colors">{room.name}</h4>
+                      <p className="text-sm text-neutral-500 mb-3 line-clamp-1">{room.tagline}</p>
                       <div className="flex items-center gap-4 text-xs text-neutral-500">
                         <span className="flex items-center gap-1">
-                          <Maximize2 size={12} />
+                          <Maximize2 size={12} className="text-shell" />
                           {room.size} m²
                         </span>
                         <span className="flex items-center gap-1">
-                          <Users size={12} />
+                          <Users size={12} className="text-shell" />
                           Up to {room.maxGuests}
                         </span>
                       </div>
@@ -444,43 +456,35 @@ function BookingForm() {
                 ))}
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="flex gap-4"
-              >
-                <button
+              <div className="flex gap-4">
+                <motion.button
                   type="button"
+                  whileHover={{ x: -2 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={() => setStep(1)}
-                  className="flex items-center justify-center gap-2 px-6 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
+                  className="group flex items-center justify-center gap-2 px-6 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-all text-sm tracking-wide uppercase"
                 >
-                  <ArrowLeft size={16} />
+                  <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                   Back
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="button"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={() => setStep(3)}
                   disabled={!formData.selectedRoom}
-                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="group flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-all text-sm tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
                 >
                   Continue
-                  <ArrowRight size={16} />
-                </button>
-              </motion.div>
-            </motion.div>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              </div>
+            </div>
           )}
 
           {/* Step 3: Contact Details */}
           {step === 3 && (
-            <motion.div
-              key="step3"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: easeOutExpo }}
-              className="max-w-xl mx-auto"
-            >
+            <div className="max-w-xl mx-auto">
               <div className="text-center mb-8">
                 <h3 className="font-display text-2xl md:text-3xl text-ink mb-2">
                   Your details
@@ -490,15 +494,10 @@ function BookingForm() {
 
               {/* Summary Card */}
               {selectedRoomData && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.5 }}
-                  className="bg-sand-100 p-6 mb-8"
-                >
-                  <p className="text-sm text-neutral-500 mb-4">Reservation Summary</p>
+                <div className="bg-sand-50 border border-sand-200 p-6 mb-8">
+                  <p className="text-xs text-shell font-medium uppercase tracking-wider mb-4">Reservation Summary</p>
                   <div className="flex gap-4 mb-4">
-                    <div className="relative w-20 h-16 overflow-hidden bg-sand-200 flex-shrink-0">
+                    <div className="relative w-24 h-20 overflow-hidden bg-sand-200 flex-shrink-0 shadow-sm">
                       <Image
                         src={selectedRoomData.image}
                         alt={selectedRoomData.name}
@@ -507,72 +506,66 @@ function BookingForm() {
                       />
                     </div>
                     <div className="flex-1">
-                      <p className="font-display text-ink">{selectedRoomData.name}</p>
-                      <p className="text-sm text-neutral-500">
+                      <p className="font-display text-lg text-ink">{selectedRoomData.name}</p>
+                      <p className="text-sm text-neutral-500 flex items-center gap-1">
+                        <Calendar size={12} className="text-shell" />
                         {formData.checkIn} → {formData.checkOut}
                       </p>
-                      <p className="text-sm text-neutral-500">
+                      <p className="text-sm text-neutral-500 flex items-center gap-1">
+                        <Users size={12} className="text-shell" />
                         {formData.adults} adult{formData.adults > 1 ? "s" : ""}
                         {formData.children > 0 && `, ${formData.children} child${formData.children > 1 ? "ren" : ""}`}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-shell font-medium">{nights} nights</p>
+                      <p className="font-display text-2xl text-navy">{nights}</p>
+                      <p className="text-xs text-neutral-500">night{nights > 1 ? "s" : ""}</p>
                     </div>
                   </div>
 
                   {/* Direct booking benefits */}
                   <div className="border-t border-sand-200 pt-4">
-                    <p className="text-xs text-shell font-medium mb-2 flex items-center gap-1">
-                      <Gift size={12} />
-                      Book Direct Benefits Included
+                    <p className="text-xs text-navy font-medium mb-3 flex items-center gap-1.5">
+                      <Gift size={14} className="text-shell" />
+                      Book Direct Benefits
                     </p>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1">
-                      {directBenefits.slice(0, 2).map((benefit) => (
-                        <span key={benefit} className="text-xs text-neutral-500 flex items-center gap-1">
-                          <Check size={10} className="text-shell" />
+                    <div className="grid grid-cols-2 gap-2">
+                      {directBenefits.map((benefit) => (
+                        <span key={benefit} className="text-xs text-neutral-600 flex items-center gap-1.5">
+                          <Check size={12} className="text-shell flex-shrink-0" />
                           {benefit}
                         </span>
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               )}
 
               <div className="space-y-4">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  className="grid grid-cols-2 gap-4"
-                >
-                  <div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="group">
                     <label className="block text-sm font-medium text-ink mb-2">First Name</label>
                     <input
                       type="text"
                       required
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      className="w-full px-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors bg-white"
+                      className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
                     />
                   </div>
-                  <div>
+                  <div className="group">
                     <label className="block text-sm font-medium text-ink mb-2">Last Name</label>
                     <input
                       type="text"
                       required
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      className="w-full px-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors bg-white"
+                      className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
                     />
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                >
+                <div className="group">
                   <label className="block text-sm font-medium text-ink mb-2">Email</label>
                   <input
                     type="email"
@@ -580,15 +573,11 @@ function BookingForm() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors bg-white"
+                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white placeholder:text-neutral-300"
                   />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                >
+                <div className="group">
                   <label className="block text-sm font-medium text-ink mb-2">Phone</label>
                   <input
                     type="tel"
@@ -596,15 +585,11 @@ function BookingForm() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+31 6 12345678"
-                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors bg-white"
+                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white placeholder:text-neutral-300"
                   />
-                </motion.div>
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                >
+                <div className="group">
                   <label className="block text-sm font-medium text-ink mb-2">
                     Special Requests <span className="text-neutral-400 font-normal">(optional)</span>
                   </label>
@@ -612,46 +597,40 @@ function BookingForm() {
                     rows={3}
                     value={formData.specialRequests}
                     onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy outline-none transition-colors resize-none bg-white"
+                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all resize-none bg-white placeholder:text-neutral-300"
                     placeholder="Dietary requirements, accessibility needs, special occasions..."
                   />
-                </motion.div>
+                </div>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="flex gap-4 mt-8"
-              >
-                <button
+              <div className="flex gap-4 mt-8">
+                <motion.button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="flex items-center justify-center gap-2 px-6 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex items-center justify-center gap-2 px-6 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
                 >
-                  <ArrowLeft size={16} />
+                  <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                   Back
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="submit"
-                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-shell text-navy hover:bg-shell/90 transition-colors text-sm tracking-wide uppercase"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-shell text-navy hover:bg-shell/90 transition-colors text-sm tracking-wide uppercase"
                 >
                   Submit Request
-                  <ArrowRight size={16} />
-                </button>
-              </motion.div>
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              </div>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                className="text-xs text-neutral-400 text-center mt-6"
-              >
+              <p className="text-xs text-neutral-400 text-center mt-6">
                 By submitting, you agree to our booking terms. No payment required until confirmation.
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
           )}
-        </AnimatePresence>
+        </>
       </form>
     </div>
   );
@@ -660,14 +639,13 @@ function BookingForm() {
 export default function BookPage() {
   return (
     <>
-      <Header />
-
       <main>
         {/* Hero */}
         <SectionHeroCompact
           label="Reservations"
           title="Book Your Stay"
           description="Reserve directly for the best rates and exclusive benefits."
+          image="/home/hero-fallback.jpg"
         />
 
         {/* Trust Indicators */}

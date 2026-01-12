@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, ReactNode, useState } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { useReducedMotion } from "@/lib/accessibility";
 
@@ -15,6 +16,18 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
   const rafIdRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const [isReady, setIsReady] = useState(false);
+  const pathname = usePathname();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    } else if (wrapperRef.current) {
+      wrapperRef.current.scrollTop = 0;
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     // Skip smooth scroll if user prefers reduced motion
@@ -62,24 +75,25 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
       }
     };
 
-    // Debounced resize for performance
+    // Debounced resize for performance - use RAF for smoother updates
     let resizeTimeout: NodeJS.Timeout;
+    let rafId: number | null = null;
     const debouncedResize = () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(handleResize, 50);
+      if (rafId) cancelAnimationFrame(rafId);
+      resizeTimeout = setTimeout(() => {
+        rafId = requestAnimationFrame(handleResize);
+      }, 100);
     };
 
-    // Initial resize sequence - be aggressive
+    // Initial resize sequence - optimized for 120fps
     handleResize();
-    setTimeout(handleResize, 100);
-    setTimeout(handleResize, 300);
-    setTimeout(handleResize, 600);
+    setTimeout(handleResize, 200);
+    setTimeout(handleResize, 500);
     setTimeout(handleResize, 1000);
-    setTimeout(handleResize, 2000);
-    setTimeout(handleResize, 3000);
 
-    // Listen for window resize
-    window.addEventListener("resize", debouncedResize);
+    // Listen for window resize with passive listener
+    window.addEventListener("resize", debouncedResize, { passive: true });
 
     // Listen for load event
     window.addEventListener("load", handleResize);
@@ -88,17 +102,21 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
     const images = document.querySelectorAll("img");
     images.forEach((img) => {
       if (!img.complete) {
-        img.addEventListener("load", debouncedResize);
+        img.addEventListener("load", debouncedResize, { passive: true });
       }
     });
 
-    // MutationObserver for dynamic content
+    // MutationObserver for dynamic content - more selective for performance
+    let mutationTimeout: NodeJS.Timeout;
     const mutationObserver = new MutationObserver(() => {
-      debouncedResize();
+      // Batch mutation callbacks with longer debounce
+      clearTimeout(mutationTimeout);
+      mutationTimeout = setTimeout(debouncedResize, 150);
     });
     mutationObserver.observe(document.body, {
       childList: true,
       subtree: true,
+      attributes: false, // Don't watch attribute changes for better perf
     });
 
     // ResizeObserver for element size changes
@@ -111,6 +129,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
 
     return () => {
       clearTimeout(resizeTimeout);
+      clearTimeout(mutationTimeout);
+      if (rafId) cancelAnimationFrame(rafId);
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
       }
@@ -135,7 +155,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
   return (
     <div
       ref={wrapperRef}
-      className="lenis-wrapper fixed inset-0 overflow-auto"
+      className="lenis-wrapper fixed inset-0 overflow-auto transform-gpu"
+      style={{ willChange: "scroll-position" }}
     >
       <div
         ref={contentRef}

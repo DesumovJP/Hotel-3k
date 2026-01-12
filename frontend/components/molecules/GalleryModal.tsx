@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -37,8 +38,14 @@ export function GalleryModal({
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [direction, setDirection] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
+
+  // Mount state for portal
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Reset to initial index when modal opens
   useEffect(() => {
@@ -48,15 +55,29 @@ export function GalleryModal({
     }
   }, [isOpen, initialIndex]);
 
-  // Lock body scroll when modal is open
+  // Lock scroll when modal is open (both body and Lenis)
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      // Stop Lenis smooth scroll
+      const lenis = (window as unknown as { lenis?: { stop: () => void; start: () => void } }).lenis;
+      if (lenis) {
+        lenis.stop();
+      }
     } else {
       document.body.style.overflow = "";
+      // Resume Lenis smooth scroll
+      const lenis = (window as unknown as { lenis?: { stop: () => void; start: () => void } }).lenis;
+      if (lenis) {
+        lenis.start();
+      }
     }
     return () => {
       document.body.style.overflow = "";
+      const lenis = (window as unknown as { lenis?: { stop: () => void; start: () => void } }).lenis;
+      if (lenis) {
+        lenis.start();
+      }
     };
   }, [isOpen]);
 
@@ -149,11 +170,12 @@ export function GalleryModal({
     }),
   };
 
-  if (!isOpen) return null;
+  // Don't render until mounted (for SSR) or if not open
+  if (!mounted || !isOpen) return null;
 
   const currentImage = images[currentIndex];
 
-  return (
+  const modalContent = (
     <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
@@ -300,4 +322,7 @@ export function GalleryModal({
       )}
     </AnimatePresence>
   );
+
+  // Use portal to render modal at document body level (outside transformed containers)
+  return createPortal(modalContent, document.body);
 }

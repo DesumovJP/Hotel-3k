@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 
-type BlendColor = "white" | "sand" | "sand-100" | "sand-200" | "navy";
+type BlendColor = "white" | "sand" | "sand-50" | "sand-100" | "sand-200" | "mist" | "navy" | "dark";
 
 interface SectionBlendProps {
   /** Color of the section above */
@@ -15,21 +15,16 @@ interface SectionBlendProps {
   className?: string;
 }
 
-const colorMap: Record<BlendColor, string> = {
-  white: "#FFFFFF",
-  sand: "#FCF9F4",
-  "sand-100": "#FCF9F4",
-  "sand-200": "#F9F3E8",
-  navy: "#4A4139",
-};
-
 // CSS variable names for colors
 const cssVarMap: Record<BlendColor, string> = {
   white: "#FFFFFF",
   sand: "var(--color-sand)",
+  "sand-50": "var(--color-sand-50)",
   "sand-100": "var(--color-sand-100)",
   "sand-200": "var(--color-sand-200)",
+  mist: "var(--color-mist)",
   navy: "var(--color-navy)",
+  dark: "#212B36",
 };
 
 const heightMap = {

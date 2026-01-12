@@ -137,13 +137,16 @@ export function MiniGallery({
             {normalizedImages.map((image, index) => (
               <motion.button
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.08, ease: easeOutExpo }}
+                whileHover={{ y: -4 }}
                 onClick={() => handleImageClick(index)}
                 className={cn(
-                  "relative overflow-hidden group cursor-pointer focus-visible:ring-2 focus-visible:ring-shell focus-visible:ring-offset-2",
+                  "relative overflow-hidden group cursor-pointer",
+                  "focus-visible:ring-2 focus-visible:ring-shell focus-visible:ring-offset-2",
+                  "shadow-md hover:shadow-xl transition-shadow duration-500 ease-out",
                   aspectRatioClasses[aspectRatio]
                 )}
                 aria-label={`View ${image.caption || image.alt || `image ${index + 1}`} in fullscreen`}
@@ -153,24 +156,24 @@ export function MiniGallery({
                   alt={image.alt || `Gallery image ${index + 1}`}
                   fill
                   sizes={`(max-width: 768px) 50vw, ${Math.floor(100 / columns)}vw`}
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors duration-300" />
 
-                {/* Caption on hover */}
-                {image.caption && (
-                  <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-navy/70 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white text-sm font-medium">{image.caption}</p>
-                  </div>
-                )}
+                {/* Elegant overlay */}
+                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/40 transition-colors duration-500" />
 
-                {/* Expand indicator */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                    <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
+                {/* Centered text panel */}
+                <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    {/* Decorative line above */}
+                    <div className="w-8 h-px bg-white/60 mx-auto mb-3 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100" />
+
+                    <p className="text-white text-lg md:text-xl lg:text-2xl font-display italic leading-snug line-clamp-2 max-w-[280px]">
+                      {image.caption || image.alt}
+                    </p>
+
+                    {/* Decorative line below */}
+                    <div className="w-8 h-px bg-white/60 mx-auto mt-3 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100" />
                   </div>
                 </div>
               </motion.button>

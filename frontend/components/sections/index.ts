@@ -57,6 +57,7 @@ export type { AboutHeroProps, TimelineEvent, TeamMember } from "./AboutHero";
 
 // Island
 export { IslandSection } from "./IslandSection";
+export { IslandTeaser } from "./IslandTeaser";
 export { TexelNowSection, defaultEvents, defaultTips } from "./TexelNowSection";
 
 // Testimonials

@@ -401,7 +401,7 @@ function MasonryItem({
     <motion.div
       variants={fadeInUp}
       custom={index}
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -4 }}
       className={cn(
         "group relative overflow-hidden rounded-xl cursor-pointer",
         image.featured && "md:col-span-2 md:row-span-2",
@@ -418,7 +418,7 @@ function MasonryItem({
             ? "(max-width: 768px) 100vw, 66vw"
             : "(max-width: 768px) 100vw, 33vw"
         }
-        className="object-cover transition-transform duration-700 group-hover:scale-110"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
 
       {/* Overlay */}

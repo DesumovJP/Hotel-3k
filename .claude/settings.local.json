@@ -37,7 +37,8 @@
       "Bash(npm uninstall:*)",
       "WebFetch(domain:www.awwwards.com)",
       "Bash(git checkout:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:www.cleanpng.com)"
     ]
   }
 }

@@ -298,7 +298,7 @@ export function CompareDrawer({ className }: CompareDrawerProps) {
               </span>
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setIsExpanded(true)}
                 className="px-4 py-2 bg-navy text-white rounded-lg text-sm font-medium"
               >

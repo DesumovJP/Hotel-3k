@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PageLayout } from "@/components/organisms";
 import { InfoStrip, BreadcrumbsSection } from "@/components/molecules";
 import { SectionHeroCompact } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { X, ChevronLeft, ChevronRight, Camera, Grid3X3 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -62,10 +63,12 @@ export default function GalleryPage() {
       {/* Quick Info Strip - Using centralized component */}
       <InfoStrip
         items={[
-          { icon: Camera, value: `${galleryImages.length} Photos` },
-          { icon: Grid3X3, value: `${galleryCategories.length - 1} Categories` },
+          { icon: Camera, label: "Photos", value: `${galleryImages.length}` },
+          { icon: Grid3X3, label: "Categories", value: `${galleryCategories.length - 1}` },
         ]}
       />
+
+      <SectionDivider variant="wave" color="sand-dark" />
 
       {/* Breadcrumbs - Using centralized component */}
       <BreadcrumbsSection items={[{ label: "Gallery" }]} />

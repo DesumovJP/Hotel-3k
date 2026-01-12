@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
-import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery } from "@/components/sections";
+import { Footer } from "@/components/organisms";
+import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionBlend } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { Clock, Phone, Waves, Flame, Droplets, Sparkles, Heart, Baby, Hand, Footprints, Check } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
@@ -142,8 +143,6 @@ export default function WellnessPage() {
 
   return (
     <>
-      <Header />
-
       {/* Floating CTA - Mobile */}
       <motion.div
         initial={{ y: 100, opacity: 0 }}
@@ -183,6 +182,8 @@ export default function WellnessPage() {
           }}
         />
 
+        <SectionDivider variant="wave" color="sand-dark" />
+
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
@@ -204,6 +205,8 @@ export default function WellnessPage() {
           imagePosition="right"
           background="white"
         />
+
+        <SectionBlend from="white" to="sand-100" />
 
         {/* Facilities */}
         <section className="py-20 md:py-28 bg-sand-100">
@@ -256,6 +259,8 @@ export default function WellnessPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="sand-100" to="white" />
 
         {/* Treatments */}
         <section className="py-20 md:py-28 bg-white">
@@ -321,6 +326,8 @@ export default function WellnessPage() {
           </div>
         </section>
 
+        <SectionBlend from="white" to="sand-100" />
+
         {/* Gallery */}
         <MiniGallery
           title="Wellness Gallery"
@@ -328,6 +335,8 @@ export default function WellnessPage() {
           columns={3}
           background="sand-100"
         />
+
+        <SectionBlend from="sand-100" to="white" />
 
         {/* CTA */}
         <SectionCTA

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import {
   Check,
@@ -64,8 +64,6 @@ interface OfferDetailClientProps {
 export function OfferDetailClient({ offer, otherOffers }: OfferDetailClientProps) {
   return (
     <>
-      <Header />
-
       <main>
         {/* Hero */}
         <section className="relative h-[50vh] min-h-[400px] md:h-[60vh] overflow-hidden bg-navy">
@@ -291,8 +289,8 @@ export function OfferDetailClient({ offer, otherOffers }: OfferDetailClientProps
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Link href={`/offers/${otherOffer.slug}`} className="group block">
-                    <div className="neo-card neo-card-hover overflow-hidden">
+                  <Link href={`/offers/${otherOffer.slug}`} className="group block h-full">
+                    <div className="neo-card neo-card-hover overflow-hidden h-full flex flex-col">
                       <div className="relative aspect-[4/3]">
                         <Image
                           src={otherOffer.image}
@@ -304,11 +302,11 @@ export function OfferDetailClient({ offer, otherOffers }: OfferDetailClientProps
                           {otherOffer.badge}
                         </span>
                       </div>
-                      <div className="p-5">
-                        <h3 className="font-display text-lg text-ink mb-1 group-hover:text-shell transition-colors">
+                      <div className="p-5 flex-1">
+                        <h3 className="font-display text-lg text-ink mb-1 group-hover:text-shell transition-colors line-clamp-1">
                           {otherOffer.title}
                         </h3>
-                        <p className="text-neutral-500 text-sm">{otherOffer.subtitle}</p>
+                        <p className="text-neutral-500 text-sm line-clamp-1">{otherOffer.subtitle}</p>
                       </div>
                     </div>
                   </Link>

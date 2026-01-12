@@ -385,7 +385,7 @@ export function RoomCard({
 
           <Link href={`/rooms/${room.slug}`}>
             <motion.button
-              whileHover={prefersReducedMotion ? {} : { x: 2 }}
+              whileHover={prefersReducedMotion ? {} : { x: 4 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
               transition={{ duration: 0.15 }}
               disabled={!room.available}

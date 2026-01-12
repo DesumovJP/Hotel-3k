@@ -7,9 +7,10 @@ import {
   Clock, Users, Ship, TreePine, Waves, ChefHat
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { MiniGallery, SectionHeroCompact, SectionCTA } from "@/components/sections";
+import { MiniGallery, SectionHeroCompact, SectionCTA, SectionBlend } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { easeOutExpo } from "@/lib/motion";
 
 // Timeline data
@@ -101,8 +102,6 @@ const awards = [
 export default function AboutPage() {
   return (
     <>
-      <Header />
-
       <main>
         {/* Hero */}
         <SectionHeroCompact
@@ -112,31 +111,34 @@ export default function AboutPage() {
         />
 
         {/* Quick Info Strip */}
-        <section className="bg-navy text-white py-4 border-t border-white/10">
+        <section className="neo-bar">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
               <div className="flex items-center gap-2">
                 <Clock size={16} className="text-shell" />
-                <span>Est. 1932</span>
+                <span className="text-neutral-500">Est.</span>
+                <span className="text-ink font-medium">1932</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Users size={16} className="text-shell" />
-                <span>3rd Generation Family</span>
+                <span className="text-neutral-500">Family</span>
+                <span className="text-ink font-medium">3rd Generation</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Leaf size={16} className="text-shell" />
-                <span>Carbon Neutral</span>
+                <span className="text-neutral-500">Status</span>
+                <span className="text-ink font-medium">Carbon Neutral</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Award size={16} className="text-shell" />
-                <span>Award Winning</span>
+                <span className="text-neutral-500">Recognition</span>
+                <span className="text-ink font-medium">Award Winning</span>
               </div>
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Introduction */}
         <section className="py-20 md:py-28 bg-white">
@@ -202,6 +204,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <SectionBlend from="white" to="sand-100" />
+
         {/* Values */}
         <section className="py-20 md:py-28 bg-sand-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
@@ -243,6 +247,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="sand-100" to="white" />
 
         {/* Timeline */}
         <section className="py-20 md:py-28 bg-white">
@@ -286,6 +292,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="white" to="navy" />
 
         {/* Sustainability */}
         <section className="py-20 md:py-28 bg-navy text-white">
@@ -349,6 +357,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <SectionBlend from="navy" to="white" />
+
         {/* Gallery */}
         <MiniGallery
           title="Moments at Opduin"
@@ -364,6 +374,8 @@ export default function AboutPage() {
           viewAllLink="/gallery"
           viewAllText="View full gallery"
         />
+
+        <SectionBlend from="white" to="sand-100" />
 
         {/* Team */}
         <section className="py-20 md:py-28 bg-sand-100">
@@ -417,8 +429,10 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <SectionBlend from="sand-100" to="white" />
+
         {/* Awards */}
-        <section className="py-16 bg-white border-y border-sand-200">
+        <section className="py-16 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/4">
@@ -446,6 +460,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="white" to="sand-100" />
 
         {/* Location */}
         <section className="py-20 md:py-28 bg-sand-100">

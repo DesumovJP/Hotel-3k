@@ -221,7 +221,7 @@ export function SectionHero({
 
     {/* Info Strip */}
     {infoStrip && (
-      <section className="bg-navy text-white border-t border-white/10">
+      <section className="neo-bar">
         <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
           <div className="flex flex-wrap items-center justify-between gap-4 py-4">
             <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
@@ -230,14 +230,11 @@ export function SectionHero({
                 return (
                   <div
                     key={index}
-                    className={cn(
-                      "flex items-center gap-2",
-                      item.highlight && "text-shell"
-                    )}
+                    className="flex items-center gap-2"
                   >
-                    <Icon size={16} className={item.highlight ? "" : "text-shell"} />
-                    {item.label && <span className="text-white/60">{item.label}</span>}
-                    <span>{item.value}</span>
+                    <Icon size={16} className="text-shell" />
+                    {item.label && <span className="text-neutral-500">{item.label}</span>}
+                    <span className={cn("text-ink font-medium", item.highlight && "text-shell")}>{item.value}</span>
                   </div>
                 );
               })}
@@ -245,7 +242,7 @@ export function SectionHero({
             {infoStrip.phoneNumber && (
               <a
                 href={`tel:${infoStrip.phoneNumber.replace(/\s/g, "")}`}
-                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-white transition-colors text-sm"
+                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
               >
                 {infoStrip.phoneLabel || infoStrip.phoneNumber}
               </a>

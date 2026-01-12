@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionCTA, SectionHeroCompact } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import {
   Check, ArrowRight, Gift, Star, Snowflake, Leaf, Sparkles, Compass, UtensilsCrossed
 } from "lucide-react";
@@ -127,8 +128,6 @@ export default function OffersPage() {
 
   return (
     <>
-      <Header />
-
       {/* Floating CTA - Mobile */}
       <AnimatePresence>
         {showFloatingCTA && (
@@ -159,26 +158,29 @@ export default function OffersPage() {
         />
 
         {/* Quick Info Strip */}
-        <section className="bg-navy text-white py-4 border-t border-white/10">
+        <section className="neo-bar">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
               <div className="flex items-center gap-2">
                 <Gift size={16} className="text-shell" />
-                <span>{offers.length} Package Deals</span>
+                <span className="text-neutral-500">Packages</span>
+                <span className="text-ink font-medium">{offers.length} Deals</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Star size={16} className="text-shell" />
-                <span>Free Extras Included</span>
+                <span className="text-neutral-500">Included</span>
+                <span className="text-ink font-medium">Free Extras</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Check size={16} className="text-shell" />
-                <span>Skip 15% Booking.com Fee</span>
+                <span className="text-neutral-500">Direct</span>
+                <span className="text-ink font-medium">Skip 15% Fee</span>
               </div>
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">

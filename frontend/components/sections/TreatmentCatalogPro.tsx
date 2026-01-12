@@ -494,7 +494,7 @@ function TreatmentCard({
             className="group/btn"
           >
             Book Online
-            <ExternalLink className="w-3.5 h-3.5 ml-1 group-hover/btn:translate-x-0.5 transition-transform" />
+            <ExternalLink className="w-3.5 h-3.5 ml-1 group-hover/btn:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>

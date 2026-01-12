@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,8 @@ interface SectionHeroCompactProps {
   description?: string;
   /** Center or left align content */
   align?: "center" | "left";
+  /** Optional background image */
+  image?: string;
   /** Additional className */
   className?: string;
 }
@@ -25,16 +28,30 @@ export function SectionHeroCompact({
   tagline,
   description,
   align = "center",
+  image,
   className,
 }: SectionHeroCompactProps) {
   return (
     <section
       className={cn(
-        "bg-navy pt-24 pb-10 md:pt-28 md:pb-12",
+        "relative bg-navy pt-24 pb-10 md:pt-28 md:pb-12",
+        image && "pt-28 pb-14 md:pt-32 md:pb-16",
         className
       )}
     >
-      <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+      {image && (
+        <>
+          <Image
+            src={image}
+            alt=""
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-navy/70" />
+        </>
+      )}
+      <div className="relative px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

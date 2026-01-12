@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline, FeatureGrid } from "@/components/molecules";
-import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery } from "@/components/sections";
+import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionBlend } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { Clock, Phone, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -84,8 +85,6 @@ export default function RestaurantPage() {
 
   return (
     <>
-      <Header />
-
       {/* Floating Reserve Button */}
       <motion.div
         initial={{ y: 100, opacity: 0 }}
@@ -122,7 +121,7 @@ export default function RestaurantPage() {
             trailingContent: (
               <Link
                 href="/book?type=restaurant"
-                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-white transition-colors text-sm"
+                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
               >
                 Reserve now
                 <ArrowRight size={14} />
@@ -130,6 +129,8 @@ export default function RestaurantPage() {
             ),
           }}
         />
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
@@ -197,6 +198,8 @@ export default function RestaurantPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="white" to="sand-100" />
 
         {/* Local Ingredients */}
         <FeatureGrid
@@ -281,8 +284,10 @@ export default function RestaurantPage() {
           </div>
         </section>
 
+        <SectionBlend from="sand-100" to="sand-50" />
+
         {/* Quick Info Strip */}
-        <section className="py-6 bg-sand-50 border-y border-sand-200">
+        <section className="py-6 bg-sand-50">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm">
               <div className="flex items-center gap-2">
@@ -303,6 +308,8 @@ export default function RestaurantPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="sand-50" to="sand-100" />
 
         {/* Gallery */}
         <MiniGallery

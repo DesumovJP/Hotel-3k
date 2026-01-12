@@ -1,11 +1,13 @@
 "use client";
 
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import {
   HeroSection,
   DirectBookingBenefits,
   IntroSection,
   DiscoverGrid,
+  HomeTestimonials,
+  IslandTeaser,
   SectionCTA,
 } from "@/components/sections";
 import { SectionDivider } from "@/components/ui";
@@ -14,8 +16,6 @@ import { Waves } from "lucide-react";
 export default function Home() {
   return (
     <>
-      <Header />
-
       <main>
         <section id="hero">
           <HeroSection />
@@ -37,7 +37,15 @@ export default function Home() {
           <DiscoverGrid />
         </section>
 
-        <SectionDivider variant="fade" color="sand-dark" />
+        <SectionDivider variant="line" />
+
+        <section id="testimonials">
+          <HomeTestimonials />
+        </section>
+
+        <section id="island">
+          <IslandTeaser />
+        </section>
 
         <section id="cta">
           <SectionCTA

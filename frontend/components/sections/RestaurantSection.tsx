@@ -95,7 +95,7 @@ export function RestaurantSection() {
               >
                 <span className="text-sm tracking-[0.1em] uppercase">Reserve a table</span>
                 <span className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center group-hover:bg-sky-200 transition-colors duration-300">
-                  <ArrowRight size={14} className="text-sky-600 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={14} className="text-sky-600 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             </motion.div>

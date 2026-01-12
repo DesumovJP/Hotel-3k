@@ -43,6 +43,7 @@ export function ScrollProgress({
       setIsVisible(scrollPercent > showAfter);
     };
 
+    // Passive listener is already set - keep it
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Check initial state
 
@@ -52,7 +53,7 @@ export function ScrollProgress({
   return (
     <motion.div
       className={cn(
-        "fixed left-0 right-0 z-[100] origin-left",
+        "fixed left-0 right-0 z-[100] origin-left transform-gpu",
         position === "top" ? "top-0" : "bottom-0",
         className
       )}
@@ -60,6 +61,9 @@ export function ScrollProgress({
         scaleX,
         height,
         backgroundColor: color,
+        willChange: "transform",
+        contain: "layout style paint",
+        backfaceVisibility: "hidden",
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: isVisible ? 1 : 0 }}

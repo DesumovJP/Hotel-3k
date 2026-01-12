@@ -4,6 +4,7 @@ import "./globals.css";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import { FilmGrain } from "@/components/effects/FilmGrain";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScroll";
+import { Header } from "@/components/organisms";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-display",
@@ -51,9 +52,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${cormorant.variable} ${dmSans.variable} antialiased`}>
+        {/* Fixed elements outside SmoothScrollProvider for proper positioning */}
+        <Header />
+        <CustomCursor />
+        <FilmGrain opacity={0.025} />
         <SmoothScrollProvider>
-          <CustomCursor />
-          <FilmGrain opacity={0.025} />
           {children}
         </SmoothScrollProvider>
       </body>

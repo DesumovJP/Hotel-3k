@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SectionCTA, SectionHeroCompact, SectionIntro } from "@/components/sections";
+import { SectionCTA, SectionHeroCompact, SectionIntro, SectionBlend } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import { rooms } from "@/lib/data";
 import {
   ArrowRight, Bed, Eye, ChevronRight, Check, ChevronDown
@@ -58,8 +59,6 @@ export default function RoomsPage() {
 
   return (
     <>
-      <Header />
-
       {/* Floating CTA - Mobile */}
       <AnimatePresence>
         {showFloatingCTA && (
@@ -90,26 +89,29 @@ export default function RoomsPage() {
         />
 
         {/* Quick Info Strip */}
-        <section className="bg-navy text-white py-4 border-t border-white/10">
+        <section className="neo-bar">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
               <div className="flex items-center gap-2">
                 <Bed size={16} className="text-shell" />
-                <span>22 Rooms & Suites</span>
+                <span className="text-neutral-500">Rooms</span>
+                <span className="text-ink font-medium">22 Rooms & Suites</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Eye size={16} className="text-shell" />
-                <span>Sea, Dune & Garden Views</span>
+                <span className="text-neutral-500">Views</span>
+                <span className="text-ink font-medium">Sea, Dune & Garden</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <div className="flex items-center gap-2">
                 <Check size={16} className="text-shell" />
-                <span>Book Direct: Free Sauna & €5 Off</span>
+                <span className="text-neutral-500">Direct</span>
+                <span className="text-ink font-medium">Free Sauna & €5 Off</span>
               </div>
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
@@ -233,6 +235,8 @@ export default function RoomsPage() {
           </div>
         </section>
 
+        <SectionBlend from="white" to="sand-50" />
+
         {/* FAQ Section */}
         <section className="py-16 md:py-20 bg-sand-50">
           <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
@@ -296,6 +300,8 @@ export default function RoomsPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="sand-50" to="white" />
 
         {/* Need Help Section */}
         <SectionCTA

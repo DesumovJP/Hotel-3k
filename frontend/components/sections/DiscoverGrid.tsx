@@ -42,9 +42,9 @@ const categories: Category[] = [
   },
   {
     id: "offer",
-    label: "Package Deals",
-    title: "Book Direct & Save",
-    subtitle: "Exclusive perks for direct bookers",
+    label: "Special Offers",
+    title: "Curated Packages",
+    subtitle: "Romantic escapes, wellness retreats & seasonal deals",
     image: "/home/aanbieding-voor-een-compleet-en-voordelig-verblijf-600x450.jpg",
     link: "/offers",
   },
@@ -77,10 +77,15 @@ export function DiscoverGrid() {
               key={category.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -4 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: easeOutExpo }}
+              className="group"
             >
-              <Link href={category.link} className="group block bg-white">
+              <Link
+                href={category.link}
+                className="block bg-white shadow-sm hover:shadow-xl transition-shadow duration-500"
+              >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={category.image}
@@ -89,20 +94,28 @@ export function DiscoverGrid() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority={index === 0}
                   />
+                  {/* Subtle overlay on hover */}
+                  <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/10 transition-colors duration-500" />
                 </div>
-                <div className="p-6">
+                <div className="p-6 relative">
+                  {/* Accent line */}
+                  <div className="absolute top-0 left-6 right-6 h-px bg-shell scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
                   <span className="text-overline text-shell mb-2 block">
                     {category.label}
                   </span>
-                  <h3 className="text-display-sm text-ink mb-2 group-hover:text-shell transition-colors">
+                  <h3 className="text-display-sm text-ink mb-2 group-hover:text-shell transition-colors duration-300">
                     {category.title}
                   </h3>
                   <p className="text-neutral-600 text-sm mb-4">
                     {category.subtitle}
                   </p>
                   <div className="flex items-center gap-2 text-neutral-500 group-hover:text-shell transition-colors text-sm">
-                    <span>Explore</span>
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    <span className="relative">
+                      Explore
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-shell group-hover:w-full transition-all duration-300" />
+                    </span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                 </div>
               </Link>

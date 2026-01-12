@@ -32,7 +32,7 @@ export function SocialLink({
         className
       )}
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.98 }}
     >
       <Icon size={18} />
     </motion.a>

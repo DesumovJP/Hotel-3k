@@ -73,7 +73,10 @@ export function IntroSection() {
               href="/about"
               className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
             >
-              Discover our story
+              <span className="relative">
+                Discover our story
+                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-shell group-hover:w-full transition-all duration-300" />
+              </span>
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -87,14 +90,14 @@ export function IntroSection() {
             className="relative"
           >
             {/* Neomorphic container */}
-            <div className="neo-frame">
+            <div className="neo-frame group/image overflow-hidden">
               <div className="relative aspect-[4/5]">
                 <Image
                   src="/home/home-600x400_1.jpg"
                   alt="Grand Hotel Opduin exterior"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover/image:scale-105"
                 />
               </div>
             </div>
@@ -105,11 +108,19 @@ export function IntroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
-              className="absolute -bottom-4 -left-4 md:-left-8 p-5 md:p-6 bg-white rounded-2xl shadow-neo-lg"
+              className="absolute -bottom-4 -left-4 md:-left-8 p-5 md:p-6 bg-white rounded-2xl shadow-neo-lg animate-float"
             >
               <div className="flex items-center gap-1 mb-2">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="text-shell fill-shell" />
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: 0.5 + i * 0.05 }}
+                  >
+                    <Star size={14} className="text-shell fill-shell" />
+                  </motion.div>
                 ))}
               </div>
               <p className="text-display-md text-ink mb-1">9.2</p>

@@ -4,14 +4,14 @@ import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * InfoStrip - Navy bar showing quick info items
+ * InfoStrip - Bar showing quick info items
  *
  * USAGE:
  * <InfoStrip items={[
  *   { icon: Clock, label: "Reception", value: "24h" },
  *   { icon: Bed, label: "22 Rooms" },
  *   { icon: Check, value: "Book Direct: Free Sauna", highlight: true },
- * ]} />
+ * ]} variant="sand" />
  *
  * REDESIGN: Change colors/layout here to affect all pages
  */
@@ -28,23 +28,27 @@ export interface InfoStripProps {
   /** Optional trailing content (e.g., a CTA link) */
   trailing?: React.ReactNode;
   /** Background variant */
-  variant?: "navy" | "dark";
+  variant?: "navy" | "dark" | "sand";
   className?: string;
 }
 
 export function InfoStrip({
   items,
   trailing,
-  variant = "navy",
+  variant = "sand",
   className,
 }: InfoStripProps) {
+  const isSand = variant === "sand";
+
   return (
     <section
       className={cn(
-        "py-4 border-t",
-        variant === "navy"
-          ? "bg-navy text-white border-white/10"
-          : "bg-[#212B36] text-white border-white/10",
+        "py-4",
+        isSand
+          ? "neo-bar"
+          : variant === "navy"
+          ? "bg-navy text-white border-t border-white/10"
+          : "bg-[#212B36] text-white border-t border-white/10",
         className
       )}
     >
@@ -52,42 +56,33 @@ export function InfoStrip({
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
           {items.map((item, index) => {
             const Icon = item.icon;
-            const displayText = item.label && item.value
-              ? `${item.label}: ${item.value}`
-              : item.label || item.value;
 
             return (
-              <div key={index} className="flex items-center">
-                <div
-                  className={cn(
-                    "flex items-center gap-2",
-                    item.highlight && "text-shell font-medium"
-                  )}
-                >
-                  {Icon && (
-                    <Icon
-                      size={16}
-                      className={cn(item.highlight ? "text-shell" : "text-shell")}
-                    />
-                  )}
-                  <span>{displayText}</span>
-                </div>
-
-                {/* Separator */}
-                {index < items.length - 1 && (
-                  <span className="hidden md:block ml-8 text-white/30">|</span>
+              <div key={index} className="flex items-center gap-2">
+                {Icon && (
+                  <Icon size={16} className="text-shell" />
+                )}
+                {item.label && (
+                  <span className={isSand ? "text-neutral-500" : "text-white/60"}>
+                    {item.label}
+                  </span>
+                )}
+                {item.value && (
+                  <span
+                    className={cn(
+                      isSand ? "text-ink font-medium" : "",
+                      item.highlight && "text-shell"
+                    )}
+                  >
+                    {item.value}
+                  </span>
                 )}
               </div>
             );
           })}
 
           {/* Trailing content */}
-          {trailing && (
-            <>
-              <span className="hidden md:block text-white/30">|</span>
-              {trailing}
-            </>
-          )}
+          {trailing}
         </div>
       </div>
     </section>

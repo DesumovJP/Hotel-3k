@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Header, Footer } from "@/components/organisms";
+import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { SectionHeroCompact } from "@/components/sections";
+import { SectionHeroCompact, SectionBlend } from "@/components/sections";
+import { SectionDivider } from "@/components/ui";
 import {
   MapPin,
   Phone,
@@ -82,8 +83,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Header />
-
       <main>
         {/* Hero */}
         <SectionHeroCompact
@@ -93,26 +92,27 @@ export default function ContactPage() {
         />
 
         {/* Quick Info Strip */}
-        <section className="bg-navy text-white py-4 border-t border-white/10">
+        <section className="neo-bar">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
               <div className="flex items-center gap-2">
                 <Clock size={16} className="text-shell" />
-                <span>Reception 24h</span>
+                <span className="text-neutral-500">Reception</span>
+                <span className="text-ink font-medium">24 hours</span>
               </div>
-              <span className="hidden md:block text-white/30">|</span>
               <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-shell transition-colors">
                 <Phone size={16} className="text-shell" />
-                <span>{contactInfo.phone}</span>
+                <span className="text-ink font-medium">{contactInfo.phone}</span>
               </a>
-              <span className="hidden md:block text-white/30">|</span>
               <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 hover:text-shell transition-colors">
                 <Mail size={16} className="text-shell" />
-                <span>{contactInfo.email}</span>
+                <span className="text-ink font-medium">{contactInfo.email}</span>
               </a>
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
@@ -302,6 +302,8 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        <SectionBlend from="white" to="sand-100" />
 
         {/* How to Get Here */}
         <section className="py-20 md:py-28 bg-sand-100">

@@ -44,47 +44,78 @@ export function SectionCTA({
       )}
     >
       <div className="px-6 md:px-12 lg:px-24 max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: easeOutExpo }}
-        >
+        <div>
           {Icon && (
-            <div className="neo-icon neo-icon-lg mx-auto mb-6">
-              <Icon className="w-6 h-6 text-shell" />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: easeOutExpo }}
+              className="neo-icon neo-icon-lg mx-auto mb-6 group/icon cursor-default"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Icon className="w-6 h-6 text-shell" />
+              </motion.div>
+            </motion.div>
           )}
 
           {label && (
-            <span className="text-overline text-shell mb-4 block">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
+              className="text-overline text-shell mb-4 block"
+            >
               {label}
-            </span>
+            </motion.span>
           )}
 
-          <h2 className={cn(
-            "text-display-lg mb-4",
-            isDark ? "text-white" : "text-ink"
-          )}>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15, ease: easeOutExpo }}
+            className={cn(
+              "text-display-lg mb-4",
+              isDark ? "text-white" : "text-ink"
+            )}
+          >
             {title}
-          </h2>
+          </motion.h2>
 
-          <p className={cn(
-            "text-body-md mb-8 max-w-xl mx-auto",
-            isDark ? "text-white/70" : "text-neutral-600"
-          )}>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
+            className={cn(
+              "text-body-md mb-8 max-w-xl mx-auto",
+              isDark ? "text-white/70" : "text-neutral-600"
+            )}
+          >
             {description}
-          </p>
+          </motion.p>
 
           {actions && actions.length > 0 && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.25, ease: easeOutExpo }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               {actions.map((action, index) => {
                 const ActionIcon = action.icon;
                 const isPrimary = action.variant !== "secondary";
                 const isLink = isExternal(action.href);
 
                 const buttonClasses = cn(
-                  "inline-flex items-center justify-center gap-2 px-8 py-4 transition-colors text-sm tracking-wide",
+                  "group inline-flex items-center justify-center gap-2 px-8 py-4 transition-all text-sm tracking-wide",
+                  "hover:scale-[1.02] active:scale-[0.98]",
                   isPrimary
                     ? isDark
                       ? "bg-shell text-navy hover:bg-white"
@@ -103,7 +134,7 @@ export function SectionCTA({
                     >
                       {ActionIcon && <ActionIcon size={16} />}
                       {action.label}
-                      {!ActionIcon && isPrimary && <ArrowRight size={16} />}
+                      {!ActionIcon && isPrimary && <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />}
                     </a>
                   );
                 }
@@ -116,13 +147,13 @@ export function SectionCTA({
                   >
                     {ActionIcon && <ActionIcon size={16} />}
                     {action.label}
-                    {!ActionIcon && isPrimary && <ArrowRight size={16} />}
+                    {!ActionIcon && isPrimary && <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />}
                   </Link>
                 );
               })}
-            </div>
+            </motion.div>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
