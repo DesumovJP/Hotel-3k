@@ -38,27 +38,25 @@ export default function RoomsPage() {
   return (
     <>
       {/* Floating CTA - Mobile */}
-      <AnimatePresence>
-        {showFloatingCTA && (
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 0.3, ease: easeOutExpo }}
-            className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-[#FEFDFB] shadow-[0_-2px_12px_rgba(0,0,0,0.08)] border-t border-neutral-100 md:hidden"
-          >
-            <Link
-              href="/book"
-              className="flex items-center justify-center gap-2 w-full py-4 bg-navy text-white text-sm tracking-wide uppercase"
-            >
-              {t("checkAvailability")}
-              <ArrowRight size={16} />
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: showFloatingCTA ? 1 : 0, opacity: showFloatingCTA ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: easeOutExpo }}
+        className="fixed bottom-6 right-6 z-50 md:hidden"
+      >
+        <Link
+          href="/book"
+          className="group flex items-center gap-3 pl-5 pr-6 py-3 bg-navy text-white shadow-[0_4px_20px_rgba(0,0,0,0.25)] rounded-full active:scale-95 transition-transform"
+        >
+          <span className="relative">
+            <Bed size={18} />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-shell rounded-full animate-pulse" />
+          </span>
+          <span className="text-sm font-medium">{t("checkAvailability")}</span>
+        </Link>
+      </motion.div>
 
-      <main className="pb-20 md:pb-0">
+      <main>
         {/* Hero */}
         <SectionHeroCompact
           label={t("heroLabel")}
