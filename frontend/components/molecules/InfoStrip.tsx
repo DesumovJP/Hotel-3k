@@ -53,18 +53,17 @@ export function InfoStrip({
       )}
     >
       <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
-        <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-center gap-3 md:gap-8 text-[11px] md:text-sm overflow-x-auto scrollbar-hide">
           {items.map((item, index) => {
             const Icon = item.icon;
 
             return (
-              <div key={index} className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+              <div key={index} className="flex items-center gap-1 md:gap-2 flex-shrink-0">
                 {Icon && (
-                  <Icon size={14} className="text-shell md:w-4 md:h-4" />
+                  <Icon size={12} className="text-shell md:w-4 md:h-4 flex-shrink-0" />
                 )}
                 {item.label && (
                   <span className={cn(
-                    "hidden sm:inline",
                     isSand ? "text-neutral-500" : "text-white/60"
                   )}>
                     {item.label}

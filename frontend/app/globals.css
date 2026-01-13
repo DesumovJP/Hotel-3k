@@ -1479,3 +1479,49 @@ img {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* ============================================
+   DATE INPUT - iOS/Safari Fixes
+   ============================================ */
+
+/* Reset native appearance for date inputs */
+input[type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  /* Ensure consistent height */
+  min-height: 44px;
+}
+
+/* Hide native calendar picker indicator (the default icon) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+/* iOS Safari specific: ensure text doesn't overlap with custom icons */
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+  padding-right: 1rem;
+}
+
+/* Ensure date input shows placeholder-like text when empty */
+input[type="date"]:not(:valid)::-webkit-datetime-edit {
+  color: var(--color-ink-muted, #8A8078);
+}
+
+/* Fix for date input text alignment on iOS */
+@supports (-webkit-touch-callout: none) {
+  /* iOS only */
+  input[type="date"] {
+    /* Prevent text from being cut off */
+    line-height: 1.2;
+  }
+}

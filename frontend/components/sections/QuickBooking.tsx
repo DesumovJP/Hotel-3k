@@ -66,31 +66,23 @@ export function QuickBooking() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
                 >
-                  <label className="block text-white/70 text-xs uppercase tracking-wider mb-3">
+                  <label className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wider mb-3">
+                    <Calendar size={14} />
                     Check-in
                   </label>
-                  <div className="relative group">
-                    <Calendar
-                      size={18}
-                      className={cn(
-                        "absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300",
-                        focusedField === "checkIn" ? "text-[var(--color-sea)]" : "text-[var(--color-slate)]"
-                      )}
-                    />
-                    <input
-                      type="date"
-                      value={checkIn}
-                      onChange={(e) => setCheckIn(e.target.value)}
-                      onFocus={() => setFocusedField("checkIn")}
-                      onBlur={() => setFocusedField(null)}
-                      className={cn(
-                        "w-full pl-12 pr-4 py-4 bg-white text-[var(--color-ink)]",
-                        "border-2 border-transparent outline-none transition-all duration-300",
-                        "focus:border-[var(--color-sea)] focus:shadow-lg focus:shadow-[var(--color-sea)]/10"
-                      )}
-                      required
-                    />
-                  </div>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    onFocus={() => setFocusedField("checkIn")}
+                    onBlur={() => setFocusedField(null)}
+                    className={cn(
+                      "w-full px-4 py-4 bg-white text-[var(--color-ink)]",
+                      "border-2 border-transparent outline-none transition-all duration-300",
+                      "focus:border-[var(--color-sea)] focus:shadow-lg focus:shadow-[var(--color-sea)]/10"
+                    )}
+                    required
+                  />
                 </motion.div>
 
                 {/* Check-out */}
@@ -100,31 +92,23 @@ export function QuickBooking() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
                 >
-                  <label className="block text-white/70 text-xs uppercase tracking-wider mb-3">
+                  <label className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-wider mb-3">
+                    <Calendar size={14} />
                     Check-out
                   </label>
-                  <div className="relative group">
-                    <Calendar
-                      size={18}
-                      className={cn(
-                        "absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300",
-                        focusedField === "checkOut" ? "text-[var(--color-sea)]" : "text-[var(--color-slate)]"
-                      )}
-                    />
-                    <input
-                      type="date"
-                      value={checkOut}
-                      onChange={(e) => setCheckOut(e.target.value)}
-                      onFocus={() => setFocusedField("checkOut")}
-                      onBlur={() => setFocusedField(null)}
-                      className={cn(
-                        "w-full pl-12 pr-4 py-4 bg-white text-[var(--color-ink)]",
-                        "border-2 border-transparent outline-none transition-all duration-300",
-                        "focus:border-[var(--color-sea)] focus:shadow-lg focus:shadow-[var(--color-sea)]/10"
-                      )}
-                      required
-                    />
-                  </div>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    onFocus={() => setFocusedField("checkOut")}
+                    onBlur={() => setFocusedField(null)}
+                    className={cn(
+                      "w-full px-4 py-4 bg-white text-[var(--color-ink)]",
+                      "border-2 border-transparent outline-none transition-all duration-300",
+                      "focus:border-[var(--color-sea)] focus:shadow-lg focus:shadow-[var(--color-sea)]/10"
+                    )}
+                    required
+                  />
                 </motion.div>
 
                 {/* Guests */}
@@ -220,32 +204,26 @@ export function QuickBooking() {
                 <div className="flex flex-wrap items-center gap-3 md:gap-4">
                   {/* Check-in */}
                   <div className="flex-1 min-w-[140px]">
-                    <div className="relative">
-                      <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/40" />
-                      <input
-                        type="date"
-                        value={checkIn}
-                        onChange={(e) => setCheckIn(e.target.value)}
-                        placeholder="Check-in"
-                        className="w-full pl-10 pr-3 py-2.5 bg-sand-50 text-ink text-sm border border-sand-200 rounded outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all"
-                        required
-                      />
-                    </div>
+                    <input
+                      type="date"
+                      value={checkIn}
+                      onChange={(e) => setCheckIn(e.target.value)}
+                      placeholder="Check-in"
+                      className="w-full px-3 py-2.5 bg-sand-50 text-ink text-sm border border-sand-200 rounded outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all"
+                      required
+                    />
                   </div>
 
                   {/* Check-out */}
                   <div className="flex-1 min-w-[140px]">
-                    <div className="relative">
-                      <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/40" />
-                      <input
-                        type="date"
-                        value={checkOut}
-                        onChange={(e) => setCheckOut(e.target.value)}
-                        placeholder="Check-out"
-                        className="w-full pl-10 pr-3 py-2.5 bg-sand-50 text-ink text-sm border border-sand-200 rounded outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all"
-                        required
-                      />
-                    </div>
+                    <input
+                      type="date"
+                      value={checkOut}
+                      onChange={(e) => setCheckOut(e.target.value)}
+                      placeholder="Check-out"
+                      className="w-full px-3 py-2.5 bg-sand-50 text-ink text-sm border border-sand-200 rounded outline-none focus:border-gold focus:ring-1 focus:ring-gold/20 transition-all"
+                      required
+                    />
                   </div>
 
                   {/* Guests */}

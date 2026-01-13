@@ -163,17 +163,17 @@ export function ReservationInline({
             <div className="grid grid-cols-2 gap-4 mb-4">
               {/* Date */}
               <div>
-                <label className="block text-neutral/70 text-body-sm mb-2">Date</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral/50" />
-                  <input
-                    type="date"
-                    required
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 bg-deepsea-800 border border-deepsea-600 rounded-lg text-neutral focus:border-gold focus:outline-none min-h-[44px]"
-                  />
-                </div>
+                <label className="flex items-center gap-2 text-neutral/70 text-body-sm mb-2">
+                  <Calendar className="w-4 h-4" />
+                  Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  className="w-full px-4 py-3 bg-deepsea-800 border border-deepsea-600 rounded-lg text-neutral focus:border-gold focus:outline-none min-h-[44px]"
+                />
               </div>
 
               {/* Time */}

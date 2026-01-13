@@ -285,33 +285,33 @@ function BookingForm() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="group">
-                  <label className="block text-sm font-medium text-ink mb-2">{t("checkIn")}</label>
-                  <div className="relative">
-                    <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-navy transition-colors" />
-                    <input
-                      type="date"
-                      required
-                      value={formData.checkIn}
-                      min={new Date().toISOString().split("T")[0]}
-                      onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                      className="w-full pl-12 pr-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
-                    />
-                  </div>
+                  <label className="flex items-center gap-2 text-sm font-medium text-ink mb-2">
+                    <Calendar size={16} className="text-shell" />
+                    {t("checkIn")}
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    value={formData.checkIn}
+                    min={new Date().toISOString().split("T")[0]}
+                    onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
+                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
+                  />
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-ink mb-2">{t("checkOut")}</label>
-                  <div className="relative">
-                    <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-navy transition-colors" />
-                    <input
-                      type="date"
-                      required
-                      value={formData.checkOut}
-                      min={formData.checkIn || new Date().toISOString().split("T")[0]}
-                      onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                      className="w-full pl-12 pr-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
-                    />
-                  </div>
+                  <label className="flex items-center gap-2 text-sm font-medium text-ink mb-2">
+                    <Calendar size={16} className="text-shell" />
+                    {t("checkOut")}
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    value={formData.checkOut}
+                    min={formData.checkIn || new Date().toISOString().split("T")[0]}
+                    onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
+                    className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all bg-white"
+                  />
                 </div>
               </div>
 

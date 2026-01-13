@@ -235,16 +235,16 @@ export function SectionHero({
       <section className="neo-bar">
         <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
           <div className="flex items-center justify-between gap-4 py-3 md:py-4">
-            <div className="flex items-center gap-3 md:gap-8 text-xs md:text-sm overflow-x-auto scrollbar-hide">
+            <div className="flex items-center gap-3 md:gap-8 text-[11px] md:text-sm overflow-x-auto scrollbar-hide">
               {infoStrip.items.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <div
                     key={index}
-                    className="flex items-center gap-1.5 md:gap-2 flex-shrink-0"
+                    className="flex items-center gap-1 md:gap-2 flex-shrink-0"
                   >
-                    <Icon size={14} className="text-shell" />
-                    {item.label && <span className="hidden sm:inline text-neutral-500">{item.label}</span>}
+                    <Icon size={12} className="text-shell md:w-4 md:h-4 flex-shrink-0" />
+                    {item.label && <span className="text-neutral-500">{item.label}</span>}
                     <span className={cn("text-ink font-medium whitespace-nowrap", item.highlight && "text-shell")}>{item.value}</span>
                   </div>
                 );

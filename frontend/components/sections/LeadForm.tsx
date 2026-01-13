@@ -190,18 +190,16 @@ export function LeadForm({
             {/* Event Date (conditional) */}
             {config.fields.includes("eventDate") && (
               <div>
-                <label className="block text-ink-700 text-body-sm font-medium mb-2">
+                <label className="flex items-center gap-2 text-ink-700 text-body-sm font-medium mb-2">
+                  <Calendar className="w-4 h-4 text-shell" />
                   Preferred Date
                 </label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400" />
-                  <input
-                    type="date"
-                    value={formData.eventDate}
-                    onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 bg-neutral border border-sand-400 rounded-lg text-ink focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 min-h-[44px]"
-                  />
-                </div>
+                <input
+                  type="date"
+                  value={formData.eventDate}
+                  onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
+                  className="w-full px-4 py-3 bg-neutral border border-sand-400 rounded-lg text-ink focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 min-h-[44px]"
+                />
               </div>
             )}
 
