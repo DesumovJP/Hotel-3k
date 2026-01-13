@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { ArrowRight, BadgePercent, Sparkles, Gift, LucideIcon } from "lucide-react";
+import { BadgePercent, Sparkles, Gift, LucideIcon } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
 const benefitIcons = [BadgePercent, Sparkles, Gift];
@@ -52,31 +51,10 @@ export function DirectBookingBenefits() {
     <section className="neo-bar">
       <div className="px-4 md:px-12 lg:px-24">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 py-3 sm:py-4">
-            <div className="flex items-center justify-center gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-2 text-sm">
-              {benefits.map((benefit, index) => (
-                <BenefitItem key={index} {...benefit} index={index} />
-              ))}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.3, ease: easeOutExpo }}
-              className="w-full sm:w-auto"
-            >
-              <Link
-                href="/book"
-                className="group flex sm:inline-flex items-center justify-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium px-5 py-2.5 sm:px-0 sm:py-0 bg-navy/5 sm:bg-transparent rounded-full sm:rounded-none"
-              >
-                <span className="relative">
-                  {t("cta")}
-                  <span className="hidden sm:block absolute -bottom-0.5 left-0 w-0 h-px bg-navy group-hover:w-full transition-all duration-300" />
-                </span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
+          <div className="flex items-center justify-center gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-2 py-3 sm:py-4 text-sm">
+            {benefits.map((benefit, index) => (
+              <BenefitItem key={index} {...benefit} index={index} />
+            ))}
           </div>
         </div>
       </div>
