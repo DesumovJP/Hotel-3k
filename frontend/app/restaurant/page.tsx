@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
 import { Footer } from "@/components/organisms";
-import { BreadcrumbsInline, FeatureGrid } from "@/components/molecules";
+import { BreadcrumbsInline, FeatureGrid, ReservationModal } from "@/components/molecules";
 import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionBlend } from "@/components/sections";
 import { SectionDivider } from "@/components/ui";
-import { Clock, Phone, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check } from "lucide-react";
+import { Clock, Phone, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check, Calendar } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -74,6 +74,7 @@ const galleryImages = [
 
 export default function RestaurantPage() {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
@@ -87,18 +88,18 @@ export default function RestaurantPage() {
     <>
       {/* Floating Reserve Button */}
       <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: showFloatingCTA ? 0 : 100, opacity: showFloatingCTA ? 1 : 0 }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: showFloatingCTA ? 1 : 0, opacity: showFloatingCTA ? 1 : 0 }}
         transition={{ duration: 0.3, ease: easeOutExpo }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden"
+        className="fixed bottom-6 right-6 z-50 md:hidden"
       >
-        <Link
-          href="/book?type=restaurant"
-          className="flex items-center gap-2 px-6 py-3 bg-navy text-white shadow-xl rounded-full text-sm font-medium"
+        <button
+          onClick={() => setIsReservationOpen(true)}
+          className="flex items-center justify-center w-14 h-14 bg-navy text-white shadow-xl rounded-full"
+          aria-label="Reserve a Table"
         >
-          Reserve a Table
-          <ArrowRight size={16} />
-        </Link>
+          <Calendar size={22} />
+        </button>
       </motion.div>
 
       <main>
@@ -106,6 +107,7 @@ export default function RestaurantPage() {
         <SectionHero
           label="Restaurant of Opduin"
           title="Wadden Gastronomy"
+          singleLineTitle
           description="Local ingredients from Texel and the Wadden Sea, prepared fresh daily by our chefs."
           backgroundImage="/restaurant/restaurant-opduin-600x450.jpg"
           youtubeId="8Raur-TG4_A"
@@ -119,13 +121,13 @@ export default function RestaurantPage() {
               { icon: Clock, label: "Dinner", value: "18:00–22:00" },
             ],
             trailingContent: (
-              <Link
-                href="/book?type=restaurant"
+              <button
+                onClick={() => setIsReservationOpen(true)}
                 className="hidden md:inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
               >
                 Reserve now
                 <ArrowRight size={14} />
-              </Link>
+              </button>
             ),
           }}
         />
@@ -273,13 +275,13 @@ export default function RestaurantPage() {
               <p className="text-neutral-600 text-lg mb-6">
                 Reserve your table for lunch or dinner. Also for non-hotel guests.
               </p>
-              <Link
-                href="/book?type=restaurant"
+              <button
+                onClick={() => setIsReservationOpen(true)}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
               >
                 Reserve a Table
                 <ArrowRight size={16} />
-              </Link>
+              </button>
             </motion.div>
           </div>
         </section>
@@ -331,6 +333,11 @@ export default function RestaurantPage() {
       </main>
 
       <Footer />
+
+      <ReservationModal
+        isOpen={isReservationOpen}
+        onClose={() => setIsReservationOpen(false)}
+      />
     </>
   );
 }

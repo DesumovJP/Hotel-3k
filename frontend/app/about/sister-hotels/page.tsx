@@ -91,7 +91,7 @@ export default function SisterHotelsPage() {
                       <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/10 transition-colors duration-500" />
 
                       {/* Character badge */}
-                      <span className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-navy text-xs">
+                      <span className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 text-navy text-xs shadow-sm">
                         {hotel.character}
                       </span>
                     </div>

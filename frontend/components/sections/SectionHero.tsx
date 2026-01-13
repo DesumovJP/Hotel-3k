@@ -42,6 +42,8 @@ interface SectionHeroProps {
   youtubeId?: string;
   infoStrip?: InfoStrip;
   className?: string;
+  /** Force title to single line */
+  singleLineTitle?: boolean;
 }
 
 export function SectionHero({
@@ -55,6 +57,7 @@ export function SectionHero({
   youtubeId,
   infoStrip,
   className,
+  singleLineTitle,
 }: SectionHeroProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const [youtubeLoaded, setYoutubeLoaded] = useState(false);
@@ -143,14 +146,14 @@ export function SectionHero({
           </motion.div>
 
           {/* Title */}
-          <div className="overflow-hidden mb-4">
+          <div className={cn("mb-4", !singleLineTitle && "overflow-hidden")}>
             <motion.div
-              initial={{ y: 60 }}
-              animate={{ y: 0 }}
+              initial={{ y: singleLineTitle ? 0 : 60, opacity: singleLineTitle ? 0 : 1 }}
+              animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
             >
               <h1
-                className="text-hero text-white"
+                className={cn("text-hero text-white", singleLineTitle && "whitespace-nowrap")}
                 style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3)' }}
               >
                 <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>

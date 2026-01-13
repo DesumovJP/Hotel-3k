@@ -67,7 +67,7 @@ function FacilityCard({ facility, index, isFeatured = false }: FacilityCardProps
             "px-3 py-1.5 text-xs font-medium tracking-wide",
             facility.priceType === "included" || facility.priceType === "free"
               ? "bg-shell text-navy"
-              : "bg-white/90 backdrop-blur-sm text-navy"
+              : "bg-white/95 text-navy shadow-sm"
           )}>
             {formatFacilityPrice(facility.price, facility.priceType)}
           </span>

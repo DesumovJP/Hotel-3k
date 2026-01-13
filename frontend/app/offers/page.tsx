@@ -275,7 +275,7 @@ export default function OffersPage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     {offer.badge && (
-                      <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-navy text-xs px-3 py-1.5 flex items-center gap-1.5">
+                      <span className="absolute top-4 left-4 bg-white/95 text-navy text-xs px-3 py-1.5 flex items-center gap-1.5 shadow-sm">
                         <offer.icon size={12} />
                         {offer.badge}
                       </span>

@@ -93,7 +93,10 @@ export function RoomDetailClient({ room, otherRooms }: RoomDetailClientProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-3 block">
+                <span
+                  className="text-white/90 text-xs tracking-[0.2em] uppercase mb-3 block"
+                  style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 2px 10px rgba(0,0,0,0.6)' }}
+                >
                   {room.view} View · {room.size} m²
                 </span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-4">
@@ -330,7 +333,7 @@ export function RoomDetailClient({ room, otherRooms }: RoomDetailClientProps) {
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <span className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-sm text-navy text-xs flex items-center gap-1.5">
+                        <span className="absolute top-3 left-3 px-3 py-1 bg-white/95 text-navy text-xs flex items-center gap-1.5 shadow-sm">
                           <Eye size={12} />
                           {otherRoom.view}
                         </span>

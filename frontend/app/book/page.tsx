@@ -433,7 +433,7 @@ function BookingForm() {
                         )}
                       </AnimatePresence>
                       {/* View badge */}
-                      <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-xs text-navy font-medium">
+                      <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/95 text-xs text-navy font-medium shadow-sm">
                         <Eye size={10} />
                         {room.view}
                       </span>

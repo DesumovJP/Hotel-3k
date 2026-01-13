@@ -117,7 +117,7 @@ function RoomCard({ room, index, prefersReducedMotion }: RoomCardProps) {
         )}
 
         {/* View Badge with sky blue */}
-        <span className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-sky-700 text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+        <span className="absolute top-4 left-4 bg-white/95 text-sky-700 text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
           <Eye size={12} className="text-sky-500" />
           {room.view}
         </span>

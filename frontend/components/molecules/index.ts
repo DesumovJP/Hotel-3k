@@ -24,3 +24,4 @@ export { FloatingCTA } from "./FloatingCTA";
 export type { FloatingCTAProps } from "./FloatingCTA";
 export { BreadcrumbsSection } from "./BreadcrumbsSection";
 export type { BreadcrumbsSectionProps } from "./BreadcrumbsSection";
+export { ReservationModal } from "./ReservationModal";
