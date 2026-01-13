@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionCTA, SectionHeroCompact, SectionIntro, SectionBlend } from "@/components/sections";
@@ -15,37 +16,14 @@ import {
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-
-const faqs = [
-  {
-    question: "What are the check-in and check-out times?",
-    answer: "Standard check-in is after 3 PM with checkout before 11 AM. Early arrivals are accommodated if rooms are ready, or you can leave your contact info for a call when your room becomes available. Late checkout ('lazy Sunday') costs €42.50 until the last ferry at 9 PM, subject to room availability."
-  },
-  {
-    question: "What is the cancellation policy?",
-    answer: "Direct bookings allow free cancellation up to 24 hours before arrival (3 PM cutoff). Cancellations within 24 hours incur full charges for overnight stays and beauty treatments, though breakfast and taxes are refunded. Third-party bookings follow their respective policies."
-  },
-  {
-    question: "Are pets allowed?",
-    answer: "Dogs are permitted on request at €28.50 per night. We provide a dog pillow and water bowl. Dogs cannot enter the restaurant, and an entire floor remains pet-free for allergic guests."
-  },
-  {
-    question: "What costs should I expect?",
-    answer: "Municipal taxes of €3.85 per person per night apply at checkout. Breakfast is included for standard rooms (8-10:30 AM service). The West Hampton family home excludes breakfast but offers it separately at €24 (adults) or €12 (children)."
-  },
-  {
-    question: "Is parking available?",
-    answer: "Free on-site parking is available with limited spaces. We recommend arriving early to secure a spot."
-  },
-  {
-    question: "What wellness facilities are available?",
-    answer: "The heated pool operates from 7 AM to 11 PM. Sauna rentals cost €10/hour, while massage chairs and solarium carry separate fees. Direct bookers receive complimentary sauna tokens."
-  }
-];
-
 export default function RoomsPage() {
+  const t = useTranslations("rooms");
+  const tCommon = useTranslations("common");
+  const tNav = useTranslations("nav");
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqItems = t.raw("faq.items") as Array<{ question: string; answer: string }>;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +51,7 @@ export default function RoomsPage() {
               href="/book"
               className="flex items-center justify-center gap-2 w-full py-4 bg-navy text-white text-sm tracking-wide uppercase"
             >
-              Check Availability
+              {t("checkAvailability")}
               <ArrowRight size={16} />
             </Link>
           </motion.div>
@@ -83,9 +61,9 @@ export default function RoomsPage() {
       <main className="pb-20 md:pb-0">
         {/* Hero */}
         <SectionHeroCompact
-          label="Sleeping in Opduin"
-          title="Rooms"
-          tagline="Waking up in silence, fresh sheets and a clean sea breeze"
+          label={t("heroLabel")}
+          title={t("heroTitle")}
+          tagline={t("heroTagline")}
         />
 
         {/* Quick Info Strip */}
@@ -94,18 +72,18 @@ export default function RoomsPage() {
             <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Bed size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Rooms</span>
-                <span className="text-ink font-medium whitespace-nowrap">22 Rooms</span>
+                <span className="hidden sm:inline text-neutral-500">{t("infoStrip.roomsLabel")}</span>
+                <span className="text-ink font-medium whitespace-nowrap">{t("infoStrip.rooms")}</span>
               </div>
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Eye size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Views</span>
-                <span className="text-ink font-medium whitespace-nowrap">Sea & Dune</span>
+                <span className="hidden sm:inline text-neutral-500">{t("infoStrip.viewsLabel")}</span>
+                <span className="text-ink font-medium whitespace-nowrap">{t("infoStrip.views")}</span>
               </div>
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Check size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Direct</span>
-                <span className="text-ink font-medium whitespace-nowrap">Free Sauna</span>
+                <span className="hidden sm:inline text-neutral-500">{t("infoStrip.directLabel")}</span>
+                <span className="text-ink font-medium whitespace-nowrap">{t("infoStrip.direct")}</span>
               </div>
             </div>
           </div>
@@ -114,25 +92,25 @@ export default function RoomsPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Rooms" }]} />
+            <BreadcrumbsInline items={[{ label: tNav("rooms") }]} />
           </div>
         </section>
 
         {/* Intro */}
         <SectionIntro
-          label="Accommodations"
-          title="A villa in the dunes"
-          lead="Light and airy, without any unnecessary hotel furniture, air-conditioned, beautiful fabrics, comfortable beds and a mini fridge."
+          label={t("intro.label")}
+          title={t("intro.title")}
+          lead={t("intro.lead")}
           paragraphs={[
-            "Slide open the curtains for a view over the island and the dunes. Make a Nespresso, open the windows and slowly wake up.",
-            "Opduin has 6 different possibilities to choose from. Double rooms with a king size bed, large suites with an extra sleeping couch, apartments with separate bedrooms, a holiday house for a big family, holiday homes for a small family and even six small single rooms.",
+            t("intro.p1"),
+            t("intro.p2"),
           ]}
           image="/rooms/suite-600x400_4.jpg"
-          imageAlt="Suite at Grand Hotel Opduin"
+          imageAlt={t("intro.imageAlt")}
           highlight={{
             icon: Check,
-            title: "Book Direct Benefits",
-            description: "Free sauna access, €5 discount per night, and flexible cancellation when you book directly with us.",
+            title: t("intro.highlightTitle"),
+            description: t("intro.highlightDescription"),
           }}
           padding="lg"
         />
@@ -178,7 +156,7 @@ export default function RoomsPage() {
                   {/* Content */}
                   <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
                     <span className="text-overline text-shell tracking-widest mb-2 block">
-                      {room.size} m² · Up to {room.maxGuests} guests
+                      {room.size} m² · {t("grid.upTo", { count: room.maxGuests })}
                     </span>
 
                     <h2 className="text-display-md text-ink mb-3">
@@ -205,7 +183,7 @@ export default function RoomsPage() {
                       ))}
                       {room.features.length > 4 && (
                         <span className="text-xs px-3 py-1.5 bg-sand-100 text-neutral-500">
-                          +{room.features.length - 4} more
+                          {t("grid.more", { count: room.features.length - 4 })}
                         </span>
                       )}
                     </div>
@@ -216,14 +194,14 @@ export default function RoomsPage() {
                         href={`/rooms/${room.slug}`}
                         className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
                       >
-                        View Details
+                        {t("grid.viewDetails")}
                         <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
                       </Link>
                       <Link
                         href={`/book?room=${room.slug}`}
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
                       >
-                        Book Now
+                        {tCommon("bookNow")}
                       </Link>
                     </div>
                   </div>
@@ -246,15 +224,15 @@ export default function RoomsPage() {
               className="text-center mb-12"
             >
               <span className="text-overline text-shell tracking-widest mb-3 block">
-                Good to Know
+                {t("faq.label")}
               </span>
               <h2 className="text-display-lg text-ink">
-                Frequently Asked Questions
+                {t("faq.title")}
               </h2>
             </motion.div>
 
             <div className="space-y-3">
-              {faqs.map((faq, index) => (
+              {faqItems.map((faq, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -304,10 +282,10 @@ export default function RoomsPage() {
         {/* Need Help Section */}
         <SectionCTA
           icon={Bed}
-          title="Book Your Stay"
-          description="Reserve via our website or just make a call. We would love to put together your Texel-holiday with you. Care for some ideas? Have a look at our package deals."
+          title={t("cta.title")}
+          description={t("cta.description")}
           actions={[
-            { label: "Book Online", href: "/book" },
+            { label: t("cta.bookOnline"), href: "/book" },
           ]}
         />
       </main>

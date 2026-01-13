@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { PageLayout } from "@/components/organisms";
 import { InfoStrip, BreadcrumbsSection } from "@/components/molecules";
 import { SectionHeroCompact } from "@/components/sections";
@@ -26,6 +27,8 @@ import { galleryCategories, galleryImages } from "@/lib/data";
  */
 
 export default function GalleryPage() {
+  const t = useTranslations("gallery");
+  const tNav = useTranslations("nav");
   const [activeCategory, setActiveCategory] = useState("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -55,23 +58,23 @@ export default function GalleryPage() {
     <PageLayout>
       {/* Hero */}
       <SectionHeroCompact
-        label="Visual Stories"
-        title="Gallery"
-        description="Moments captured at Grand Hotel Opduin."
+        label={t("heroLabel")}
+        title={t("heroTitle")}
+        description={t("heroDescription")}
       />
 
       {/* Quick Info Strip - Using centralized component */}
       <InfoStrip
         items={[
-          { icon: Camera, label: "Photos", value: `${galleryImages.length}` },
-          { icon: Grid3X3, label: "Categories", value: `${galleryCategories.length - 1}` },
+          { icon: Camera, label: t("photos"), value: `${galleryImages.length}` },
+          { icon: Grid3X3, label: t("categories"), value: `${galleryCategories.length - 1}` },
         ]}
       />
 
       <SectionDivider variant="wave" color="sand-dark" />
 
       {/* Breadcrumbs - Using centralized component */}
-      <BreadcrumbsSection items={[{ label: "Gallery" }]} />
+      <BreadcrumbsSection items={[{ label: tNav("gallery") }]} />
 
       {/* Gallery Section */}
       <section className="py-16 md:py-24 bg-white">

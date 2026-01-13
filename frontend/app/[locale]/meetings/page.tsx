@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionIntro, SectionBlend } from "@/components/sections";
@@ -87,8 +88,13 @@ const galleryImages = [
 ];
 
 export default function MeetingsPage() {
+  const t = useTranslations("meetings");
+  const tNav = useTranslations("nav");
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const { scrollYProgress } = useScroll();
+
+  // Get translated activities
+  const translatedActivities = t.raw("teambuilding.activities") as string[];
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
@@ -111,33 +117,33 @@ export default function MeetingsPage() {
           className="flex items-center gap-2 px-6 py-3 bg-navy text-white shadow-xl rounded-full text-sm font-medium"
         >
           <Mail size={16} />
-          Request Proposal
+          {t("requestProposal")}
         </a>
       </motion.div>
 
       <main>
         {/* Hero */}
         <SectionHero
-          label="Meetings & Events"
-          title="Meetings"
-          tagline="Sincere attention for each other"
-          description="You will organize a meeting that no one will forget. And that's what matters."
+          label={t("heroLabel")}
+          title={t("heroTitle")}
+          tagline={t("heroTagline")}
+          description={t("heroDescription")}
           backgroundImage="/meetings/bollekamer-600x450.jpg"
           youtubeId="APJyGnhfits"
           primaryAction={{
-            label: "Request Proposal",
+            label: t("requestProposal"),
             href: "mailto:banqueting@opduin.nl",
             icon: Mail,
           }}
           infoStrip={{
             items: [
-              { icon: Users, value: "2 to 200 guests" },
-              { icon: Check, value: "Full-service catering" },
-              { icon: Check, value: "Dedicated events team" },
+              { icon: Users, value: t("infoStrip.guests") },
+              { icon: Check, value: t("infoStrip.catering") },
+              { icon: Check, value: t("infoStrip.team") },
             ],
             trailingContent: (
               <span className="hidden md:block text-neutral-500 text-sm">
-                Response within 24 hours
+                {t("infoStrip.response")}
               </span>
             ),
           }}
@@ -148,25 +154,25 @@ export default function MeetingsPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Meetings & Events" }]} />
+            <BreadcrumbsInline items={[{ label: tNav("meetings") }]} />
           </div>
         </section>
 
         {/* Introduction */}
         <SectionIntro
-          label="Conference & Events"
-          title="Meetings that inspire"
-          lead="An original place where participants are completely isolated from their normal activities. But still easily accessible. An endless variety of professionally organized activities in and around the location."
+          label={t("intro.label")}
+          title={t("intro.title")}
+          lead={t("intro.lead")}
           paragraphs={[
-            "Intimate enough for a small gathering, but also well equipped for a meeting of 200 participants. Meetings on Texel are always successful.",
-            "With a well chosen destination and a good program participants get involved and excited. The atmosphere and comfort in combination with a flexible organization give everyone the chance to grow.",
+            t("intro.p1"),
+            t("intro.p2"),
           ]}
           image="/meetings/vergaderzalen-600x450.jpg"
           imageAlt="Meeting room at Grand Hotel Opduin"
           highlight={{
             icon: Users,
-            title: "Flexible Capacity",
-            description: "From board meetings of 10 people to conferences of 200 participants - we adapt to your needs.",
+            title: t("intro.highlightTitle"),
+            description: t("intro.highlightDescription"),
           }}
           padding="lg"
         />
@@ -176,18 +182,18 @@ export default function MeetingsPage() {
 
         {/* Teambuilding Activities */}
         <SectionTwoColumn
-          title="Teambuilding Activities"
+          title={t("teambuilding.title")}
           content={[
-            "Oyster mudflat hiking, nature excursions, flying above the island, surfing... So many activities to let your guests experience something special between meetings.",
-            "We are happy to help you find a suitable activity and arrange everything for you.",
+            t("teambuilding.p1"),
+            t("teambuilding.p2"),
           ]}
           image="/meetings/teambuildingactiviteiten-600x450.jpg"
           imageAlt="Teambuilding activities on Texel"
           imagePosition="left"
           background="sand"
-          tags={activities}
+          tags={translatedActivities}
           ctaLink="mailto:banqueting@opduin.nl"
-          ctaText="Ask about activities"
+          ctaText={t("teambuilding.cta")}
         />
 
         {/* Blend: sand -> white */}
@@ -195,18 +201,18 @@ export default function MeetingsPage() {
 
         {/* A Texel Party */}
         <SectionTwoColumn
-          title="A Texel Party"
+          title={t("party.title")}
           content={[
-            "A great party is well organized and at the same time gives your guests the opportunity to completely relax. When you invite guests to the island, the fun already begins — it's like going abroad, but even better.",
-            "Texel offers a world of possibilities. Food and drinks grown by local neighbors, fierce nature, adventurous sports, high-standing art and culture, wellness, and unique skies on endless beaches.",
-            "Weddings, anniversaries, family gatherings — your guests don't just stop by, they enjoy a real happening.",
+            t("party.p1"),
+            t("party.p2"),
+            t("party.p3"),
           ]}
           image="/meetings/een-feestje-op-texel-600x450.jpg"
           imageAlt="Celebrations on Texel"
           imagePosition="right"
           background="white"
           ctaLink="mailto:banqueting@opduin.nl"
-          ctaText="Plan your celebration"
+          ctaText={t("party.cta")}
         />
 
         {/* Blend: white -> sand-100 */}
@@ -226,19 +232,16 @@ export default function MeetingsPage() {
               </div>
               <div>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                  Getting Married on Texel
+                  {t("wedding.title")}
                 </h2>
                 <p className="text-neutral-600 mb-4 leading-relaxed">
-                  Opduin is an official wedding location. Ideal for small weddings. You can get married
-                  in one of our rooms or on the beach and afterwards a relaxed dinner with the whole group.
+                  {t("wedding.p1")}
                 </p>
                 <p className="text-neutral-600 mb-6 leading-relaxed">
-                  To ensure that your wedding day is arranged according to your wishes, we work together
-                  with Sophie of Trouwen Texel. She will organize your wedding (or part of it) with heart
-                  and soul, so that you can enjoy this special day carefree.
+                  {t("wedding.p2")}
                 </p>
                 <div className="bg-white p-4 rounded-lg mb-6">
-                  <p className="text-sm font-medium text-ink mb-2">Contact the Texel wedding planner Sophie:</p>
+                  <p className="text-sm font-medium text-ink mb-2">{t("wedding.contactWedding")}</p>
                   <div className="text-sm text-neutral-600 space-y-1">
                     <p><a href="https://www.trouwen-texel.nl" target="_blank" rel="noopener noreferrer" className="text-navy hover:text-shell">www.trouwen-texel.nl</a></p>
                     <p><a href="mailto:info@trouwentexel.com" className="text-navy hover:text-shell">info@trouwentexel.com</a></p>
@@ -249,7 +252,7 @@ export default function MeetingsPage() {
                   href="mailto:banqueting@opduin.nl"
                   className="inline-flex items-center gap-2 text-navy font-medium hover:text-shell transition-colors"
                 >
-                  Contact our banqueting team
+                  {t("wedding.contactBanqueting")}
                   <ArrowRight size={16} />
                 </a>
               </div>
@@ -262,18 +265,18 @@ export default function MeetingsPage() {
 
         {/* Meeting Packages */}
         <SectionTwoColumn
-          title="Meeting Packages"
+          title={t("packages.title")}
           content={[
-            "The complete package. You do not have to worry about anything, we make sure that you and your guests are taken care of in the right way.",
-            "Including meeting room rental, lunches, dinner and treats. Prices depend on your wishes and the number of participants. We are happy to make an offer for you.",
-            "Need extra ideas for an activity on Texel? Just give us a call and we will help you with some suggestions. We are also glad to take care of the organizational part.",
+            t("packages.p1"),
+            t("packages.p2"),
+            t("packages.p3"),
           ]}
           image="/meetings/vergaderarrangementen-600x450.jpg"
           imageAlt="Meeting packages"
           imagePosition="left"
           background="white"
           ctaLink="mailto:banqueting@opduin.nl"
-          ctaText="Request a quote"
+          ctaText={t("packages.cta")}
         />
 
         {/* Blend: white -> sand-100 */}
@@ -284,10 +287,10 @@ export default function MeetingsPage() {
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="font-display text-3xl md:text-4xl text-ink mb-3">
-                Meeting Rooms
+                {t("rooms.title")}
               </h2>
               <p className="text-neutral-600">
-                All rooms on first floor with natural daylight. Beamer, screen, sound system & flipchart included.
+                {t("rooms.description")}
               </p>
             </div>
 
@@ -308,9 +311,9 @@ export default function MeetingsPage() {
                     <p className="text-sm text-shell mb-2">{room.dimensions} • {room.area}</p>
                     <p className="text-sm text-neutral-600 mb-3">{room.description}</p>
                     <div className="flex gap-4 text-xs text-neutral-500">
-                      <span>Carré: {room.carre}</span>
-                      <span>Theatre: {room.theatre}</span>
-                      <span>U: {room.ushape}</span>
+                      <span>{t("rooms.carre")}: {room.carre}</span>
+                      <span>{t("rooms.theatre")}: {room.theatre}</span>
+                      <span>{t("rooms.ushape")}: {room.ushape}</span>
                     </div>
                   </div>
                 </div>
@@ -319,16 +322,16 @@ export default function MeetingsPage() {
 
             {/* Capacity Table */}
             <div className="bg-white rounded-lg p-6">
-              <h3 className="font-display text-xl text-ink mb-4 text-center">Room Combinations</h3>
+              <h3 className="font-display text-xl text-ink mb-4 text-center">{t("rooms.combinations")}</h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="border-b-2 border-navy">
-                      <th className="py-3 pr-4 text-sm font-medium text-ink">Configuration</th>
-                      <th className="py-3 px-4 text-sm font-medium text-ink text-center hidden md:table-cell">Size</th>
-                      <th className="py-3 px-4 text-sm font-medium text-ink text-center">Carré</th>
-                      <th className="py-3 px-4 text-sm font-medium text-ink text-center">Theatre</th>
-                      <th className="py-3 pl-4 text-sm font-medium text-ink text-center">U-Shape</th>
+                      <th className="py-3 pr-4 text-sm font-medium text-ink">{t("rooms.configuration")}</th>
+                      <th className="py-3 px-4 text-sm font-medium text-ink text-center hidden md:table-cell">{t("rooms.size")}</th>
+                      <th className="py-3 px-4 text-sm font-medium text-ink text-center">{t("rooms.carre")}</th>
+                      <th className="py-3 px-4 text-sm font-medium text-ink text-center">{t("rooms.theatre")}</th>
+                      <th className="py-3 pl-4 text-sm font-medium text-ink text-center">{t("rooms.ushape")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -350,7 +353,7 @@ export default function MeetingsPage() {
                 </table>
               </div>
               <p className="text-xs text-neutral-500 mt-4 text-center">
-                Additional equipment available through third-party hire.
+                {t("rooms.additionalEquipment")}
               </p>
             </div>
           </div>
@@ -358,7 +361,7 @@ export default function MeetingsPage() {
 
         {/* Gallery */}
         <MiniGallery
-          title="Events at Opduin"
+          title={t("gallery")}
           images={galleryImages}
           columns={3}
           background="sand-100"
@@ -370,8 +373,8 @@ export default function MeetingsPage() {
         {/* Contact CTA */}
         <SectionCTA
           icon={Users}
-          title="Contact Our Banqueting Team"
-          description="Luuk and Esmee will help you plan your event. We respond within 24 hours."
+          title={t("cta.title")}
+          description={t("cta.description")}
           actions={[
             { label: "banqueting@opduin.nl", href: "mailto:banqueting@opduin.nl", icon: Mail },
           ]}

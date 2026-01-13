@@ -1,119 +1,46 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionCTA, SectionHeroCompact } from "@/components/sections";
-import { SectionDivider } from "@/components/ui";
 import {
   Check, ArrowRight, Gift, Star, Snowflake, Leaf, Sparkles, Compass, UtensilsCrossed
 } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-// Real package deals from opduin.nl
-const offers = [
-  {
-    id: "warm-winter",
-    slug: "warm-winter-offer",
-    title: "Warm Winter Offer",
-    subtitle: "Cozy escape with wellness included",
-    description: "Escape the winter cold with our warming package. Enjoy a cozy stay with breakfast, afternoon coffee and cake, and full access to our wellness facilities including sauna, steam room, and heated indoor pool.",
-    image: "/offers/warm-winteraanbieding-400x300_2.jpg",
-    category: "Seasonal",
-    icon: Snowflake,
-    badge: "Winter Special",
-    includes: [
-      "Overnight stay with breakfast",
-      "Coffee and cake in the afternoon",
-      "Access to wellness facilities",
-      "Free parking",
-      "Free WiFi",
-    ],
-    idealFor: "Weekend getaways, wellness seekers",
-  },
-  {
-    id: "early-spring",
-    slug: "early-spring-week",
-    title: "Early Spring Week",
-    subtitle: "Up to 50% discount on accommodation",
-    description: "Book early and save big on your spring holiday. Enjoy the awakening nature of Texel with up to 50% discount on your overnight stay with breakfast. The perfect time to explore the island before the summer crowds arrive.",
-    image: "/offers/vroege-voorjaars-week-400x300.jpg",
-    category: "Seasonal",
-    icon: Leaf,
-    badge: "Up to 50% Off",
-    includes: [
-      "Up to 50% discount on accommodation",
-      "Breakfast included",
-      "Access to wellness facilities",
-      "Free parking",
-      "Free WiFi",
-    ],
-    idealFor: "Early bookers, budget-conscious travelers",
-  },
-  {
-    id: "opduin-relax",
-    slug: "opduin-relax-deal",
-    title: "Opduin Relax Deal",
-    subtitle: "3 nights of pure relaxation",
-    description: "Unwind completely with our 3-night relaxation package. Includes a delicious dinner at our restaurant, full access to wellness facilities, and everything you need for a peaceful retreat in the dunes of Texel.",
-    image: "/offers/opduin-verwenaanbieding-400x300_2.jpg",
-    category: "Wellness",
-    icon: Sparkles,
-    badge: "3 Nights",
-    includes: [
-      "3 nights accommodation",
-      "Breakfast daily",
-      "1 dinner at Restaurant Opduin",
-      "Access to wellness facilities",
-      "Free parking",
-    ],
-    idealFor: "Couples, wellness retreats, relaxation",
-  },
-  {
-    id: "explore-texel",
-    slug: "explore-texel-deal",
-    title: "Explore Texel Deal",
-    subtitle: "2 nights discovering the island",
-    description: "The perfect package for those who want to discover all that Texel has to offer. Includes entrance to Ecomare seal sanctuary, a picnic bag for your adventures, and dinner to end your day of exploration.",
-    image: "/offers/ontdek-texel-aanbieding-400x300_1.jpg",
-    category: "Adventure",
-    icon: Compass,
-    badge: "2 Nights",
-    includes: [
-      "2 nights accommodation",
-      "Breakfast daily",
-      "1 dinner at Restaurant Opduin",
-      "Entrance to Ecomare",
-      "Picnic bag for your excursion",
-    ],
-    idealFor: "Families, nature lovers, first-time visitors",
-  },
-  {
-    id: "taste-of-texel",
-    slug: "taste-of-texel-deal",
-    title: "Taste of Texel Deal",
-    subtitle: "2 nights of culinary delight",
-    description: "Experience the best flavors Texel has to offer. This culinary package includes two dinners at our restaurant featuring local Texel lamb, fresh seafood, and island produce. A feast for food lovers.",
-    image: "/offers/smaak-van-texel-aanbieding-400x300_1.jpg",
-    category: "Culinary",
-    icon: UtensilsCrossed,
-    badge: "2 Dinners",
-    includes: [
-      "2 nights accommodation",
-      "Breakfast daily",
-      "2 dinners at Restaurant Opduin",
-      "Access to wellness facilities",
-      "Free parking",
-    ],
-    idealFor: "Foodies, couples, culinary enthusiasts",
-  },
-];
+const offerKeys = ["warmWinter", "earlySpring", "opduinRelax", "exploreTexel", "tasteOfTexel"] as const;
+const offerImages = {
+  warmWinter: "/offers/warm-winteraanbieding-400x300_2.jpg",
+  earlySpring: "/offers/vroege-voorjaars-week-400x300.jpg",
+  opduinRelax: "/offers/opduin-verwenaanbieding-400x300_2.jpg",
+  exploreTexel: "/offers/ontdek-texel-aanbieding-400x300_1.jpg",
+  tasteOfTexel: "/offers/smaak-van-texel-aanbieding-400x300_1.jpg",
+};
+const offerSlugs = {
+  warmWinter: "warm-winter-offer",
+  earlySpring: "early-spring-week",
+  opduinRelax: "opduin-relax-deal",
+  exploreTexel: "explore-texel-deal",
+  tasteOfTexel: "taste-of-texel-deal",
+};
+const offerIcons = {
+  warmWinter: Snowflake,
+  earlySpring: Leaf,
+  opduinRelax: Sparkles,
+  exploreTexel: Compass,
+  tasteOfTexel: UtensilsCrossed,
+};
 
 export default function OffersPage() {
+  const t = useTranslations("offers");
+  const tCommon = useTranslations("common");
+  const tNav = useTranslations("nav");
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
 
   useEffect(() => {
@@ -142,7 +69,7 @@ export default function OffersPage() {
               href="/book"
               className="flex items-center justify-center gap-2 w-full py-4 bg-navy text-white text-sm tracking-wide uppercase"
             >
-              Book a Package
+              {t("bookPackage")}
               <ArrowRight size={16} />
             </Link>
           </motion.div>
@@ -152,9 +79,9 @@ export default function OffersPage() {
       <main className="pb-20 md:pb-0">
         {/* Hero */}
         <SectionHeroCompact
-          label="Book Direct & Save"
-          title="Package Deals"
-          tagline="Advantageous offers for direct bookers"
+          label={t("heroLabel")}
+          title={t("heroTitle")}
+          tagline={t("heroTagline")}
         />
 
         {/* Quick Info Strip */}
@@ -163,18 +90,18 @@ export default function OffersPage() {
             <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Gift size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Packages</span>
-                <span className="text-ink font-medium whitespace-nowrap">{offers.length} Deals</span>
+                <span className="hidden sm:inline text-neutral-500">{t("infoStrip.packagesLabel")}</span>
+                <span className="text-ink font-medium whitespace-nowrap">{t("infoStrip.deals", { count: offerKeys.length })}</span>
               </div>
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Star size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Included</span>
-                <span className="text-ink font-medium whitespace-nowrap">Free Extras</span>
+                <span className="hidden sm:inline text-neutral-500">{t("infoStrip.includedLabel")}</span>
+                <span className="text-ink font-medium whitespace-nowrap">{t("infoStrip.freeExtras")}</span>
               </div>
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Check size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Direct</span>
-                <span className="text-ink font-medium whitespace-nowrap">Skip 15% Fee</span>
+                <span className="hidden sm:inline text-neutral-500">{t("infoStrip.directLabel")}</span>
+                <span className="text-ink font-medium whitespace-nowrap">{t("infoStrip.skipFee")}</span>
               </div>
             </div>
           </div>
@@ -183,7 +110,7 @@ export default function OffersPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Package Deals" }]} />
+            <BreadcrumbsInline items={[{ label: tNav("offers") }]} />
           </div>
         </section>
 
@@ -198,27 +125,25 @@ export default function OffersPage() {
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
                 <span className="text-overline text-shell mb-4 block">
-                  Why Book Direct?
+                  {t("intro.label")}
                 </span>
                 <h2 className="text-display-lg text-ink mb-6">
-                  Better value, more perks
+                  {t("intro.title")}
                 </h2>
                 <p className="text-body-lg text-neutral-600 mb-6">
-                  Booking via Booking.com is convenient, but pricey — we pay 15% commission
-                  on every third-party booking. That's money we'd rather spend on you.
+                  {t("intro.p1")}
                 </p>
                 <p className="text-body-md text-neutral-600 mb-8">
-                  Our packages are exclusively for direct bookers: free extras, discounts,
-                  and flexible cancellation. Choose your perfect Texel escape below.
+                  {t("intro.p2")}
                 </p>
 
                 {/* Benefits highlight */}
                 <div className="flex items-start gap-3 p-4 bg-sand-50 border-l-2 border-shell">
                   <Gift className="w-5 h-5 text-shell mt-0.5" />
                   <div>
-                    <p className="font-medium text-ink mb-1">Direct Booking Perks</p>
+                    <p className="font-medium text-ink mb-1">{t("intro.highlightTitle")}</p>
                     <p className="text-sm text-neutral-600">
-                      Free sauna access, €5/night discount, and extras you won't find elsewhere.
+                      {t("intro.highlightDescription")}
                     </p>
                   </div>
                 </div>
@@ -234,7 +159,7 @@ export default function OffersPage() {
               >
                 <Image
                   src="/offers/opduin-verwenaanbieding-600x400_2.jpg"
-                  alt="Relaxation package at Grand Hotel Opduin"
+                  alt={t("intro.imageAlt")}
                   fill
                   className="object-cover"
                 />
@@ -247,101 +172,103 @@ export default function OffersPage() {
         <section className="py-16 md:py-20 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="space-y-20">
-              {offers.map((offer, index) => (
-                <motion.article
-                  key={offer.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1, ease: easeOutExpo }}
-                  className={cn(
-                    "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center",
-                    index % 2 === 1 && "lg:grid-flow-dense"
-                  )}
-                >
-                  {/* Image - Clean style like rooms */}
-                  <Link
-                    href={`/offers/${offer.slug}`}
+              {offerKeys.map((key, index) => {
+                const Icon = offerIcons[key];
+                const includes = t.raw(`items.${key}.includes`) as string[];
+                return (
+                  <motion.article
+                    key={key}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: easeOutExpo }}
                     className={cn(
-                      "relative aspect-[4/3] overflow-hidden bg-sand-100 group",
-                      index % 2 === 1 && "lg:col-start-2"
+                      "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center",
+                      index % 2 === 1 && "lg:grid-flow-dense"
                     )}
                   >
-                    <Image
-                      src={offer.image}
-                      alt={offer.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {offer.badge && (
-                      <span className="absolute top-4 left-4 bg-white/95 text-navy text-xs px-3 py-1.5 flex items-center gap-1.5 shadow-sm">
-                        <offer.icon size={12} />
-                        {offer.badge}
-                      </span>
-                    )}
-                  </Link>
-
-                  {/* Content - Clean like rooms */}
-                  <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                    <span className="text-overline text-shell tracking-widest mb-2 block">
-                      {offer.category}
-                    </span>
-
-                    <h2 className="text-display-md text-ink mb-3">
-                      {offer.title}
-                    </h2>
-
-                    <p className="text-tagline-md text-neutral-500 mb-4">
-                      {offer.subtitle}
-                    </p>
-
-                    <p className="text-body-md text-neutral-600 mb-6">
-                      {offer.description}
-                    </p>
-
-                    {/* Includes - Simple tags like rooms */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {offer.includes.slice(0, 4).map((item, i) => (
-                        <span
-                          key={i}
-                          className="text-xs px-3 py-1.5 bg-sand-100 text-neutral-600 flex items-center gap-1.5"
-                        >
-                          <Check size={12} className="text-shell" />
-                          {item}
-                        </span>
-                      ))}
-                      {offer.includes.length > 4 && (
-                        <span className="text-xs px-3 py-1.5 bg-sand-100 text-neutral-500">
-                          +{offer.includes.length - 4} more
-                        </span>
+                    {/* Image - Clean style like rooms */}
+                    <Link
+                      href={`/offers/${offerSlugs[key]}`}
+                      className={cn(
+                        "relative aspect-[4/3] overflow-hidden bg-sand-100 group",
+                        index % 2 === 1 && "lg:col-start-2"
                       )}
-                    </div>
+                    >
+                      <Image
+                        src={offerImages[key]}
+                        alt={t(`items.${key}.title`)}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <span className="absolute top-4 left-4 bg-white/95 text-navy text-xs px-3 py-1.5 flex items-center gap-1.5 shadow-sm">
+                        <Icon size={12} />
+                        {t(`items.${key}.badge`)}
+                      </span>
+                    </Link>
 
-                    {/* Ideal For */}
-                    <p className="text-sm text-neutral-500 mb-8">
-                      <span className="text-neutral-400">Ideal for:</span> {offer.idealFor}
-                    </p>
+                    {/* Content - Clean like rooms */}
+                    <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
+                      <span className="text-overline text-shell tracking-widest mb-2 block">
+                        {t(`items.${key}.category`)}
+                      </span>
 
-                    {/* CTAs - Like rooms */}
-                    <div className="flex flex-wrap gap-4">
-                      <Link
-                        href={`/offers/${offer.slug}`}
-                        className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
-                      >
-                        View Details
-                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                      </Link>
-                      <Link
-                        href="/book"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
-                      >
-                        Book Now
-                      </Link>
+                      <h2 className="text-display-md text-ink mb-3">
+                        {t(`items.${key}.title`)}
+                      </h2>
+
+                      <p className="text-tagline-md text-neutral-500 mb-4">
+                        {t(`items.${key}.subtitle`)}
+                      </p>
+
+                      <p className="text-body-md text-neutral-600 mb-6">
+                        {t(`items.${key}.description`)}
+                      </p>
+
+                      {/* Includes - Simple tags like rooms */}
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {includes.slice(0, 4).map((item, i) => (
+                          <span
+                            key={i}
+                            className="text-xs px-3 py-1.5 bg-sand-100 text-neutral-600 flex items-center gap-1.5"
+                          >
+                            <Check size={12} className="text-shell" />
+                            {item}
+                          </span>
+                        ))}
+                        {includes.length > 4 && (
+                          <span className="text-xs px-3 py-1.5 bg-sand-100 text-neutral-500">
+                            {t("more", { count: includes.length - 4 })}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Ideal For */}
+                      <p className="text-sm text-neutral-500 mb-8">
+                        <span className="text-neutral-400">{t("idealFor")}:</span> {t(`items.${key}.idealFor`)}
+                      </p>
+
+                      {/* CTAs - Like rooms */}
+                      <div className="flex flex-wrap gap-4">
+                        <Link
+                          href={`/offers/${offerSlugs[key]}`}
+                          className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
+                        >
+                          {t("viewDetails")}
+                          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                        </Link>
+                        <Link
+                          href="/book"
+                          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
+                        >
+                          {tCommon("bookNow")}
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </motion.article>
-              ))}
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -349,10 +276,10 @@ export default function OffersPage() {
         {/* Contact CTA */}
         <SectionCTA
           icon={Gift}
-          title="Book Your Package"
-          description="Reserve via our website or just make a call. We are happy to answer your questions and help you choose the right package for your Texel holiday."
+          title={t("cta.title")}
+          description={t("cta.description")}
           actions={[
-            { label: "Book Online", href: "/book" },
+            { label: t("cta.bookOnline"), href: "/book" },
           ]}
         />
       </main>

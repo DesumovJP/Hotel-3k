@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionHeroCompact, SectionCTA } from "@/components/sections";
@@ -16,27 +17,29 @@ import {
 import { cn } from "@/lib/utils";
 import { easeOutExpo } from "@/lib/motion";
 
-const steps = [
-  { number: 1, label: "Dates & Guests" },
-  { number: 2, label: "Choose Room" },
-  { number: 3, label: "Your Details" },
-];
-
-const trustIndicators = [
-  { icon: Shield, label: "Secure Booking" },
-  { icon: Clock, label: "Instant Confirmation" },
-  { icon: CreditCard, label: "No Payment Now" },
-  { icon: BadgeCheck, label: "Best Rate Guarantee" },
-];
-
-const directBenefits = [
-  "Free sauna access",
-  "€5 off per night",
-  "Texel gift on departure",
-  "Flexible cancellation",
-];
-
 function BookingForm() {
+  const t = useTranslations("booking");
+  const tCommon = useTranslations("common");
+
+  const steps = [
+    { number: 1, label: t("steps.datesGuests") },
+    { number: 2, label: t("steps.chooseRoom") },
+    { number: 3, label: t("steps.yourDetails") },
+  ];
+
+  const trustIndicators = [
+    { icon: Shield, label: t("trustIndicators.secure") },
+    { icon: Clock, label: t("trustIndicators.instant") },
+    { icon: CreditCard, label: t("trustIndicators.noPayment") },
+    { icon: BadgeCheck, label: t("trustIndicators.bestRate") },
+  ];
+
+  const directBenefits = [
+    t("directBenefits.sauna"),
+    t("directBenefits.discount"),
+    t("directBenefits.gift"),
+    t("directBenefits.cancellation"),
+  ];
   const searchParams = useSearchParams();
   const preselectedRoom = searchParams.get("room");
 
@@ -119,7 +122,7 @@ function BookingForm() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="font-display text-3xl md:text-4xl text-ink mb-4"
         >
-          Request Received
+          {t("success.title")}
         </motion.h2>
 
         <motion.p
@@ -128,8 +131,7 @@ function BookingForm() {
           transition={{ delay: 0.4, duration: 0.5 }}
           className="text-neutral-600 mb-6"
         >
-          Thank you for your reservation request. Our team will review your details
-          and confirm your booking within 24 hours via email.
+          {t("success.description")}
         </motion.p>
 
         <motion.div
@@ -138,7 +140,7 @@ function BookingForm() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="bg-sand-100 p-6 mb-8"
         >
-          <p className="text-sm text-neutral-500 mb-2">Confirmation will be sent to:</p>
+          <p className="text-sm text-neutral-500 mb-2">{t("success.confirmationTo")}</p>
           <p className="text-ink font-medium">{formData.email}</p>
         </motion.div>
 
@@ -150,7 +152,7 @@ function BookingForm() {
             transition={{ delay: 0.55, duration: 0.5 }}
             className="bg-white border border-sand-200 p-6 mb-8 text-left"
           >
-            <p className="text-sm text-neutral-500 mb-4">Reservation Summary</p>
+            <p className="text-sm text-neutral-500 mb-4">{t("step3.reservationSummary")}</p>
             <div className="flex gap-4 mb-4">
               <div className="relative w-24 h-20 overflow-hidden bg-sand-100 flex-shrink-0">
                 <Image
@@ -194,13 +196,13 @@ function BookingForm() {
             href="/"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
           >
-            Return Home
+            {t("success.returnHome")}
           </Link>
           <Link
             href="/contact"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
           >
-            Contact Us
+            {tCommon("contactUs")}
           </Link>
         </motion.div>
       </motion.div>
@@ -276,14 +278,14 @@ function BookingForm() {
             <div className="max-w-xl mx-auto space-y-8">
               <div className="text-center mb-8">
                 <h3 className="font-display text-2xl md:text-3xl text-ink mb-2">
-                  When are you visiting?
+                  {t("step1.title")}
                 </h3>
-                <p className="text-neutral-500">Select your dates and number of guests</p>
+                <p className="text-neutral-500">{t("step1.subtitle")}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="group">
-                  <label className="block text-sm font-medium text-ink mb-2">Check-in</label>
+                  <label className="block text-sm font-medium text-ink mb-2">{t("checkIn")}</label>
                   <div className="relative">
                     <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-navy transition-colors" />
                     <input
@@ -298,7 +300,7 @@ function BookingForm() {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-ink mb-2">Check-out</label>
+                  <label className="block text-sm font-medium text-ink mb-2">{t("checkOut")}</label>
                   <div className="relative">
                     <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 group-focus-within:text-navy transition-colors" />
                     <input
@@ -323,7 +325,7 @@ function BookingForm() {
                   >
                     <span className="inline-flex items-center gap-2 px-4 py-2 bg-shell/10 text-navy font-medium">
                       <Check size={16} className="text-shell" />
-                      {nights} night{nights > 1 ? "s" : ""} selected
+                      {nights} {nights > 1 ? t("step1.nightsSelectedPlural") : t("step1.nightsSelected")}
                     </span>
                   </motion.div>
                 )}
@@ -336,9 +338,9 @@ function BookingForm() {
                     className="flex items-center justify-between py-5 border-b border-sand-200"
                   >
                     <div>
-                      <p className="font-medium text-ink capitalize">{type}</p>
+                      <p className="font-medium text-ink capitalize">{type === "adults" ? t("adults") : t("children")}</p>
                       <p className="text-sm text-neutral-500">
-                        {type === "adults" ? "Ages 18+" : "Ages 0-17"}
+                        {type === "adults" ? t("step1.adultsAges") : t("step1.childrenAges")}
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
@@ -374,7 +376,7 @@ function BookingForm() {
                 disabled={!formData.checkIn || !formData.checkOut || nights < 1}
                 className="group w-full flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-all text-sm tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
               >
-                Continue
+                {t("continue")}
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </div>
@@ -385,7 +387,7 @@ function BookingForm() {
             <div>
               <div className="text-center mb-8">
                 <h3 className="font-display text-2xl md:text-3xl text-ink mb-2">
-                  Choose your room
+                  {t("step2.title")}
                 </h3>
                 <p className="text-neutral-500">
                   {nights} night{nights > 1 ? "s" : ""} · {formData.adults} adult{formData.adults > 1 ? "s" : ""}
@@ -448,7 +450,7 @@ function BookingForm() {
                         </span>
                         <span className="flex items-center gap-1">
                           <Users size={12} className="text-shell" />
-                          Up to {room.maxGuests}
+                          {t("step2.upTo")} {room.maxGuests}
                         </span>
                       </div>
                     </div>
@@ -465,7 +467,7 @@ function BookingForm() {
                   className="group flex items-center justify-center gap-2 px-6 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-all text-sm tracking-wide uppercase"
                 >
                   <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                  Back
+                  {t("back")}
                 </motion.button>
                 <motion.button
                   type="button"
@@ -475,7 +477,7 @@ function BookingForm() {
                   disabled={!formData.selectedRoom}
                   className="group flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-all text-sm tracking-wide uppercase disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
                 >
-                  Continue
+                  {t("continue")}
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </div>
@@ -487,15 +489,15 @@ function BookingForm() {
             <div className="max-w-xl mx-auto">
               <div className="text-center mb-8">
                 <h3 className="font-display text-2xl md:text-3xl text-ink mb-2">
-                  Your details
+                  {t("step3.title")}
                 </h3>
-                <p className="text-neutral-500">Complete your reservation request</p>
+                <p className="text-neutral-500">{t("step3.subtitle")}</p>
               </div>
 
               {/* Summary Card */}
               {selectedRoomData && (
                 <div className="bg-sand-50 border border-sand-200 p-6 mb-8">
-                  <p className="text-xs text-shell font-medium uppercase tracking-wider mb-4">Reservation Summary</p>
+                  <p className="text-xs text-shell font-medium uppercase tracking-wider mb-4">{t("step3.reservationSummary")}</p>
                   <div className="flex gap-4 mb-4">
                     <div className="relative w-24 h-20 overflow-hidden bg-sand-200 flex-shrink-0 shadow-sm">
                       <Image
@@ -519,7 +521,7 @@ function BookingForm() {
                     </div>
                     <div className="text-right">
                       <p className="font-display text-2xl text-navy">{nights}</p>
-                      <p className="text-xs text-neutral-500">night{nights > 1 ? "s" : ""}</p>
+                      <p className="text-xs text-neutral-500">{nights > 1 ? t("nights") : t("night")}</p>
                     </div>
                   </div>
 
@@ -527,7 +529,7 @@ function BookingForm() {
                   <div className="border-t border-sand-200 pt-4">
                     <p className="text-xs text-navy font-medium mb-3 flex items-center gap-1.5">
                       <Gift size={14} className="text-shell" />
-                      Book Direct Benefits
+                      {t("directBenefits.title")}
                     </p>
                     <div className="grid grid-cols-2 gap-2">
                       {directBenefits.map((benefit) => (
@@ -544,7 +546,7 @@ function BookingForm() {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="group">
-                    <label className="block text-sm font-medium text-ink mb-2">First Name</label>
+                    <label className="block text-sm font-medium text-ink mb-2">{t("step3.firstName")}</label>
                     <input
                       type="text"
                       required
@@ -554,7 +556,7 @@ function BookingForm() {
                     />
                   </div>
                   <div className="group">
-                    <label className="block text-sm font-medium text-ink mb-2">Last Name</label>
+                    <label className="block text-sm font-medium text-ink mb-2">{t("step3.lastName")}</label>
                     <input
                       type="text"
                       required
@@ -566,7 +568,7 @@ function BookingForm() {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-ink mb-2">Email</label>
+                  <label className="block text-sm font-medium text-ink mb-2">{t("step3.email")}</label>
                   <input
                     type="email"
                     required
@@ -578,7 +580,7 @@ function BookingForm() {
                 </div>
 
                 <div className="group">
-                  <label className="block text-sm font-medium text-ink mb-2">Phone</label>
+                  <label className="block text-sm font-medium text-ink mb-2">{t("step3.phone")}</label>
                   <input
                     type="tel"
                     required
@@ -591,14 +593,14 @@ function BookingForm() {
 
                 <div className="group">
                   <label className="block text-sm font-medium text-ink mb-2">
-                    Special Requests <span className="text-neutral-400 font-normal">(optional)</span>
+                    {t("step3.specialRequests")} <span className="text-neutral-400 font-normal">({t("step3.specialRequestsOptional")})</span>
                   </label>
                   <textarea
                     rows={3}
                     value={formData.specialRequests}
                     onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
                     className="w-full px-4 py-4 border border-sand-200 focus:border-navy focus:ring-2 focus:ring-navy/10 outline-none transition-all resize-none bg-white placeholder:text-neutral-300"
-                    placeholder="Dietary requirements, accessibility needs, special occasions..."
+                    placeholder={t("step3.specialRequestsPlaceholder")}
                   />
                 </div>
               </div>
@@ -612,7 +614,7 @@ function BookingForm() {
                   className="group flex items-center justify-center gap-2 px-6 py-4 border border-navy text-navy hover:bg-navy hover:text-white transition-colors text-sm tracking-wide uppercase"
                 >
                   <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                  Back
+                  {t("back")}
                 </motion.button>
                 <motion.button
                   type="submit"
@@ -620,13 +622,13 @@ function BookingForm() {
                   whileTap={{ scale: 0.98 }}
                   className="group flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-shell text-navy hover:bg-shell/90 transition-colors text-sm tracking-wide uppercase"
                 >
-                  Submit Request
+                  {t("step3.submitRequest")}
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </div>
 
               <p className="text-xs text-neutral-400 text-center mt-6">
-                By submitting, you agree to our booking terms. No payment required until confirmation.
+                {t("step3.terms")}
               </p>
             </div>
           )}
@@ -637,14 +639,17 @@ function BookingForm() {
 }
 
 export default function BookPage() {
+  const t = useTranslations("booking");
+  const tNav = useTranslations("nav");
+
   return (
     <>
       <main>
         {/* Hero */}
         <SectionHeroCompact
-          label="Reservations"
-          title="Book Your Stay"
-          description="Reserve directly for the best rates and exclusive benefits."
+          label={t("heroLabel")}
+          title={t("heroTitle")}
+          description={t("heroDescription")}
           image="/home/hero-fallback.jpg"
         />
 
@@ -652,13 +657,18 @@ export default function BookPage() {
         <section className="bg-navy text-white py-4 border-t border-white/10">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
-              {trustIndicators.map((item, index) => {
+              {[
+                { icon: Shield, label: t("trustIndicators.secure") },
+                { icon: Clock, label: t("trustIndicators.instant") },
+                { icon: CreditCard, label: t("trustIndicators.noPayment") },
+                { icon: BadgeCheck, label: t("trustIndicators.bestRate") },
+              ].map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <div key={item.label} className="flex items-center gap-2">
                     <Icon size={16} className="text-shell" />
                     <span>{item.label}</span>
-                    {index < trustIndicators.length - 1 && (
+                    {index < 3 && (
                       <span className="hidden md:block ml-6 text-white/30">|</span>
                     )}
                   </div>
@@ -671,7 +681,7 @@ export default function BookPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-sand-200">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Book" }]} />
+            <BreadcrumbsInline items={[{ label: tNav("reserve") }]} />
           </div>
         </section>
 
@@ -699,10 +709,10 @@ export default function BookPage() {
         {/* Contact CTA */}
         <SectionCTA
           icon={Phone}
-          title="Prefer to speak with us?"
-          description="Our reservations team is available Mon-Sun 9:00-18:00 to assist with your booking."
+          title={t("cta.title")}
+          description={t("cta.description")}
           actions={[
-            { label: "Call +31 222 317 445", href: "tel:+31222317445" },
+            { label: t("cta.call"), href: "tel:+31222317445" },
           ]}
           background="sand"
         />

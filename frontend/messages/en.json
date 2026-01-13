@@ -160,10 +160,72 @@
     "fromPrice": "From",
     "perNight": "per night",
     "maxGuests": "Up to {count} guests",
-    "size": "{size} m\u00b2",
+    "size": "{size} m²",
     "view": "{type} View",
     "features": "Room Features",
-    "bookThisRoom": "Book This Room"
+    "bookThisRoom": "Book This Room",
+    "heroLabel": "Sleeping in Opduin",
+    "heroTitle": "Rooms",
+    "heroTagline": "Waking up in silence, fresh sheets and a clean sea breeze",
+    "infoStrip": {
+      "rooms": "22 Rooms",
+      "roomsLabel": "Rooms",
+      "views": "Sea & Dune",
+      "viewsLabel": "Views",
+      "direct": "Free Sauna",
+      "directLabel": "Direct"
+    },
+    "intro": {
+      "label": "Accommodations",
+      "title": "A villa in the dunes",
+      "lead": "Light and airy, without any unnecessary hotel furniture, air-conditioned, beautiful fabrics, comfortable beds and a mini fridge.",
+      "p1": "Slide open the curtains for a view over the island and the dunes. Make a Nespresso, open the windows and slowly wake up.",
+      "p2": "Opduin has 6 different possibilities to choose from. Double rooms with a king size bed, large suites with an extra sleeping couch, apartments with separate bedrooms, a holiday house for a big family, holiday homes for a small family and even six small single rooms.",
+      "imageAlt": "Suite at Grand Hotel Opduin",
+      "highlightTitle": "Book Direct Benefits",
+      "highlightDescription": "Free sauna access, €5 discount per night, and flexible cancellation when you book directly with us."
+    },
+    "grid": {
+      "upTo": "Up to {count} guests",
+      "viewDetails": "View Details",
+      "more": "+{count} more"
+    },
+    "faq": {
+      "label": "Good to Know",
+      "title": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What are the check-in and check-out times?",
+          "answer": "Standard check-in is after 3 PM with checkout before 11 AM. Early arrivals are accommodated if rooms are ready, or you can leave your contact info for a call when your room becomes available. Late checkout ('lazy Sunday') costs €42.50 until the last ferry at 9 PM, subject to room availability."
+        },
+        {
+          "question": "What is the cancellation policy?",
+          "answer": "Direct bookings allow free cancellation up to 24 hours before arrival (3 PM cutoff). Cancellations within 24 hours incur full charges for overnight stays and beauty treatments, though breakfast and taxes are refunded. Third-party bookings follow their respective policies."
+        },
+        {
+          "question": "Are pets allowed?",
+          "answer": "Dogs are permitted on request at €28.50 per night. We provide a dog pillow and water bowl. Dogs cannot enter the restaurant, and an entire floor remains pet-free for allergic guests."
+        },
+        {
+          "question": "What costs should I expect?",
+          "answer": "Municipal taxes of €3.85 per person per night apply at checkout. Breakfast is included for standard rooms (8-10:30 AM service). The West Hampton family home excludes breakfast but offers it separately at €24 (adults) or €12 (children)."
+        },
+        {
+          "question": "Is parking available?",
+          "answer": "Free on-site parking is available with limited spaces. We recommend arriving early to secure a spot."
+        },
+        {
+          "question": "What wellness facilities are available?",
+          "answer": "The heated pool operates from 7 AM to 11 PM. Sauna rentals cost €10/hour, while massage chairs and solarium carry separate fees. Direct bookers receive complimentary sauna tokens."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Book Your Stay",
+      "description": "Reserve via our website or just make a call. We would love to put together your Texel-holiday with you. Care for some ideas? Have a look at our package deals.",
+      "bookOnline": "Book Online"
+    },
+    "checkAvailability": "Check Availability"
   },
   "restaurant": {
     "pageTitle": "Wadden Gastronomy",
@@ -174,18 +236,195 @@
     "lunchHours": "12:00 - 14:30",
     "dinnerHours": "18:00 - 22:00",
     "reserveNow": "Reserve now",
-    "philosophy": "Fresh and homemade",
-    "philosophyText": "In the middle of the dunes of De Koog we made the restaurant and terrace. Good food, extensive choice, as many local products as possible and always fresh and homemade.",
+    "reserveTable": "Reserve a Table",
+    "reserveTableAria": "Reserve a Table",
+    "philosophy": {
+      "label": "In the Dunes",
+      "title": "Fresh and homemade",
+      "text1": "In the middle of the dunes of De Koog we made the restaurant and terrace. Good food, extensive choice, as many local products as possible and always fresh and homemade.",
+      "text2": "Our chefs source the freshest and most sustainable ingredients from the region, from the Wadden Islands to the coastline from Den Oever to Delfzijl. The sea provides us with day-fresh fish and shellfish, while the land provides organic meat and seasonal vegetables. Each product is carefully selected to reflect the rich biodiversity and flavor of the Wadden region."
+    },
     "dogFree": "Dog-free Restaurant",
-    "dogFreeText": "The restaurant is completely dog-free. Would you like to have a bite to eat with your dog? Then you are welcome in our bar for a simple 2-course menu."
+    "dogFreeText": "The restaurant is completely dog-free. Would you like to have a bite to eat with your dog? Then you are welcome in our bar for a simple 2-course menu.",
+    "localSourcing": {
+      "label": "Local Sourcing",
+      "title": "Ingredients with a story",
+      "items": {
+        "texel": {
+          "title": "Texel & Wadden Products",
+          "description": "As many products as possible from Texel and other Wadden Sea regions"
+        },
+        "organic": {
+          "title": "Organic & Seasonal",
+          "description": "Organic meat and seasonal vegetables from local farms"
+        },
+        "fish": {
+          "title": "Day-fresh Fish",
+          "description": "The sea provides us with day-fresh fish and shellfish"
+        }
+      }
+    },
+    "dining": {
+      "label": "When to Dine",
+      "title": "Three moments, one kitchen",
+      "viewMenu": "View Menu",
+      "breakfast": {
+        "title": "Breakfast",
+        "time": "7:00 – 10:30",
+        "description": "Extensive buffet for hotel guests. Fresh breads, local cheeses, eggs to order, and island honey.",
+        "note": "Included for hotel guests"
+      },
+      "lunch": {
+        "title": "Lunch",
+        "time": "12:00 – 14:30",
+        "description": "Light dishes and sandwiches. Perfect after a morning beach walk or cycle tour.",
+        "note": "Open to all"
+      },
+      "dinner": {
+        "title": "Dinner",
+        "time": "18:00 – 22:00",
+        "description": "Multi-course dining experience. Choose 3 to 6 courses showcasing the island's finest.",
+        "note": "Reservations recommended"
+      }
+    },
+    "reserveCta": "Reserve your table for lunch or dinner. Also for non-hotel guests.",
+    "infoStrip": {
+      "dietary": {
+        "label": "Dietary",
+        "value": "Vegan, GF options"
+      },
+      "terrace": {
+        "label": "Terrace",
+        "value": "Open to all"
+      },
+      "capacity": {
+        "label": "Capacity",
+        "value": "70 guests"
+      }
+    },
+    "gallery": "Restaurant Gallery",
+    "privateDining": {
+      "title": "Private Dining & Events",
+      "description": "Celebrate special occasions in our private dining room. Customized menus, attentive service, and views of the dunes. Perfect for birthdays, anniversaries, or intimate gatherings."
+    },
+    "imageAlt": "Slow Food Chefs Alliance - Restaurant Opduin"
   },
   "wellness": {
     "pageTitle": "Wellness & Spa",
     "pageDescription": "Escape to tranquility. Our spa offers a sanctuary of calm with treatments inspired by the sea and dunes.",
-    "heroLabel": "Wellness at Opduin",
+    "heroLabel": "Wellness in Opduin",
+    "heroTitle": "Personal Attention",
+    "heroDescription": "There is nothing like personal attention. Our certified beauty specialists work with Thalgo — light and fresh quality products with its origin from the sea.",
+    "bookTreatment": "Book a Treatment",
     "poolSauna": "Pool & Sauna",
     "treatments": "Treatments",
-    "packages": "Wellness Packages"
+    "packages": "Wellness Packages",
+    "infoStrip": {
+      "pool": "Pool",
+      "poolHours": "9:00–21:00",
+      "salon": "Salon",
+      "byAppointment": "By appointment",
+      "freeSauna": "Free sauna for guests"
+    },
+    "philosophy": {
+      "label": "Beauty Salon",
+      "title": "Thalgo Marine Cosmetics",
+      "p1": "Our certified beauty specialists work with Thalgo — light and fresh quality products with its origin from the sea. French marine cosmetics renowned for their purity and effectiveness.",
+      "p2": "All treatments are by appointment only and accessible to non-guests as well. Book your treatment by phone or check availability in our online booking tool.",
+      "p3": "For private sauna bookings: €12.50 per person per hour.",
+      "imageAlt": "Beauty Salon Opduin"
+    },
+    "facilities": {
+      "label": "Facilities",
+      "title": "Pool, Sauna & Steam",
+      "pool": {
+        "name": "Swimming Pool",
+        "description": "Heated indoor pool with Jacuzzi and children's pool. Swimming lessons on Tuesdays.",
+        "highlight": "Non-guests: €9 adults, €5 children"
+      },
+      "sauna": {
+        "name": "Finnish Sauna & Steam Bath",
+        "description": "Traditional Finnish sauna and Turkish steam bath. Customary use without swimwear during free hours.",
+        "highlight": "Free for guests 16:30-19:00"
+      },
+      "solarium": {
+        "name": "Solarium",
+        "description": "Quick tanning service available for guests and visitors.",
+        "highlight": "€11 per session"
+      }
+    },
+    "treatmentsSection": {
+      "label": "Treatments",
+      "title": "Our Treatment Menu",
+      "description": "From soothing massages to revitalizing facials. Signature Texel treatments with local honey and Noordkroon sheepscream.",
+      "signature": "Signature",
+      "categories": {
+        "massage": {
+          "name": "Massage",
+          "treatments": [
+            { "name": "Relaxing Massage", "duration": "25 min", "price": "€50" },
+            { "name": "Relaxing Massage", "duration": "55 min", "price": "€85" },
+            { "name": "Hot Stone Massage", "duration": "40 min", "price": "€70" },
+            { "name": "Hot Stone Massage", "duration": "75 min", "price": "€110" },
+            { "name": "Scalp Massage", "duration": "15 min", "price": "€25" }
+          ]
+        },
+        "facialWomen": {
+          "name": "Facial (Women)",
+          "treatments": [
+            { "name": "Sea Treatment", "duration": "55 min", "price": "€85" },
+            { "name": "Organic Facial", "duration": "40 min", "price": "€65" },
+            { "name": "Anti-Aging Treatment", "duration": "90 min", "price": "€135" }
+          ]
+        },
+        "facialMen": {
+          "name": "Facial (Men)",
+          "treatments": [
+            { "name": "Men's Facial", "duration": "55 min", "price": "€85" },
+            { "name": "Men's Deluxe Facial", "duration": "90 min", "price": "€110" }
+          ]
+        },
+        "body": {
+          "name": "Body Treatments",
+          "treatments": [
+            { "name": "Body Peeling", "duration": "30 min", "price": "€60" },
+            { "name": "Algae Packing", "duration": "45 min", "price": "€85" },
+            { "name": "Pregnancy Treatment", "duration": "60 min", "price": "€110" }
+          ]
+        },
+        "texel": {
+          "name": "Texel Treatments",
+          "featured": true,
+          "treatments": [
+            { "name": "Texel Feet (honey & sheepscream)", "duration": "25 min", "price": "€40" },
+            { "name": "Texel Feeling", "duration": "55 min", "price": "€85" },
+            { "name": "Opduin Feeling Deluxe", "duration": "90 min", "price": "€130" }
+          ]
+        },
+        "handsFeet": {
+          "name": "Hands & Feet",
+          "treatments": [
+            { "name": "Manicure", "duration": "35 min", "price": "€50" },
+            { "name": "Luxury Manicure", "duration": "55 min", "price": "€75" },
+            { "name": "Pedicure", "duration": "45 min", "price": "€65" },
+            { "name": "Foot Reflex Massage", "duration": "55 min", "price": "€85" }
+          ]
+        },
+        "kids": {
+          "name": "Kids Wellness",
+          "treatments": [
+            { "name": "Kids Massage", "duration": "25 min", "price": "€29" },
+            { "name": "Kids Manicure", "duration": "25 min", "price": "€29" },
+            { "name": "Kids Facial", "duration": "25 min", "price": "€29" }
+          ]
+        }
+      }
+    },
+    "gallery": "Wellness Gallery",
+    "cta": {
+      "title": "Book Your Treatment",
+      "description": "Our salon is open to everyone, not just hotel guests. All treatments are by appointment only. Call to reserve your personal wellness experience."
+    }
   },
   "offers": {
     "pageTitle": "Special Offers",
@@ -194,7 +433,82 @@
     "includes": "What's Included",
     "conditions": "Conditions",
     "idealFor": "Ideal for",
-    "morePackages": "More Packages"
+    "morePackages": "More Packages",
+    "heroLabel": "Book Direct & Save",
+    "heroTitle": "Package Deals",
+    "heroTagline": "Advantageous offers for direct bookers",
+    "bookPackage": "Book a Package",
+    "infoStrip": {
+      "packagesLabel": "Packages",
+      "deals": "{count} Deals",
+      "includedLabel": "Included",
+      "freeExtras": "Free Extras",
+      "directLabel": "Direct",
+      "skipFee": "Skip 15% Fee"
+    },
+    "intro": {
+      "label": "Why Book Direct?",
+      "title": "Better value, more perks",
+      "p1": "Booking via Booking.com is convenient, but pricey — we pay 15% commission on every third-party booking. That's money we'd rather spend on you.",
+      "p2": "Our packages are exclusively for direct bookers: free extras, discounts, and flexible cancellation. Choose your perfect Texel escape below.",
+      "highlightTitle": "Direct Booking Perks",
+      "highlightDescription": "Free sauna access, €5/night discount, and extras you won't find elsewhere.",
+      "imageAlt": "Relaxation package at Grand Hotel Opduin"
+    },
+    "viewDetails": "View Details",
+    "more": "+{count} more",
+    "cta": {
+      "title": "Book Your Package",
+      "description": "Reserve via our website or just make a call. We are happy to answer your questions and help you choose the right package for your Texel holiday.",
+      "bookOnline": "Book Online"
+    },
+    "items": {
+      "warmWinter": {
+        "title": "Warm Winter Offer",
+        "subtitle": "Cozy escape with wellness included",
+        "description": "Escape the winter cold with our warming package. Enjoy a cozy stay with breakfast, afternoon coffee and cake, and full access to our wellness facilities including sauna, steam room, and heated indoor pool.",
+        "category": "Seasonal",
+        "badge": "Winter Special",
+        "includes": ["Overnight stay with breakfast", "Coffee and cake in the afternoon", "Access to wellness facilities", "Free parking", "Free WiFi"],
+        "idealFor": "Weekend getaways, wellness seekers"
+      },
+      "earlySpring": {
+        "title": "Early Spring Week",
+        "subtitle": "Up to 50% discount on accommodation",
+        "description": "Book early and save big on your spring holiday. Enjoy the awakening nature of Texel with up to 50% discount on your overnight stay with breakfast. The perfect time to explore the island before the summer crowds arrive.",
+        "category": "Seasonal",
+        "badge": "Up to 50% Off",
+        "includes": ["Up to 50% discount on accommodation", "Breakfast included", "Access to wellness facilities", "Free parking", "Free WiFi"],
+        "idealFor": "Early bookers, budget-conscious travelers"
+      },
+      "opduinRelax": {
+        "title": "Opduin Relax Deal",
+        "subtitle": "3 nights of pure relaxation",
+        "description": "Unwind completely with our 3-night relaxation package. Includes a delicious dinner at our restaurant, full access to wellness facilities, and everything you need for a peaceful retreat in the dunes of Texel.",
+        "category": "Wellness",
+        "badge": "3 Nights",
+        "includes": ["3 nights accommodation", "Breakfast daily", "1 dinner at Restaurant Opduin", "Access to wellness facilities", "Free parking"],
+        "idealFor": "Couples, wellness retreats, relaxation"
+      },
+      "exploreTexel": {
+        "title": "Explore Texel Deal",
+        "subtitle": "2 nights discovering the island",
+        "description": "The perfect package for those who want to discover all that Texel has to offer. Includes entrance to Ecomare seal sanctuary, a picnic bag for your adventures, and dinner to end your day of exploration.",
+        "category": "Adventure",
+        "badge": "2 Nights",
+        "includes": ["2 nights accommodation", "Breakfast daily", "1 dinner at Restaurant Opduin", "Entrance to Ecomare", "Picnic bag for your excursion"],
+        "idealFor": "Families, nature lovers, first-time visitors"
+      },
+      "tasteOfTexel": {
+        "title": "Taste of Texel Deal",
+        "subtitle": "2 nights of culinary delight",
+        "description": "Experience the best flavors Texel has to offer. This culinary package includes two dinners at our restaurant featuring local Texel lamb, fresh seafood, and island produce. A feast for food lovers.",
+        "category": "Culinary",
+        "badge": "2 Dinners",
+        "includes": ["2 nights accommodation", "Breakfast daily", "2 dinners at Restaurant Opduin", "Access to wellness facilities", "Free parking"],
+        "idealFor": "Foodies, couples, culinary enthusiasts"
+      }
+    }
   },
   "about": {
     "pageTitle": "The Hamptons of the Wadden",
@@ -205,32 +519,179 @@
     "thirdGen": "3rd Generation",
     "carbonNeutral": "Carbon Neutral",
     "awardWinning": "Award Winning",
-    "sanctuary": "A sanctuary at the edge of the world",
-    "sanctuaryText": "Nestled among the dunes of Texel, Grand Hotel Opduin has been welcoming guests for nearly a century.",
-    "values": "Our Values",
-    "valuesTitle": "What guides us",
-    "sustainability": "Sustainability",
-    "sustainabilityTitle": "Caring for our island home",
-    "team": "The People",
-    "teamTitle": "Meet our team",
-    "location": "Getting Here",
-    "locationTitle": "Find us on Texel"
+    "bookYourStay": "Book Your Stay",
+    "bookYourStayAria": "Book Your Stay",
+    "intro": {
+      "label": "In the Dunes",
+      "title": "A sanctuary at the edge of the world",
+      "p1": "Nestled among the dunes of Texel, Grand Hotel Opduin has been welcoming guests for nearly a century. What began as a modest seaside retreat has evolved into one of the Netherlands' most cherished boutique destinations.",
+      "p2": "Our philosophy remains unchanged: to offer genuine hospitality that honors the island's natural beauty and the Wadden Sea's UNESCO World Heritage status. Every detail, from our locally-sourced cuisine to our sustainable practices, reflects our deep connection to this remarkable place.",
+      "p3": "Today, the third generation of the Petit family continues this legacy, balancing time-honored traditions with modern comforts for the discerning traveler.",
+      "discoverSister": "Discover our sister hotels",
+      "imageAlt": "Historic Grand Hotel Opduin"
+    },
+    "values": {
+      "label": "Our Values",
+      "title": "What guides us",
+      "items": {
+        "hospitality": {
+          "title": "Genuine Hospitality",
+          "description": "Three generations of the Petit family have welcomed guests. That warmth is in our DNA."
+        },
+        "stewardship": {
+          "title": "Island Stewardship",
+          "description": "We protect what makes Texel special—from supporting local farmers to preserving dune ecosystems."
+        },
+        "luxury": {
+          "title": "Thoughtful Luxury",
+          "description": "Excellence without pretension. Every detail serves your comfort, not our ego."
+        }
+      }
+    },
+    "timeline": {
+      "label": "Our Journey",
+      "title": "Nearly a century of hospitality",
+      "items": [
+        { "year": "1932", "title": "The Beginning", "description": "The Petit family opens a small guesthouse for visitors to Texel, offering simple rooms and hearty island meals." },
+        { "year": "1956", "title": "Post-War Renaissance", "description": "After careful restoration, the hotel expands with a new wing, terrace restaurant, and the first glimpses of what would become our signature dune views." },
+        { "year": "1985", "title": "Wellness Pioneer", "description": "We become the first hotel on Texel to offer spa facilities, introducing the island to the concept of seaside wellness." },
+        { "year": "2010", "title": "Grand Renovation", "description": "A complete renovation transforms Opduin into a luxury destination while preserving our family heritage and island character." },
+        { "year": "2023", "title": "Sustainable Future", "description": "Achieving carbon-neutral status, installing solar panels, and deepening our commitment to local sourcing and island conservation." }
+      ]
+    },
+    "sustainability": {
+      "label": "Sustainability",
+      "title": "Caring for our island home",
+      "description": "We believe luxury and sustainability go hand in hand. From solar panels on our roof to partnerships with local farmers, we're committed to protecting the natural beauty that makes Texel so special.",
+      "imageAlt": "Texel nature and sustainability",
+      "stats": {
+        "carbonNeutral": { "value": "100%", "label": "Carbon Neutral", "description": "Since 2023" },
+        "localSourcing": { "value": "85%", "label": "Local Sourcing", "description": "Food & supplies from Texel" },
+        "solarPanels": { "value": "40+", "label": "Solar Panels", "description": "Powering our operations" },
+        "plastic": { "value": "Zero", "label": "Single-Use Plastic", "description": "Throughout the hotel" }
+      }
+    },
+    "gallery": "Moments at Opduin",
+    "viewFullGallery": "View full gallery",
+    "team": {
+      "label": "The People",
+      "title": "Meet our team",
+      "description": "Behind every great stay is a team that cares. These are the people who make Opduin special.",
+      "members": [
+        { "name": "Lucas Petit", "role": "Owner, Third Generation", "quote": "My grandfather built this place with his hands. My job is to honor that while building something even better for the next generation." },
+        { "name": "Maria Jansen", "role": "Executive Chef", "quote": "Texel's bounty inspires every dish. The sea, the land, the seasons — they tell the story. I just translate it to the plate." },
+        { "name": "Thomas de Vries", "role": "Spa Director", "quote": "True wellness comes from connecting with nature. Here, the dunes and sea do half the work. We just help you slow down." }
+      ]
+    },
+    "awards": {
+      "label": "Recognition",
+      "title": "Awards & Honors",
+      "items": [
+        { "year": "2024", "title": "Best Boutique Hotel Netherlands", "org": "Traveller's Choice" },
+        { "year": "2023", "title": "Green Key Gold Certification", "org": "Green Key International" },
+        { "year": "2023", "title": "Top 10 Wellness Retreats", "org": "Condé Nast Traveller" },
+        { "year": "2022", "title": "Excellence in Hospitality", "org": "Dutch Hotel Association" }
+      ]
+    },
+    "location": {
+      "label": "Getting Here",
+      "title": "Find us on Texel",
+      "description": "Just 90 minutes from Amsterdam, yet a world away. Take the ferry from Den Helder (20 minutes) and follow the dunes to De Koog.",
+      "imageAlt": "Texel Island",
+      "steps": {
+        "ferry": { "title": "Ferry from Den Helder", "description": "TESO ferry, every 30 minutes" },
+        "drive": { "title": "Drive through the island", "description": "15 minutes to De Koog" },
+        "arrive": { "title": "Arrive at Opduin", "description": "On Texel's highest dune" }
+      }
+    },
+    "cta": {
+      "title": "Experience Opduin",
+      "description": "The best way to understand what makes us special is to visit. We look forward to welcoming you."
+    }
   },
   "sisterHotels": {
     "pageTitle": "Our Sister Hotels",
     "pageDescription": "Five distinctive hotels across the Netherlands, each with its own character. United by a commitment to genuine hospitality.",
     "heroLabel": "Hoscom Collection",
+    "heroTitle": "Our Sister Hotels",
+    "heroDescription": "Five distinctive hotels across the Netherlands, each with its own character. United by a commitment to genuine hospitality.",
+    "bookAtOpduin": "Book at Opduin",
     "hotels": "Hotels",
     "acrossNetherlands": "Across Netherlands",
     "familyValues": "Family Values",
+    "visitWebsite": "Visit Website",
     "aboutHoscom": "About Hoscom",
     "hoscomTitle": "A Family of Unique Experiences",
+    "hoscomDescription1": "Lucas Petit, owner of Hoscom, manages six distinctive hotels across the Netherlands. Each property has been carefully developed to offer guests a unique experience, rooted in local character and genuine hospitality.",
+    "hoscomDescription2": "What unites them is a shared philosophy: hotels should be places where guests can truly be themselves, surrounded by thoughtful details and warm service. From the dunes of Texel to the streets of Leeuwarden, each hotel tells its own story.",
+    "ourCollection": "Our Collection",
     "beginJourney": "Begin Your Texel Journey",
-    "beginJourneyText": "Grand Hotel Opduin is the jewel of the collection—a seaside sanctuary where the dunes meet the Wadden Sea."
+    "beginJourneyText": "Grand Hotel Opduin is the jewel of the collection—a seaside sanctuary where the dunes meet the Wadden Sea.",
+    "aboutOpduin": "About Opduin",
+    "breadcrumbs": {
+      "about": "About",
+      "sisterHotels": "Sister Hotels"
+    }
   },
   "contact": {
     "pageTitle": "Contact Us",
     "pageDescription": "We'd love to hear from you. Get in touch with our team.",
+    "heroLabel": "Contact",
+    "heroTitle": "Get in Touch",
+    "heroDescription": "We're here to help you plan your perfect stay on Texel.",
+    "reception": "Reception",
+    "findUs": "Find Us",
+    "getDirections": "Get Directions",
+    "contactUs": "Contact Us",
+    "openingHours": "Opening Hours",
+    "restaurant": "Restaurant",
+    "spa": "Spa",
+    "byAppointment": "By appointment",
+    "parking": {
+      "title": "Free Parking",
+      "description": "Parking on Opduin's own parking lot is free of charge. For island-wide parking you need to purchase a Texel vignet online."
+    },
+    "directions": {
+      "label": "Directions",
+      "title": "How to Get Here",
+      "byCar": {
+        "title": "By Car",
+        "description": "From western/southern Netherlands via Amsterdam ringroad (A10), through Zaandam, Purmerend, Hoorn to Den Helder. From east via Afsluitdijk (A7)."
+      },
+      "byFerry": {
+        "title": "By Ferry",
+        "description": "TESO ferry leaves from Den Helder every hour (on the half hour). 20 minute crossing, no reservation needed."
+      },
+      "publicTransport": {
+        "title": "Public Transport",
+        "description": "Bus 33 takes you to the ferry from Den Helder station. On Texel, bus 28 takes you from the ferry to Opduin."
+      }
+    },
+    "form": {
+      "title": "Send us a Message",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Subject",
+      "selectTopic": "Select a topic",
+      "topics": {
+        "reservation": "Reservation Inquiry",
+        "spa": "Spa & Wellness",
+        "restaurant": "Restaurant",
+        "events": "Meetings & Events",
+        "feedback": "Feedback",
+        "other": "Other"
+      },
+      "message": "Message",
+      "messagePlaceholder": "How can we help you?",
+      "send": "Send Message"
+    },
+    "success": {
+      "title": "Message Sent",
+      "description": "Thank you for reaching out. We'll get back to you within 24 hours.",
+      "sendAnother": "Send Another Message"
+    },
     "address": "Address",
     "phone": "Phone",
     "email": "Email",
@@ -244,16 +705,86 @@
     "pageTitle": "Meetings & Events",
     "pageDescription": "Host your next meeting or event in our inspiring venue with views of the dunes.",
     "heroLabel": "Meetings & Events",
+    "heroTitle": "Meetings",
+    "heroTagline": "Sincere attention for each other",
+    "heroDescription": "You will organize a meeting that no one will forget. And that's what matters.",
     "requestProposal": "Request Proposal",
     "capacity": "Capacity",
-    "venues": "Venues"
+    "venues": "Venues",
+    "infoStrip": {
+      "guests": "2 to 200 guests",
+      "catering": "Full-service catering",
+      "team": "Dedicated events team",
+      "response": "Response within 24 hours"
+    },
+    "intro": {
+      "label": "Conference & Events",
+      "title": "Meetings that inspire",
+      "lead": "An original place where participants are completely isolated from their normal activities. But still easily accessible. An endless variety of professionally organized activities in and around the location.",
+      "p1": "Intimate enough for a small gathering, but also well equipped for a meeting of 200 participants. Meetings on Texel are always successful.",
+      "p2": "With a well chosen destination and a good program participants get involved and excited. The atmosphere and comfort in combination with a flexible organization give everyone the chance to grow.",
+      "highlightTitle": "Flexible Capacity",
+      "highlightDescription": "From board meetings of 10 people to conferences of 200 participants - we adapt to your needs."
+    },
+    "teambuilding": {
+      "title": "Teambuilding Activities",
+      "p1": "Oyster mudflat hiking, nature excursions, flying above the island, surfing... So many activities to let your guests experience something special between meetings.",
+      "p2": "We are happy to help you find a suitable activity and arrange everything for you.",
+      "cta": "Ask about activities",
+      "activities": ["Oyster mudflat hiking", "Nature excursions", "Flying above the island", "Surfing", "Cycling tours", "Seal watching"]
+    },
+    "party": {
+      "title": "A Texel Party",
+      "p1": "A great party is well organized and at the same time gives your guests the opportunity to completely relax. When you invite guests to the island, the fun already begins — it's like going abroad, but even better.",
+      "p2": "Texel offers a world of possibilities. Food and drinks grown by local neighbors, fierce nature, adventurous sports, high-standing art and culture, wellness, and unique skies on endless beaches.",
+      "p3": "Weddings, anniversaries, family gatherings — your guests don't just stop by, they enjoy a real happening.",
+      "cta": "Plan your celebration"
+    },
+    "wedding": {
+      "title": "Getting Married on Texel",
+      "p1": "Opduin is an official wedding location. Ideal for small weddings. You can get married in one of our rooms or on the beach and afterwards a relaxed dinner with the whole group.",
+      "p2": "To ensure that your wedding day is arranged according to your wishes, we work together with Sophie of Trouwen Texel. She will organize your wedding (or part of it) with heart and soul, so that you can enjoy this special day carefree.",
+      "contactWedding": "Contact the Texel wedding planner Sophie:",
+      "contactBanqueting": "Contact our banqueting team"
+    },
+    "packages": {
+      "title": "Meeting Packages",
+      "p1": "The complete package. You do not have to worry about anything, we make sure that you and your guests are taken care of in the right way.",
+      "p2": "Including meeting room rental, lunches, dinner and treats. Prices depend on your wishes and the number of participants. We are happy to make an offer for you.",
+      "p3": "Need extra ideas for an activity on Texel? Just give us a call and we will help you with some suggestions. We are also glad to take care of the organizational part.",
+      "cta": "Request a quote"
+    },
+    "rooms": {
+      "title": "Meeting Rooms",
+      "description": "All rooms on first floor with natural daylight. Beamer, screen, sound system & flipchart included.",
+      "combinations": "Room Combinations",
+      "configuration": "Configuration",
+      "size": "Size",
+      "carre": "Carré",
+      "theatre": "Theatre",
+      "ushape": "U-Shape",
+      "additionalEquipment": "Additional equipment available through third-party hire."
+    },
+    "gallery": "Events at Opduin",
+    "cta": {
+      "title": "Contact Our Banqueting Team",
+      "description": "Luuk and Esmee will help you plan your event. We respond within 24 hours."
+    }
   },
   "gallery": {
     "pageTitle": "Gallery",
-    "pageDescription": "Explore Grand Hotel Opduin through our photo gallery."
+    "pageDescription": "Explore Grand Hotel Opduin through our photo gallery.",
+    "heroLabel": "Visual Stories",
+    "heroTitle": "Gallery",
+    "heroDescription": "Moments captured at Grand Hotel Opduin.",
+    "photos": "Photos",
+    "categories": "Categories"
   },
   "booking": {
     "pageTitle": "Book Your Stay",
+    "heroLabel": "Reservations",
+    "heroTitle": "Book Your Stay",
+    "heroDescription": "Reserve directly for the best rates and exclusive benefits.",
     "selectDates": "Select Dates",
     "selectRoom": "Select Room",
     "guestDetails": "Guest Details",
@@ -261,7 +792,66 @@
     "checkIn": "Check-in",
     "checkOut": "Check-out",
     "adults": "Adults",
-    "children": "Children"
+    "children": "Children",
+    "steps": {
+      "datesGuests": "Dates & Guests",
+      "chooseRoom": "Choose Room",
+      "yourDetails": "Your Details"
+    },
+    "trustIndicators": {
+      "secure": "Secure Booking",
+      "instant": "Instant Confirmation",
+      "noPayment": "No Payment Now",
+      "bestRate": "Best Rate Guarantee"
+    },
+    "directBenefits": {
+      "title": "Book Direct Benefits",
+      "sauna": "Free sauna access",
+      "discount": "€5 off per night",
+      "gift": "Texel gift on departure",
+      "cancellation": "Flexible cancellation"
+    },
+    "step1": {
+      "title": "When are you visiting?",
+      "subtitle": "Select your dates and number of guests",
+      "nightsSelected": "night selected",
+      "nightsSelectedPlural": "nights selected",
+      "adultsAges": "Ages 18+",
+      "childrenAges": "Ages 0-17"
+    },
+    "step2": {
+      "title": "Choose your room",
+      "upTo": "Up to"
+    },
+    "step3": {
+      "title": "Your details",
+      "subtitle": "Complete your reservation request",
+      "reservationSummary": "Reservation Summary",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "specialRequests": "Special Requests",
+      "specialRequestsOptional": "optional",
+      "specialRequestsPlaceholder": "Dietary requirements, accessibility needs, special occasions...",
+      "submitRequest": "Submit Request",
+      "terms": "By submitting, you agree to our booking terms. No payment required until confirmation."
+    },
+    "success": {
+      "title": "Request Received",
+      "description": "Thank you for your reservation request. Our team will review your details and confirm your booking within 24 hours via email.",
+      "confirmationTo": "Confirmation will be sent to:",
+      "returnHome": "Return Home"
+    },
+    "continue": "Continue",
+    "back": "Back",
+    "night": "night",
+    "nights": "nights",
+    "cta": {
+      "title": "Prefer to speak with us?",
+      "description": "Our reservations team is available Mon-Sun 9:00-18:00 to assist with your booking.",
+      "call": "Call +31 222 317 445"
+    }
   },
   "reservation": {
     "title": "Reserve a Table",

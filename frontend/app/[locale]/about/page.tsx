@@ -2,107 +2,56 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import {
   ArrowRight, MapPin, Phone, Mail, Award, Leaf, Heart, Star,
-  Clock, Users, Ship, TreePine, Waves, ChefHat, Calendar
+  Clock, Users, Ship, TreePine, Waves, Calendar
 } from "lucide-react";
 import { motion, useScroll } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { MiniGallery, SectionHero, SectionCTA, SectionBlend } from "@/components/sections";
 import { SectionDivider } from "@/components/ui";
 import { easeOutExpo } from "@/lib/motion";
 
-// Timeline data
-const timeline = [
-  {
-    year: "1932",
-    title: "The Beginning",
-    description: "The Petit family opens a small guesthouse for visitors to Texel, offering simple rooms and hearty island meals."
-  },
-  {
-    year: "1956",
-    title: "Post-War Renaissance",
-    description: "After careful restoration, the hotel expands with a new wing, terrace restaurant, and the first glimpses of what would become our signature dune views."
-  },
-  {
-    year: "1985",
-    title: "Wellness Pioneer",
-    description: "We become the first hotel on Texel to offer spa facilities, introducing the island to the concept of seaside wellness."
-  },
-  {
-    year: "2010",
-    title: "Grand Renovation",
-    description: "A complete renovation transforms Opduin into a luxury destination while preserving our family heritage and island character."
-  },
-  {
-    year: "2023",
-    title: "Sustainable Future",
-    description: "Achieving carbon-neutral status, installing solar panels, and deepening our commitment to local sourcing and island conservation."
-  },
-];
+const valueKeys = ["hospitality", "stewardship", "luxury"] as const;
+const valueIcons = {
+  hospitality: Heart,
+  stewardship: Leaf,
+  luxury: Star,
+};
 
-// Values data
-const values = [
-  {
-    icon: Heart,
-    title: "Genuine Hospitality",
-    description: "Three generations of the Petit family have welcomed guests. That warmth is in our DNA."
-  },
-  {
-    icon: Leaf,
-    title: "Island Stewardship",
-    description: "We protect what makes Texel special—from supporting local farmers to preserving dune ecosystems."
-  },
-  {
-    icon: Star,
-    title: "Thoughtful Luxury",
-    description: "Excellence without pretension. Every detail serves your comfort, not our ego."
-  },
-];
+const statKeys = ["carbonNeutral", "localSourcing", "solarPanels", "plastic"] as const;
 
-// Team data
-const team = [
-  {
-    name: "Lucas Petit",
-    role: "Owner, Third Generation",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400",
-    quote: "My grandfather built this place with his hands. My job is to honor that while building something even better for the next generation.",
-  },
-  {
-    name: "Maria Jansen",
-    role: "Executive Chef",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400",
-    quote: "Texel's bounty inspires every dish. The sea, the land, the seasons — they tell the story. I just translate it to the plate.",
-  },
-  {
-    name: "Thomas de Vries",
-    role: "Spa Director",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
-    quote: "True wellness comes from connecting with nature. Here, the dunes and sea do half the work. We just help you slow down.",
-  },
-];
-
-// Sustainability stats
-const sustainabilityStats = [
-  { value: "100%", label: "Carbon Neutral", description: "Since 2023" },
-  { value: "85%", label: "Local Sourcing", description: "Food & supplies from Texel" },
-  { value: "40+", label: "Solar Panels", description: "Powering our operations" },
-  { value: "Zero", label: "Single-Use Plastic", description: "Throughout the hotel" },
-];
-
-// Awards
-const awards = [
-  { year: "2024", title: "Best Boutique Hotel Netherlands", org: "Traveller's Choice" },
-  { year: "2023", title: "Green Key Gold Certification", org: "Green Key International" },
-  { year: "2023", title: "Top 10 Wellness Retreats", org: "Condé Nast Traveller" },
-  { year: "2022", title: "Excellence in Hospitality", org: "Dutch Hotel Association" },
+const teamImages = [
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
 ];
 
 export default function AboutPage() {
+  const t = useTranslations("about");
+  const tCommon = useTranslations("common");
+  const tNav = useTranslations("nav");
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const { scrollYProgress } = useScroll();
+
+  const timelineItems = t.raw("timeline.items") as Array<{
+    year: string;
+    title: string;
+    description: string;
+  }>;
+  const teamMembers = t.raw("team.members") as Array<{
+    name: string;
+    role: string;
+    quote: string;
+  }>;
+  const awards = t.raw("awards.items") as Array<{
+    year: string;
+    title: string;
+    org: string;
+  }>;
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
@@ -123,7 +72,7 @@ export default function AboutPage() {
         <Link
           href="/book"
           className="flex items-center justify-center w-14 h-14 bg-navy text-white shadow-xl rounded-full"
-          aria-label="Book Your Stay"
+          aria-label={t("bookYourStayAria")}
         >
           <Calendar size={22} />
         </Link>
@@ -132,20 +81,20 @@ export default function AboutPage() {
       <main>
         {/* Hero */}
         <SectionHero
-          label="Our Story"
-          title="The Hamptons of the Wadden"
-          description="Where luxury meets the rhythm of the tides. Family-run since 1932."
+          label={t("heroLabel")}
+          title={t("pageTitle")}
+          description={t("pageDescription")}
           backgroundImage="/home/hero-fallback.jpg"
           primaryAction={{
-            label: "Book Your Stay",
+            label: t("bookYourStay"),
             href: "/book",
           }}
           infoStrip={{
             items: [
-              { icon: Clock, label: "Est.", value: "1932" },
-              { icon: Users, label: "Family", value: "3rd Generation" },
-              { icon: Leaf, value: "Carbon Neutral" },
-              { icon: Award, value: "Award Winning" },
+              { icon: Clock, label: t("established"), value: "1932" },
+              { icon: Users, label: t("family"), value: t("thirdGen") },
+              { icon: Leaf, value: t("carbonNeutral") },
+              { icon: Award, value: t("awardWinning") },
             ],
           }}
         />
@@ -155,7 +104,7 @@ export default function AboutPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "About" }]} />
+            <BreadcrumbsInline items={[{ label: tNav("about") }]} />
           </div>
         </section>
 
@@ -171,32 +120,26 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  In the Dunes
+                  {t("intro.label")}
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  A sanctuary at the edge of the world
+                  {t("intro.title")}
                 </h2>
                 <p className="text-neutral-600 text-lg leading-relaxed mb-6">
-                  Nestled among the dunes of Texel, Grand Hotel Opduin has been welcoming
-                  guests for nearly a century. What began as a modest seaside retreat has
-                  evolved into one of the Netherlands' most cherished boutique destinations.
+                  {t("intro.p1")}
                 </p>
                 <p className="text-neutral-600 leading-relaxed mb-6">
-                  Our philosophy remains unchanged: to offer genuine hospitality that honors
-                  the island's natural beauty and the Wadden Sea's UNESCO World Heritage status.
-                  Every detail, from our locally-sourced cuisine to our sustainable practices,
-                  reflects our deep connection to this remarkable place.
+                  {t("intro.p2")}
                 </p>
                 <p className="text-neutral-500 leading-relaxed mb-8">
-                  Today, the third generation of the Petit family continues this legacy,
-                  balancing time-honored traditions with modern comforts for the discerning traveler.
+                  {t("intro.p3")}
                 </p>
 
                 <Link
                   href="/about/sister-hotels"
                   className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
                 >
-                  Discover our sister hotels
+                  {t("intro.discoverSister")}
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -212,7 +155,7 @@ export default function AboutPage() {
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200"
-                    alt="Historic Grand Hotel Opduin"
+                    alt={t("intro.imageAlt")}
                     fill
                     className="object-cover"
                   />
@@ -237,19 +180,19 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                Our Values
+                {t("values.label")}
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink">
-                What guides us
+                {t("values.title")}
               </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-              {values.map((value, index) => {
-                const Icon = value.icon;
+              {valueKeys.map((key, index) => {
+                const Icon = valueIcons[key];
                 return (
                   <motion.div
-                    key={value.title}
+                    key={key}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -259,8 +202,12 @@ export default function AboutPage() {
                     <div className="w-16 h-16 mx-auto mb-6 bg-shell/10 flex items-center justify-center">
                       <Icon size={28} className="text-shell" />
                     </div>
-                    <h3 className="font-display text-xl text-ink mb-3">{value.title}</h3>
-                    <p className="text-neutral-600 leading-relaxed">{value.description}</p>
+                    <h3 className="font-display text-xl text-ink mb-3">
+                      {t(`values.items.${key}.title`)}
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      {t(`values.items.${key}.description`)}
+                    </p>
                   </motion.div>
                 );
               })}
@@ -281,15 +228,15 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                Our Journey
+                {t("timeline.label")}
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink">
-                Nearly a century of hospitality
+                {t("timeline.title")}
               </h2>
             </motion.div>
 
             <div className="space-y-0">
-              {timeline.map((item, index) => (
+              {timelineItems.map((item, index) => (
                 <motion.div
                   key={item.year}
                   initial={{ opacity: 0, y: 20 }}
@@ -329,7 +276,7 @@ export default function AboutPage() {
               >
                 <Image
                   src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200"
-                  alt="Texel nature and sustainability"
+                  alt={t("sustainability.imageAlt")}
                   fill
                   className="object-cover"
                 />
@@ -343,31 +290,35 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
               >
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Sustainability
+                  {t("sustainability.label")}
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  Caring for our island home
+                  {t("sustainability.title")}
                 </h2>
                 <p className="text-neutral-600 text-lg leading-relaxed mb-8">
-                  We believe luxury and sustainability go hand in hand. From solar panels
-                  on our roof to partnerships with local farmers, we're committed to
-                  protecting the natural beauty that makes Texel so special.
+                  {t("sustainability.description")}
                 </p>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 gap-4">
-                  {sustainabilityStats.map((stat, index) => (
+                  {statKeys.map((key, index) => (
                     <motion.div
-                      key={stat.label}
+                      key={key}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.2 + index * 0.05, ease: easeOutExpo }}
                       className="bg-white p-5"
                     >
-                      <p className="text-shell text-2xl md:text-3xl font-display mb-1">{stat.value}</p>
-                      <p className="text-ink font-medium text-sm mb-1">{stat.label}</p>
-                      <p className="text-neutral-500 text-xs">{stat.description}</p>
+                      <p className="text-shell text-2xl md:text-3xl font-display mb-1">
+                        {t(`sustainability.stats.${key}.value`)}
+                      </p>
+                      <p className="text-ink font-medium text-sm mb-1">
+                        {t(`sustainability.stats.${key}.label`)}
+                      </p>
+                      <p className="text-neutral-500 text-xs">
+                        {t(`sustainability.stats.${key}.description`)}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -380,7 +331,7 @@ export default function AboutPage() {
 
         {/* Gallery */}
         <MiniGallery
-          title="Moments at Opduin"
+          title={t("gallery")}
           images={[
             { src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800", caption: "Hotel exterior" },
             { src: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800", caption: "Lobby" },
@@ -391,7 +342,7 @@ export default function AboutPage() {
           aspectRatio="square"
           background="white"
           viewAllLink="/gallery"
-          viewAllText="View full gallery"
+          viewAllText={t("viewFullGallery")}
         />
 
         <SectionBlend from="white" to="sand-100" />
@@ -407,18 +358,18 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                The People
+                {t("team.label")}
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink mb-4">
-                Meet our team
+                {t("team.title")}
               </h2>
               <p className="text-neutral-600 max-w-2xl mx-auto">
-                Behind every great stay is a team that cares. These are the people who make Opduin special.
+                {t("team.description")}
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-              {team.map((member, index) => (
+              {teamMembers.map((member, index) => (
                 <motion.div
                   key={member.name}
                   initial={{ opacity: 0, y: 30 }}
@@ -429,7 +380,7 @@ export default function AboutPage() {
                 >
                   <div className="relative aspect-[3/4] mb-6 overflow-hidden bg-sand-200">
                     <Image
-                      src={member.image}
+                      src={teamImages[index]}
                       alt={member.name}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -456,9 +407,9 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/4">
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-2 block">
-                  Recognition
+                  {t("awards.label")}
                 </span>
-                <h3 className="font-display text-2xl text-ink">Awards & Honors</h3>
+                <h3 className="font-display text-2xl text-ink">{t("awards.title")}</h3>
               </div>
               <div className="md:w-3/4 grid grid-cols-2 md:grid-cols-4 gap-6">
                 {awards.map((award, index) => (
@@ -496,7 +447,7 @@ export default function AboutPage() {
               >
                 <Image
                   src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200"
-                  alt="Texel Island"
+                  alt={t("location.imageAlt")}
                   fill
                   className="object-cover"
                 />
@@ -517,14 +468,13 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.2, ease: easeOutExpo }}
               >
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Getting Here
+                  {t("location.label")}
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  Find us on Texel
+                  {t("location.title")}
                 </h2>
                 <p className="text-neutral-600 leading-relaxed mb-8">
-                  Just 90 minutes from Amsterdam, yet a world away. Take the ferry from
-                  Den Helder (20 minutes) and follow the dunes to De Koog.
+                  {t("location.description")}
                 </p>
 
                 {/* Journey steps */}
@@ -534,8 +484,8 @@ export default function AboutPage() {
                       <Ship size={18} className="text-shell" />
                     </div>
                     <div>
-                      <p className="text-ink font-medium">Ferry from Den Helder</p>
-                      <p className="text-neutral-500 text-sm">TESO ferry, every 30 minutes</p>
+                      <p className="text-ink font-medium">{t("location.steps.ferry.title")}</p>
+                      <p className="text-neutral-500 text-sm">{t("location.steps.ferry.description")}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -543,8 +493,8 @@ export default function AboutPage() {
                       <TreePine size={18} className="text-shell" />
                     </div>
                     <div>
-                      <p className="text-ink font-medium">Drive through the island</p>
-                      <p className="text-neutral-500 text-sm">15 minutes to De Koog</p>
+                      <p className="text-ink font-medium">{t("location.steps.drive.title")}</p>
+                      <p className="text-neutral-500 text-sm">{t("location.steps.drive.description")}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -552,8 +502,8 @@ export default function AboutPage() {
                       <Waves size={18} className="text-shell" />
                     </div>
                     <div>
-                      <p className="text-ink font-medium">Arrive at Opduin</p>
-                      <p className="text-neutral-500 text-sm">On Texel's highest dune</p>
+                      <p className="text-ink font-medium">{t("location.steps.arrive.title")}</p>
+                      <p className="text-neutral-500 text-sm">{t("location.steps.arrive.description")}</p>
                     </div>
                   </div>
                 </div>
@@ -566,14 +516,14 @@ export default function AboutPage() {
                   </div>
                   <div className="flex items-center gap-3 text-neutral-600">
                     <Phone size={16} className="text-shell" />
-                    <a href="tel:+31222123456" className="hover:text-shell transition-colors">
-                      +31 222 123 456
+                    <a href="tel:+31222317445" className="hover:text-shell transition-colors">
+                      +31 222 317 445
                     </a>
                   </div>
                   <div className="flex items-center gap-3 text-neutral-600">
                     <Mail size={16} className="text-shell" />
-                    <a href="mailto:info@grandhotelOpduin.nl" className="hover:text-shell transition-colors">
-                      info@grandhotelOpduin.nl
+                    <a href="mailto:info@opduin.nl" className="hover:text-shell transition-colors">
+                      info@opduin.nl
                     </a>
                   </div>
                 </div>
@@ -585,11 +535,11 @@ export default function AboutPage() {
         {/* CTA */}
         <SectionCTA
           icon={Heart}
-          title="Experience Opduin"
-          description="The best way to understand what makes us special is to visit. We look forward to welcoming you."
+          title={t("cta.title")}
+          description={t("cta.description")}
           actions={[
-            { label: "Book Your Stay", href: "/book" },
-            { label: "Contact Us", href: "/contact", variant: "secondary" },
+            { label: tCommon("bookYourStay"), href: "/book" },
+            { label: tCommon("contactUs"), href: "/contact", variant: "secondary" },
           ]}
           background="sand"
         />

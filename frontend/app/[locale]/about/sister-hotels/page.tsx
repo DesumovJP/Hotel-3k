@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline, FeatureGrid } from "@/components/molecules";
 import { SectionHero, SectionCTA, SectionBlend, MiniGallery } from "@/components/sections";
@@ -25,6 +26,8 @@ const galleryImages = [
 ];
 
 export default function SisterHotelsPage() {
+  const t = useTranslations("sisterHotels");
+  const tCommon = useTranslations("common");
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const { scrollYProgress } = useScroll();
 
@@ -47,7 +50,7 @@ export default function SisterHotelsPage() {
         <Link
           href="/book"
           className="flex items-center justify-center w-14 h-14 bg-navy text-white shadow-xl rounded-full"
-          aria-label="Book Your Stay"
+          aria-label={tCommon("bookYourStay")}
         >
           <Calendar size={22} />
         </Link>
@@ -56,19 +59,19 @@ export default function SisterHotelsPage() {
       <main>
         {/* Hero */}
         <SectionHero
-          label="Hoscom Collection"
-          title="Our Sister Hotels"
-          description="Five distinctive hotels across the Netherlands, each with its own character. United by a commitment to genuine hospitality."
+          label={t("heroLabel")}
+          title={t("heroTitle")}
+          description={t("heroDescription")}
           backgroundImage="/home/home-600x400_1.jpg"
           primaryAction={{
-            label: "Book at Opduin",
+            label: t("bookAtOpduin"),
             href: "/book",
           }}
           infoStrip={{
             items: [
-              { icon: Building2, value: `${sisterHotels.length} Hotels` },
-              { icon: MapPin, value: "Across Netherlands" },
-              { icon: Heart, value: "Family Values" },
+              { icon: Building2, value: `${sisterHotels.length} ${t("hotels")}` },
+              { icon: MapPin, value: t("acrossNetherlands") },
+              { icon: Heart, value: t("familyValues") },
             ],
           }}
         />
@@ -80,8 +83,8 @@ export default function SisterHotelsPage() {
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <BreadcrumbsInline
               items={[
-                { label: "About", href: "/about" },
-                { label: "Sister Hotels" },
+                { label: t("breadcrumbs.about"), href: "/about" },
+                { label: t("breadcrumbs.sisterHotels") },
               ]}
             />
           </div>
@@ -177,7 +180,7 @@ export default function SisterHotelsPage() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase group/link"
                       >
-                        Visit Website
+                        {t("visitWebsite")}
                         <ArrowUpRight
                           size={16}
                           className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
@@ -203,20 +206,16 @@ export default function SisterHotelsPage() {
               transition={{ duration: 0.6, ease: easeOutExpo }}
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                About Hoscom
+                {t("aboutHoscom")}
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                A Family of Unique Experiences
+                {t("hoscomTitle")}
               </h2>
               <p className="text-neutral-600 text-lg leading-relaxed mb-6">
-                Lucas Petit, owner of Hoscom, manages six distinctive hotels across the Netherlands.
-                Each property has been carefully developed to offer guests a unique experience,
-                rooted in local character and genuine hospitality.
+                {t("hoscomDescription1")}
               </p>
               <p className="text-neutral-500 leading-relaxed">
-                What unites them is a shared philosophy: hotels should be places where guests
-                can truly be themselves, surrounded by thoughtful details and warm service.
-                From the dunes of Texel to the streets of Leeuwarden, each hotel tells its own story.
+                {t("hoscomDescription2")}
               </p>
             </motion.div>
           </div>
@@ -226,7 +225,7 @@ export default function SisterHotelsPage() {
 
         {/* Gallery */}
         <MiniGallery
-          title="Our Collection"
+          title={t("ourCollection")}
           images={galleryImages}
           columns={3}
           background="sand-100"
@@ -235,11 +234,11 @@ export default function SisterHotelsPage() {
         {/* CTA */}
         <SectionCTA
           icon={Waves}
-          title="Begin Your Texel Journey"
-          description="Grand Hotel Opduin is the jewel of the collection—a seaside sanctuary where the dunes meet the Wadden Sea."
+          title={t("beginJourney")}
+          description={t("beginJourneyText")}
           actions={[
-            { label: "Book Your Stay", href: "/book" },
-            { label: "About Opduin", href: "/about", variant: "secondary" },
+            { label: tCommon("bookYourStay"), href: "/book" },
+            { label: t("aboutOpduin"), href: "/about", variant: "secondary" },
           ]}
         />
       </main>

@@ -1,67 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline, FeatureGrid, ReservationModal } from "@/components/molecules";
-import { SectionHero, SectionCTA, SectionTwoColumn, MiniGallery, SectionBlend } from "@/components/sections";
+import { SectionHero, SectionCTA, MiniGallery, SectionBlend } from "@/components/sections";
 import { SectionDivider } from "@/components/ui";
-import { Clock, Phone, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check, Calendar } from "lucide-react";
+import { Clock, Users, ArrowRight, FileText, Wine, Leaf, Sun, UtensilsCrossed, Coffee, Heart, Check, Calendar } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
-import { cn } from "@/lib/utils";
 
 const menuPDFs = {
   breakfast: "https://www.opduin.nl/upload/files/opduin_ontbijtkaart.pdf",
   lunch: "https://www.opduin.nl/upload/files/opduin_lunchkaart_A5%20(2).pdf",
   dinner: "https://www.opduin.nl/upload/files/opduin_menukaart%20EN%20vanaf%2012%20dec.pdf",
 };
-
-const localIngredients = [
-  {
-    icon: UtensilsCrossed,
-    title: "Texel & Wadden Products",
-    description: "As many products as possible from Texel and other Wadden Sea regions",
-  },
-  {
-    icon: Leaf,
-    title: "Organic & Seasonal",
-    description: "Organic meat and seasonal vegetables from local farms",
-  },
-  {
-    icon: Wine,
-    title: "Day-fresh Fish",
-    description: "The sea provides us with day-fresh fish and shellfish",
-  },
-];
-
-const diningOptions = [
-  {
-    title: "Breakfast",
-    time: "7:00 – 10:30",
-    description: "Extensive buffet for hotel guests. Fresh breads, local cheeses, eggs to order, and island honey.",
-    note: "Included for hotel guests",
-    icon: Coffee,
-    menuUrl: menuPDFs.breakfast,
-  },
-  {
-    title: "Lunch",
-    time: "12:00 – 14:30",
-    description: "Light dishes and sandwiches. Perfect after a morning beach walk or cycle tour.",
-    note: "Open to all",
-    icon: Sun,
-    menuUrl: menuPDFs.lunch,
-  },
-  {
-    title: "Dinner",
-    time: "18:00 – 22:00",
-    description: "Multi-course dining experience. Choose 3 to 6 courses showcasing the island's finest.",
-    note: "Reservations recommended",
-    icon: UtensilsCrossed,
-    menuUrl: menuPDFs.dinner,
-  },
-];
 
 const galleryImages = [
   "/restaurant/restaurant-opduin-600x450.jpg",
@@ -73,6 +28,8 @@ const galleryImages = [
 ];
 
 export default function RestaurantPage() {
+  const t = useTranslations("restaurant");
+  const tCommon = useTranslations("common");
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -83,6 +40,42 @@ export default function RestaurantPage() {
     });
     return () => unsubscribe();
   }, [scrollYProgress]);
+
+  const localIngredients = [
+    {
+      icon: UtensilsCrossed,
+      title: t("localSourcing.items.texel.title"),
+      description: t("localSourcing.items.texel.description"),
+    },
+    {
+      icon: Leaf,
+      title: t("localSourcing.items.organic.title"),
+      description: t("localSourcing.items.organic.description"),
+    },
+    {
+      icon: Wine,
+      title: t("localSourcing.items.fish.title"),
+      description: t("localSourcing.items.fish.description"),
+    },
+  ];
+
+  const diningOptions = [
+    {
+      key: "breakfast",
+      icon: Coffee,
+      menuUrl: menuPDFs.breakfast,
+    },
+    {
+      key: "lunch",
+      icon: Sun,
+      menuUrl: menuPDFs.lunch,
+    },
+    {
+      key: "dinner",
+      icon: UtensilsCrossed,
+      menuUrl: menuPDFs.dinner,
+    },
+  ];
 
   return (
     <>
@@ -96,7 +89,7 @@ export default function RestaurantPage() {
         <button
           onClick={() => setIsReservationOpen(true)}
           className="flex items-center justify-center w-14 h-14 bg-navy text-white shadow-xl rounded-full"
-          aria-label="Reserve a Table"
+          aria-label={t("reserveTableAria")}
         >
           <Calendar size={22} />
         </button>
@@ -105,27 +98,27 @@ export default function RestaurantPage() {
       <main>
         {/* Hero */}
         <SectionHero
-          label="Restaurant of Opduin"
-          title="Wadden Gastronomy"
+          label={t("heroLabel")}
+          title={t("pageTitle")}
           singleLineTitle
-          description="Local ingredients from Texel and the Wadden Sea, prepared fresh daily by our chefs."
+          description={t("pageDescription")}
           backgroundImage="/restaurant/restaurant-opduin-600x450.jpg"
           youtubeId="8Raur-TG4_A"
           primaryAction={{
-            label: "Reserve a Table",
+            label: t("reserveTable"),
             href: "/book?type=restaurant",
           }}
           infoStrip={{
             items: [
-              { icon: Clock, label: "Lunch", value: "12:00–14:30" },
-              { icon: Clock, label: "Dinner", value: "18:00–22:00" },
+              { icon: Clock, label: t("lunch"), value: t("lunchHours") },
+              { icon: Clock, label: t("dinner"), value: t("dinnerHours") },
             ],
             trailingContent: (
               <button
                 onClick={() => setIsReservationOpen(true)}
                 className="hidden md:inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
               >
-                Reserve now
+                {t("reserveNow")}
                 <ArrowRight size={14} />
               </button>
             ),
@@ -152,32 +145,25 @@ export default function RestaurantPage() {
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
                 <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  In the Dunes
+                  {t("philosophy.label")}
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
-                  Fresh and homemade
+                  {t("philosophy.title")}
                 </h2>
                 <p className="text-neutral-600 mb-6 leading-relaxed text-lg">
-                  In the middle of the dunes of De Koog we made the restaurant and terrace.
-                  Good food, extensive choice, as many local products as possible and always
-                  fresh and homemade.
+                  {t("philosophy.text1")}
                 </p>
                 <p className="text-neutral-600 leading-relaxed mb-8">
-                  Our chefs source the freshest and most sustainable ingredients from the region,
-                  from the Wadden Islands to the coastline from Den Oever to Delfzijl.
-                  The sea provides us with day-fresh fish and shellfish, while the land provides
-                  organic meat and seasonal vegetables. Each product is carefully selected to
-                  reflect the rich biodiversity and flavor of the Wadden region.
+                  {t("philosophy.text2")}
                 </p>
 
                 {/* Dog note */}
                 <div className="flex items-start gap-3 p-4 bg-sand-50 border-l-2 border-shell">
                   <Heart className="w-5 h-5 text-shell mt-0.5" />
                   <div>
-                    <p className="font-medium text-ink mb-1">Dog-free Restaurant</p>
+                    <p className="font-medium text-ink mb-1">{t("dogFree")}</p>
                     <p className="text-sm text-neutral-600">
-                      The restaurant is completely dog-free. Would you like to have a bite to eat
-                      with your dog? Then you are welcome in our bar for a simple 2-course menu.
+                      {t("dogFreeText")}
                     </p>
                   </div>
                 </div>
@@ -192,7 +178,7 @@ export default function RestaurantPage() {
               >
                 <Image
                   src="/restaurant/slow-food-chefs-alliantie-600x450_1.jpg"
-                  alt="Slow Food Chefs Alliance - Restaurant Opduin"
+                  alt={t("imageAlt")}
                   fill
                   className="object-cover"
                 />
@@ -205,8 +191,8 @@ export default function RestaurantPage() {
 
         {/* Local Ingredients */}
         <FeatureGrid
-          label="Local Sourcing"
-          title="Ingredients with a story"
+          label={t("localSourcing.label")}
+          title={t("localSourcing.title")}
           items={localIngredients}
         />
 
@@ -220,10 +206,10 @@ export default function RestaurantPage() {
               className="text-center mb-16"
             >
               <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                When to Dine
+                {t("dining.label")}
               </span>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-ink">
-                Three moments, one kitchen
+                {t("dining.title")}
               </h2>
             </motion.div>
 
@@ -232,7 +218,7 @@ export default function RestaurantPage() {
                 const Icon = option.icon;
                 return (
                   <motion.article
-                    key={option.title}
+                    key={option.key}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -240,12 +226,18 @@ export default function RestaurantPage() {
                     className="group bg-white p-8"
                   >
                     <Icon size={28} className="text-shell mb-6" />
-                    <p className="text-shell text-sm font-medium tracking-wide mb-2">{option.time}</p>
-                    <h3 className="font-display text-2xl text-ink mb-4">{option.title}</h3>
-                    <p className="text-neutral-600 leading-relaxed mb-6">{option.description}</p>
+                    <p className="text-shell text-sm font-medium tracking-wide mb-2">
+                      {t(`dining.${option.key}.time`)}
+                    </p>
+                    <h3 className="font-display text-2xl text-ink mb-4">
+                      {t(`dining.${option.key}.title`)}
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed mb-6">
+                      {t(`dining.${option.key}.description`)}
+                    </p>
                     <p className="text-sm text-neutral-500 flex items-center gap-2 mb-6">
                       <Check size={14} className="text-shell" />
-                      {option.note}
+                      {t(`dining.${option.key}.note`)}
                     </p>
                     {option.menuUrl && (
                       <a
@@ -255,7 +247,7 @@ export default function RestaurantPage() {
                         className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm group/link"
                       >
                         <FileText size={14} />
-                        View Menu
+                        {t("dining.viewMenu")}
                         <ArrowRight size={14} className="opacity-0 -ml-2 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                       </a>
                     )}
@@ -273,13 +265,13 @@ export default function RestaurantPage() {
               className="mt-16 text-center"
             >
               <p className="text-neutral-600 text-lg mb-6">
-                Reserve your table for lunch or dinner. Also for non-hotel guests.
+                {t("reserveCta")}
               </p>
               <button
                 onClick={() => setIsReservationOpen(true)}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
               >
-                Reserve a Table
+                {t("reserveTable")}
                 <ArrowRight size={16} />
               </button>
             </motion.div>
@@ -294,18 +286,18 @@ export default function RestaurantPage() {
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm">
               <div className="flex items-center gap-2">
                 <Heart size={16} className="text-shell" />
-                <span className="text-neutral-500">Dietary</span>
-                <span className="text-ink font-medium">Vegan, GF options</span>
+                <span className="text-neutral-500">{t("infoStrip.dietary.label")}</span>
+                <span className="text-ink font-medium">{t("infoStrip.dietary.value")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Sun size={16} className="text-shell" />
-                <span className="text-neutral-500">Terrace</span>
-                <span className="text-ink font-medium">Open to all</span>
+                <span className="text-neutral-500">{t("infoStrip.terrace.label")}</span>
+                <span className="text-ink font-medium">{t("infoStrip.terrace.value")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Users size={16} className="text-shell" />
-                <span className="text-neutral-500">Capacity</span>
-                <span className="text-ink font-medium">70 guests</span>
+                <span className="text-neutral-500">{t("infoStrip.capacity.label")}</span>
+                <span className="text-ink font-medium">{t("infoStrip.capacity.value")}</span>
               </div>
             </div>
           </div>
@@ -315,7 +307,7 @@ export default function RestaurantPage() {
 
         {/* Gallery */}
         <MiniGallery
-          title="Restaurant Gallery"
+          title={t("gallery")}
           images={galleryImages}
           columns={3}
           background="sand-100"
@@ -324,10 +316,10 @@ export default function RestaurantPage() {
         {/* Private Dining CTA */}
         <SectionCTA
           icon={Users}
-          title="Private Dining & Events"
-          description="Celebrate special occasions in our private dining room. Customized menus, attentive service, and views of the dunes. Perfect for birthdays, anniversaries, or intimate gatherings."
+          title={t("privateDining.title")}
+          description={t("privateDining.description")}
           actions={[
-            { label: "Enquire Now", href: "/meetings" },
+            { label: tCommon("enquireNow"), href: "/meetings" },
           ]}
         />
       </main>

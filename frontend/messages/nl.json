@@ -160,10 +160,72 @@
     "fromPrice": "Vanaf",
     "perNight": "per nacht",
     "maxGuests": "Tot {count} gasten",
-    "size": "{size} m\u00b2",
+    "size": "{size} m²",
     "view": "{type} Uitzicht",
     "features": "Kamervoorzieningen",
-    "bookThisRoom": "Boek Deze Kamer"
+    "bookThisRoom": "Boek Deze Kamer",
+    "heroLabel": "Slapen in Opduin",
+    "heroTitle": "Kamers",
+    "heroTagline": "Wakker worden in stilte, frisse lakens en een schone zeewind",
+    "infoStrip": {
+      "rooms": "22 Kamers",
+      "roomsLabel": "Kamers",
+      "views": "Zee & Duin",
+      "viewsLabel": "Uitzicht",
+      "direct": "Gratis Sauna",
+      "directLabel": "Direct"
+    },
+    "intro": {
+      "label": "Accommodaties",
+      "title": "Een villa in de duinen",
+      "lead": "Licht en luchtig, zonder onnodig hotelmeubilair, airconditioning, mooie stoffen, comfortabele bedden en een minibar.",
+      "p1": "Schuif de gordijnen open voor een uitzicht over het eiland en de duinen. Zet een Nespresso, open de ramen en word langzaam wakker.",
+      "p2": "Opduin heeft 6 verschillende mogelijkheden om uit te kiezen. Tweepersoonskamers met een kingsize bed, grote suites met een extra slaapbank, appartementen met aparte slaapkamers, een vakantiehuis voor een groot gezin, vakantiewoningen voor een klein gezin en zelfs zes kleine eenpersoonskamers.",
+      "imageAlt": "Suite in Grand Hotel Opduin",
+      "highlightTitle": "Voordelen Direct Boeken",
+      "highlightDescription": "Gratis sauna toegang, €5 korting per nacht en flexibele annulering wanneer u direct bij ons boekt."
+    },
+    "grid": {
+      "upTo": "Tot {count} gasten",
+      "viewDetails": "Bekijk Details",
+      "more": "+{count} meer"
+    },
+    "faq": {
+      "label": "Goed om te Weten",
+      "title": "Veelgestelde Vragen",
+      "items": [
+        {
+          "question": "Wat zijn de in- en uitchecktijden?",
+          "answer": "Standaard inchecken is na 15:00 uur met uitchecken voor 11:00 uur. Vroege aankomsten worden geaccommodeerd als kamers gereed zijn, of u kunt uw contactgegevens achterlaten voor een telefoontje wanneer uw kamer beschikbaar is. Laat uitchecken ('luie zondag') kost €42,50 tot de laatste veerboot om 21:00 uur, afhankelijk van kamerbeschikbaarheid."
+        },
+        {
+          "question": "Wat is het annuleringsbeleid?",
+          "answer": "Directe boekingen kunnen gratis worden geannuleerd tot 24 uur voor aankomst (15:00 uur grens). Annuleringen binnen 24 uur brengen volledige kosten met zich mee voor overnachtingen en beautybehandelingen, hoewel ontbijt en belastingen worden terugbetaald. Boekingen via derden volgen hun respectievelijke beleid."
+        },
+        {
+          "question": "Zijn huisdieren toegestaan?",
+          "answer": "Honden zijn toegestaan op aanvraag voor €28,50 per nacht. We bieden een hondenkussen en waterbak. Honden mogen het restaurant niet betreden en een hele verdieping blijft huisdiervrij voor allergische gasten."
+        },
+        {
+          "question": "Welke kosten kan ik verwachten?",
+          "answer": "Toeristenbelasting van €3,85 per persoon per nacht is van toepassing bij uitchecken. Ontbijt is inbegrepen voor standaardkamers (8-10:30 uur service). Het West Hampton vakantiehuis sluit ontbijt uit maar biedt het apart aan voor €24 (volwassenen) of €12 (kinderen)."
+        },
+        {
+          "question": "Is er parkeergelegenheid?",
+          "answer": "Gratis parkeren op het terrein is beschikbaar met beperkte plaatsen. We raden aan vroeg te arriveren om een plek te bemachtigen."
+        },
+        {
+          "question": "Welke wellnessfaciliteiten zijn er beschikbaar?",
+          "answer": "Het verwarmde zwembad is geopend van 7:00 tot 23:00 uur. Saunahuur kost €10/uur, terwijl massagestoelen en solarium aparte kosten met zich meebrengen. Directe boekers ontvangen gratis saunamunten."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Boek Uw Verblijf",
+      "description": "Reserveer via onze website of bel gewoon. We zouden graag uw Texel-vakantie met u samenstellen. Zin in wat ideeën? Bekijk onze arrangementen.",
+      "bookOnline": "Online Boeken"
+    },
+    "checkAvailability": "Beschikbaarheid Controleren"
   },
   "restaurant": {
     "pageTitle": "Wadden Gastronomie",
@@ -174,18 +236,195 @@
     "lunchHours": "12:00 - 14:30",
     "dinnerHours": "18:00 - 22:00",
     "reserveNow": "Reserveer nu",
-    "philosophy": "Vers en huisgemaakt",
-    "philosophyText": "Midden in de duinen van De Koog hebben wij het restaurant en terras gemaakt. Goed eten, ruime keuze, zoveel mogelijk lokale producten en altijd vers en huisgemaakt.",
+    "reserveTable": "Reserveer een Tafel",
+    "reserveTableAria": "Reserveer een Tafel",
+    "philosophy": {
+      "label": "In de Duinen",
+      "title": "Vers en huisgemaakt",
+      "text1": "Midden in de duinen van De Koog hebben wij het restaurant en terras gemaakt. Goed eten, ruime keuze, zoveel mogelijk lokale producten en altijd vers en huisgemaakt.",
+      "text2": "Onze chefs selecteren de versste en meest duurzame ingrediënten uit de regio, van de Waddeneilanden tot de kustlijn van Den Oever tot Delfzijl. De zee voorziet ons van dagverse vis en schelpdieren, terwijl het land ons biologisch vlees en seizoensgroenten levert. Elk product wordt zorgvuldig geselecteerd om de rijke biodiversiteit en smaak van het Waddengebied te weerspiegelen."
+    },
     "dogFree": "Hondvrij Restaurant",
-    "dogFreeText": "Het restaurant is volledig hondvrij. Wilt u met uw hond een hapje eten? Dan bent u welkom in onze bar voor een eenvoudig 2-gangen menu."
+    "dogFreeText": "Het restaurant is volledig hondvrij. Wilt u met uw hond een hapje eten? Dan bent u welkom in onze bar voor een eenvoudig 2-gangen menu.",
+    "localSourcing": {
+      "label": "Lokale Inkoop",
+      "title": "Ingrediënten met een verhaal",
+      "items": {
+        "texel": {
+          "title": "Texel & Wadden Producten",
+          "description": "Zoveel mogelijk producten van Texel en andere Waddenzeeregio's"
+        },
+        "organic": {
+          "title": "Biologisch & Seizoensgebonden",
+          "description": "Biologisch vlees en seizoensgroenten van lokale boerderijen"
+        },
+        "fish": {
+          "title": "Dagverse Vis",
+          "description": "De zee voorziet ons van dagverse vis en schelpdieren"
+        }
+      }
+    },
+    "dining": {
+      "label": "Wanneer Dineren",
+      "title": "Drie momenten, één keuken",
+      "viewMenu": "Bekijk Menu",
+      "breakfast": {
+        "title": "Ontbijt",
+        "time": "7:00 – 10:30",
+        "description": "Uitgebreid buffet voor hotelgasten. Vers brood, lokale kazen, eieren op bestelling en eilandhoning.",
+        "note": "Inbegrepen voor hotelgasten"
+      },
+      "lunch": {
+        "title": "Lunch",
+        "time": "12:00 – 14:30",
+        "description": "Lichte gerechten en broodjes. Perfect na een ochtendwandeling op het strand of fietstocht.",
+        "note": "Open voor iedereen"
+      },
+      "dinner": {
+        "title": "Diner",
+        "time": "18:00 – 22:00",
+        "description": "Multi-gangen dinerbeleving. Kies 3 tot 6 gangen met het beste van het eiland.",
+        "note": "Reserveren aanbevolen"
+      }
+    },
+    "reserveCta": "Reserveer uw tafel voor lunch of diner. Ook voor niet-hotelgasten.",
+    "infoStrip": {
+      "dietary": {
+        "label": "Dieet",
+        "value": "Vegan, GV opties"
+      },
+      "terrace": {
+        "label": "Terras",
+        "value": "Open voor iedereen"
+      },
+      "capacity": {
+        "label": "Capaciteit",
+        "value": "70 gasten"
+      }
+    },
+    "gallery": "Restaurant Galerij",
+    "privateDining": {
+      "title": "Privé Dineren & Evenementen",
+      "description": "Vier speciale gelegenheden in onze privé eetzaal. Op maat gemaakte menu's, attente service en uitzicht op de duinen. Perfect voor verjaardagen, jubilea of intieme bijeenkomsten."
+    },
+    "imageAlt": "Slow Food Chefs Alliance - Restaurant Opduin"
   },
   "wellness": {
     "pageTitle": "Wellness & Spa",
     "pageDescription": "Ontsnap naar rust. Onze spa biedt een oase van kalmte met behandelingen geïnspireerd door zee en duinen.",
-    "heroLabel": "Wellness bij Opduin",
+    "heroLabel": "Wellness in Opduin",
+    "heroTitle": "Persoonlijke Aandacht",
+    "heroDescription": "Er gaat niets boven persoonlijke aandacht. Onze gecertificeerde schoonheidsspecialisten werken met Thalgo — lichte en frisse kwaliteitsproducten met hun oorsprong uit de zee.",
+    "bookTreatment": "Boek een Behandeling",
     "poolSauna": "Zwembad & Sauna",
     "treatments": "Behandelingen",
-    "packages": "Wellness Arrangementen"
+    "packages": "Wellness Arrangementen",
+    "infoStrip": {
+      "pool": "Zwembad",
+      "poolHours": "9:00–21:00",
+      "salon": "Salon",
+      "byAppointment": "Op afspraak",
+      "freeSauna": "Gratis sauna voor gasten"
+    },
+    "philosophy": {
+      "label": "Schoonheidssalon",
+      "title": "Thalgo Marine Cosmetica",
+      "p1": "Onze gecertificeerde schoonheidsspecialisten werken met Thalgo — lichte en frisse kwaliteitsproducten met hun oorsprong uit de zee. Franse mariene cosmetica bekend om hun zuiverheid en effectiviteit.",
+      "p2": "Alle behandelingen zijn alleen op afspraak en ook toegankelijk voor niet-gasten. Boek uw behandeling telefonisch of controleer beschikbaarheid in onze online boekingstool.",
+      "p3": "Voor privé saunareserveringen: €12,50 per persoon per uur.",
+      "imageAlt": "Schoonheidssalon Opduin"
+    },
+    "facilities": {
+      "label": "Faciliteiten",
+      "title": "Zwembad, Sauna & Stoom",
+      "pool": {
+        "name": "Zwembad",
+        "description": "Verwarmd binnenzwembad met jacuzzi en kinderbad. Zwemlessen op dinsdagen.",
+        "highlight": "Niet-gasten: €9 volwassenen, €5 kinderen"
+      },
+      "sauna": {
+        "name": "Finse Sauna & Stoombad",
+        "description": "Traditionele Finse sauna en Turks stoombad. Gebruikelijk gebruik zonder badkleding tijdens vrije uren.",
+        "highlight": "Gratis voor gasten 16:30-19:00"
+      },
+      "solarium": {
+        "name": "Solarium",
+        "description": "Snelle bruiningsservice beschikbaar voor gasten en bezoekers.",
+        "highlight": "€11 per sessie"
+      }
+    },
+    "treatmentsSection": {
+      "label": "Behandelingen",
+      "title": "Ons Behandelmenu",
+      "description": "Van ontspannende massages tot verkwikkende gezichtsbehandelingen. Kenmerkende Texel-behandelingen met lokale honing en Noordkroon schapencrème.",
+      "signature": "Kenmerkend",
+      "categories": {
+        "massage": {
+          "name": "Massage",
+          "treatments": [
+            { "name": "Ontspanningsmassage", "duration": "25 min", "price": "€50" },
+            { "name": "Ontspanningsmassage", "duration": "55 min", "price": "€85" },
+            { "name": "Hot Stone Massage", "duration": "40 min", "price": "€70" },
+            { "name": "Hot Stone Massage", "duration": "75 min", "price": "€110" },
+            { "name": "Hoofdhuidmassage", "duration": "15 min", "price": "€25" }
+          ]
+        },
+        "facialWomen": {
+          "name": "Gezicht (Dames)",
+          "treatments": [
+            { "name": "Zeebehandeling", "duration": "55 min", "price": "€85" },
+            { "name": "Biologische Gezichtsbehandeling", "duration": "40 min", "price": "€65" },
+            { "name": "Anti-Aging Behandeling", "duration": "90 min", "price": "€135" }
+          ]
+        },
+        "facialMen": {
+          "name": "Gezicht (Heren)",
+          "treatments": [
+            { "name": "Heren Gezichtsbehandeling", "duration": "55 min", "price": "€85" },
+            { "name": "Heren Deluxe Gezichtsbehandeling", "duration": "90 min", "price": "€110" }
+          ]
+        },
+        "body": {
+          "name": "Lichaamsbehandelingen",
+          "treatments": [
+            { "name": "Body Peeling", "duration": "30 min", "price": "€60" },
+            { "name": "Algenpakking", "duration": "45 min", "price": "€85" },
+            { "name": "Zwangerschapsbehandeling", "duration": "60 min", "price": "€110" }
+          ]
+        },
+        "texel": {
+          "name": "Texelse Behandelingen",
+          "featured": true,
+          "treatments": [
+            { "name": "Texelse Voeten (honing & schapencrème)", "duration": "25 min", "price": "€40" },
+            { "name": "Texels Gevoel", "duration": "55 min", "price": "€85" },
+            { "name": "Opduin Gevoel Deluxe", "duration": "90 min", "price": "€130" }
+          ]
+        },
+        "handsFeet": {
+          "name": "Handen & Voeten",
+          "treatments": [
+            { "name": "Manicure", "duration": "35 min", "price": "€50" },
+            { "name": "Luxe Manicure", "duration": "55 min", "price": "€75" },
+            { "name": "Pedicure", "duration": "45 min", "price": "€65" },
+            { "name": "Voetreflexmassage", "duration": "55 min", "price": "€85" }
+          ]
+        },
+        "kids": {
+          "name": "Kinderwellness",
+          "treatments": [
+            { "name": "Kindermassage", "duration": "25 min", "price": "€29" },
+            { "name": "Kindermanicure", "duration": "25 min", "price": "€29" },
+            { "name": "Kindergezichtsbehandeling", "duration": "25 min", "price": "€29" }
+          ]
+        }
+      }
+    },
+    "gallery": "Wellness Galerij",
+    "cta": {
+      "title": "Boek Uw Behandeling",
+      "description": "Onze salon is open voor iedereen, niet alleen hotelgasten. Alle behandelingen zijn alleen op afspraak. Bel om uw persoonlijke wellness-ervaring te reserveren."
+    }
   },
   "offers": {
     "pageTitle": "Arrangementen",
@@ -194,7 +433,82 @@
     "includes": "Wat is inbegrepen",
     "conditions": "Voorwaarden",
     "idealFor": "Ideaal voor",
-    "morePackages": "Meer Arrangementen"
+    "morePackages": "Meer Arrangementen",
+    "heroLabel": "Boek Direct & Bespaar",
+    "heroTitle": "Arrangementen",
+    "heroTagline": "Voordelige aanbiedingen voor directe boekers",
+    "bookPackage": "Boek een Arrangement",
+    "infoStrip": {
+      "packagesLabel": "Pakketten",
+      "deals": "{count} Deals",
+      "includedLabel": "Inbegrepen",
+      "freeExtras": "Gratis Extra's",
+      "directLabel": "Direct",
+      "skipFee": "Geen 15% Toeslag"
+    },
+    "intro": {
+      "label": "Waarom Direct Boeken?",
+      "title": "Meer waarde, meer voordelen",
+      "p1": "Boeken via Booking.com is handig, maar duur — wij betalen 15% commissie op elke boeking via derden. Dat is geld dat we liever aan u besteden.",
+      "p2": "Onze arrangementen zijn exclusief voor directe boekers: gratis extra's, kortingen en flexibele annulering. Kies hieronder uw perfecte Texel-uitje.",
+      "highlightTitle": "Voordelen Direct Boeken",
+      "highlightDescription": "Gratis sauna toegang, €5/nacht korting en extra's die u nergens anders vindt.",
+      "imageAlt": "Ontspanningsarrangement bij Grand Hotel Opduin"
+    },
+    "viewDetails": "Bekijk Details",
+    "more": "+{count} meer",
+    "cta": {
+      "title": "Boek Uw Arrangement",
+      "description": "Reserveer via onze website of bel gewoon. We beantwoorden graag uw vragen en helpen u het juiste arrangement te kiezen voor uw Texel-vakantie.",
+      "bookOnline": "Online Boeken"
+    },
+    "items": {
+      "warmWinter": {
+        "title": "Warme Winteraanbieding",
+        "subtitle": "Gezellig uitje met wellness inbegrepen",
+        "description": "Ontsnap aan de winterkou met ons verwarmende arrangement. Geniet van een gezellig verblijf met ontbijt, middagkoffie en cake, en volledige toegang tot onze wellnessfaciliteiten inclusief sauna, stoombad en verwarmd binnenzwembad.",
+        "category": "Seizoen",
+        "badge": "Winter Special",
+        "includes": ["Overnachting met ontbijt", "Koffie en cake in de middag", "Toegang tot wellnessfaciliteiten", "Gratis parkeren", "Gratis WiFi"],
+        "idealFor": "Weekendjes weg, wellness zoekers"
+      },
+      "earlySpring": {
+        "title": "Vroege Voorjaarsweek",
+        "subtitle": "Tot 50% korting op accommodatie",
+        "description": "Boek vroeg en bespaar flink op uw lentevakantie. Geniet van de ontwakende natuur van Texel met tot 50% korting op uw overnachting met ontbijt. De perfecte tijd om het eiland te verkennen voordat de zomerdrukte begint.",
+        "category": "Seizoen",
+        "badge": "Tot 50% Korting",
+        "includes": ["Tot 50% korting op accommodatie", "Ontbijt inbegrepen", "Toegang tot wellnessfaciliteiten", "Gratis parkeren", "Gratis WiFi"],
+        "idealFor": "Vroege boekers, budgetbewuste reizigers"
+      },
+      "opduinRelax": {
+        "title": "Opduin Ontspan Deal",
+        "subtitle": "3 nachten pure ontspanning",
+        "description": "Ontspan volledig met ons 3-nachten ontspanningsarrangement. Inclusief een heerlijk diner in ons restaurant, volledige toegang tot wellnessfaciliteiten en alles wat u nodig heeft voor een rustige retraite in de duinen van Texel.",
+        "category": "Wellness",
+        "badge": "3 Nachten",
+        "includes": ["3 nachten accommodatie", "Dagelijks ontbijt", "1 diner in Restaurant Opduin", "Toegang tot wellnessfaciliteiten", "Gratis parkeren"],
+        "idealFor": "Stellen, wellness retraites, ontspanning"
+      },
+      "exploreTexel": {
+        "title": "Ontdek Texel Deal",
+        "subtitle": "2 nachten het eiland ontdekken",
+        "description": "Het perfecte arrangement voor wie alles wil ontdekken wat Texel te bieden heeft. Inclusief entree tot Ecomare zeehondenopvang, een picknicktas voor uw avonturen en diner om uw verkenningsdag af te sluiten.",
+        "category": "Avontuur",
+        "badge": "2 Nachten",
+        "includes": ["2 nachten accommodatie", "Dagelijks ontbijt", "1 diner in Restaurant Opduin", "Entree tot Ecomare", "Picknicktas voor uw excursie"],
+        "idealFor": "Gezinnen, natuurliefhebbers, eerste bezoekers"
+      },
+      "tasteOfTexel": {
+        "title": "Proef van Texel Deal",
+        "subtitle": "2 nachten culinair genieten",
+        "description": "Ervaar de beste smaken die Texel te bieden heeft. Dit culinaire arrangement bevat twee diners in ons restaurant met lokaal Texels lamsvlees, verse zeevruchten en eilandproducten. Een feest voor fijnproevers.",
+        "category": "Culinair",
+        "badge": "2 Diners",
+        "includes": ["2 nachten accommodatie", "Dagelijks ontbijt", "2 diners in Restaurant Opduin", "Toegang tot wellnessfaciliteiten", "Gratis parkeren"],
+        "idealFor": "Fijnproevers, stellen, culinaire enthousiastelingen"
+      }
+    }
   },
   "about": {
     "pageTitle": "De Hamptons van de Wadden",
@@ -205,32 +519,179 @@
     "thirdGen": "3e Generatie",
     "carbonNeutral": "Klimaatneutraal",
     "awardWinning": "Bekroond",
-    "sanctuary": "Een toevluchtsoord aan de rand van de wereld",
-    "sanctuaryText": "Genesteld tussen de duinen van Texel, verwelkomt Grand Hotel Opduin al bijna een eeuw gasten.",
-    "values": "Onze Waarden",
-    "valuesTitle": "Wat ons leidt",
-    "sustainability": "Duurzaamheid",
-    "sustainabilityTitle": "Zorgen voor ons eiland",
-    "team": "Het Team",
-    "teamTitle": "Maak kennis met ons team",
-    "location": "Routebeschrijving",
-    "locationTitle": "Vind ons op Texel"
+    "bookYourStay": "Boek Uw Verblijf",
+    "bookYourStayAria": "Boek Uw Verblijf",
+    "intro": {
+      "label": "In de Duinen",
+      "title": "Een toevluchtsoord aan de rand van de wereld",
+      "p1": "Genesteld tussen de duinen van Texel, verwelkomt Grand Hotel Opduin al bijna een eeuw gasten. Wat begon als een bescheiden strandverblijf is uitgegroeid tot een van Nederlands meest gekoesterde boutique bestemmingen.",
+      "p2": "Onze filosofie blijft ongewijzigd: oprechte gastvrijheid bieden die de natuurlijke schoonheid van het eiland en de UNESCO Werelderfgoedstatus van de Waddenzee eert. Elk detail, van onze lokaal geïnkochte keuken tot onze duurzame praktijken, weerspiegelt onze diepe verbinding met deze bijzondere plek.",
+      "p3": "Vandaag zet de derde generatie van de familie Petit deze erfenis voort, met een balans tussen tijdloze tradities en modern comfort voor de veeleisende reiziger.",
+      "discoverSister": "Ontdek onze zusterhotels",
+      "imageAlt": "Historisch Grand Hotel Opduin"
+    },
+    "values": {
+      "label": "Onze Waarden",
+      "title": "Wat ons leidt",
+      "items": {
+        "hospitality": {
+          "title": "Oprechte Gastvrijheid",
+          "description": "Drie generaties van de familie Petit hebben gasten verwelkomd. Die warmte zit in ons DNA."
+        },
+        "stewardship": {
+          "title": "Eiland Rentmeesterschap",
+          "description": "We beschermen wat Texel bijzonder maakt—van het ondersteunen van lokale boeren tot het behouden van duinecosystemen."
+        },
+        "luxury": {
+          "title": "Doordachte Luxe",
+          "description": "Excellentie zonder pretentie. Elk detail dient uw comfort, niet ons ego."
+        }
+      }
+    },
+    "timeline": {
+      "label": "Onze Reis",
+      "title": "Bijna een eeuw gastvrijheid",
+      "items": [
+        { "year": "1932", "title": "Het Begin", "description": "De familie Petit opent een klein pension voor bezoekers van Texel, met eenvoudige kamers en stevige eilandmaaltijden." },
+        { "year": "1956", "title": "Naoorlogse Renaissance", "description": "Na zorgvuldige restauratie breidt het hotel uit met een nieuwe vleugel, terrasrestaurant en de eerste glimpen van wat ons kenmerkende duinuitzicht zou worden." },
+        { "year": "1985", "title": "Wellness Pionier", "description": "We worden het eerste hotel op Texel dat spa-faciliteiten aanbiedt, en introduceren het eiland aan het concept van wellness aan zee." },
+        { "year": "2010", "title": "Grote Renovatie", "description": "Een complete renovatie transformeert Opduin tot een luxe bestemming met behoud van onze familietraditie en eilandkarakter." },
+        { "year": "2023", "title": "Duurzame Toekomst", "description": "Klimaatneutraal worden, zonnepanelen installeren en onze toewijding aan lokale inkoop en eilandbehoud verdiepen." }
+      ]
+    },
+    "sustainability": {
+      "label": "Duurzaamheid",
+      "title": "Zorgen voor ons eiland",
+      "description": "Wij geloven dat luxe en duurzaamheid hand in hand gaan. Van zonnepanelen op ons dak tot samenwerkingen met lokale boeren, we zijn toegewijd aan het beschermen van de natuurlijke schoonheid die Texel zo bijzonder maakt.",
+      "imageAlt": "Texel natuur en duurzaamheid",
+      "stats": {
+        "carbonNeutral": { "value": "100%", "label": "Klimaatneutraal", "description": "Sinds 2023" },
+        "localSourcing": { "value": "85%", "label": "Lokale Inkoop", "description": "Voedsel & benodigdheden van Texel" },
+        "solarPanels": { "value": "40+", "label": "Zonnepanelen", "description": "Voor onze energie" },
+        "plastic": { "value": "Nul", "label": "Wegwerpplastic", "description": "In het hele hotel" }
+      }
+    },
+    "gallery": "Momenten bij Opduin",
+    "viewFullGallery": "Bekijk volledige galerij",
+    "team": {
+      "label": "Het Team",
+      "title": "Maak kennis met ons team",
+      "description": "Achter elk geweldig verblijf staat een team dat geeft. Dit zijn de mensen die Opduin bijzonder maken.",
+      "members": [
+        { "name": "Lucas Petit", "role": "Eigenaar, Derde Generatie", "quote": "Mijn grootvader heeft deze plek met zijn handen gebouwd. Mijn taak is dat te eren terwijl ik iets nog beters bouw voor de volgende generatie." },
+        { "name": "Maria Jansen", "role": "Executive Chef", "quote": "De rijkdom van Texel inspireert elk gerecht. De zee, het land, de seizoenen — zij vertellen het verhaal. Ik vertaal het alleen naar het bord." },
+        { "name": "Thomas de Vries", "role": "Spa Directeur", "quote": "Echte wellness komt van verbinding met de natuur. Hier doen de duinen en de zee de helft van het werk. Wij helpen je alleen te vertragen." }
+      ]
+    },
+    "awards": {
+      "label": "Erkenning",
+      "title": "Prijzen & Onderscheidingen",
+      "items": [
+        { "year": "2024", "title": "Beste Boutique Hotel Nederland", "org": "Traveller's Choice" },
+        { "year": "2023", "title": "Green Key Goud Certificering", "org": "Green Key International" },
+        { "year": "2023", "title": "Top 10 Wellness Retraites", "org": "Condé Nast Traveller" },
+        { "year": "2022", "title": "Excellence in Hospitality", "org": "Dutch Hotel Association" }
+      ]
+    },
+    "location": {
+      "label": "Routebeschrijving",
+      "title": "Vind ons op Texel",
+      "description": "Slechts 90 minuten van Amsterdam, maar een wereld apart. Neem de veerboot van Den Helder (20 minuten) en volg de duinen naar De Koog.",
+      "imageAlt": "Texel Eiland",
+      "steps": {
+        "ferry": { "title": "Veerboot van Den Helder", "description": "TESO veerboot, elke 30 minuten" },
+        "drive": { "title": "Rijd over het eiland", "description": "15 minuten naar De Koog" },
+        "arrive": { "title": "Aankomst bij Opduin", "description": "Op Texels hoogste duin" }
+      }
+    },
+    "cta": {
+      "title": "Beleef Opduin",
+      "description": "De beste manier om te begrijpen wat ons bijzonder maakt is een bezoek. We kijken ernaar uit u te verwelkomen."
+    }
   },
   "sisterHotels": {
     "pageTitle": "Onze Zusterhotels",
     "pageDescription": "Vijf onderscheidende hotels door heel Nederland, elk met een eigen karakter. Verenigd door toewijding aan oprechte gastvrijheid.",
     "heroLabel": "Hoscom Collectie",
+    "heroTitle": "Onze Zusterhotels",
+    "heroDescription": "Vijf onderscheidende hotels door heel Nederland, elk met een eigen karakter. Verenigd door toewijding aan oprechte gastvrijheid.",
+    "bookAtOpduin": "Boek bij Opduin",
     "hotels": "Hotels",
     "acrossNetherlands": "Door Nederland",
     "familyValues": "Familiewaarden",
+    "visitWebsite": "Bezoek Website",
     "aboutHoscom": "Over Hoscom",
     "hoscomTitle": "Een Familie van Unieke Ervaringen",
+    "hoscomDescription1": "Lucas Petit, eigenaar van Hoscom, beheert zes onderscheidende hotels door heel Nederland. Elk pand is zorgvuldig ontwikkeld om gasten een unieke ervaring te bieden, geworteld in lokaal karakter en oprechte gastvrijheid.",
+    "hoscomDescription2": "Wat hen verenigt is een gedeelde filosofie: hotels moeten plekken zijn waar gasten echt zichzelf kunnen zijn, omringd door doordachte details en warme service. Van de duinen van Texel tot de straten van Leeuwarden, elk hotel vertelt zijn eigen verhaal.",
+    "ourCollection": "Onze Collectie",
     "beginJourney": "Begin Uw Texelse Reis",
-    "beginJourneyText": "Grand Hotel Opduin is het juweel van de collectie—een toevluchtsoord aan zee waar de duinen de Waddenzee ontmoeten."
+    "beginJourneyText": "Grand Hotel Opduin is het juweel van de collectie—een toevluchtsoord aan zee waar de duinen de Waddenzee ontmoeten.",
+    "aboutOpduin": "Over Opduin",
+    "breadcrumbs": {
+      "about": "Over Ons",
+      "sisterHotels": "Zusterhotels"
+    }
   },
   "contact": {
     "pageTitle": "Neem Contact Op",
     "pageDescription": "We horen graag van u. Neem contact op met ons team.",
+    "heroLabel": "Contact",
+    "heroTitle": "Neem Contact Op",
+    "heroDescription": "Wij helpen u graag bij het plannen van uw perfecte verblijf op Texel.",
+    "reception": "Receptie",
+    "findUs": "Vind Ons",
+    "getDirections": "Route",
+    "contactUs": "Neem Contact Op",
+    "openingHours": "Openingstijden",
+    "restaurant": "Restaurant",
+    "spa": "Spa",
+    "byAppointment": "Op afspraak",
+    "parking": {
+      "title": "Gratis Parkeren",
+      "description": "Parkeren op het eigen parkeerterrein van Opduin is gratis. Voor parkeren op het hele eiland heeft u een Texel vignet nodig dat u online kunt kopen."
+    },
+    "directions": {
+      "label": "Routebeschrijving",
+      "title": "Hoe komt u hier",
+      "byCar": {
+        "title": "Met de Auto",
+        "description": "Vanuit west/zuid Nederland via de Amsterdamse ringweg (A10), door Zaandam, Purmerend, Hoorn naar Den Helder. Vanuit het oosten via de Afsluitdijk (A7)."
+      },
+      "byFerry": {
+        "title": "Met de Veerboot",
+        "description": "De TESO veerboot vertrekt elk uur (op het halve uur) uit Den Helder. 20 minuten overtocht, geen reservering nodig."
+      },
+      "publicTransport": {
+        "title": "Openbaar Vervoer",
+        "description": "Bus 33 brengt u naar de veerboot vanaf station Den Helder. Op Texel brengt bus 28 u van de veerboot naar Opduin."
+      }
+    },
+    "form": {
+      "title": "Stuur ons een Bericht",
+      "name": "Naam",
+      "namePlaceholder": "Uw naam",
+      "email": "E-mail",
+      "emailPlaceholder": "uw@email.com",
+      "subject": "Onderwerp",
+      "selectTopic": "Selecteer een onderwerp",
+      "topics": {
+        "reservation": "Reserveringsvraag",
+        "spa": "Spa & Wellness",
+        "restaurant": "Restaurant",
+        "events": "Vergaderingen & Evenementen",
+        "feedback": "Feedback",
+        "other": "Anders"
+      },
+      "message": "Bericht",
+      "messagePlaceholder": "Hoe kunnen wij u helpen?",
+      "send": "Verstuur Bericht"
+    },
+    "success": {
+      "title": "Bericht Verzonden",
+      "description": "Bedankt voor uw bericht. We nemen binnen 24 uur contact met u op.",
+      "sendAnother": "Nieuw Bericht Versturen"
+    },
     "address": "Adres",
     "phone": "Telefoon",
     "email": "E-mail",
@@ -244,16 +705,86 @@
     "pageTitle": "Vergaderen & Evenementen",
     "pageDescription": "Organiseer uw volgende vergadering of evenement in onze inspirerende locatie met uitzicht op de duinen.",
     "heroLabel": "Vergaderen & Evenementen",
+    "heroTitle": "Vergaderen",
+    "heroTagline": "Oprechte aandacht voor elkaar",
+    "heroDescription": "U organiseert een vergadering die niemand zal vergeten. En daar gaat het om.",
     "requestProposal": "Offerte Aanvragen",
     "capacity": "Capaciteit",
-    "venues": "Zalen"
+    "venues": "Zalen",
+    "infoStrip": {
+      "guests": "2 tot 200 gasten",
+      "catering": "Volledige catering",
+      "team": "Toegewijd evenemententeam",
+      "response": "Reactie binnen 24 uur"
+    },
+    "intro": {
+      "label": "Conferenties & Evenementen",
+      "title": "Vergaderingen die inspireren",
+      "lead": "Een originele plek waar deelnemers volledig geïsoleerd zijn van hun normale activiteiten. Maar nog steeds gemakkelijk bereikbaar. Een eindeloze variëteit aan professioneel georganiseerde activiteiten in en rond de locatie.",
+      "p1": "Intiem genoeg voor een kleine bijeenkomst, maar ook goed uitgerust voor een vergadering van 200 deelnemers. Vergaderingen op Texel zijn altijd succesvol.",
+      "p2": "Met een goed gekozen bestemming en een goed programma raken deelnemers betrokken en enthousiast. De sfeer en het comfort in combinatie met een flexibele organisatie geven iedereen de kans om te groeien.",
+      "highlightTitle": "Flexibele Capaciteit",
+      "highlightDescription": "Van bestuursvergaderingen van 10 personen tot conferenties van 200 deelnemers - wij passen ons aan uw behoeften aan."
+    },
+    "teambuilding": {
+      "title": "Teambuilding Activiteiten",
+      "p1": "Oesterwandelen op het wad, natuurexcursies, vliegen boven het eiland, surfen... Zoveel activiteiten om uw gasten iets bijzonders te laten beleven tussen vergaderingen door.",
+      "p2": "Wij helpen u graag een geschikte activiteit te vinden en regelen alles voor u.",
+      "cta": "Vraag naar activiteiten",
+      "activities": ["Oesterwandelen op het wad", "Natuurexcursies", "Vliegen boven het eiland", "Surfen", "Fietstochten", "Zeehonden spotten"]
+    },
+    "party": {
+      "title": "Een Feestje op Texel",
+      "p1": "Een geweldig feest is goed georganiseerd en geeft uw gasten tegelijkertijd de mogelijkheid om volledig te ontspannen. Wanneer u gasten uitnodigt op het eiland, begint het plezier al — het is alsof je naar het buitenland gaat, maar dan beter.",
+      "p2": "Texel biedt een wereld aan mogelijkheden. Eten en drinken geteeld door lokale buren, woeste natuur, avontuurlijke sporten, hoogstaande kunst en cultuur, wellness en unieke luchten op eindeloze stranden.",
+      "p3": "Bruiloften, jubilea, familiebijeenkomsten — uw gasten komen niet zomaar even langs, ze genieten van een echt happening.",
+      "cta": "Plan uw feest"
+    },
+    "wedding": {
+      "title": "Trouwen op Texel",
+      "p1": "Opduin is een officiële trouwlocatie. Ideaal voor kleine bruiloften. U kunt trouwen in een van onze zalen of op het strand en daarna een ontspannen diner met de hele groep.",
+      "p2": "Om ervoor te zorgen dat uw trouwdag volgens uw wensen wordt geregeld, werken we samen met Sophie van Trouwen Texel. Zij organiseert uw bruiloft (of een deel ervan) met hart en ziel, zodat u zorgeloos van deze speciale dag kunt genieten.",
+      "contactWedding": "Neem contact op met Texelse weddingplanner Sophie:",
+      "contactBanqueting": "Neem contact op met ons banquetingteam"
+    },
+    "packages": {
+      "title": "Vergaderarrangementen",
+      "p1": "Het complete pakket. U hoeft zich nergens zorgen over te maken, wij zorgen ervoor dat u en uw gasten op de juiste manier worden verzorgd.",
+      "p2": "Inclusief vergaderzaalhuur, lunches, diner en lekkernijen. Prijzen zijn afhankelijk van uw wensen en het aantal deelnemers. Wij maken graag een offerte voor u.",
+      "p3": "Extra ideeën nodig voor een activiteit op Texel? Bel ons gerust en wij helpen u met suggesties. Wij nemen ook graag het organisatorische deel uit handen.",
+      "cta": "Vraag een offerte aan"
+    },
+    "rooms": {
+      "title": "Vergaderzalen",
+      "description": "Alle zalen op de eerste verdieping met natuurlijk daglicht. Beamer, scherm, geluidssysteem & flipchart inbegrepen.",
+      "combinations": "Zaalcombinaties",
+      "configuration": "Configuratie",
+      "size": "Grootte",
+      "carre": "Carré",
+      "theatre": "Theater",
+      "ushape": "U-vorm",
+      "additionalEquipment": "Extra apparatuur beschikbaar via externe verhuur."
+    },
+    "gallery": "Evenementen bij Opduin",
+    "cta": {
+      "title": "Neem Contact Op met Ons Banquetingteam",
+      "description": "Luuk en Esmee helpen u graag bij het plannen van uw evenement. We reageren binnen 24 uur."
+    }
   },
   "gallery": {
     "pageTitle": "Galerij",
-    "pageDescription": "Ontdek Grand Hotel Opduin via onze fotogalerij."
+    "pageDescription": "Ontdek Grand Hotel Opduin via onze fotogalerij.",
+    "heroLabel": "Visuele Verhalen",
+    "heroTitle": "Galerij",
+    "heroDescription": "Momenten vastgelegd bij Grand Hotel Opduin.",
+    "photos": "Foto's",
+    "categories": "Categorieën"
   },
   "booking": {
     "pageTitle": "Boek Uw Verblijf",
+    "heroLabel": "Reserveringen",
+    "heroTitle": "Boek Uw Verblijf",
+    "heroDescription": "Reserveer direct voor de beste prijzen en exclusieve voordelen.",
     "selectDates": "Selecteer Data",
     "selectRoom": "Selecteer Kamer",
     "guestDetails": "Gastgegevens",
@@ -261,7 +792,66 @@
     "checkIn": "Inchecken",
     "checkOut": "Uitchecken",
     "adults": "Volwassenen",
-    "children": "Kinderen"
+    "children": "Kinderen",
+    "steps": {
+      "datesGuests": "Data & Gasten",
+      "chooseRoom": "Kies Kamer",
+      "yourDetails": "Uw Gegevens"
+    },
+    "trustIndicators": {
+      "secure": "Veilig Boeken",
+      "instant": "Directe Bevestiging",
+      "noPayment": "Geen Betaling Nu",
+      "bestRate": "Beste Prijs Garantie"
+    },
+    "directBenefits": {
+      "title": "Voordelen Direct Boeken",
+      "sauna": "Gratis sauna toegang",
+      "discount": "€5 korting per nacht",
+      "gift": "Texel cadeau bij vertrek",
+      "cancellation": "Flexibele annulering"
+    },
+    "step1": {
+      "title": "Wanneer komt u?",
+      "subtitle": "Selecteer uw data en aantal gasten",
+      "nightsSelected": "nacht geselecteerd",
+      "nightsSelectedPlural": "nachten geselecteerd",
+      "adultsAges": "18 jaar en ouder",
+      "childrenAges": "0-17 jaar"
+    },
+    "step2": {
+      "title": "Kies uw kamer",
+      "upTo": "Tot"
+    },
+    "step3": {
+      "title": "Uw gegevens",
+      "subtitle": "Voltooi uw reserveringsaanvraag",
+      "reservationSummary": "Reserveringssamenvatting",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "specialRequests": "Speciale Verzoeken",
+      "specialRequestsOptional": "optioneel",
+      "specialRequestsPlaceholder": "Dieetwensen, toegankelijkheidsbehoeften, speciale gelegenheden...",
+      "submitRequest": "Aanvraag Versturen",
+      "terms": "Door te verzenden gaat u akkoord met onze boekingsvoorwaarden. Geen betaling vereist tot bevestiging."
+    },
+    "success": {
+      "title": "Aanvraag Ontvangen",
+      "description": "Bedankt voor uw reserveringsaanvraag. Ons team zal uw gegevens bekijken en uw boeking binnen 24 uur per e-mail bevestigen.",
+      "confirmationTo": "Bevestiging wordt gestuurd naar:",
+      "returnHome": "Terug naar Home"
+    },
+    "continue": "Doorgaan",
+    "back": "Terug",
+    "night": "nacht",
+    "nights": "nachten",
+    "cta": {
+      "title": "Liever met ons spreken?",
+      "description": "Ons reserveringsteam is ma-zo van 9:00-18:00 beschikbaar om u te helpen met uw boeking.",
+      "call": "Bel +31 222 317 445"
+    }
   },
   "reservation": {
     "title": "Reserveer een Tafel",

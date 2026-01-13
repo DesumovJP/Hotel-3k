@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
 import { SectionHeroCompact, SectionBlend } from "@/components/sections";
@@ -66,6 +67,8 @@ const parkingInfo = {
 };
 
 export default function ContactPage() {
+  const t = useTranslations("contact");
+  const tNav = useTranslations("nav");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -86,9 +89,9 @@ export default function ContactPage() {
       <main>
         {/* Hero */}
         <SectionHeroCompact
-          label="Contact"
-          title="Get in Touch"
-          description="We're here to help you plan your perfect stay on Texel."
+          label={t("heroLabel")}
+          title={t("heroTitle")}
+          description={t("heroDescription")}
         />
 
         {/* Quick Info Strip */}
@@ -97,7 +100,7 @@ export default function ContactPage() {
             <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
               <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <Clock size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Reception</span>
+                <span className="hidden sm:inline text-neutral-500">{t("reception")}</span>
                 <span className="text-ink font-medium whitespace-nowrap">24h</span>
               </div>
               <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-1.5 md:gap-2 flex-shrink-0 hover:text-shell transition-colors">
@@ -116,7 +119,7 @@ export default function ContactPage() {
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "Contact" }]} />
+            <BreadcrumbsInline items={[{ label: tNav("contact") }]} />
           </div>
         </section>
 
@@ -135,7 +138,7 @@ export default function ContactPage() {
                 <div className="mb-8">
                   <h3 className="font-display text-xl text-ink mb-4 flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-shell" />
-                    Find Us
+                    {t("findUs")}
                   </h3>
                   <address className="not-italic text-neutral-600 mb-4">
                     {contactInfo.address}<br />
@@ -149,7 +152,7 @@ export default function ContactPage() {
                     className="inline-flex items-center gap-2 text-shell hover:text-navy font-medium transition-colors"
                   >
                     <Navigation className="w-4 h-4" />
-                    Get Directions
+                    {t("getDirections")}
                   </a>
                 </div>
 
@@ -157,7 +160,7 @@ export default function ContactPage() {
                 <div className="mb-8">
                   <h3 className="font-display text-xl text-ink mb-4 flex items-center gap-2">
                     <Phone className="w-5 h-5 text-shell" />
-                    Contact Us
+                    {t("contactUs")}
                   </h3>
                   <div className="space-y-3">
                     <a
@@ -179,28 +182,28 @@ export default function ContactPage() {
 
                 {/* Parking */}
                 <div className="mb-8 p-4 bg-sand-50 border-l-2 border-shell">
-                  <h4 className="font-medium text-ink mb-2">{parkingInfo.title}</h4>
-                  <p className="text-sm text-neutral-600">{parkingInfo.description}</p>
+                  <h4 className="font-medium text-ink mb-2">{t("parking.title")}</h4>
+                  <p className="text-sm text-neutral-600">{t("parking.description")}</p>
                 </div>
 
                 {/* Opening Hours */}
                 <div className="bg-sand-100 p-6">
                   <h3 className="font-display text-xl text-ink mb-4 flex items-center gap-2">
                     <Clock className="w-5 h-5 text-shell" />
-                    Opening Hours
+                    {t("openingHours")}
                   </h3>
                   <div className="space-y-2 text-neutral-600">
                     <div className="flex justify-between">
-                      <span>Reception</span>
+                      <span>{t("reception")}</span>
                       <span>{openingHours.reception}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Restaurant</span>
+                      <span>{t("restaurant")}</span>
                       <span>{openingHours.restaurant}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Spa</span>
-                      <span>{openingHours.spa}</span>
+                      <span>{t("spa")}</span>
+                      <span>{t("byAppointment")}</span>
                     </div>
                   </div>
                 </div>
@@ -218,28 +221,28 @@ export default function ContactPage() {
                     <div className="w-16 h-16 bg-shell/10 flex items-center justify-center mx-auto mb-4">
                       <Check className="w-8 h-8 text-shell" />
                     </div>
-                    <h3 className="font-display text-xl text-ink mb-2">Message Sent</h3>
+                    <h3 className="font-display text-xl text-ink mb-2">{t("success.title")}</h3>
                     <p className="text-neutral-600 mb-6">
-                      Thank you for reaching out. We'll get back to you within 24 hours.
+                      {t("success.description")}
                     </p>
                     <button
                       onClick={() => setIsSubmitted(false)}
                       className="px-6 py-3 border border-navy text-navy text-sm hover:bg-navy hover:text-white transition-colors"
                     >
-                      Send Another Message
+                      {t("success.sendAnother")}
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="bg-sand-100 p-8">
-                    <h3 className="font-display text-xl text-ink mb-6">Send us a Message</h3>
+                    <h3 className="font-display text-xl text-ink mb-6">{t("form.title")}</h3>
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-ink text-sm font-medium mb-2">Name</label>
+                        <label className="block text-ink text-sm font-medium mb-2">{t("form.name")}</label>
                         <input
                           type="text"
                           required
-                          placeholder="Your name"
+                          placeholder={t("form.namePlaceholder")}
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           className="w-full px-4 py-3 bg-white border border-sand-300 text-ink placeholder:text-neutral-400 focus:border-shell focus:outline-none"
@@ -247,11 +250,11 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label className="block text-ink text-sm font-medium mb-2">Email</label>
+                        <label className="block text-ink text-sm font-medium mb-2">{t("form.email")}</label>
                         <input
                           type="email"
                           required
-                          placeholder="your@email.com"
+                          placeholder={t("form.emailPlaceholder")}
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className="w-full px-4 py-3 bg-white border border-sand-300 text-ink placeholder:text-neutral-400 focus:border-shell focus:outline-none"
@@ -259,28 +262,28 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label className="block text-ink text-sm font-medium mb-2">Subject</label>
+                        <label className="block text-ink text-sm font-medium mb-2">{t("form.subject")}</label>
                         <select
                           value={formData.subject}
                           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                           className="w-full px-4 py-3 bg-white border border-sand-300 text-ink focus:border-shell focus:outline-none"
                         >
-                          <option value="">Select a topic</option>
-                          <option value="reservation">Reservation Inquiry</option>
-                          <option value="spa">Spa & Wellness</option>
-                          <option value="restaurant">Restaurant</option>
-                          <option value="events">Meetings & Events</option>
-                          <option value="feedback">Feedback</option>
-                          <option value="other">Other</option>
+                          <option value="">{t("form.selectTopic")}</option>
+                          <option value="reservation">{t("form.topics.reservation")}</option>
+                          <option value="spa">{t("form.topics.spa")}</option>
+                          <option value="restaurant">{t("form.topics.restaurant")}</option>
+                          <option value="events">{t("form.topics.events")}</option>
+                          <option value="feedback">{t("form.topics.feedback")}</option>
+                          <option value="other">{t("form.topics.other")}</option>
                         </select>
                       </div>
 
                       <div>
-                        <label className="block text-ink text-sm font-medium mb-2">Message</label>
+                        <label className="block text-ink text-sm font-medium mb-2">{t("form.message")}</label>
                         <textarea
                           required
                           rows={5}
-                          placeholder="How can we help you?"
+                          placeholder={t("form.messagePlaceholder")}
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           className="w-full px-4 py-3 bg-white border border-sand-300 text-ink placeholder:text-neutral-400 focus:border-shell focus:outline-none resize-none"
@@ -292,7 +295,7 @@ export default function ContactPage() {
                         className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white hover:bg-navy-600 transition-colors text-sm tracking-wide uppercase"
                       >
                         <Send size={16} />
-                        Send Message
+                        {t("form.send")}
                       </button>
                     </div>
                   </form>
@@ -315,33 +318,53 @@ export default function ContactPage() {
               className="text-center mb-12"
             >
               <span className="text-overline text-shell tracking-widest mb-3 block">
-                Directions
+                {t("directions.label")}
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink">
-                How to Get Here
+                {t("directions.title")}
               </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {directions.map((direction, index) => {
-                const Icon = direction.icon;
-                return (
-                  <motion.div
-                    key={direction.mode}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="neo-icon neo-icon-lg mx-auto mb-4">
-                      <Icon className="w-6 h-6 text-shell" />
-                    </div>
-                    <h3 className="font-display text-xl text-ink mb-2">{direction.title}</h3>
-                    <p className="text-neutral-600">{direction.description}</p>
-                  </motion.div>
-                );
-              })}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0 }}
+                className="text-center"
+              >
+                <div className="neo-icon neo-icon-lg mx-auto mb-4">
+                  <Car className="w-6 h-6 text-shell" />
+                </div>
+                <h3 className="font-display text-xl text-ink mb-2">{t("directions.byCar.title")}</h3>
+                <p className="text-neutral-600">{t("directions.byCar.description")}</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-center"
+              >
+                <div className="neo-icon neo-icon-lg mx-auto mb-4">
+                  <Ship className="w-6 h-6 text-shell" />
+                </div>
+                <h3 className="font-display text-xl text-ink mb-2">{t("directions.byFerry.title")}</h3>
+                <p className="text-neutral-600">{t("directions.byFerry.description")}</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-center"
+              >
+                <div className="neo-icon neo-icon-lg mx-auto mb-4">
+                  <Navigation className="w-6 h-6 text-shell" />
+                </div>
+                <h3 className="font-display text-xl text-ink mb-2">{t("directions.publicTransport.title")}</h3>
+                <p className="text-neutral-600">{t("directions.publicTransport.description")}</p>
+              </motion.div>
             </div>
           </div>
         </section>
