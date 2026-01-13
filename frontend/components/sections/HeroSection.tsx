@@ -152,8 +152,8 @@ export function HeroSection({
 
       <section
         ref={containerRef}
-        className="relative h-dvh min-h-[600px] overflow-hidden bg-deepsea"
-        style={{ height: '100dvh' }}
+        className="relative min-h-[600px] overflow-hidden bg-deepsea"
+        style={{ height: '100svh' }}
         role="banner"
         aria-label={`Welcome to ${resolvedHeadline} - ${resolvedSubheadline}`}
       >

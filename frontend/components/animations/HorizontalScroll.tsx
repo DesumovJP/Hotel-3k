@@ -68,7 +68,7 @@ export function HorizontalScrollSection({
     <div
       ref={containerRef}
       className={cn("relative", className)}
-      style={{ height: `${panels * 100}dvh` }}
+      style={{ height: `${panels * 100}svh` }}
     >
       <div className="sticky top-0 h-screen-stable overflow-hidden">
         <motion.div

@@ -167,8 +167,8 @@ body {
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0.01em;
-  /* Use dvh for stable height on mobile (browser bar hide/show) */
-  min-height: 100dvh;
+  /* Use svh for stable height - doesn't change when mobile browser bars hide/show */
+  min-height: 100svh;
   font-feature-settings: "kern" 1, "liga" 1;
   /* Prevent bounce scroll and horizontal pull on mobile */
   overscroll-behavior: none;
@@ -701,24 +701,24 @@ div[class*="fixed"][class*="inset-0"] {
    Fix for browser bar hide/show causing content jumps
    ============================================ */
 
-/* Dynamic viewport height - stable on mobile */
+/* Small viewport height - STABLE, doesn't jump when mobile browser bars hide/show */
 .h-screen-stable {
-  height: 100vh;
-  height: 100dvh;
-}
-
-.min-h-screen-stable {
-  min-height: 100vh;
-  min-height: 100dvh;
-}
-
-/* Small viewport height - for fixed elements */
-.h-screen-small {
   height: 100vh;
   height: 100svh;
 }
 
-/* Large viewport height - for full-bleed content */
+.min-h-screen-stable {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Dynamic viewport height - CHANGES with browser chrome, may cause jumping */
+.h-screen-dynamic {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Large viewport height - full size when browser bars hidden */
 .h-screen-large {
   height: 100vh;
   height: 100lvh;
