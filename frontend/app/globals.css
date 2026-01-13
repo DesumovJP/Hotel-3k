@@ -140,6 +140,8 @@ html {
   text-rendering: optimizeLegibility;
   /* Prevent bounce scroll on iOS/Safari */
   overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
   overflow-x: hidden;
   /* Native smooth scroll - GPU accelerated */
   scroll-behavior: smooth;
@@ -165,17 +167,38 @@ body {
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0.01em;
-  min-height: 100vh;
+  /* Use dvh for stable height on mobile (browser bar hide/show) */
+  min-height: 100dvh;
   font-feature-settings: "kern" 1, "liga" 1;
   /* Prevent bounce scroll and horizontal pull on mobile */
   overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
   overflow-x: hidden;
   touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 ::selection {
   background: var(--color-shell);
   color: var(--color-ink);
+}
+
+/* Prevent overscroll on main content areas */
+main, section {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
+}
+
+/* Prevent bounce on fixed background elements (grain, vignette, etc.) */
+div[class*="fixed"][class*="inset-0"] {
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  touch-action: none !important;
+  will-change: transform;
 }
 
 :focus-visible {
@@ -671,6 +694,34 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ============================================
+   MOBILE VIEWPORT STABILITY
+   Fix for browser bar hide/show causing content jumps
+   ============================================ */
+
+/* Dynamic viewport height - stable on mobile */
+.h-screen-stable {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-h-screen-stable {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Small viewport height - for fixed elements */
+.h-screen-small {
+  height: 100vh;
+  height: 100svh;
+}
+
+/* Large viewport height - for full-bleed content */
+.h-screen-large {
+  height: 100vh;
+  height: 100lvh;
 }
 
 /* ============================================

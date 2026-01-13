@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <>
-      <main>
+      <main className="overscroll-none">
         <section id="hero">
           <HeroSection />
         </section>

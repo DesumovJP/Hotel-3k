@@ -122,7 +122,7 @@ export function HorizontalGallery({
   return (
     <section
       ref={containerRef}
-      className={cn("relative h-screen bg-sand-50 overflow-hidden", className)}
+      className={cn("relative h-screen-stable bg-sand-50 overflow-hidden", className)}
     >
       {/* Header - Fixed during scroll */}
       <div className="absolute top-12 left-0 right-0 z-10 pointer-events-none">
