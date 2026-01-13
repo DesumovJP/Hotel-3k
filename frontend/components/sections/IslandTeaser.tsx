@@ -1,19 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
 export function IslandTeaser() {
+  const t = useTranslations("home.island");
+
   return (
     <section className="relative bg-navy overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
           src="/home/hero-fallback.jpg"
-          alt="Texel Island landscape"
+          alt={t("imageAlt")}
           fill
           className="object-cover opacity-40"
         />
@@ -31,7 +34,7 @@ export function IslandTeaser() {
               transition={{ duration: 0.6, ease: easeOutExpo }}
               className="text-shell text-xs tracking-[0.2em] uppercase mb-6 block"
             >
-              Texel Island
+              {t("label")}
             </motion.span>
 
             {/* Headline */}
@@ -42,8 +45,8 @@ export function IslandTeaser() {
               transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
               className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-8"
             >
-              Where the North Sea
-              <span className="block text-shell italic mt-2">meets stillness</span>
+              {t("titlePart1")}
+              <span className="block text-shell italic mt-2">{t("titlePart2")}</span>
             </motion.h2>
 
             {/* Description */}
@@ -54,9 +57,7 @@ export function IslandTeaser() {
               transition={{ duration: 0.6, delay: 0.2, ease: easeOutExpo }}
               className="text-white/70 text-lg md:text-xl leading-relaxed mb-10 max-w-xl"
             >
-              The largest Dutch Wadden island. Endless beaches, rolling dunes,
-              and a rhythm set only by the tides. A short journey from the mainland,
-              yet a world apart.
+              {t("description")}
             </motion.p>
 
             {/* CTA */}
@@ -71,7 +72,7 @@ export function IslandTeaser() {
                 className="group inline-flex items-center gap-3 text-white hover:text-shell transition-colors"
               >
                 <span className="text-sm tracking-[0.15em] uppercase">
-                  Discover Texel
+                  {t("cta")}
                 </span>
                 <span className="w-10 h-10 border border-white/30 flex items-center justify-center group-hover:border-shell group-hover:bg-shell/10 transition-all">
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

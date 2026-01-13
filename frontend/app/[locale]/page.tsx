@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
 import {
   HeroSection,
@@ -14,6 +15,8 @@ import { SectionDivider } from "@/components/ui";
 import { Waves } from "lucide-react";
 
 export default function Home() {
+  const t = useTranslations("home.cta");
+
   return (
     <>
       <main>
@@ -50,9 +53,9 @@ export default function Home() {
         <section id="cta">
           <SectionCTA
             icon={Waves}
-            title="Ready for stillness?"
-            description="Escape to where the horizon stretches endlessly and the only schedule is the rhythm of the tides."
-            actions={[{ label: "Check Availability", href: "/book" }]}
+            title={t("title")}
+            description={t("description")}
+            actions={[{ label: t("button"), href: "/book" }]}
           />
         </section>
       </main>

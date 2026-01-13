@@ -1,15 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight, BadgePercent, Sparkles, Gift, LucideIcon } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
-const benefits = [
-  { icon: BadgePercent, label: "Direct", value: "Save €5" },
-  { icon: Sparkles, label: "Included", value: "Free sauna" },
-  { icon: Gift, label: "Bonus", value: "Texel gift" },
-];
+const benefitIcons = [BadgePercent, Sparkles, Gift];
 
 function BenefitItem({
   icon: Icon,
@@ -43,6 +40,14 @@ function BenefitItem({
 }
 
 export function DirectBookingBenefits() {
+  const t = useTranslations("home.benefits");
+
+  const benefits = [
+    { icon: benefitIcons[0], label: t("items.discount.label"), value: t("items.discount.value") },
+    { icon: benefitIcons[1], label: t("items.sauna.label"), value: t("items.sauna.value") },
+    { icon: benefitIcons[2], label: t("items.gift.label"), value: t("items.gift.value") },
+  ];
+
   return (
     <section className="neo-bar">
       <div className="px-4 md:px-12 lg:px-24">
@@ -50,7 +55,7 @@ export function DirectBookingBenefits() {
           <div className="flex flex-wrap items-center justify-between gap-4 py-4">
             <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
               {benefits.map((benefit, index) => (
-                <BenefitItem key={benefit.label} {...benefit} index={index} />
+                <BenefitItem key={index} {...benefit} index={index} />
               ))}
             </div>
 
@@ -65,7 +70,7 @@ export function DirectBookingBenefits() {
                 className="group inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
               >
                 <span className="relative">
-                  Book direct
+                  {t("cta")}
                   <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-navy group-hover:w-full transition-all duration-300" />
                 </span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

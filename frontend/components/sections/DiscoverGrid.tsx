@@ -1,56 +1,51 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
 interface Category {
   id: string;
-  label: string;
-  title: string;
-  subtitle: string;
   image: string;
   link: string;
 }
 
-const categories: Category[] = [
+const categoryData: Category[] = [
   {
     id: "rooms",
-    label: "Accommodations",
-    title: "Rooms & Suites",
-    subtitle: "22 rooms with dune, forest & garden views",
     image: "/home/de-kamers-600x450_1.jpg",
     link: "/rooms",
   },
   {
     id: "restaurant",
-    label: "Dining",
-    title: "Wadden Gastronomy",
-    subtitle: "Local products, fresh and homemade",
     image: "/home/restaurant-opduin-600x450.jpg",
     link: "/restaurant",
   },
   {
     id: "wellness",
-    label: "Wellness",
-    title: "Personal Attention",
-    subtitle: "Pool, sauna & Thalgo treatments",
     image: "/wellness/zwembad-600x450_1.jpg",
     link: "/wellness",
   },
   {
-    id: "offer",
-    label: "Special Offers",
-    title: "Curated Packages",
-    subtitle: "Romantic escapes, wellness retreats & seasonal deals",
+    id: "offers",
     image: "/home/aanbieding-voor-een-compleet-en-voordelig-verblijf-600x450.jpg",
     link: "/offers",
   },
 ];
 
 export function DiscoverGrid() {
+  const t = useTranslations("home.discover");
+
+  const categories = categoryData.map((cat) => ({
+    ...cat,
+    label: t(`categories.${cat.id}.label`),
+    title: t(`categories.${cat.id}.title`),
+    subtitle: t(`categories.${cat.id}.subtitle`),
+  }));
+
   return (
     <section className="py-20 md:py-28 bg-sand-100">
       <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
@@ -63,10 +58,10 @@ export function DiscoverGrid() {
           className="text-center mb-16"
         >
           <span className="text-overline text-shell mb-4 block">
-            Discover
+            {t("label")}
           </span>
           <h2 className="text-display-xl text-ink">
-            Everything for the perfect stay
+            {t("title")}
           </h2>
         </motion.div>
 
@@ -112,7 +107,7 @@ export function DiscoverGrid() {
                   </p>
                   <div className="flex items-center gap-2 text-neutral-500 group-hover:text-shell transition-colors text-sm">
                     <span className="relative">
-                      Explore
+                      {t("explore")}
                       <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-shell group-hover:w-full transition-all duration-300" />
                     </span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-all duration-300" />

@@ -1,0 +1,321 @@
+{
+  "common": {
+    "bookNow": "Boek Nu",
+    "learnMore": "Meer Informatie",
+    "viewAll": "Bekijk Alles",
+    "readMore": "Lees Meer",
+    "contactUs": "Neem Contact Op",
+    "reserveTable": "Reserveer een Tafel",
+    "bookTreatment": "Boek Behandeling",
+    "checkAvailability": "Beschikbaarheid Controleren",
+    "bookYourStay": "Boek Uw Verblijf",
+    "enquireNow": "Vraag Nu Aan",
+    "viewMenu": "Bekijk Menu",
+    "visitWebsite": "Bezoek Website",
+    "back": "Terug",
+    "next": "Volgende",
+    "close": "Sluiten",
+    "guests": "gasten",
+    "night": "Nacht",
+    "nights": "Nachten"
+  },
+  "nav": {
+    "rooms": "Kamers",
+    "restaurant": "Restaurant",
+    "wellness": "Wellness",
+    "offers": "Arrangementen",
+    "about": "Over Ons",
+    "ourStory": "Ons Verhaal",
+    "sisterHotels": "Zusterhotels",
+    "gallery": "Galerij",
+    "contact": "Contact",
+    "meetings": "Vergaderen",
+    "island": "Het Eiland",
+    "reserve": "Reserveren",
+    "call": "Bellen"
+  },
+  "home": {
+    "hero": {
+      "headline": "Grand Hotel Opduin",
+      "subheadline": "De Hamptons van de Wadden",
+      "tagline": "Waar luxe samenkomt met het ritme van de getijden",
+      "location": "Texel, Nederland",
+      "imageAlt": "Grand Hotel Opduin - Luxe strandhotel op Texel",
+      "primaryCta": "Beschikbaarheid Controleren",
+      "secondaryCta": "Ontdek Kamers"
+    },
+    "heroLabel": "Grand Hotel Opduin",
+    "heroTitle": "Waar Duinen de Zee Ontmoeten",
+    "heroDescription": "Een boutique toevluchtsoord op Texel. Familiebedrijf sinds 1932.",
+    "roomsTitle": "Kamers & Suites",
+    "roomsDescription": "Zorgvuldig ontworpen ruimtes met uitzicht op duinen of bos",
+    "restaurantTitle": "Wadden Gastronomie",
+    "restaurantDescription": "Verse, lokale ingrediënten van Texel en de Waddenzee",
+    "wellnessTitle": "Wellness & Spa",
+    "wellnessDescription": "Ontspan en verjong met onze spa-behandelingen",
+    "offersTitle": "Speciale Aanbiedingen",
+    "offersDescription": "Exclusieve arrangementen voor uw perfecte uitje",
+    "intro": {
+      "label": "Welkom bij Opduin",
+      "titlePart1": "De Hamptons aan",
+      "titlePart2": "de Wadden",
+      "description1": "Meer dan 90 jaar gastvrijheid gecombineerd in een smaakvol, comfortabel en eigentijds hotel. Het strand ligt op loopafstand, het dorp en gezellige restaurants liggen naast de deur.",
+      "description2": "Volop mogelijkheden voor ontspanning, beweging en recreatie. Kamers variërend van suites tot vakantiewoningen, met opties voor eenpersoons tot appartementen. Alle kamers met airconditioning en comfortabel beddengoed, gelegen op een duin.",
+      "cta": "Ontdek ons verhaal",
+      "imageAlt": "Grand Hotel Opduin exterieur",
+      "guestRating": "Gastenbeoordeling",
+      "reviewCount": "1.200+ beoordelingen",
+      "usps": {
+        "years": "90+ jaar gastvrijheid",
+        "location": "Op de hoogste duin",
+        "beach": "5 min lopen naar strand",
+        "family": "Familiebedrijf"
+      }
+    },
+    "discover": {
+      "label": "Ontdek",
+      "title": "Alles voor het perfecte verblijf",
+      "explore": "Ontdek",
+      "categories": {
+        "rooms": {
+          "label": "Accommodaties",
+          "title": "Kamers & Suites",
+          "subtitle": "22 kamers met uitzicht op duinen, bos & tuin"
+        },
+        "restaurant": {
+          "label": "Restaurant",
+          "title": "Wadden Gastronomie",
+          "subtitle": "Lokale producten, vers en huisgemaakt"
+        },
+        "wellness": {
+          "label": "Wellness",
+          "title": "Persoonlijke Aandacht",
+          "subtitle": "Zwembad, sauna & Thalgo behandelingen"
+        },
+        "offers": {
+          "label": "Arrangementen",
+          "title": "Samengestelde Pakketten",
+          "subtitle": "Romantische uitjes, wellness retreats & seizoensaanbiedingen"
+        }
+      }
+    },
+    "cta": {
+      "title": "Klaar voor rust?",
+      "description": "Ontsnap naar waar de horizon eindeloos strekt en het enige schema het ritme van de getijden is.",
+      "button": "Beschikbaarheid Controleren"
+    },
+    "benefits": {
+      "cta": "Direct boeken",
+      "items": {
+        "discount": {
+          "label": "Direct",
+          "value": "Bespaar €5"
+        },
+        "sauna": {
+          "label": "Inbegrepen",
+          "value": "Gratis sauna"
+        },
+        "gift": {
+          "label": "Bonus",
+          "value": "Texel cadeau"
+        }
+      }
+    },
+    "testimonials": {
+      "label": "Gastverhalen",
+      "title": "Wat onze gasten zeggen",
+      "guestRating": "Gastenbeoordeling",
+      "verifiedReviews": "geverifieerde beoordelingen",
+      "prevButton": "Vorige beoordeling",
+      "nextButton": "Volgende beoordeling",
+      "goToTestimonial": "Ga naar beoordeling",
+      "items": [
+        {
+          "quote": "Het personeel onthield onze namen, de spa-behandelingen waren hemels, en de zonsondergang kijken vanaf ons balkon was onvergetelijk.",
+          "stayType": "Jubileum Uitje"
+        },
+        {
+          "quote": "Ochtendlijke zwempartijen, saunasessies en de beste zeevruchten die ik in jaren heb gehad. De perfecte plek om los te koppelen en rust te vinden.",
+          "stayType": "Wellness Retreat"
+        },
+        {
+          "quote": "De kinderen waren gek op het strand en de fietstochten, terwijl wij genoten van het restaurant en de spa. Texel is nu onze favoriete Nederlandse bestemming.",
+          "stayType": "Familievakantie"
+        }
+      ]
+    },
+    "island": {
+      "label": "Texel Eiland",
+      "titlePart1": "Waar de Noordzee",
+      "titlePart2": "de stilte ontmoet",
+      "description": "Het grootste Nederlandse Waddeneiland. Eindeloze stranden, glooiende duinen en een ritme dat alleen door de getijden wordt bepaald. Een korte reis van het vasteland, maar een wereld apart.",
+      "cta": "Ontdek Texel",
+      "imageAlt": "Texel eiland landschap"
+    }
+  },
+  "rooms": {
+    "pageTitle": "Kamers & Suites",
+    "pageDescription": "Zorgvuldig ontworpen ruimtes met uitzicht op duinen of bos. Elke kamer biedt modern comfort met eilandcharme.",
+    "viewAll": "Bekijk Alle Kamers",
+    "fromPrice": "Vanaf",
+    "perNight": "per nacht",
+    "maxGuests": "Tot {count} gasten",
+    "size": "{size} m\u00b2",
+    "view": "{type} Uitzicht",
+    "features": "Kamervoorzieningen",
+    "bookThisRoom": "Boek Deze Kamer"
+  },
+  "restaurant": {
+    "pageTitle": "Wadden Gastronomie",
+    "pageDescription": "Lokale ingrediënten van Texel en de Waddenzee, dagelijks vers bereid door onze chefs.",
+    "heroLabel": "Restaurant van Opduin",
+    "lunch": "Lunch",
+    "dinner": "Diner",
+    "lunchHours": "12:00 - 14:30",
+    "dinnerHours": "18:00 - 22:00",
+    "reserveNow": "Reserveer nu",
+    "philosophy": "Vers en huisgemaakt",
+    "philosophyText": "Midden in de duinen van De Koog hebben wij het restaurant en terras gemaakt. Goed eten, ruime keuze, zoveel mogelijk lokale producten en altijd vers en huisgemaakt.",
+    "dogFree": "Hondvrij Restaurant",
+    "dogFreeText": "Het restaurant is volledig hondvrij. Wilt u met uw hond een hapje eten? Dan bent u welkom in onze bar voor een eenvoudig 2-gangen menu."
+  },
+  "wellness": {
+    "pageTitle": "Wellness & Spa",
+    "pageDescription": "Ontsnap naar rust. Onze spa biedt een oase van kalmte met behandelingen geïnspireerd door zee en duinen.",
+    "heroLabel": "Wellness bij Opduin",
+    "poolSauna": "Zwembad & Sauna",
+    "treatments": "Behandelingen",
+    "packages": "Wellness Arrangementen"
+  },
+  "offers": {
+    "pageTitle": "Arrangementen",
+    "pageDescription": "Ontdek onze exclusieve arrangementen en seizoensaanbiedingen voor een onvergetelijk verblijf.",
+    "viewPackage": "Bekijk Arrangement",
+    "includes": "Wat is inbegrepen",
+    "conditions": "Voorwaarden",
+    "idealFor": "Ideaal voor",
+    "morePackages": "Meer Arrangementen"
+  },
+  "about": {
+    "pageTitle": "De Hamptons van de Wadden",
+    "pageDescription": "Waar luxe het ritme van de getijden ontmoet. Familiebedrijf sinds 1932.",
+    "heroLabel": "Ons Verhaal",
+    "established": "Opgericht",
+    "family": "Familie",
+    "thirdGen": "3e Generatie",
+    "carbonNeutral": "Klimaatneutraal",
+    "awardWinning": "Bekroond",
+    "sanctuary": "Een toevluchtsoord aan de rand van de wereld",
+    "sanctuaryText": "Genesteld tussen de duinen van Texel, verwelkomt Grand Hotel Opduin al bijna een eeuw gasten.",
+    "values": "Onze Waarden",
+    "valuesTitle": "Wat ons leidt",
+    "sustainability": "Duurzaamheid",
+    "sustainabilityTitle": "Zorgen voor ons eiland",
+    "team": "Het Team",
+    "teamTitle": "Maak kennis met ons team",
+    "location": "Routebeschrijving",
+    "locationTitle": "Vind ons op Texel"
+  },
+  "sisterHotels": {
+    "pageTitle": "Onze Zusterhotels",
+    "pageDescription": "Vijf onderscheidende hotels door heel Nederland, elk met een eigen karakter. Verenigd door toewijding aan oprechte gastvrijheid.",
+    "heroLabel": "Hoscom Collectie",
+    "hotels": "Hotels",
+    "acrossNetherlands": "Door Nederland",
+    "familyValues": "Familiewaarden",
+    "aboutHoscom": "Over Hoscom",
+    "hoscomTitle": "Een Familie van Unieke Ervaringen",
+    "beginJourney": "Begin Uw Texelse Reis",
+    "beginJourneyText": "Grand Hotel Opduin is het juweel van de collectie—een toevluchtsoord aan zee waar de duinen de Waddenzee ontmoeten."
+  },
+  "contact": {
+    "pageTitle": "Neem Contact Op",
+    "pageDescription": "We horen graag van u. Neem contact op met ons team.",
+    "address": "Adres",
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "sendMessage": "Verstuur Bericht",
+    "yourName": "Uw Naam",
+    "yourEmail": "Uw E-mail",
+    "subject": "Onderwerp",
+    "message": "Bericht"
+  },
+  "meetings": {
+    "pageTitle": "Vergaderen & Evenementen",
+    "pageDescription": "Organiseer uw volgende vergadering of evenement in onze inspirerende locatie met uitzicht op de duinen.",
+    "heroLabel": "Vergaderen & Evenementen",
+    "requestProposal": "Offerte Aanvragen",
+    "capacity": "Capaciteit",
+    "venues": "Zalen"
+  },
+  "gallery": {
+    "pageTitle": "Galerij",
+    "pageDescription": "Ontdek Grand Hotel Opduin via onze fotogalerij."
+  },
+  "booking": {
+    "pageTitle": "Boek Uw Verblijf",
+    "selectDates": "Selecteer Data",
+    "selectRoom": "Selecteer Kamer",
+    "guestDetails": "Gastgegevens",
+    "confirmation": "Bevestiging",
+    "checkIn": "Inchecken",
+    "checkOut": "Uitchecken",
+    "adults": "Volwassenen",
+    "children": "Kinderen"
+  },
+  "reservation": {
+    "title": "Reserveer een Tafel",
+    "step": "Stap {current} van {total}",
+    "selectDate": "Selecteer Datum",
+    "mealType": "Lunch of Diner?",
+    "selectTime": "Selecteer Tijd",
+    "numberOfGuests": "Aantal Gasten",
+    "continue": "Doorgaan",
+    "name": "Naam",
+    "yourName": "Uw naam",
+    "email": "E-mail",
+    "yourEmail": "uw@email.com",
+    "phone": "Telefoon",
+    "specialRequests": "Speciale Verzoeken",
+    "optional": "optioneel",
+    "specialRequestsPlaceholder": "Dieetwensen, speciale gelegenheid, zitvoorkeuren...",
+    "back": "Terug",
+    "confirmReservation": "Bevestig Reservering",
+    "received": "Reservering Ontvangen",
+    "thankYou": "Bedankt, {name}! We hebben uw reserveringsverzoek ontvangen voor",
+    "guestsOn": "{guests} gasten op {date} om {time}",
+    "confirmationEmail": "We sturen binnen 24 uur een bevestiging naar {email}.",
+    "done": "Gereed"
+  },
+  "footer": {
+    "netherlands": "Nederland",
+    "sections": {
+      "stay": "Verblijf",
+      "experience": "Beleving",
+      "discover": "Ontdek",
+      "contact": "Contact"
+    },
+    "links": {
+      "roomsSuites": "Kamers & Suites",
+      "specialOffers": "Arrangementen",
+      "reservations": "Reserveringen",
+      "restaurant": "Restaurant",
+      "wellness": "Wellness",
+      "meetings": "Vergaderen",
+      "ourStory": "Ons Verhaal",
+      "texelIsland": "Texel Eiland",
+      "gallery": "Galerij"
+    },
+    "callUs": "Bel ons",
+    "privacy": "Privacy",
+    "terms": "Voorwaarden",
+    "tagline": "Waar duinen de zee ontmoeten",
+    "quickLinks": "Snelle Links",
+    "followUs": "Volg Ons",
+    "newsletter": "Nieuwsbrief",
+    "newsletterText": "Schrijf u in voor exclusieve aanbiedingen en eilandverhalen",
+    "subscribe": "Aanmelden",
+    "yourEmail": "Uw e-mail",
+    "copyright": "Grand Hotel Opduin. Alle rechten voorbehouden."
+  }
+}

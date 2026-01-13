@@ -1,0 +1,321 @@
+{
+  "common": {
+    "bookNow": "Book Now",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "contactUs": "Contact Us",
+    "reserveTable": "Reserve a Table",
+    "bookTreatment": "Book Treatment",
+    "checkAvailability": "Check Availability",
+    "bookYourStay": "Book Your Stay",
+    "enquireNow": "Enquire Now",
+    "viewMenu": "View Menu",
+    "visitWebsite": "Visit Website",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "guests": "guests",
+    "night": "Night",
+    "nights": "Nights"
+  },
+  "nav": {
+    "rooms": "Rooms",
+    "restaurant": "Restaurant",
+    "wellness": "Wellness",
+    "offers": "Offers",
+    "about": "About",
+    "ourStory": "Our Story",
+    "sisterHotels": "Sister Hotels",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "meetings": "Meetings",
+    "island": "The Island",
+    "reserve": "Reserve",
+    "call": "Call"
+  },
+  "home": {
+    "hero": {
+      "headline": "Grand Hotel Opduin",
+      "subheadline": "The Hamptons of the Wadden",
+      "tagline": "Where luxury meets the rhythm of the tides",
+      "location": "Texel Island, Netherlands",
+      "imageAlt": "Grand Hotel Opduin - Luxury beachfront hotel on Texel",
+      "primaryCta": "Check Availability",
+      "secondaryCta": "Explore Rooms"
+    },
+    "heroLabel": "Grand Hotel Opduin",
+    "heroTitle": "Where Dunes Meet the Sea",
+    "heroDescription": "A boutique sanctuary on Texel island. Family-run since 1932.",
+    "roomsTitle": "Rooms & Suites",
+    "roomsDescription": "Thoughtfully designed spaces with views of dunes or forest",
+    "restaurantTitle": "Wadden Gastronomy",
+    "restaurantDescription": "Fresh, local ingredients from Texel and the Wadden Sea",
+    "wellnessTitle": "Wellness & Spa",
+    "wellnessDescription": "Relax and rejuvenate with our spa treatments",
+    "offersTitle": "Special Offers",
+    "offersDescription": "Exclusive packages for your perfect getaway",
+    "intro": {
+      "label": "Welcome to Opduin",
+      "titlePart1": "The Hamptons on",
+      "titlePart2": "the Wadden",
+      "description1": "More than 90 years of hospitality combined in a tasteful, comfortable and contemporary hotel. The beach is within walking distance, the village and cozy restaurants are next door.",
+      "description2": "Plenty of opportunities for relaxation, exercise and recreation. Rooms ranging from suites to holiday homes, with options for single occupancy through apartments. All rooms with air conditioning and comfortable bedding, positioned atop a dune.",
+      "cta": "Discover our story",
+      "imageAlt": "Grand Hotel Opduin exterior",
+      "guestRating": "Guest Rating",
+      "reviewCount": "1,200+ reviews",
+      "usps": {
+        "years": "90+ years of hospitality",
+        "location": "On the highest dune",
+        "beach": "5 min walk to beach",
+        "family": "Family-run"
+      }
+    },
+    "discover": {
+      "label": "Discover",
+      "title": "Everything for the perfect stay",
+      "explore": "Explore",
+      "categories": {
+        "rooms": {
+          "label": "Accommodations",
+          "title": "Rooms & Suites",
+          "subtitle": "22 rooms with dune, forest & garden views"
+        },
+        "restaurant": {
+          "label": "Dining",
+          "title": "Wadden Gastronomy",
+          "subtitle": "Local products, fresh and homemade"
+        },
+        "wellness": {
+          "label": "Wellness",
+          "title": "Personal Attention",
+          "subtitle": "Pool, sauna & Thalgo treatments"
+        },
+        "offers": {
+          "label": "Special Offers",
+          "title": "Curated Packages",
+          "subtitle": "Romantic escapes, wellness retreats & seasonal deals"
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready for stillness?",
+      "description": "Escape to where the horizon stretches endlessly and the only schedule is the rhythm of the tides.",
+      "button": "Check Availability"
+    },
+    "benefits": {
+      "cta": "Book direct",
+      "items": {
+        "discount": {
+          "label": "Direct",
+          "value": "Save €5"
+        },
+        "sauna": {
+          "label": "Included",
+          "value": "Free sauna"
+        },
+        "gift": {
+          "label": "Bonus",
+          "value": "Texel gift"
+        }
+      }
+    },
+    "testimonials": {
+      "label": "Guest Stories",
+      "title": "What our guests say",
+      "guestRating": "Guest Rating",
+      "verifiedReviews": "verified reviews",
+      "prevButton": "Previous testimonial",
+      "nextButton": "Next testimonial",
+      "goToTestimonial": "Go to testimonial",
+      "items": [
+        {
+          "quote": "The staff remembered our names, the spa treatments were heavenly, and watching the sunset from our balcony was unforgettable.",
+          "stayType": "Anniversary Escape"
+        },
+        {
+          "quote": "Morning swims, sauna sessions, and the best seafood I've had in years. The perfect place to disconnect and find stillness.",
+          "stayType": "Wellness Retreat"
+        },
+        {
+          "quote": "The kids loved the beach and bike rides, while we enjoyed the restaurant and spa. Texel is now our favorite Dutch destination.",
+          "stayType": "Family Holiday"
+        }
+      ]
+    },
+    "island": {
+      "label": "Texel Island",
+      "titlePart1": "Where the North Sea",
+      "titlePart2": "meets stillness",
+      "description": "The largest Dutch Wadden island. Endless beaches, rolling dunes, and a rhythm set only by the tides. A short journey from the mainland, yet a world apart.",
+      "cta": "Discover Texel",
+      "imageAlt": "Texel Island landscape"
+    }
+  },
+  "rooms": {
+    "pageTitle": "Rooms & Suites",
+    "pageDescription": "Thoughtfully designed spaces with views of dunes or forest. Each room offers modern comfort with island charm.",
+    "viewAll": "View All Rooms",
+    "fromPrice": "From",
+    "perNight": "per night",
+    "maxGuests": "Up to {count} guests",
+    "size": "{size} m\u00b2",
+    "view": "{type} View",
+    "features": "Room Features",
+    "bookThisRoom": "Book This Room"
+  },
+  "restaurant": {
+    "pageTitle": "Wadden Gastronomy",
+    "pageDescription": "Local ingredients from Texel and the Wadden Sea, prepared fresh daily by our chefs.",
+    "heroLabel": "Restaurant of Opduin",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "lunchHours": "12:00 - 14:30",
+    "dinnerHours": "18:00 - 22:00",
+    "reserveNow": "Reserve now",
+    "philosophy": "Fresh and homemade",
+    "philosophyText": "In the middle of the dunes of De Koog we made the restaurant and terrace. Good food, extensive choice, as many local products as possible and always fresh and homemade.",
+    "dogFree": "Dog-free Restaurant",
+    "dogFreeText": "The restaurant is completely dog-free. Would you like to have a bite to eat with your dog? Then you are welcome in our bar for a simple 2-course menu."
+  },
+  "wellness": {
+    "pageTitle": "Wellness & Spa",
+    "pageDescription": "Escape to tranquility. Our spa offers a sanctuary of calm with treatments inspired by the sea and dunes.",
+    "heroLabel": "Wellness at Opduin",
+    "poolSauna": "Pool & Sauna",
+    "treatments": "Treatments",
+    "packages": "Wellness Packages"
+  },
+  "offers": {
+    "pageTitle": "Special Offers",
+    "pageDescription": "Discover our exclusive packages and seasonal deals for an unforgettable stay.",
+    "viewPackage": "View Package",
+    "includes": "What's Included",
+    "conditions": "Conditions",
+    "idealFor": "Ideal for",
+    "morePackages": "More Packages"
+  },
+  "about": {
+    "pageTitle": "The Hamptons of the Wadden",
+    "pageDescription": "Where luxury meets the rhythm of the tides. Family-run since 1932.",
+    "heroLabel": "Our Story",
+    "established": "Est.",
+    "family": "Family",
+    "thirdGen": "3rd Generation",
+    "carbonNeutral": "Carbon Neutral",
+    "awardWinning": "Award Winning",
+    "sanctuary": "A sanctuary at the edge of the world",
+    "sanctuaryText": "Nestled among the dunes of Texel, Grand Hotel Opduin has been welcoming guests for nearly a century.",
+    "values": "Our Values",
+    "valuesTitle": "What guides us",
+    "sustainability": "Sustainability",
+    "sustainabilityTitle": "Caring for our island home",
+    "team": "The People",
+    "teamTitle": "Meet our team",
+    "location": "Getting Here",
+    "locationTitle": "Find us on Texel"
+  },
+  "sisterHotels": {
+    "pageTitle": "Our Sister Hotels",
+    "pageDescription": "Five distinctive hotels across the Netherlands, each with its own character. United by a commitment to genuine hospitality.",
+    "heroLabel": "Hoscom Collection",
+    "hotels": "Hotels",
+    "acrossNetherlands": "Across Netherlands",
+    "familyValues": "Family Values",
+    "aboutHoscom": "About Hoscom",
+    "hoscomTitle": "A Family of Unique Experiences",
+    "beginJourney": "Begin Your Texel Journey",
+    "beginJourneyText": "Grand Hotel Opduin is the jewel of the collection—a seaside sanctuary where the dunes meet the Wadden Sea."
+  },
+  "contact": {
+    "pageTitle": "Contact Us",
+    "pageDescription": "We'd love to hear from you. Get in touch with our team.",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "sendMessage": "Send Message",
+    "yourName": "Your Name",
+    "yourEmail": "Your Email",
+    "subject": "Subject",
+    "message": "Message"
+  },
+  "meetings": {
+    "pageTitle": "Meetings & Events",
+    "pageDescription": "Host your next meeting or event in our inspiring venue with views of the dunes.",
+    "heroLabel": "Meetings & Events",
+    "requestProposal": "Request Proposal",
+    "capacity": "Capacity",
+    "venues": "Venues"
+  },
+  "gallery": {
+    "pageTitle": "Gallery",
+    "pageDescription": "Explore Grand Hotel Opduin through our photo gallery."
+  },
+  "booking": {
+    "pageTitle": "Book Your Stay",
+    "selectDates": "Select Dates",
+    "selectRoom": "Select Room",
+    "guestDetails": "Guest Details",
+    "confirmation": "Confirmation",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "adults": "Adults",
+    "children": "Children"
+  },
+  "reservation": {
+    "title": "Reserve a Table",
+    "step": "Step {current} of {total}",
+    "selectDate": "Select Date",
+    "mealType": "Lunch or Dinner?",
+    "selectTime": "Select Time",
+    "numberOfGuests": "Number of Guests",
+    "continue": "Continue",
+    "name": "Name",
+    "yourName": "Your name",
+    "email": "Email",
+    "yourEmail": "your@email.com",
+    "phone": "Phone",
+    "specialRequests": "Special Requests",
+    "optional": "optional",
+    "specialRequestsPlaceholder": "Dietary requirements, special occasion, seating preferences...",
+    "back": "Back",
+    "confirmReservation": "Confirm Reservation",
+    "received": "Reservation Received",
+    "thankYou": "Thank you, {name}! We've received your reservation request for",
+    "guestsOn": "{guests} guests on {date} at {time}",
+    "confirmationEmail": "We'll send a confirmation to {email} within 24 hours.",
+    "done": "Done"
+  },
+  "footer": {
+    "netherlands": "Netherlands",
+    "sections": {
+      "stay": "Stay",
+      "experience": "Experience",
+      "discover": "Discover",
+      "contact": "Contact"
+    },
+    "links": {
+      "roomsSuites": "Rooms & Suites",
+      "specialOffers": "Special Offers",
+      "reservations": "Reservations",
+      "restaurant": "Restaurant",
+      "wellness": "Wellness",
+      "meetings": "Meetings",
+      "ourStory": "Our Story",
+      "texelIsland": "Texel Island",
+      "gallery": "Gallery"
+    },
+    "callUs": "Call us",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "tagline": "Where dunes meet the sea",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "newsletter": "Newsletter",
+    "newsletterText": "Subscribe for exclusive offers and island stories",
+    "subscribe": "Subscribe",
+    "yourEmail": "Your email",
+    "copyright": "Grand Hotel Opduin. All rights reserved."
+  }
+}

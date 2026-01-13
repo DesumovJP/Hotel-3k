@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "@/components/molecules/LanguageSwitcher";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, MapPin, Phone } from "lucide-react";
@@ -9,30 +11,36 @@ import { cn } from "@/lib/utils";
 
 interface NavItem {
   href: string;
-  label: string;
-  children?: { href: string; label: string }[];
+  labelKey: string;
+  children?: { href: string; labelKey: string }[];
 }
 
-const navItems: NavItem[] = [
-  { href: "/rooms", label: "Rooms" },
-  { href: "/restaurant", label: "Restaurant" },
-  { href: "/wellness", label: "Wellness" },
-  { href: "/offers", label: "Offers" },
+const navItemsConfig: NavItem[] = [
+  { href: "/rooms", labelKey: "rooms" },
+  { href: "/restaurant", labelKey: "restaurant" },
+  { href: "/wellness", labelKey: "wellness" },
+  { href: "/offers", labelKey: "offers" },
   {
     href: "/about",
-    label: "About",
+    labelKey: "about",
     children: [
-      { href: "/about", label: "Our Story" },
-      { href: "/about/sister-hotels", label: "Sister Hotels" },
-      { href: "/gallery", label: "Gallery" },
-      { href: "/contact", label: "Contact" },
+      { href: "/about", labelKey: "ourStory" },
+      { href: "/about/sister-hotels", labelKey: "sisterHotels" },
+      { href: "/gallery", labelKey: "gallery" },
+      { href: "/contact", labelKey: "contact" },
     ],
   },
-  { href: "/meetings", label: "Meetings" },
+  { href: "/meetings", labelKey: "meetings" },
 ];
 
 interface HeaderProps {
   variant?: "light" | "dark";
+}
+
+interface ResolvedNavItem {
+  href: string;
+  label: string;
+  children?: { href: string; label: string }[];
 }
 
 // Dropdown Menu Component
@@ -41,7 +49,7 @@ function DropdownMenu({
   isScrolled,
   useDarkText,
 }: {
-  item: NavItem;
+  item: ResolvedNavItem;
   isScrolled: boolean;
   useDarkText: boolean;
 }) {
@@ -117,11 +125,22 @@ function DropdownMenu({
 }
 
 export function Header({ variant = "light" }: HeaderProps) {
+  const t = useTranslations("nav");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const rafRef = useRef<number | null>(null);
 
   const useDarkText = variant === "dark" && !isScrolled;
+
+  // Resolve nav items with translations
+  const navItems: ResolvedNavItem[] = navItemsConfig.map((item) => ({
+    href: item.href,
+    label: t(item.labelKey),
+    children: item.children?.map((child) => ({
+      href: child.href,
+      label: t(child.labelKey),
+    })),
+  }));
 
   // Optimized scroll handler with RAF for smooth performance
   const handleScroll = useCallback(() => {
@@ -213,21 +232,27 @@ export function Header({ variant = "light" }: HeaderProps) {
               ))}
             </nav>
 
-            {/* Book Button */}
-            <Link
-              href="/book"
-              className={cn(
-                "hidden md:flex items-center px-5 py-2 rounded-full transition-colors duration-200 tap-target focus-visible-ring",
-                isScrolled || useDarkText
-                  ? "bg-shell text-white hover:bg-shell-600"
-                  : "text-white hover:text-white/80"
-              )}
-              style={!(isScrolled || useDarkText) ? { textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' } : undefined}
-            >
-              <span className="text-nav">
-                Reserve
-              </span>
-            </Link>
+            {/* Right side: Language Switcher + Book Button */}
+            <div className="hidden md:flex items-center gap-4">
+              <LanguageSwitcher
+                variant={isScrolled || useDarkText ? "default" : "compact"}
+                isScrolled={isScrolled || useDarkText}
+              />
+              <Link
+                href="/book"
+                className={cn(
+                  "flex items-center px-5 py-2 rounded-full transition-colors duration-200 tap-target focus-visible-ring",
+                  isScrolled || useDarkText
+                    ? "bg-shell text-white hover:bg-shell-600"
+                    : "text-white hover:text-white/80"
+                )}
+                style={!(isScrolled || useDarkText) ? { textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' } : undefined}
+              >
+                <span className="text-nav">
+                  {t("reserve")}
+                </span>
+              </Link>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -261,7 +286,7 @@ export function Header({ variant = "light" }: HeaderProps) {
             aria-label="Navigation menu"
           >
             <div className="h-full flex flex-col px-6 py-6">
-              {/* Header with logo and close button */}
+              {/* Header with logo, language switcher and close button */}
               <div className="flex items-center justify-between mb-8">
                 <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
                   <Image
@@ -272,13 +297,16 @@ export function Header({ variant = "light" }: HeaderProps) {
                     className="object-contain"
                   />
                 </Link>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2.5 rounded-xl text-ink bg-white/80 shadow-sm"
-                  aria-label="Close menu"
-                >
-                  <X size={22} aria-hidden="true" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <LanguageSwitcher variant="default" />
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2.5 rounded-xl text-ink bg-white/80 shadow-sm"
+                    aria-label="Close menu"
+                  >
+                    <X size={22} aria-hidden="true" />
+                  </button>
+                </div>
               </div>
 
               {/* Navigation - takes remaining space */}
@@ -326,7 +354,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="inline-flex items-center gap-2 text-xl font-display text-shell hover:text-ink transition-colors duration-150"
                   >
-                    Reserve
+                    {t("reserve")}
                     <span className="w-6 h-px bg-shell" />
                   </Link>
                 </motion.div>
@@ -345,7 +373,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                     <div className="w-8 h-8 rounded-full bg-shell/10 flex items-center justify-center group-hover:bg-shell transition-colors duration-200">
                       <Phone size={14} className="text-shell group-hover:text-white transition-colors duration-200" />
                     </div>
-                    <span className="text-sm text-ink font-medium">Call</span>
+                    <span className="text-sm text-ink font-medium">{t("call")}</span>
                   </div>
                   <div className="w-px h-6 bg-sand-200" />
                   <div className="flex-1">

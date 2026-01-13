@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Facebook, Instagram, Phone, Mail } from "lucide-react";
 
 /**
@@ -11,6 +12,8 @@ import { Facebook, Instagram, Phone, Mail } from "lucide-react";
  * Uses site's sand/shell color palette
  */
 export function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className="bg-navy">
       <div className="px-6 md:px-12 lg:px-24 py-16 md:py-20">
@@ -30,61 +33,61 @@ export function Footer() {
               </Link>
               <div className="text-sm text-white/70 space-y-1">
                 <p>Ruijslaan 22, 1796 AD De Koog</p>
-                <p>Texel, Netherlands</p>
+                <p>Texel, {t("netherlands")}</p>
               </div>
             </div>
 
             {/* Stay */}
             <div className="col-span-1 md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Stay</h4>
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">{t("sections.stay")}</h4>
               <nav className="space-y-2.5 md:space-y-3">
                 <Link href="/rooms" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Rooms & Suites
+                  {t("links.roomsSuites")}
                 </Link>
                 <Link href="/offers" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Special Offers
+                  {t("links.specialOffers")}
                 </Link>
                 <Link href="/book" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Reservations
+                  {t("links.reservations")}
                 </Link>
               </nav>
             </div>
 
             {/* Experience */}
             <div className="col-span-1 md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Experience</h4>
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">{t("sections.experience")}</h4>
               <nav className="space-y-2.5 md:space-y-3">
                 <Link href="/restaurant" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Restaurant
+                  {t("links.restaurant")}
                 </Link>
                 <Link href="/wellness" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Wellness
+                  {t("links.wellness")}
                 </Link>
                 <Link href="/meetings" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Meetings
+                  {t("links.meetings")}
                 </Link>
               </nav>
             </div>
 
             {/* Discover */}
             <div className="col-span-1 md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Discover</h4>
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">{t("sections.discover")}</h4>
               <nav className="space-y-2.5 md:space-y-3">
                 <Link href="/about" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Our Story
+                  {t("links.ourStory")}
                 </Link>
                 <Link href="/island" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Texel Island
+                  {t("links.texelIsland")}
                 </Link>
                 <Link href="/gallery" className="block text-sm text-white/80 hover:text-white transition-colors">
-                  Gallery
+                  {t("links.gallery")}
                 </Link>
               </nav>
             </div>
 
             {/* Contact */}
             <div className="col-span-1 md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Contact</h4>
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">{t("sections.contact")}</h4>
               <div className="space-y-2.5 md:space-y-3">
                 <a
                   href="tel:+31222317445"
@@ -92,7 +95,7 @@ export function Footer() {
                 >
                   <Phone size={14} className="text-shell" />
                   <span className="hidden sm:inline">+31 222 317 445</span>
-                  <span className="sm:hidden">Call us</span>
+                  <span className="sm:hidden">{t("callUs")}</span>
                 </a>
                 <a
                   href="mailto:info@opduin.nl"
@@ -131,10 +134,10 @@ export function Footer() {
             <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs text-white/50">
               <span>© {new Date().getFullYear()} Grand Hotel Opduin</span>
               <Link href="/privacy" className="hover:text-white transition-colors">
-                Privacy
+                {t("privacy")}
               </Link>
               <Link href="/terms" className="hover:text-white transition-colors">
-                Terms
+                {t("terms")}
               </Link>
               <Link href="/about/sister-hotels" className="hover:text-white transition-colors">
                 Hoscom Collection

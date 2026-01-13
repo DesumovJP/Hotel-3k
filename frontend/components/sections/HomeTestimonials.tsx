@@ -2,38 +2,40 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Sarah & Michael",
-    location: "Amsterdam",
-    rating: 5,
-    quote: "The staff remembered our names, the spa treatments were heavenly, and watching the sunset from our balcony was unforgettable.",
-    stayType: "Anniversary Escape",
-  },
-  {
-    id: 2,
-    name: "Thomas B.",
-    location: "Hamburg",
-    rating: 5,
-    quote: "Morning swims, sauna sessions, and the best seafood I've had in years. The perfect place to disconnect and find stillness.",
-    stayType: "Wellness Retreat",
-  },
-  {
-    id: 3,
-    name: "Familie de Jong",
-    location: "Utrecht",
-    rating: 5,
-    quote: "The kids loved the beach and bike rides, while we enjoyed the restaurant and spa. Texel is now our favorite Dutch destination.",
-    stayType: "Family Holiday",
-  },
-];
-
 export function HomeTestimonials() {
+  const t = useTranslations("home.testimonials");
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const testimonials = [
+    {
+      id: 1,
+      name: "Sarah & Michael",
+      location: "Amsterdam",
+      rating: 5,
+      quote: t("items.0.quote"),
+      stayType: t("items.0.stayType"),
+    },
+    {
+      id: 2,
+      name: "Thomas B.",
+      location: "Hamburg",
+      rating: 5,
+      quote: t("items.1.quote"),
+      stayType: t("items.1.stayType"),
+    },
+    {
+      id: 3,
+      name: "Familie de Jong",
+      location: "Utrecht",
+      rating: 5,
+      quote: t("items.2.quote"),
+      stayType: t("items.2.stayType"),
+    },
+  ];
 
   const next = () => setCurrentIndex((i) => (i + 1) % testimonials.length);
   const prev = () => setCurrentIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
@@ -52,10 +54,10 @@ export function HomeTestimonials() {
           className="text-center mb-12"
         >
           <span className="text-overline text-shell tracking-widest mb-3 block">
-            Guest Stories
+            {t("label")}
           </span>
           <h2 className="font-display text-3xl md:text-4xl text-ink">
-            What our guests say
+            {t("title")}
           </h2>
         </motion.div>
 
@@ -107,7 +109,7 @@ export function HomeTestimonials() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               className="w-12 h-12 rounded-full bg-sand-100 text-ink/60 flex items-center justify-center hover:bg-shell hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-              aria-label="Previous testimonial"
+              aria-label={t("prevButton")}
             >
               <ChevronLeft size={20} strokeWidth={1.5} />
             </motion.button>
@@ -123,7 +125,7 @@ export function HomeTestimonials() {
                       ? "bg-shell w-8"
                       : "bg-ink/20 hover:bg-ink/40 w-2"
                   }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  aria-label={`${t("goToTestimonial")} ${index + 1}`}
                 />
               ))}
             </div>
@@ -133,7 +135,7 @@ export function HomeTestimonials() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               className="w-12 h-12 rounded-full bg-sand-100 text-ink/60 flex items-center justify-center hover:bg-shell hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
-              aria-label="Next testimonial"
+              aria-label={t("nextButton")}
             >
               <ChevronRight size={20} strokeWidth={1.5} />
             </motion.button>
@@ -151,11 +153,11 @@ export function HomeTestimonials() {
           <div className="flex items-center justify-center gap-8 text-sm text-neutral-500">
             <div className="flex items-center gap-2">
               <span className="text-2xl font-display text-ink">9.2</span>
-              <span>Guest Rating</span>
+              <span>{t("guestRating")}</span>
             </div>
             <div className="w-px h-6 bg-sand-200" />
             <div>
-              <span className="text-ink font-medium">1,200+</span> verified reviews
+              <span className="text-ink font-medium">1,200+</span> {t("verifiedReviews")}
             </div>
           </div>
         </motion.div>

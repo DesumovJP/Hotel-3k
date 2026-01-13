@@ -1,25 +1,4 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
-import "./globals.css";
-import { CustomCursor } from "@/components/effects/CustomCursor";
-import { FilmGrain } from "@/components/effects/FilmGrain";
-import { SmoothScrollProvider } from "@/components/providers/SmoothScroll";
-import { Header } from "@/components/organisms";
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Grand Hotel Opduin | Luxury Resort on Texel Island",
@@ -44,22 +23,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type Props = {
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={`${cormorant.variable} ${dmSans.variable} antialiased`}>
-        {/* Fixed elements outside SmoothScrollProvider for proper positioning */}
-        <Header />
-        <CustomCursor />
-        <FilmGrain opacity={0.025} />
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
-      </body>
-    </html>
-  );
+};
+
+// Root layout - minimal, locale-specific content handled in [locale]/layout
+export default function RootLayout({ children }: Props) {
+  return children;
 }

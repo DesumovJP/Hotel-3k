@@ -2,7 +2,8 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { SplitText } from "@/components/animations";
 import { BrushStroke } from "@/components/effects";
 import { cn } from "@/lib/utils";
@@ -28,14 +29,24 @@ export function HeroSection({
   youtubeId = "7WGS5SUVbcg",
   videoSrc,
   imageSrc = "/home/hero-fallback.jpg",
-  imageAlt = "Grand Hotel Opduin - Luxury beachfront hotel on Texel",
-  headline = "Grand Hotel Opduin",
-  subheadline = "The Hamptons of the Wadden",
-  tagline = "Where luxury meets the rhythm of the tides",
-  location = "Texel Island, Netherlands",
-  primaryCta = { label: "Check Availability", href: "/book" },
-  secondaryCta = { label: "Explore Rooms", href: "/rooms" },
+  imageAlt,
+  headline,
+  subheadline,
+  tagline,
+  location,
+  primaryCta,
+  secondaryCta,
 }: HeroSectionProps) {
+  const t = useTranslations("home.hero");
+
+  // Use translations as defaults
+  const resolvedHeadline = headline ?? t("headline");
+  const resolvedSubheadline = subheadline ?? t("subheadline");
+  const resolvedTagline = tagline ?? t("tagline");
+  const resolvedLocation = location ?? t("location");
+  const resolvedImageAlt = imageAlt ?? t("imageAlt");
+  const resolvedPrimaryCta = primaryCta ?? { label: t("primaryCta"), href: "/book" };
+  const resolvedSecondaryCta = secondaryCta ?? { label: t("secondaryCta"), href: "/rooms" };
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -143,7 +154,7 @@ export function HeroSection({
         ref={containerRef}
         className="relative h-screen min-h-[700px] overflow-hidden bg-deepsea"
         role="banner"
-        aria-label={`Welcome to ${headline} - ${subheadline}`}
+        aria-label={`Welcome to ${resolvedHeadline} - ${resolvedSubheadline}`}
       >
         {/* Background Media Layer */}
         <div className="absolute inset-0">
@@ -196,7 +207,7 @@ export function HeroSection({
             )}
             style={{ backgroundImage: `url('${imageSrc}')` }}
             role="img"
-            aria-label={imageAlt}
+            aria-label={resolvedImageAlt}
           />
         </div>
 
@@ -236,7 +247,7 @@ export function HeroSection({
                   className="text-white text-xs tracking-[0.2em] uppercase font-medium"
                   style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.5)' }}
                 >
-                  {location}
+                  {resolvedLocation}
                 </span>
               </motion.div>
 
@@ -253,7 +264,7 @@ export function HeroSection({
                   staggerDelay={0.08}
                   delay={0.25}
                 >
-                  {headline}
+                  {resolvedHeadline}
                 </SplitText>
               </motion.h1>
 
@@ -274,7 +285,7 @@ export function HeroSection({
                     textShadow: '0 1px 2px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6)',
                   }}
                 >
-                  {subheadline}
+                  {resolvedSubheadline}
                 </p>
               </motion.div>
 
@@ -286,7 +297,7 @@ export function HeroSection({
                 className="relative z-10 text-lg md:text-xl text-white font-normal max-w-lg mx-auto md:mx-0 mb-12 leading-relaxed"
                 style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4)' }}
               >
-                {tagline}
+                {resolvedTagline}
               </motion.p>
 
               {/* CTAs */}
@@ -299,21 +310,21 @@ export function HeroSection({
                 aria-label="Booking actions"
               >
                 <Link
-                  href={primaryCta.href}
+                  href={resolvedPrimaryCta.href}
                   onClick={handlePrimaryCTAClick}
                   className="group inline-flex items-center gap-2 md:gap-3 text-white hover:text-white/80 transition-colors duration-300"
                   style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)' }}
                 >
-                  <span className="font-display text-base md:text-xl tracking-wide">{primaryCta.label}</span>
+                  <span className="font-display text-base md:text-xl tracking-wide">{resolvedPrimaryCta.label}</span>
                   <span className="w-6 md:w-8 h-px bg-gold group-hover:w-10 md:group-hover:w-12 transition-all duration-300" />
                 </Link>
                 <span className="hidden md:block w-px h-6 bg-white/30" />
                 <Link
-                  href={secondaryCta.href}
+                  href={resolvedSecondaryCta.href}
                   className="group inline-flex items-center gap-2 md:gap-3 text-white/80 hover:text-white transition-colors duration-300"
                   style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)' }}
                 >
-                  <span className="font-display text-base md:text-xl tracking-wide">{secondaryCta.label}</span>
+                  <span className="font-display text-base md:text-xl tracking-wide">{resolvedSecondaryCta.label}</span>
                   <span className="w-6 md:w-8 h-px bg-white/50 group-hover:w-10 md:group-hover:w-12 group-hover:bg-gold transition-all duration-300" />
                 </Link>
               </motion.div>

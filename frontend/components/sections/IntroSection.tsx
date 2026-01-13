@@ -1,19 +1,24 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { ArrowRight, MapPin, Clock, Waves, Award, Star } from "lucide-react";
 import { easeOutExpo } from "@/lib/motion";
 
-const usps = [
-  { icon: Clock, text: "90+ years of hospitality" },
-  { icon: MapPin, text: "On the highest dune" },
-  { icon: Waves, text: "5 min walk to beach" },
-  { icon: Award, text: "Family-run" },
-];
+const uspIcons = [Clock, MapPin, Waves, Award];
 
 export function IntroSection() {
+  const t = useTranslations("home.intro");
+
+  const usps = [
+    { icon: uspIcons[0], text: t("usps.years") },
+    { icon: uspIcons[1], text: t("usps.location") },
+    { icon: uspIcons[2], text: t("usps.beach") },
+    { icon: uspIcons[3], text: t("usps.family") },
+  ];
+
   return (
     <section className="py-20 md:py-28 bg-white relative overflow-hidden">
       <div className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
@@ -26,25 +31,20 @@ export function IntroSection() {
             transition={{ duration: 0.6, ease: easeOutExpo }}
           >
             <span className="text-overline text-shell mb-4 block">
-              Welcome to Opduin
+              {t("label")}
             </span>
 
             <h2 className="text-display-xl text-ink mb-6">
-              The Hamptons on
-              <span className="text-shell"> the Wadden</span>
+              {t("titlePart1")}
+              <span className="text-shell"> {t("titlePart2")}</span>
             </h2>
 
             <p className="text-body-lg text-neutral-600 mb-6">
-              More than 90 years of hospitality combined in a tasteful, comfortable
-              and contemporary hotel. The beach is within walking distance, the village
-              and cozy restaurants are next door.
+              {t("description1")}
             </p>
 
             <p className="text-body-md text-neutral-500 mb-8">
-              Plenty of opportunities for relaxation, exercise and recreation.
-              Rooms ranging from suites to holiday homes, with options for single
-              occupancy through apartments. All rooms with air conditioning and
-              comfortable bedding, positioned atop a dune.
+              {t("description2")}
             </p>
 
             {/* USP badges - neomorphic grid */}
@@ -53,7 +53,7 @@ export function IntroSection() {
                 const Icon = usp.icon;
                 return (
                   <motion.div
-                    key={usp.text}
+                    key={index}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -74,7 +74,7 @@ export function IntroSection() {
               className="inline-flex items-center gap-2 text-navy hover:text-shell transition-colors text-sm tracking-wide uppercase group"
             >
               <span className="relative">
-                Discover our story
+                {t("cta")}
                 <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-shell group-hover:w-full transition-all duration-300" />
               </span>
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -94,7 +94,7 @@ export function IntroSection() {
               <div className="relative aspect-[4/5]">
                 <Image
                   src="/home/home-600x400_1.jpg"
-                  alt="Grand Hotel Opduin exterior"
+                  alt={t("imageAlt")}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover/image:scale-105"
@@ -124,8 +124,8 @@ export function IntroSection() {
                 ))}
               </div>
               <p className="text-display-md text-ink mb-1">9.2</p>
-              <p className="text-neutral-500 text-sm">Guest Rating</p>
-              <p className="text-neutral-400 text-xs mt-1">1,200+ reviews</p>
+              <p className="text-neutral-500 text-sm">{t("guestRating")}</p>
+              <p className="text-neutral-400 text-xs mt-1">{t("reviewCount")}</p>
             </motion.div>
           </motion.div>
         </div>
