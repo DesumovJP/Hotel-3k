@@ -112,27 +112,27 @@ export default function AboutPage() {
 
         {/* Quick Info Strip */}
         <section className="neo-bar">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
-              <div className="flex items-center gap-2">
-                <Clock size={16} className="text-shell" />
-                <span className="text-neutral-500">Est.</span>
-                <span className="text-ink font-medium">1932</span>
+          <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Clock size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Est.</span>
+                <span className="text-ink font-medium whitespace-nowrap">1932</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Users size={16} className="text-shell" />
-                <span className="text-neutral-500">Family</span>
-                <span className="text-ink font-medium">3rd Generation</span>
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Users size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Family</span>
+                <span className="text-ink font-medium whitespace-nowrap">3rd Gen</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Leaf size={16} className="text-shell" />
-                <span className="text-neutral-500">Status</span>
-                <span className="text-ink font-medium">Carbon Neutral</span>
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Leaf size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Status</span>
+                <span className="text-ink font-medium whitespace-nowrap">Carbon Neutral</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Award size={16} className="text-shell" />
-                <span className="text-neutral-500">Recognition</span>
-                <span className="text-ink font-medium">Award Winning</span>
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Award size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Recognition</span>
+                <span className="text-ink font-medium whitespace-nowrap">Award Winning</span>
               </div>
             </div>
           </div>

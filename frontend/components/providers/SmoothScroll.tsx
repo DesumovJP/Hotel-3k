@@ -106,18 +106,21 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
       }
     });
 
-    // MutationObserver for dynamic content - more selective for performance
+    // MutationObserver for dynamic content - only watch content container for performance
     let mutationTimeout: NodeJS.Timeout;
     const mutationObserver = new MutationObserver(() => {
       // Batch mutation callbacks with longer debounce
       clearTimeout(mutationTimeout);
-      mutationTimeout = setTimeout(debouncedResize, 150);
+      mutationTimeout = setTimeout(debouncedResize, 200);
     });
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: false, // Don't watch attribute changes for better perf
-    });
+    // Watch only the content container instead of entire body
+    if (contentRef.current) {
+      mutationObserver.observe(contentRef.current, {
+        childList: true,
+        subtree: false, // Only direct children - much better performance
+        attributes: false,
+      });
+    }
 
     // ResizeObserver for element size changes
     const resizeObserver = new ResizeObserver(() => {
@@ -155,8 +158,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProps) {
   return (
     <div
       ref={wrapperRef}
-      className="lenis-wrapper fixed inset-0 overflow-auto transform-gpu"
-      style={{ willChange: "scroll-position" }}
+      className="lenis-wrapper fixed inset-0 overflow-auto"
+      style={{ contain: "strict" }}
     >
       <div
         ref={contentRef}

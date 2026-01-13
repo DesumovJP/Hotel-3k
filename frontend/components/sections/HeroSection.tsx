@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { SplitText } from "@/components/animations";
 import { BrushStroke } from "@/components/effects";
-import { Button } from "@/components/atoms";
 import { cn } from "@/lib/utils";
 import { easeOutExpo } from "@/lib/motion";
 import { useReducedMotion } from "@/lib/accessibility";
@@ -75,7 +74,7 @@ export function HeroSection({
 
   // Reload iframe when video ends to get fresh HD quality
   useEffect(() => {
-    if (!youtubeId || isMobile) return;
+    if (!youtubeId) return;
 
     // Listen for messages from YouTube iframe
     const handleMessage = (event: MessageEvent) => {
@@ -114,11 +113,12 @@ export function HeroSection({
   }, []);
 
   const showLocalVideo = videoSrc && videoLoaded && !videoError && !youtubeId;
-  const showYoutube = youtubeId && !isMobile && origin;
+  // Enable YouTube on mobile too - playsinline attribute should help with autoplay
+  const showYoutube = youtubeId && origin;
 
-  // enablejsapi=1 needed to receive postMessage events
+  // enablejsapi=1 needed to receive postMessage events, loop+playlist for looping
   const youtubeEmbedUrl = youtubeId
-    ? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=${origin}`
+    ? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=${origin}`
     : "";
 
   const handlePrimaryCTAClick = () => {
@@ -210,18 +210,21 @@ export function HeroSection({
           style={prefersReducedMotion ? {} : { y: contentY }}
         >
           <div className="w-full px-6 md:px-12 lg:px-24">
-            <div className="relative max-w-3xl">
+            <div className="relative max-w-3xl mx-auto md:mx-0 text-center md:text-left">
               {/* Brush stroke background for text readability */}
               <BrushStroke />
 
               {/* Premium Badge */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
-                className="relative z-10 flex items-center gap-4 mb-8"
+                className="relative z-10 flex items-center justify-center md:justify-start gap-4 mb-8"
               >
-                <div className="flex gap-1 drop-shadow-lg">
+                <div
+                  className="flex gap-1"
+                  style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.5))' }}
+                >
                   {[...Array(4)].map((_, i) => (
                     <svg key={i} className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -259,13 +262,16 @@ export function HeroSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
-                className="relative z-10 flex items-center gap-6 mb-8"
+                className="relative z-10 flex items-center justify-center md:justify-start gap-3 md:gap-6 mb-8"
               >
-                <div className="w-16 h-px bg-gold drop-shadow-lg" />
+                <div
+                  className="w-8 md:w-16 h-px bg-gold"
+                  style={{ boxShadow: '0 0 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)' }}
+                />
                 <p
                   className="font-display text-xl md:text-2xl lg:text-3xl text-gold italic"
                   style={{
-                    textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(0,0,0,0.3)',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6)',
                   }}
                 >
                   {subheadline}
@@ -277,7 +283,7 @@ export function HeroSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5, ease: easeOutExpo }}
-                className="relative z-10 text-lg md:text-xl text-white font-normal max-w-lg mb-12 leading-relaxed"
+                className="relative z-10 text-lg md:text-xl text-white font-normal max-w-lg mx-auto md:mx-0 mb-12 leading-relaxed"
                 style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.4)' }}
               >
                 {tagline}
@@ -288,19 +294,27 @@ export function HeroSection({
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.6, ease: easeOutExpo }}
-                className="relative z-10 flex flex-wrap gap-4"
+                className="relative z-10 flex flex-row items-center justify-between md:justify-start gap-4 md:gap-6"
                 role="group"
                 aria-label="Booking actions"
               >
-                <Link href={primaryCta.href} onClick={handlePrimaryCTAClick}>
-                  <Button size="lg" variant="primary" className="min-w-[180px]">
-                    {primaryCta.label}
-                  </Button>
+                <Link
+                  href={primaryCta.href}
+                  onClick={handlePrimaryCTAClick}
+                  className="group inline-flex items-center gap-2 md:gap-3 text-white hover:text-white/80 transition-colors duration-300"
+                  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)' }}
+                >
+                  <span className="font-display text-base md:text-xl tracking-wide">{primaryCta.label}</span>
+                  <span className="w-6 md:w-8 h-px bg-gold group-hover:w-10 md:group-hover:w-12 transition-all duration-300" />
                 </Link>
-                <Link href={secondaryCta.href}>
-                  <Button variant="glass" size="lg" className="min-w-[180px]">
-                    {secondaryCta.label}
-                  </Button>
+                <span className="hidden md:block w-px h-6 bg-white/30" />
+                <Link
+                  href={secondaryCta.href}
+                  className="group inline-flex items-center gap-2 md:gap-3 text-white/80 hover:text-white transition-colors duration-300"
+                  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)' }}
+                >
+                  <span className="font-display text-base md:text-xl tracking-wide">{secondaryCta.label}</span>
+                  <span className="w-6 md:w-8 h-px bg-white/50 group-hover:w-10 md:group-hover:w-12 group-hover:bg-gold transition-all duration-300" />
                 </Link>
               </motion.div>
             </div>

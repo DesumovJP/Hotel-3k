@@ -67,7 +67,7 @@ export default function RoomsPage() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.3, ease: easeOutExpo }}
-            className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/95 backdrop-blur-sm border-t border-neutral-200 md:hidden"
+            className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-[#FEFDFB] shadow-[0_-2px_12px_rgba(0,0,0,0.08)] border-t border-neutral-100 md:hidden"
           >
             <Link
               href="/book"
@@ -90,28 +90,26 @@ export default function RoomsPage() {
 
         {/* Quick Info Strip */}
         <section className="neo-bar">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
-              <div className="flex items-center gap-2">
-                <Bed size={16} className="text-shell" />
-                <span className="text-neutral-500">Rooms</span>
-                <span className="text-ink font-medium">22 Rooms & Suites</span>
+          <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Bed size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Rooms</span>
+                <span className="text-ink font-medium whitespace-nowrap">22 Rooms</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Eye size={16} className="text-shell" />
-                <span className="text-neutral-500">Views</span>
-                <span className="text-ink font-medium">Sea, Dune & Garden</span>
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Eye size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Views</span>
+                <span className="text-ink font-medium whitespace-nowrap">Sea & Dune</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Check size={16} className="text-shell" />
-                <span className="text-neutral-500">Direct</span>
-                <span className="text-ink font-medium">Free Sauna & €5 Off</span>
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Check size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Direct</span>
+                <span className="text-ink font-medium whitespace-nowrap">Free Sauna</span>
               </div>
             </div>
           </div>
         </section>
-
-        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">

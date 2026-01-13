@@ -16,16 +16,16 @@ export function Footer() {
       <div className="px-6 md:px-12 lg:px-24 py-16 md:py-20">
         <div className="max-w-6xl mx-auto">
           {/* Main grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
-            {/* Brand */}
-            <div className="md:col-span-4">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-8 mb-16">
+            {/* Brand - full width on mobile */}
+            <div className="col-span-2 md:col-span-4 pb-6 md:pb-0 border-b border-white/10 md:border-0">
               <Link href="/" className="inline-block mb-4">
                 <Image
                   src="/icon.png"
                   alt="Grand Hotel Opduin"
-                  width={160}
-                  height={160}
-                  className="object-contain brightness-0 invert"
+                  width={120}
+                  height={120}
+                  className="object-contain brightness-0 invert md:w-40 md:h-40"
                 />
               </Link>
               <div className="text-sm text-white/70 space-y-1">
@@ -35,9 +35,9 @@ export function Footer() {
             </div>
 
             {/* Stay */}
-            <div className="md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Stay</h4>
-              <nav className="space-y-3">
+            <div className="col-span-1 md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Stay</h4>
+              <nav className="space-y-2.5 md:space-y-3">
                 <Link href="/rooms" className="block text-sm text-white/80 hover:text-white transition-colors">
                   Rooms & Suites
                 </Link>
@@ -51,9 +51,9 @@ export function Footer() {
             </div>
 
             {/* Experience */}
-            <div className="md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Experience</h4>
-              <nav className="space-y-3">
+            <div className="col-span-1 md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Experience</h4>
+              <nav className="space-y-2.5 md:space-y-3">
                 <Link href="/restaurant" className="block text-sm text-white/80 hover:text-white transition-colors">
                   Restaurant
                 </Link>
@@ -67,9 +67,9 @@ export function Footer() {
             </div>
 
             {/* Discover */}
-            <div className="md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Discover</h4>
-              <nav className="space-y-3">
+            <div className="col-span-1 md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Discover</h4>
+              <nav className="space-y-2.5 md:space-y-3">
                 <Link href="/about" className="block text-sm text-white/80 hover:text-white transition-colors">
                   Our Story
                 </Link>
@@ -83,22 +83,24 @@ export function Footer() {
             </div>
 
             {/* Contact */}
-            <div className="md:col-span-2">
-              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-5">Contact</h4>
-              <div className="space-y-3">
+            <div className="col-span-1 md:col-span-2">
+              <h4 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-5">Contact</h4>
+              <div className="space-y-2.5 md:space-y-3">
                 <a
                   href="tel:+31222317445"
                   className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
                 >
                   <Phone size={14} className="text-shell" />
-                  +31 222 317 445
+                  <span className="hidden sm:inline">+31 222 317 445</span>
+                  <span className="sm:hidden">Call us</span>
                 </a>
                 <a
                   href="mailto:info@opduin.nl"
                   className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
                 >
                   <Mail size={14} className="text-shell" />
-                  info@opduin.nl
+                  <span className="hidden sm:inline">info@opduin.nl</span>
+                  <span className="sm:hidden">Email</span>
                 </a>
               </div>
             </div>

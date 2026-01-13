@@ -122,7 +122,7 @@ export default function MeetingsPage() {
           title="Meetings"
           tagline="Sincere attention for each other"
           description="You will organize a meeting that no one will forget. And that's what matters."
-          backgroundImage="/meetings/image-700x700_1.jpg"
+          backgroundImage="/meetings/bollekamer-600x450.jpg"
           youtubeId="APJyGnhfits"
           primaryAction={{
             label: "Request Proposal",

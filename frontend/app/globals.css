@@ -779,12 +779,12 @@ body {
 }
 
 /* Header glass effect - fixed navbar */
+/* Performance optimized: solid background instead of backdrop-filter for 120fps scroll */
 .header-glass {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  box-shadow: 0 2px 4px rgba(14, 42, 58, 0.04), 0 4px 8px rgba(14, 42, 58, 0.08);
-  border-bottom: 1px solid rgba(167, 159, 136, 0.15);
+  background: rgba(254, 253, 251, 0.97) !important;
+  /* backdrop-filter removed for performance - causes GPU layer thrashing during scroll */
+  box-shadow: 0 1px 3px rgba(14, 42, 58, 0.05), 0 4px 12px rgba(14, 42, 58, 0.08);
+  border-bottom: 1px solid rgba(167, 159, 136, 0.12);
 }
 
 /* ============================================
@@ -1413,18 +1413,11 @@ body {
 
 /* Optimize animations for 120fps */
 @media (prefers-reduced-motion: no-preference) {
-  /* Smooth transitions use GPU */
-  .transition-transform,
-  .transition-all {
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  /* Optimize hover effects */
-  .hover-lift,
-  .hover-scale,
-  .neo-card-hover {
-    will-change: transform;
+  /* GPU acceleration ONLY during active hover - not permanent */
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .neo-card-hover:hover {
+    transform: translateZ(0);
     backface-visibility: hidden;
   }
 }

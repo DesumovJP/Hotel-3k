@@ -134,7 +134,10 @@ export function SectionHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: easeOutExpo }}
           >
-            <span className="text-overline text-shell tracking-widest mb-4 block drop-shadow-md">
+            <span
+              className="text-overline text-white/90 tracking-widest mb-4 block"
+              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8), 0 2px 10px rgba(0,0,0,0.6)' }}
+            >
               {label}
             </span>
           </motion.div>
@@ -146,7 +149,10 @@ export function SectionHero({
               animate={{ y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
             >
-              <h1 className="text-hero text-white drop-shadow-lg">
+              <h1
+                className="text-hero text-white"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3)' }}
+              >
                 <SplitText type="words" animation="fadeUp" staggerDelay={0.05} delay={0.2}>
                   {title}
                 </SplitText>
@@ -160,7 +166,8 @@ export function SectionHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: easeOutExpo }}
-              className="text-tagline-xl text-white mb-4 drop-shadow-md"
+              className="text-tagline-xl text-white mb-4"
+              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5)' }}
             >
               <span className="text-shell">"</span>
               {tagline}
@@ -173,7 +180,8 @@ export function SectionHero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: tagline ? 0.4 : 0.3, ease: easeOutExpo }}
-            className="text-body-lg text-white/90 max-w-lg mb-8 drop-shadow-sm"
+            className="text-body-lg text-white/90 max-w-lg mb-8"
+            style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
           >
             {description}
           </motion.p>
@@ -222,19 +230,19 @@ export function SectionHero({
     {/* Info Strip */}
     {infoStrip && (
       <section className="neo-bar">
-        <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-          <div className="flex flex-wrap items-center justify-between gap-4 py-4">
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
+        <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
+          <div className="flex items-center justify-between gap-4 py-3 md:py-4">
+            <div className="flex items-center gap-3 md:gap-8 text-xs md:text-sm overflow-x-auto scrollbar-hide">
               {infoStrip.items.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <div
                     key={index}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-1.5 md:gap-2 flex-shrink-0"
                   >
-                    <Icon size={16} className="text-shell" />
-                    {item.label && <span className="text-neutral-500">{item.label}</span>}
-                    <span className={cn("text-ink font-medium", item.highlight && "text-shell")}>{item.value}</span>
+                    <Icon size={14} className="text-shell" />
+                    {item.label && <span className="hidden sm:inline text-neutral-500">{item.label}</span>}
+                    <span className={cn("text-ink font-medium whitespace-nowrap", item.highlight && "text-shell")}>{item.value}</span>
                   </div>
                 );
               })}
@@ -242,7 +250,7 @@ export function SectionHero({
             {infoStrip.phoneNumber && (
               <a
                 href={`tel:${infoStrip.phoneNumber.replace(/\s/g, "")}`}
-                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
+                className="hidden md:inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium flex-shrink-0"
               >
                 {infoStrip.phoneLabel || infoStrip.phoneNumber}
               </a>

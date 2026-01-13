@@ -101,27 +101,27 @@ export function HomeTestimonials() {
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-6 mt-12">
+          <div className="flex items-center justify-center gap-4 mt-12">
             <motion.button
               onClick={prev}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-11 h-11 border border-sand-200 flex items-center justify-center hover:border-navy hover:bg-navy hover:text-white transition-all"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-12 h-12 rounded-full bg-sand-100 text-ink/60 flex items-center justify-center hover:bg-shell hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={20} strokeWidth={1.5} />
             </motion.button>
 
             {/* Dots */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5 px-4">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex
-                      ? "bg-shell w-6"
-                      : "bg-sand-300 hover:bg-sand-400"
+                      ? "bg-shell w-8"
+                      : "bg-ink/20 hover:bg-ink/40 w-2"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -130,12 +130,12 @@ export function HomeTestimonials() {
 
             <motion.button
               onClick={next}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-11 h-11 border border-sand-200 flex items-center justify-center hover:border-navy hover:bg-navy hover:text-white transition-all"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-12 h-12 rounded-full bg-sand-100 text-ink/60 flex items-center justify-center hover:bg-shell hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
               aria-label="Next testimonial"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={20} strokeWidth={1.5} />
             </motion.button>
           </div>
         </motion.div>

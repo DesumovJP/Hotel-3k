@@ -93,26 +93,25 @@ export default function ContactPage() {
 
         {/* Quick Info Strip */}
         <section className="neo-bar">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm py-4">
-              <div className="flex items-center gap-2">
-                <Clock size={16} className="text-shell" />
-                <span className="text-neutral-500">Reception</span>
-                <span className="text-ink font-medium">24 hours</span>
+          <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
+              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <Clock size={14} className="text-shell" />
+                <span className="hidden sm:inline text-neutral-500">Reception</span>
+                <span className="text-ink font-medium whitespace-nowrap">24h</span>
               </div>
-              <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-shell transition-colors">
-                <Phone size={16} className="text-shell" />
-                <span className="text-ink font-medium">{contactInfo.phone}</span>
+              <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-1.5 md:gap-2 flex-shrink-0 hover:text-shell transition-colors">
+                <Phone size={14} className="text-shell" />
+                <span className="text-ink font-medium whitespace-nowrap">{contactInfo.phone}</span>
               </a>
-              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 hover:text-shell transition-colors">
-                <Mail size={16} className="text-shell" />
-                <span className="text-ink font-medium">{contactInfo.email}</span>
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-1.5 md:gap-2 flex-shrink-0 hover:text-shell transition-colors">
+                <Mail size={14} className="text-shell" />
+                <span className="text-ink font-medium whitespace-nowrap hidden sm:inline">{contactInfo.email}</span>
+                <span className="text-ink font-medium whitespace-nowrap sm:hidden">Email</span>
               </a>
             </div>
           </div>
         </section>
-
-        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Breadcrumbs */}
         <section className="py-6 bg-white border-b border-neutral-100">

@@ -82,7 +82,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       fullWidth = false,
-      magnetic = true,
+      magnetic = false,
       magneticStrength = 0.15,
       className,
       children,

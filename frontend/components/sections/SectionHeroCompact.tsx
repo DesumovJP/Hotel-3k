@@ -58,7 +58,7 @@ export function SectionHeroCompact({
           transition={{ duration: 0.6, ease: easeOutExpo }}
           className={align === "center" ? "text-center" : ""}
         >
-          <span className="text-overline text-shell tracking-widest mb-3 block">
+          <span className="text-overline text-white/80 tracking-widest mb-3 block">
             {label}
           </span>
           <h1 className="text-hero-md text-white mb-4">

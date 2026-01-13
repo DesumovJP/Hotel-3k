@@ -165,8 +165,11 @@ export function WellnessHero({
               variants={fadeInUp}
               className="mb-6"
             >
-              <span className="inline-flex items-center gap-3 text-sand-400 text-overline tracking-[0.2em] uppercase">
-                <span className="w-8 h-px bg-gold" />
+              <span
+                className="inline-flex items-center gap-3 text-sand-400 text-overline tracking-[0.2em] uppercase"
+                style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
+              >
+                <span className="w-8 h-px bg-gold" style={{ boxShadow: '0 0 6px rgba(0,0,0,0.5)' }} />
                 Grand Hotel Opduin Wellness
               </span>
             </motion.div>
@@ -175,6 +178,7 @@ export function WellnessHero({
             <motion.h1
               variants={fadeInUp}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight mb-4"
+              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3)' }}
             >
               {title}
             </motion.h1>
@@ -183,6 +187,7 @@ export function WellnessHero({
             <motion.p
               variants={fadeInUp}
               className="font-display text-xl md:text-2xl text-gold italic mb-6"
+              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5)' }}
             >
               {tagline}
             </motion.p>
@@ -191,6 +196,7 @@ export function WellnessHero({
             <motion.p
               variants={fadeInUp}
               className="text-base md:text-lg text-white/70 max-w-xl mb-10 leading-relaxed"
+              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
             >
               {description}
             </motion.p>

@@ -142,6 +142,7 @@ export function PageHero({
             animate={{ scaleY: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
             className="w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-gold to-gold/30 mx-auto mb-6 origin-top"
+            style={{ boxShadow: '0 0 6px rgba(0,0,0,0.5)' }}
             aria-hidden="true"
           />
 
@@ -151,7 +152,10 @@ export function PageHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15, ease: easeOutExpo }}
           >
-            <span className="text-overline text-gold/80 mb-4 block">
+            <span
+              className="text-overline text-gold/80 mb-4 block"
+              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)' }}
+            >
               {label}
             </span>
           </motion.div>
@@ -163,6 +167,7 @@ export function PageHero({
               animate={{ y: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
               className="text-hero text-white"
+              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3)' }}
             >
               <SplitText type="words" animation="fadeUp" staggerDelay={0.04} delay={0.25}>
                 {headline}
@@ -177,6 +182,7 @@ export function PageHero({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.4, ease: easeOutExpo }}
               className="text-body-lg text-white/70 max-w-lg mx-auto"
+              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' }}
             >
               {description}
             </motion.p>

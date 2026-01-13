@@ -106,7 +106,7 @@ export default function RestaurantPage() {
         <SectionHero
           label="Restaurant of Opduin"
           title="Wadden Gastronomy"
-          description="Good food with as many products as possible from Texel and other Wadden Sea regions. If this is not possible, we look for a sustainable and organic alternative."
+          description="Local ingredients from Texel and the Wadden Sea, prepared fresh daily by our chefs."
           backgroundImage="/restaurant/restaurant-opduin-600x450.jpg"
           youtubeId="8Raur-TG4_A"
           primaryAction={{

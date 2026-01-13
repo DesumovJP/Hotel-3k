@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, MapPin, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -57,6 +57,8 @@ function DropdownMenu({
     timeoutRef.current = setTimeout(() => setIsOpen(false), 150);
   };
 
+  const textShadowStyle = !(isScrolled || useDarkText) ? { textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' } : undefined;
+
   return (
     <div
       className="relative overflow-visible"
@@ -65,11 +67,12 @@ function DropdownMenu({
     >
       <button
         className={cn(
-          "flex items-center gap-1 text-nav transition-colors duration-150 hover:opacity-100 tap-target focus-visible-ring",
+          "flex items-center gap-1 text-nav transition-colors duration-300 tap-target focus-visible-ring",
           isScrolled || useDarkText
-            ? "text-ink/70 hover:text-shell"
-            : "text-white hover:text-white"
+            ? "text-ink/70 hover:text-ink"
+            : "text-white hover:text-white/80"
         )}
+        style={textShadowStyle}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -144,13 +147,13 @@ export function Header({ variant = "light" }: HeaderProps) {
         className={cn(
           "fixed top-0 left-0 right-0 z-50",
           "transition-all duration-300 ease-out",
-          // GPU acceleration for smooth scrolling over video
-          "transform-gpu will-change-transform",
+          // GPU acceleration for smooth transitions
+          "transform-gpu",
           isScrolled
             ? "py-3 header-glass"
             : useDarkText
               ? "py-5 md:py-6 header-glass"
-              : "py-5 md:py-6 bg-gradient-to-b from-black/30 to-transparent"
+              : "py-5 md:py-6 bg-gradient-to-b from-black/70 via-black/40 to-transparent"
         )}
         style={{ contain: "layout style", backfaceVisibility: "hidden" }}
       >
@@ -170,7 +173,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                     "object-contain transition-all duration-300",
                     isScrolled || useDarkText
                       ? "brightness-100"
-                      : "brightness-0 invert"
+                      : "brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]"
                   )}
                   priority
                 />
@@ -195,8 +198,9 @@ export function Header({ variant = "light" }: HeaderProps) {
                       "relative text-nav transition-colors duration-300 tap-target focus-visible-ring group",
                       isScrolled || useDarkText
                         ? "text-ink/70 hover:text-ink"
-                        : "text-white/80 hover:text-white"
+                        : "text-white hover:text-white/80"
                     )}
+                    style={!(isScrolled || useDarkText) ? { textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' } : undefined}
                   >
                     {item.label}
                     {/* Aman-style underline animation */}
@@ -218,6 +222,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                   ? "bg-shell text-white hover:bg-shell-600"
                   : "text-white hover:text-white/80"
               )}
+              style={!(isScrolled || useDarkText) ? { textShadow: '0 1px 3px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)' } : undefined}
             >
               <span className="text-nav">
                 Reserve
@@ -242,7 +247,7 @@ export function Header({ variant = "light" }: HeaderProps) {
         </div>
       </header>
 
-      {/* Mobile Menu - Neomorphic */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -255,74 +260,100 @@ export function Header({ variant = "light" }: HeaderProps) {
             aria-modal="true"
             aria-label="Navigation menu"
           >
-            <div className="h-full flex flex-col justify-center px-8">
+            <div className="h-full flex flex-col px-6 py-6">
               {/* Header with logo and close button */}
-              <div className="absolute top-6 left-6 right-6 flex items-center justify-between">
-                <Image
-                  src="/icon.png"
-                  alt="Grand Hotel Opduin"
-                  width={120}
-                  height={120}
-                  className="object-contain"
-                />
+              <div className="flex items-center justify-between mb-8">
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Image
+                    src="/icon.png"
+                    alt="Grand Hotel Opduin"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                  />
+                </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2.5 rounded-xl text-ink bg-white/80 shadow-neo-sm"
+                  className="p-2.5 rounded-xl text-ink bg-white/80 shadow-sm"
                   aria-label="Close menu"
                 >
-                  <X size={24} aria-hidden="true" />
+                  <X size={22} aria-hidden="true" />
                 </button>
               </div>
 
-              <nav className="space-y-4" role="navigation">
-                {[...navItems, { href: "/book", label: "Reserve" }].map(
-                  (item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.04, duration: 0.25 }}
+              {/* Navigation - takes remaining space */}
+              <nav className="flex-1 space-y-3" role="navigation">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.04, duration: 0.25 }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-xl font-display text-ink hover:text-shell transition-colors duration-150 py-1.5"
                     >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block text-nav-lg text-ink hover:text-shell transition-colors duration-150 tap-target focus-visible-ring py-1"
-                      >
-                        {item.label}
-                      </Link>
-                      {item.children && (
-                        <div className="mt-2 ml-4 space-y-2">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className="block text-body-sm text-neutral-500 hover:text-shell transition-colors duration-150 tap-target focus-visible-ring"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </motion.div>
-                  )
-                )}
+                      {item.label}
+                    </Link>
+                    {item.children && (
+                      <div className="mt-1.5 ml-4 space-y-1.5">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-sm text-neutral-500 hover:text-shell transition-colors duration-150"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+
+                {/* Reserve button - styled differently */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navItems.length * 0.04, duration: 0.25 }}
+                  className="pt-4"
+                >
+                  <Link
+                    href="/book"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="inline-flex items-center gap-2 text-xl font-display text-shell hover:text-ink transition-colors duration-150"
+                  >
+                    Reserve
+                    <span className="w-6 h-px bg-shell" />
+                  </Link>
+                </motion.div>
               </nav>
 
-              {/* Contact info - Neomorphic card */}
-              <motion.div
+              {/* Contact info - at bottom */}
+              <motion.a
+                href="tel:+31222317445"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.25 }}
-                className="absolute bottom-8 left-6 right-6 p-5 rounded-2xl bg-white/60 shadow-neo-md"
+                className="mt-6 p-5 rounded-2xl bg-white shadow-md border border-sand-200/50 block group active:scale-[0.98] transition-transform"
               >
-                <p className="text-sm text-neutral-600">
-                  Ruijslaan 22, De Koog, Texel
-                </p>
-                <p className="text-sm text-shell font-medium mt-1">
-                  +31 222 317 445
-                </p>
-              </motion.div>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-shell/10 flex items-center justify-center group-hover:bg-shell transition-colors duration-200">
+                      <Phone size={14} className="text-shell group-hover:text-white transition-colors duration-200" />
+                    </div>
+                    <span className="text-sm text-ink font-medium">Call</span>
+                  </div>
+                  <div className="w-px h-6 bg-sand-200" />
+                  <div className="flex-1">
+                    <p className="text-xs text-neutral-500">Ruijslaan 22, De Koog</p>
+                    <p className="text-xs text-neutral-400">Texel Island</p>
+                  </div>
+                </div>
+              </motion.a>
             </div>
           </motion.div>
         )}
