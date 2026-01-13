@@ -327,43 +327,43 @@ export default function ContactPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0 }}
+                transition={{ duration: 0.5, delay: 0, ease: easeOutExpo }}
                 className="text-center"
               >
                 <div className="neo-icon neo-icon-lg mx-auto mb-4">
-                  <Car className="w-6 h-6 text-shell" />
+                  <Car size={24} className="text-shell" />
                 </div>
                 <h3 className="font-display text-xl text-ink mb-2">{t("directions.byCar.title")}</h3>
-                <p className="text-neutral-600">{t("directions.byCar.description")}</p>
+                <p className="text-neutral-600 text-sm leading-relaxed">{t("directions.byCar.description")}</p>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
                 className="text-center"
               >
                 <div className="neo-icon neo-icon-lg mx-auto mb-4">
-                  <Ship className="w-6 h-6 text-shell" />
+                  <Ship size={24} className="text-shell" />
                 </div>
                 <h3 className="font-display text-xl text-ink mb-2">{t("directions.byFerry.title")}</h3>
-                <p className="text-neutral-600">{t("directions.byFerry.description")}</p>
+                <p className="text-neutral-600 text-sm leading-relaxed">{t("directions.byFerry.description")}</p>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
                 className="text-center"
               >
                 <div className="neo-icon neo-icon-lg mx-auto mb-4">
-                  <Navigation className="w-6 h-6 text-shell" />
+                  <Navigation size={24} className="text-shell" />
                 </div>
                 <h3 className="font-display text-xl text-ink mb-2">{t("directions.publicTransport.title")}</h3>
-                <p className="text-neutral-600">{t("directions.publicTransport.description")}</p>
+                <p className="text-neutral-600 text-sm leading-relaxed">{t("directions.publicTransport.description")}</p>
               </motion.div>
             </div>
           </div>

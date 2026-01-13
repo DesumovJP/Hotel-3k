@@ -138,40 +138,24 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* Lenis smooth scroll - required for proper height calculation */
-html.lenis,
-html.lenis body {
-  height: auto;
-  overflow: hidden; /* Let Lenis handle scrolling */
-}
-
-.lenis-wrapper {
-  position: fixed;
-  inset: 0;
-  overflow: auto;
+  /* Prevent bounce scroll on iOS/Safari */
+  overscroll-behavior: none;
   overflow-x: hidden;
+  /* Native smooth scroll - GPU accelerated */
+  scroll-behavior: smooth;
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+/* Reduce motion preference - disable smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-stopped .lenis-wrapper {
-  overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
+/* Custom cursor - hide native cursor on ALL elements */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
 }
 
 body {
@@ -183,6 +167,10 @@ body {
   letter-spacing: 0.01em;
   min-height: 100vh;
   font-feature-settings: "kern" 1, "liga" 1;
+  /* Prevent bounce scroll and horizontal pull on mobile */
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  touch-action: pan-y pinch-zoom;
 }
 
 ::selection {

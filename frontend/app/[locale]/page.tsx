@@ -56,6 +56,7 @@ export default function Home() {
             title={t("title")}
             description={t("description")}
             actions={[{ label: t("button"), href: "/book" }]}
+            background="white"
           />
         </section>
       </main>

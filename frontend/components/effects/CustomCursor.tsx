@@ -103,8 +103,8 @@ export function CustomCursor({ enabled = true }: CustomCursorProps) {
     document.addEventListener("mousedown", handleMouseDown, { passive: true });
     document.addEventListener("mouseup", handleMouseUp, { passive: true });
 
-    // Hide default cursor
-    document.body.style.cursor = "none";
+    // Hide default cursor globally via class
+    document.documentElement.classList.add("custom-cursor-active");
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
@@ -113,7 +113,7 @@ export function CustomCursor({ enabled = true }: CustomCursorProps) {
       document.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("mouseup", handleMouseUp);
-      document.body.style.cursor = "";
+      document.documentElement.classList.remove("custom-cursor-active");
     };
   }, [enabled, isMobile, cursorX, cursorY]);
 
@@ -125,7 +125,7 @@ export function CustomCursor({ enabled = true }: CustomCursorProps) {
       {/* Main cursor dot */}
       <motion.div
         className={cn(
-          "fixed top-0 left-0 pointer-events-none z-[100]",
+          "fixed top-0 left-0 pointer-events-none z-[9999]",
           !isVisible && "opacity-0"
         )}
         style={{
@@ -136,7 +136,7 @@ export function CustomCursor({ enabled = true }: CustomCursorProps) {
         }}
       >
         <motion.div
-          className="bg-ink rounded-full"
+          className="bg-ink/80 rounded-full shadow-[0_0_0_1.5px_rgba(255,255,255,0.7),0_2px_6px_rgba(0,0,0,0.2)]"
           animate={{
             width: cursorState === "click" ? 6 : 8,
             height: cursorState === "click" ? 6 : 8,
@@ -148,7 +148,7 @@ export function CustomCursor({ enabled = true }: CustomCursorProps) {
       {/* Follower circle */}
       <motion.div
         className={cn(
-          "fixed top-0 left-0 pointer-events-none z-[99]",
+          "fixed top-0 left-0 pointer-events-none z-[9998]",
           !isVisible && "opacity-0"
         )}
         style={{
@@ -162,13 +162,13 @@ export function CustomCursor({ enabled = true }: CustomCursorProps) {
           className={cn(
             "rounded-full border flex items-center justify-center",
             cursorState === "view"
-              ? "bg-gold/90 border-gold"
-              : "bg-transparent border-ink/30"
+              ? "bg-gold/90 border-gold shadow-lg"
+              : "bg-transparent border-ink/50 shadow-[0_0_0_1.5px_rgba(255,255,255,0.6)]"
           )}
           animate={{
             width: cursorState === "view" ? 80 : cursorState === "hover" ? 48 : cursorState === "click" ? 24 : 32,
             height: cursorState === "view" ? 80 : cursorState === "hover" ? 48 : cursorState === "click" ? 24 : 32,
-            borderWidth: cursorState === "view" ? 0 : 1,
+            borderWidth: cursorState === "view" ? 0 : 1.5,
           }}
           transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >

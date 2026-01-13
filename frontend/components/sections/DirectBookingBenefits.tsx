@@ -25,16 +25,16 @@ function BenefitItem({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.1, ease: easeOutExpo }}
-      className="group/item flex items-center gap-2 cursor-default"
+      className="group/item flex items-center gap-1.5 md:gap-2 cursor-default"
     >
       <motion.div
         whileHover={{ scale: 1.15, rotate: 5 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        <Icon size={16} className="text-shell group-hover/item:text-navy transition-colors" />
+        <Icon size={14} className="text-shell group-hover/item:text-navy transition-colors md:w-4 md:h-4" />
       </motion.div>
-      <span className="text-neutral-500">{label}</span>
-      <span className="text-ink font-medium">{value}</span>
+      <span className="hidden sm:inline text-neutral-500">{label}</span>
+      <span className="text-ink font-medium text-xs sm:text-sm">{value}</span>
     </motion.div>
   );
 }
@@ -52,8 +52,8 @@ export function DirectBookingBenefits() {
     <section className="neo-bar">
       <div className="px-4 md:px-12 lg:px-24">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap items-center justify-between gap-4 py-4">
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 py-3 sm:py-4">
+            <div className="flex items-center justify-center gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-2 text-sm">
               {benefits.map((benefit, index) => (
                 <BenefitItem key={index} {...benefit} index={index} />
               ))}
@@ -64,14 +64,15 @@ export function DirectBookingBenefits() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.3, ease: easeOutExpo }}
+              className="w-full sm:w-auto"
             >
               <Link
                 href="/book"
-                className="group inline-flex items-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium"
+                className="group flex sm:inline-flex items-center justify-center gap-2 text-shell hover:text-navy transition-colors text-sm font-medium px-5 py-2.5 sm:px-0 sm:py-0 bg-navy/5 sm:bg-transparent rounded-full sm:rounded-none"
               >
                 <span className="relative">
                   {t("cta")}
-                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-navy group-hover:w-full transition-all duration-300" />
+                  <span className="hidden sm:block absolute -bottom-0.5 left-0 w-0 h-px bg-navy group-hover:w-full transition-all duration-300" />
                 </span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>

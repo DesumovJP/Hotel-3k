@@ -11,7 +11,6 @@ import {
   Maximize,
   Bed,
   Eye,
-  ArrowLeft,
   ArrowRight,
   Phone,
   Mail,
@@ -73,17 +72,6 @@ export function RoomDetailClient({ room, otherRooms }: RoomDetailClientProps) {
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-transparent" />
-
-          {/* Back Link */}
-          <div className="absolute top-24 left-6 md:left-12 lg:left-24">
-            <Link
-              href="/rooms"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors"
-            >
-              <ArrowLeft size={16} />
-              All Rooms
-            </Link>
-          </div>
 
           {/* Content */}
           <div className="absolute inset-0 flex items-end pb-12 md:pb-16 px-6 md:px-12 lg:px-24">

@@ -76,9 +76,9 @@ export function OfferDetailClient({ offer, otherOffers }: OfferDetailClientProps
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-transparent" />
 
-          {/* Badge */}
-          <div className="absolute top-24 left-6 md:left-12 lg:left-24">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-shell text-navy text-sm font-medium">
+          {/* Badge - positioned for better visibility */}
+          <div className="absolute top-28 md:top-32 left-6 md:left-12 lg:left-24 z-10">
+            <span className="inline-flex items-center gap-2 px-4 py-2.5 bg-shell text-navy text-sm font-medium rounded-full shadow-lg backdrop-blur-sm">
               <Gift size={16} />
               {offer.badge}
             </span>

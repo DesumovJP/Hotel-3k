@@ -5,54 +5,37 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { PageLayout } from "@/components/organisms";
-import { InfoStrip, BreadcrumbsSection } from "@/components/molecules";
-import { SectionHeroCompact } from "@/components/sections";
-import { SectionDivider } from "@/components/ui";
-import { X, ChevronLeft, ChevronRight, Camera, Grid3X3 } from "lucide-react";
+import { BreadcrumbsInline } from "@/components/molecules";
+import { GalleryModal } from "@/components/molecules/GalleryModal";
+import { SectionHeroCompact, SectionBlend } from "@/components/sections";
+import { Camera, Grid3X3 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { easeOutExpo } from "@/lib/motion";
 
 // Centralized data
 import { galleryCategories, galleryImages } from "@/lib/data";
-
-/**
- * Gallery Page
- *
- * USES:
- * - PageLayout for consistent header/footer
- * - InfoStrip for the navy quick info bar
- * - BreadcrumbsSection for breadcrumbs
- * - Centralized data from lib/data/gallery.ts
- *
- * REDESIGN: Update galleryImages in lib/data/gallery.ts to change gallery content
- */
 
 export default function GalleryPage() {
   const t = useTranslations("gallery");
   const tNav = useTranslations("nav");
   const [activeCategory, setActiveCategory] = useState("all");
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const filteredImages = activeCategory === "all"
     ? galleryImages
     : galleryImages.filter(img => img.category === activeCategory);
 
-  const openLightbox = useCallback((index: number) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
+  const handleImageClick = useCallback((index: number) => {
+    setSelectedIndex(index);
+    setIsModalOpen(true);
   }, []);
 
-  const closeLightbox = useCallback(() => {
-    setLightboxOpen(false);
-  }, []);
-
-  const nextImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev + 1) % filteredImages.length);
-  }, [filteredImages.length]);
-
-  const prevImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
-  }, [filteredImages.length]);
+  // Convert to GalleryModal format
+  const modalImages = filteredImages.map((img) => ({
+    src: img.src,
+    alt: img.caption || img.alt,
+  }));
 
   return (
     <PageLayout>
@@ -63,39 +46,69 @@ export default function GalleryPage() {
         description={t("heroDescription")}
       />
 
-      {/* Quick Info Strip - Using centralized component */}
-      <InfoStrip
-        items={[
-          { icon: Camera, label: t("photos"), value: `${galleryImages.length}` },
-          { icon: Grid3X3, label: t("categories"), value: `${galleryCategories.length - 1}` },
-        ]}
-      />
+      {/* Quick Info Strip */}
+      <section className="neo-bar">
+        <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
+          <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <Camera size={14} className="text-shell" />
+              <span className="hidden sm:inline text-neutral-500">{t("photos")}</span>
+              <span className="text-ink font-medium">{galleryImages.length}</span>
+            </div>
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <Grid3X3 size={14} className="text-shell" />
+              <span className="hidden sm:inline text-neutral-500">{t("categories")}</span>
+              <span className="text-ink font-medium">{galleryCategories.length - 1}</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <SectionDivider variant="wave" color="sand-dark" />
+      <SectionBlend from="sand" to="white" height="sm" />
 
-      {/* Breadcrumbs - Using centralized component */}
-      <BreadcrumbsSection items={[{ label: tNav("gallery") }]} />
+      {/* Breadcrumbs */}
+      <section className="py-6 bg-white border-b border-neutral-100">
+        <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+          <BreadcrumbsInline items={[{ label: tNav("gallery") }]} />
+        </div>
+      </section>
 
       {/* Gallery Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: easeOutExpo }}
+            className="text-center mb-10"
+          >
+            <span className="text-overline text-shell tracking-widest mb-3 block">
+              {t("heroLabel")}
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl text-ink">
+              {t("heroTitle")}
+            </h2>
+          </motion.div>
+
           {/* Category Filters */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-3 mb-12"
+            transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
+            className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12"
           >
             {galleryCategories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "px-5 py-2.5 text-sm font-medium transition-all",
+                  "px-4 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-medium transition-all duration-300 rounded-full",
                   activeCategory === cat.id
-                    ? "bg-navy text-white"
-                    : "bg-sand-100 text-neutral-600 hover:bg-sand-200"
+                    ? "bg-navy text-white shadow-md"
+                    : "bg-sand-100 text-neutral-600 hover:bg-sand-200 hover:text-ink"
                 )}
               >
                 {cat.name}
@@ -103,106 +116,72 @@ export default function GalleryPage() {
             ))}
           </motion.div>
 
-          {/* Gallery Grid */}
+          {/* Image Grid - Matching MiniGallery style */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: easeOutExpo }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
             <AnimatePresence mode="popLayout">
               {filteredImages.map((image, index) => (
-                <motion.div
+                <motion.button
                   key={image.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3), ease: easeOutExpo }}
+                  whileHover={{ y: -4 }}
+                  onClick={() => handleImageClick(index)}
                   className={cn(
-                    "relative overflow-hidden group cursor-pointer",
-                    image.featured ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
+                    "relative overflow-hidden group cursor-pointer aspect-square",
+                    "focus-visible:ring-2 focus-visible:ring-shell focus-visible:ring-offset-2",
+                    "shadow-md hover:shadow-xl transition-shadow duration-500 ease-out",
+                    image.featured && "md:col-span-2 md:row-span-2"
                   )}
-                  onClick={() => openLightbox(index)}
+                  aria-label={`View ${image.caption || image.alt} in fullscreen`}
                 >
                   <Image
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white font-display">{image.caption}</p>
+
+                  {/* Elegant overlay */}
+                  <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/40 transition-colors duration-500" />
+
+                  {/* Centered text panel */}
+                  <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                      {/* Decorative line above */}
+                      <div className="w-8 h-px bg-white/60 mx-auto mb-3 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100" />
+
+                      <p className="text-white text-base md:text-lg lg:text-xl font-display italic leading-snug line-clamp-2 max-w-[280px]">
+                        {image.caption}
+                      </p>
+
+                      {/* Decorative line below */}
+                      <div className="w-8 h-px bg-white/60 mx-auto mt-3 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100" />
+                    </div>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </AnimatePresence>
           </motion.div>
         </div>
       </section>
 
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-navy/95 flex items-center justify-center"
-            onClick={closeLightbox}
-          >
-            {/* Close Button */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {/* Navigation */}
-            <button
-              onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Image */}
-            <motion.div
-              key={filteredImages[lightboxIndex]?.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-w-[90vw] max-h-[85vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={filteredImages[lightboxIndex]?.src || ""}
-                alt={filteredImages[lightboxIndex]?.alt || ""}
-                width={1920}
-                height={1080}
-                className="object-contain max-h-[85vh] w-auto"
-              />
-            </motion.div>
-
-            {/* Caption */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
-              <p className="text-lg font-display mb-1">{filteredImages[lightboxIndex]?.caption}</p>
-              <p className="text-sm text-white/60">
-                {lightboxIndex + 1} / {filteredImages.length}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Modal - Using shared GalleryModal component */}
+      <GalleryModal
+        images={modalImages}
+        initialIndex={selectedIndex}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </PageLayout>
   );
 }

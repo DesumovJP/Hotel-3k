@@ -10,7 +10,7 @@ import {
 import { motion, useScroll } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Footer } from "@/components/organisms";
-import { BreadcrumbsInline } from "@/components/molecules";
+import { BreadcrumbsInline, FeatureGrid } from "@/components/molecules";
 import { MiniGallery, SectionHero, SectionCTA, SectionBlend } from "@/components/sections";
 import { SectionDivider } from "@/components/ui";
 import { easeOutExpo } from "@/lib/motion";
@@ -170,50 +170,17 @@ export default function AboutPage() {
         <SectionBlend from="white" to="sand-100" />
 
         {/* Values */}
-        <section className="py-20 md:py-28 bg-sand-100">
-          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: easeOutExpo }}
-              className="text-center mb-16"
-            >
-              <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                {t("values.label")}
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink">
-                {t("values.title")}
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-              {valueKeys.map((key, index) => {
-                const Icon = valueIcons[key];
-                return (
-                  <motion.div
-                    key={key}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1, ease: easeOutExpo }}
-                    className="text-center p-8 bg-white"
-                  >
-                    <div className="w-16 h-16 mx-auto mb-6 bg-shell/10 flex items-center justify-center">
-                      <Icon size={28} className="text-shell" />
-                    </div>
-                    <h3 className="font-display text-xl text-ink mb-3">
-                      {t(`values.items.${key}.title`)}
-                    </h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      {t(`values.items.${key}.description`)}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <FeatureGrid
+          label={t("values.label")}
+          title={t("values.title")}
+          items={valueKeys.map((key) => ({
+            icon: valueIcons[key],
+            title: t(`values.items.${key}.title`),
+            description: t(`values.items.${key}.description`),
+          }))}
+          columns={3}
+          background="sand"
+        />
 
         <SectionBlend from="sand-100" to="white" />
 
@@ -532,6 +499,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <SectionBlend from="sand-100" to="white" />
+
         {/* CTA */}
         <SectionCTA
           icon={Heart}
@@ -541,7 +510,7 @@ export default function AboutPage() {
             { label: tCommon("bookYourStay"), href: "/book" },
             { label: tCommon("contactUs"), href: "/contact", variant: "secondary" },
           ]}
-          background="sand"
+          background="white"
         />
       </main>
 

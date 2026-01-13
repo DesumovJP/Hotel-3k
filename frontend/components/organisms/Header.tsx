@@ -177,9 +177,9 @@ export function Header({ variant = "light" }: HeaderProps) {
         style={{ contain: "layout style", backfaceVisibility: "hidden" }}
       >
         <div className="px-6 md:px-12 lg:px-24 overflow-visible">
-          <div className="flex items-center justify-between overflow-visible">
-            {/* Logo */}
-            <Link href="/" className="relative z-10">
+          <div className="relative flex items-center justify-between overflow-visible">
+            {/* Logo - Left */}
+            <Link href="/" className="relative z-10 flex-shrink-0">
               <div className={cn(
                 "relative transition-all duration-300 ease-out",
                 isScrolled ? "w-14 h-14 md:w-16 md:h-16" : "w-16 h-16 md:w-20 md:h-20"
@@ -199,8 +199,8 @@ export function Header({ variant = "light" }: HeaderProps) {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8 lg:gap-10 overflow-visible">
+            {/* Desktop Navigation - Absolutely Centered */}
+            <nav className="hidden md:flex items-center gap-8 lg:gap-10 overflow-visible absolute left-1/2 -translate-x-1/2">
               {navItems.map((item) => (
                 item.children ? (
                   <DropdownMenu
@@ -214,7 +214,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "relative text-nav transition-colors duration-300 tap-target focus-visible-ring group",
+                      "relative text-nav transition-colors duration-300 tap-target focus-visible-ring group whitespace-nowrap",
                       isScrolled || useDarkText
                         ? "text-ink/70 hover:text-ink"
                         : "text-white hover:text-white/80"
@@ -233,7 +233,7 @@ export function Header({ variant = "light" }: HeaderProps) {
             </nav>
 
             {/* Right side: Language Switcher + Book Button */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-4 flex-shrink-0">
               <LanguageSwitcher
                 variant={isScrolled || useDarkText ? "default" : "compact"}
                 isScrolled={isScrolled || useDarkText}
@@ -316,12 +316,14 @@ export function Header({ variant = "light" }: HeaderProps) {
                     key={item.href}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.04, duration: 0.25 }}
+                    transition={{ delay: index * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
                   >
                     <Link
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="block text-xl font-display text-ink hover:text-shell transition-colors duration-150 py-1.5"
+                      style={{ backfaceVisibility: "hidden" }}
                     >
                       {item.label}
                     </Link>
@@ -333,6 +335,7 @@ export function Header({ variant = "light" }: HeaderProps) {
                             href={child.href}
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="block text-sm text-neutral-500 hover:text-shell transition-colors duration-150"
+                            style={{ backfaceVisibility: "hidden" }}
                           >
                             {child.label}
                           </Link>
@@ -346,13 +349,15 @@ export function Header({ variant = "light" }: HeaderProps) {
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.04, duration: 0.25 }}
+                  transition={{ delay: navItems.length * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="pt-4"
+                  style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
                 >
                   <Link
                     href="/book"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="inline-flex items-center gap-2 text-xl font-display text-shell hover:text-ink transition-colors duration-150"
+                    style={{ backfaceVisibility: "hidden" }}
                   >
                     {t("reserve")}
                     <span className="w-6 h-px bg-shell" />
@@ -365,8 +370,9 @@ export function Header({ variant = "light" }: HeaderProps) {
                 href="tel:+31222317445"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.25 }}
+                transition={{ delay: 0.35, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="mt-6 p-5 rounded-2xl bg-white shadow-md border border-sand-200/50 block group active:scale-[0.98] transition-transform"
+                style={{ backfaceVisibility: "hidden", transform: "translateZ(0)" }}
               >
                 <div className="flex items-center gap-6">
                   <div className="flex items-center gap-2.5">

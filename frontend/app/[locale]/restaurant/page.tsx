@@ -88,10 +88,14 @@ export default function RestaurantPage() {
       >
         <button
           onClick={() => setIsReservationOpen(true)}
-          className="flex items-center justify-center w-14 h-14 bg-navy text-white shadow-xl rounded-full"
+          className="group flex items-center gap-3 pl-5 pr-6 py-3 bg-navy text-white shadow-[0_4px_20px_rgba(0,0,0,0.25)] rounded-full active:scale-95 transition-transform"
           aria-label={t("reserveTableAria")}
         >
-          <Calendar size={22} />
+          <span className="relative">
+            <Calendar size={18} />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-shell rounded-full animate-pulse" />
+          </span>
+          <span className="text-sm font-medium">{t("reserveTable")}</span>
         </button>
       </motion.div>
 

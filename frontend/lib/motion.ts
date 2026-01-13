@@ -5,25 +5,25 @@ import { Variants } from "framer-motion";
 // Per redesign: 150-300ms range, surgical use only
 // ============================================
 
-// Duration scale (in seconds) - COMPACT per redesign
+// Duration scale (in seconds) - Optimized for native scroll (snappier)
 export const duration = {
-  instant: 0.12,   // 120ms - micro-interactions
+  instant: 0.1,    // 100ms - micro-interactions
   fast: 0.15,      // 150ms - hover states
   normal: 0.2,     // 200ms - standard transitions
-  slow: 0.25,      // 250ms - content reveals
-  slower: 0.3,     // 300ms - larger animations
-  slowest: 0.4,    // 400ms - only for special hero reveals
+  slow: 0.35,      // 350ms - content reveals
+  slower: 0.45,    // 450ms - larger animations
+  slowest: 0.6,    // 600ms - special hero reveals
 } as const;
 
 // Calm Premium easing - per redesign spec
 export const easeCalmPremium = [0.22, 1, 0.36, 1] as const;
 
-// Stagger scale (in seconds)
+// Stagger scale (in seconds) - smoother cascades
 export const stagger = {
-  tight: 0.03,    // For characters
-  normal: 0.06,   // For words, small items
-  relaxed: 0.1,   // For cards, sections
-  loose: 0.15,    // For large items
+  tight: 0.04,    // For characters
+  normal: 0.08,   // For words, small items
+  relaxed: 0.12,  // For cards, sections
+  loose: 0.18,    // For large items
 } as const;
 
 // Delay scale (in seconds)
@@ -59,47 +59,47 @@ export const fadeIn: Variants = {
 };
 
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: duration.slow, ease: easeOutExpo },
+    transition: { duration: duration.slow, ease: easeOutQuint },
   },
 };
 
 export const fadeInUpSlow: Variants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: duration.slower, ease: easeOutExpo },
+    transition: { duration: duration.slower, ease: easeOutQuint },
   },
 };
 
 export const fadeInDown: Variants = {
-  hidden: { opacity: 0, y: -40 },
+  hidden: { opacity: 0, y: -30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: duration.slow, ease: easeOutExpo },
+    transition: { duration: duration.slow, ease: easeOutQuint },
   },
 };
 
 export const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { opacity: 0, x: -40 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: duration.slow, ease: easeOutExpo },
+    transition: { duration: duration.slow, ease: easeOutQuint },
   },
 };
 
 export const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { opacity: 0, x: 40 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: duration.slow, ease: easeOutExpo },
+    transition: { duration: duration.slow, ease: easeOutQuint },
   },
 };
 
