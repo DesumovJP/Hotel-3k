@@ -1,15 +1,16 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight, MapPin, Phone, Mail, Award, Leaf, Heart, Star,
-  Clock, Users, Ship, TreePine, Waves, ChefHat
+  Clock, Users, Ship, TreePine, Waves, ChefHat, Calendar
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { Footer } from "@/components/organisms";
 import { BreadcrumbsInline } from "@/components/molecules";
-import { MiniGallery, SectionHeroCompact, SectionCTA, SectionBlend } from "@/components/sections";
+import { MiniGallery, SectionHero, SectionCTA, SectionBlend } from "@/components/sections";
 import { SectionDivider } from "@/components/ui";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -100,51 +101,67 @@ const awards = [
 ];
 
 export default function AboutPage() {
+  const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (value) => {
+      setShowFloatingCTA(value > 0.15);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress]);
+
   return (
     <>
+      {/* Floating Book Button */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: showFloatingCTA ? 1 : 0, opacity: showFloatingCTA ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: easeOutExpo }}
+        className="fixed bottom-6 right-6 z-50 md:hidden"
+      >
+        <Link
+          href="/book"
+          className="flex items-center justify-center w-14 h-14 bg-navy text-white shadow-xl rounded-full"
+          aria-label="Book Your Stay"
+        >
+          <Calendar size={22} />
+        </Link>
+      </motion.div>
+
       <main>
         {/* Hero */}
-        <SectionHeroCompact
+        <SectionHero
           label="Our Story"
           title="The Hamptons of the Wadden"
           description="Where luxury meets the rhythm of the tides. Family-run since 1932."
+          backgroundImage="/home/hero-fallback.jpg"
+          primaryAction={{
+            label: "Book Your Stay",
+            href: "/book",
+          }}
+          infoStrip={{
+            items: [
+              { icon: Clock, label: "Est.", value: "1932" },
+              { icon: Users, label: "Family", value: "3rd Generation" },
+              { icon: Leaf, value: "Carbon Neutral" },
+              { icon: Award, value: "Award Winning" },
+            ],
+          }}
         />
 
-        {/* Quick Info Strip */}
-        <section className="neo-bar">
-          <div className="px-4 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <div className="flex items-center justify-center gap-3 md:gap-8 text-xs md:text-sm py-3 md:py-4 overflow-x-auto scrollbar-hide">
-              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                <Clock size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Est.</span>
-                <span className="text-ink font-medium whitespace-nowrap">1932</span>
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                <Users size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Family</span>
-                <span className="text-ink font-medium whitespace-nowrap">3rd Gen</span>
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                <Leaf size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Status</span>
-                <span className="text-ink font-medium whitespace-nowrap">Carbon Neutral</span>
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                <Award size={14} className="text-shell" />
-                <span className="hidden sm:inline text-neutral-500">Recognition</span>
-                <span className="text-ink font-medium whitespace-nowrap">Award Winning</span>
-              </div>
-            </div>
+        <SectionDivider variant="wave" color="sand-dark" />
+
+        {/* Breadcrumbs */}
+        <section className="py-6 bg-white border-b border-neutral-100">
+          <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
+            <BreadcrumbsInline items={[{ label: "About" }]} />
           </div>
         </section>
-
-        <SectionDivider variant="wave" color="sand-dark" />
 
         {/* Introduction */}
         <section className="py-20 md:py-28 bg-white">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
-            <BreadcrumbsInline items={[{ label: "About" }]} className="mb-12" />
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Content */}
               <motion.div
@@ -153,6 +170,9 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: easeOutExpo }}
               >
+                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+                  In the Dunes
+                </span>
                 <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
                   A sanctuary at the edge of the world
                 </h2>
@@ -293,56 +313,18 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <SectionBlend from="white" to="navy" />
+        <SectionBlend from="white" to="sand-100" />
 
         {/* Sustainability */}
-        <section className="py-20 md:py-28 bg-navy text-white">
+        <section className="py-20 md:py-28 bg-sand-100">
           <div className="px-6 md:px-12 lg:px-24 max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              {/* Content */}
+              {/* Image */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: easeOutExpo }}
-              >
-                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
-                  Sustainability
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl mb-6">
-                  Caring for our island home
-                </h2>
-                <p className="text-white/70 text-lg leading-relaxed mb-8">
-                  We believe luxury and sustainability go hand in hand. From solar panels
-                  on our roof to partnerships with local farmers, we're committed to
-                  protecting the natural beauty that makes Texel so special.
-                </p>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-6">
-                  {sustainabilityStats.map((stat, index) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.2 + index * 0.05, ease: easeOutExpo }}
-                      className="bg-white/5 border border-white/10 p-5"
-                    >
-                      <p className="text-shell text-2xl md:text-3xl font-display mb-1">{stat.value}</p>
-                      <p className="text-white font-medium text-sm mb-1">{stat.label}</p>
-                      <p className="text-white/50 text-xs">{stat.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Image */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2, ease: easeOutExpo }}
                 className="relative aspect-[4/5] overflow-hidden"
               >
                 <Image
@@ -351,13 +333,50 @@ export default function AboutPage() {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
+              </motion.div>
+
+              {/* Content */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
+              >
+                <span className="text-shell text-xs tracking-[0.2em] uppercase mb-4 block">
+                  Sustainability
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                  Caring for our island home
+                </h2>
+                <p className="text-neutral-600 text-lg leading-relaxed mb-8">
+                  We believe luxury and sustainability go hand in hand. From solar panels
+                  on our roof to partnerships with local farmers, we're committed to
+                  protecting the natural beauty that makes Texel so special.
+                </p>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {sustainabilityStats.map((stat, index) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 + index * 0.05, ease: easeOutExpo }}
+                      className="bg-white p-5"
+                    >
+                      <p className="text-shell text-2xl md:text-3xl font-display mb-1">{stat.value}</p>
+                      <p className="text-ink font-medium text-sm mb-1">{stat.label}</p>
+                      <p className="text-neutral-500 text-xs">{stat.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        <SectionBlend from="navy" to="white" />
+        <SectionBlend from="sand-100" to="white" />
 
         {/* Gallery */}
         <MiniGallery
